@@ -2,8 +2,12 @@
 'use strict';
 
 var cache = {};
+var lastError;
 
 function update ({hostname, tabId}) {
+  if (!hostname) {
+    return;
+  }
   let obj = cache[hostname];
   if (obj) {
     let country = obj.country, path, title = 'Country Flags & IP Whois\n\n';
@@ -36,7 +40,7 @@ function update ({hostname, tabId}) {
     }
     title += '\nServer IP: ' + obj.ip;
     //
-    chrome.pageAction.setIcon({tabId, path});
+    chrome.pageAction.setIcon({tabId, path}, () => lastError = chrome.runtime.lastError);
     chrome.pageAction.setTitle({title, tabId});
     chrome.pageAction.show(tabId);
   }
@@ -45,7 +49,20 @@ function update ({hostname, tabId}) {
 var worker = new Worker('./geo.js');
 worker.onmessage = (e) => {
   cache[e.data.hostname] = e.data;
+  update(e.data);
 };
+
+function get4mapped (ip) {
+  let ipv6 = ip.toUpperCase();
+  let v6prefixes = ['0:0:0:0:0:FFFF:', '::FFFF:'];
+  for (let i = 0; i < v6prefixes.length; i++) {
+    let v6prefix = v6prefixes[i];
+    if (ipv6.indexOf(v6prefix) === 0) {
+      return ipv6.substring(v6prefix.length);
+    }
+  }
+  return null;
+}
 
 chrome.webRequest.onResponseStarted.addListener(details => {
   let ip = details.ip;
@@ -53,6 +70,10 @@ chrome.webRequest.onResponseStarted.addListener(details => {
     return;
   }
   let hostname = (new URL(details.url)).hostname;
+  let obj = cache[hostname];
+  if (obj && obj.ip === ip) {
+    return;
+  }
   if (utils.isIP4(ip)) {
     if (utils.isPrivate(ip)) {
       cache[hostname] = {
@@ -62,22 +83,38 @@ chrome.webRequest.onResponseStarted.addListener(details => {
       };
     }
     else {
-      let obj = cache[hostname];
-      if (!obj || obj.country === 'private') {
-        console.error(details);
-        worker.postMessage({
-          ip: details.ip,
-          tabId: details.tabId,
-          hostname
-        });
-      }
+      worker.postMessage({
+        ip,
+        type: 4,
+        tabId: details.tabId,
+        hostname
+      });
+    }
+  }
+  else if (utils.isIP6(ip)) {
+    let ipv4 = get4mapped(ip);
+    if (ipv4) {
+      worker.postMessage({
+        ip: ipv4,
+        type: 4,
+        tabId: details.tabId,
+        hostname
+      });
+    }
+    else {
+      worker.postMessage({
+        ip,
+        type: 6,
+        tabId: details.tabId,
+        hostname
+      });
     }
   }
   else {
     cache[hostname] = {
       ip,
       hostname,
-      error: 'only IP4 is currently supported'
+      error: 'cannot resolve the IP'
     };
   }
 }, {
@@ -85,15 +122,15 @@ chrome.webRequest.onResponseStarted.addListener(details => {
   types: ['main_frame']
 }, []);
 
-// For HTML5 ajax page loading; like YouTube or GitHub (Firefox ONLY)
+// For HTML5 ajax page loading; like YouTube or GitHub
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  console.error(tabId, changeInfo, tab);
-  update({
-    tabId,
-    hostname: (new URL(tab.url)).hostname
-  });
+  if (changeInfo.favIconUrl || changeInfo.url) {
+    update({
+      tabId,
+      hostname: (new URL(tab.url)).hostname
+    });
+  }
 });
-
 
 chrome.pageAction.onClicked.addListener(tab => {
   let hostname = (new URL(tab.url)).hostname;
@@ -118,7 +155,8 @@ chrome.storage.local.get('version', (obj) => {
     window.setTimeout(() => {
       chrome.storage.local.set({version}, () => {
         chrome.tabs.create({
-          url: 'http://add0n.com/country-flags.html?version=' + version + '&type=' + (obj.version ? ('upgrade&p=' + obj.version) : 'install')
+          url: 'http://add0n.com/country-flags.html?version=' + version +
+            '&type=' + (obj.version ? ('upgrade&p=' + obj.version) : 'install')
         });
       });
     }, 3000);
