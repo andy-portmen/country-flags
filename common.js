@@ -137,7 +137,7 @@ chrome.pageAction.onClicked.addListener(tab => {
   let obj = cache[hostname];
   if (obj) {
     chrome.tabs.create({
-      url: 'https://isc.sans.edu/ipinfo.html?ip=' + obj.ip
+      url: 'http://www.tcpiputils.com/browse/ip-address/' + obj.ip
     });
   }
   else {
