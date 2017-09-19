@@ -3,7 +3,7 @@
 var utils = {
   aton4: (a) => {
     a = a.split(/\./);
-    return ((parseInt(a[0], 10)<<24)>>>0) + ((parseInt(a[1], 10)<<16)>>>0) + ((parseInt(a[2], 10)<<8)>>>0) + (parseInt(a[3], 10)>>>0);
+    return ((parseInt(a[0], 10) << 24) >>> 0) + ((parseInt(a[1], 10) << 16) >>> 0) + ((parseInt(a[2], 10) << 8) >>> 0) + (parseInt(a[3], 10) >>> 0);
   },
   isIP4: (function (re) {
     return ipv4 => re.test(ipv4);
@@ -37,21 +37,22 @@ utils.aton6 = function (a) {
     a.length = 8;
 
     for (i = l; i >= 0 && a[i] !== ''; i--) {
-      a[7-l+i] = a[i];
+      a[7 - l + i] = a[i];
     }
   }
 
   for (i = 0; i < 8; i++) {
     if (!a[i]) {
-      a[i]=0;
-    } else {
+      a[i] = 0;
+    }
+    else {
       a[i] = parseInt(a[i], 16);
     }
   }
 
   var r = [];
-  for (i = 0; i<4; i++) {
-    r.push(((a[2*i]<<16) + a[2*i+1])>>>0);
+  for (i = 0; i < 4; i++) {
+    r.push(((a[2 * i] << 16) + a[2 * i + 1]) >>> 0);
   }
 
   return r;

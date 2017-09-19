@@ -4,13 +4,37 @@
 var cache = {};
 var lastError;
 
-function update ({hostname, tabId}) {
+var useDNS = false;
+chrome.storage.local.get({
+  dns: false
+}, prefs => useDNS = prefs.dns);
+chrome.storage.onChanged.addListener(prefs => {
+  if (prefs.dns) {
+    useDNS = prefs.dns.newValue;
+  }
+});
+
+var dns = (host, callback) => chrome.runtime.sendNativeMessage('com.add0n.node', {
+  permissions: ['dns'],
+  script: `
+    const dns = require('dns');
+
+    dns.lookup('${host}', (err, address, family) => {
+      push({err, address, family});
+      done();
+    });
+  `
+}, callback);
+
+function update({hostname, tabId}) {
   if (!hostname) {
     return;
   }
-  let obj = cache[hostname];
+  const obj = cache[hostname];
   if (obj) {
-    let country = obj.country, path, title = 'Country Flags & IP Whois\n\n';
+    const country = obj.country;
+    let path;
+    let title = 'Country Flags & IP Whois\n\n';
 
     if (obj.error || !country) {
       path = {
@@ -47,57 +71,40 @@ function update ({hostname, tabId}) {
 }
 
 var worker = new Worker('./geo.js');
-worker.onmessage = (e) => {
+worker.onmessage = e => {
   cache[e.data.hostname] = e.data;
   update(e.data);
 };
 
-function get4mapped (ip) {
-  let ipv6 = ip.toUpperCase();
-  let v6prefixes = ['0:0:0:0:0:FFFF:', '::FFFF:'];
+function get4mapped(ip) {
+  const ipv6 = ip.toUpperCase();
+  const v6prefixes = ['0:0:0:0:0:FFFF:', '::FFFF:'];
   for (let i = 0; i < v6prefixes.length; i++) {
-    let v6prefix = v6prefixes[i];
+    const v6prefix = v6prefixes[i];
     if (ipv6.indexOf(v6prefix) === 0) {
       return ipv6.substring(v6prefix.length);
     }
   }
   return null;
 }
-
-chrome.webRequest.onResponseStarted.addListener(details => {
-  let ip = details.ip;
-  if (!ip) {
-    return;
-  }
-  let hostname = (new URL(details.url)).hostname;
-  let obj = cache[hostname];
-  if (obj && obj.ip === ip) {
-    return;
-  }
+console.log(12);
+function resolve({ip, tabId, hostname}) {
+  console.log(ip, tabId, hostname)
   if (utils.isIP4(ip)) {
-    if (utils.isPrivate(ip)) {
-      cache[hostname] = {
-        ip,
-        hostname,
-        country: 'private'
-      };
-    }
-    else {
-      worker.postMessage({
-        ip,
-        type: 4,
-        tabId: details.tabId,
-        hostname
-      });
-    }
+    worker.postMessage({
+      ip,
+      type: 4,
+      tabId: tabId,
+      hostname
+    });
   }
   else if (utils.isIP6(ip)) {
-    let ipv4 = get4mapped(ip);
+    const ipv4 = get4mapped(ip);
     if (ipv4) {
       worker.postMessage({
         ip: ipv4,
         type: 4,
-        tabId: details.tabId,
+        tabId: tabId,
         hostname
       });
     }
@@ -105,7 +112,7 @@ chrome.webRequest.onResponseStarted.addListener(details => {
       worker.postMessage({
         ip,
         type: 6,
-        tabId: details.tabId,
+        tabId: tabId,
         hostname
       });
     }
@@ -116,6 +123,56 @@ chrome.webRequest.onResponseStarted.addListener(details => {
       hostname,
       error: 'cannot resolve the IP'
     };
+  }
+}
+
+chrome.webRequest.onResponseStarted.addListener(details => {
+  const ip = details.ip;
+  if (!ip) {
+    return;
+  }
+  const hostname = (new URL(details.url)).hostname;
+  const obj = cache[hostname];
+  if (obj && obj.ip === ip) {
+    return;
+  }
+
+  if (utils.isPrivate(ip)) {
+    const setPrivate = () => {
+      cache[hostname] = {
+        ip,
+        hostname,
+        country: 'private'
+      };
+      update({
+        hostname,
+        tabId: details.tabId
+      });
+    };
+
+    if (useDNS) {
+      return dns(hostname, resp => {
+        if (resp && !resp.err && resp.address) {
+          if (utils.isPrivate(resp.address)) {
+            setPrivate();
+          }
+          else {
+            resolve({
+              ip: resp.address,
+              tabId: details.tabId,
+              hostname
+            });
+          }
+        }
+        else {
+          setPrivate();
+        }
+      });
+    }
+    setPrivate();
+  }
+  else {
+    resolve({ip, hostname, tabId: details.tabId});
   }
 }, {
   urls: ['<all_urls>'],
@@ -133,8 +190,8 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 
 chrome.pageAction.onClicked.addListener(tab => {
-  let hostname = (new URL(tab.url)).hostname;
-  let obj = cache[hostname];
+  const hostname = (new URL(tab.url)).hostname;
+  const obj = cache[hostname];
   if (obj) {
     chrome.tabs.create({
       url: 'http://www.tcpiputils.com/browse/ip-address/' + obj.ip
@@ -149,16 +206,24 @@ chrome.pageAction.onClicked.addListener(tab => {
   }
 });
 
-chrome.storage.local.get('version', (obj) => {
-  let version = chrome.runtime.getManifest().version;
-  if (obj.version !== version) {
-    window.setTimeout(() => {
-      chrome.storage.local.set({version}, () => {
-        chrome.tabs.create({
-          url: 'http://add0n.com/country-flags.html?version=' + version +
-            '&type=' + (obj.version ? ('upgrade&p=' + obj.version) : 'install')
-        });
+// FAQs & Feedback
+chrome.storage.local.get({
+  'version': null,
+  'faqs': navigator.userAgent.indexOf('Firefox') === -1
+}, prefs => {
+  const version = chrome.runtime.getManifest().version;
+
+  if (prefs.version ? (prefs.faqs && prefs.version !== version) : true) {
+    chrome.storage.local.set({version}, () => {
+      chrome.tabs.create({
+        url: 'http://add0n.com/country-flags.html?version=' + version +
+          '&type=' + (prefs.version ? ('upgrade&p=' + prefs.version) : 'install')
       });
-    }, 3000);
+    });
   }
 });
+
+{
+  const {name, version} = chrome.runtime.getManifest();
+  chrome.runtime.setUninstallURL('http://add0n.com/feedback.html?name=' + name + '&version=' + version);
+}
