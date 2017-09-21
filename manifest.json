@@ -12,7 +12,9 @@
     "webRequest",
     "<all_urls>",
     "nativeMessaging",
-    "downloads"
+    "downloads",
+    "contextMenus",
+    "webNavigation"
   ],
   "homepage_url": "http://add0n.com/country-flags.html",
   "icons": {

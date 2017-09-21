@@ -20,12 +20,12 @@ var geo = {
   },
 
   init4: () => {
-    let req = new XMLHttpRequest();
+    const req = new XMLHttpRequest();
     req.open('GET', './data/assets/geoip-country4.dat');
     req.responseType = 'arraybuffer';
     req.onload = () => {
       geo.cache4.buffer = req.response;
-      let size = req.response.byteLength;
+      const size = req.response.byteLength;
 
       geo.cache4.lastLine = (size / geo.cache4.recordSize) - 1;
 
@@ -38,12 +38,12 @@ var geo = {
     req.send();
   },
   init6: () => {
-    let req = new XMLHttpRequest();
+    const req = new XMLHttpRequest();
     req.open('GET', './data/assets/geoip-country6.dat');
     req.responseType = 'arraybuffer';
     req.onload = () => {
       geo.cache6.buffer = req.response;
-      let size = req.response.byteLength;
+      const size = req.response.byteLength;
 
       geo.cache6.lastLine = (size / geo.cache6.recordSize) - 1;
 
@@ -55,13 +55,13 @@ var geo = {
     };
     req.send();
   },
-  lookup4: (ip) => {
+  lookup4: ip => {
     if (!geo.cache4.buffer) {
       throw Error('cache4.buffer is not ready');
     }
 
     let fline = 0, cline = geo.cache4.lastLine, floor, ceil, line;
-    let recordSize = geo.cache4.recordSize;
+    const recordSize = geo.cache4.recordSize;
 
     // outside IPv4 range
     if (ip > geo.cache4.lastIP || ip < geo.cache4.firstIP) {
@@ -74,7 +74,7 @@ var geo = {
       ceil = new DataView(geo.cache4.buffer, (line * recordSize) + 4).getUint32(0);
 
       if (floor <= ip && ceil >= ip) {
-        let uint8array = new DataView(geo.cache4.buffer, (line * recordSize) + 8, 2);
+        const uint8array = new DataView(geo.cache4.buffer, (line * recordSize) + 8, 2);
         return new TextDecoder('utf-8').decode(uint8array);
       }
       else if (fline === cline) {
@@ -98,15 +98,15 @@ var geo = {
 
     return null; // loop error
   },
-  lookup6: (ip) => {
+  lookup6: ip => {
     if (!geo.cache6.buffer) {
       throw Error('cache4.buffer is not ready');
     }
-    let recordSize = geo.cache6.recordSize;
+    const recordSize = geo.cache6.recordSize;
 
     function readip(line, offset) {
       let ii = 0;
-      let ip = [];
+      const ip = [];
 
       for (ii = 0; ii < 2; ii++) {
         ip.push(
@@ -133,10 +133,10 @@ var geo = {
     for (let k = 0; k < 40; k += 1) {
       line = Math.round((cline - fline) / 2) + fline;
       floor = readip(line, 0);
-      ceil  = readip(line, 1);
+      ceil = readip(line, 1);
 
       if (utils.cmp6(floor, ip) <= 0 && utils.cmp6(ceil, ip) >= 0) {
-        let uint8array = new DataView(geo.cache6.buffer, (line * recordSize) + 32, 2);
+        const uint8array = new DataView(geo.cache6.buffer, (line * recordSize) + 32, 2);
         return (new TextDecoder('utf-8').decode(uint8array)).replace(/\u0000.*/, '');
       }
       else if (fline === cline) {
@@ -145,7 +145,8 @@ var geo = {
       else if (fline === (cline - 1)) {
         if (line === fline) {
           fline = cline;
-        } else {
+        }
+        else {
           cline = fline;
         }
       }
@@ -164,24 +165,27 @@ var geo = {
 geo.init4();
 geo.init6();
 
-self.onmessage = function (obj) {
+self.onmessage = function({data}) {
   try {
-    if (obj.data.type === 4) {
-      let ip = utils.aton4(obj.data.ip);
-      self.postMessage(Object.assign(obj.data, {
+    if (data.type === 4) {
+      const ip = utils.aton4(data.ip);
+      self.postMessage({
+        tabId: data.tabId,
         country: geo.lookup4(ip)
-      }));
+      });
     }
     else {
-      let ip = utils.aton6(obj.data.ip);
-      self.postMessage(Object.assign(obj.data, {
+      const ip = utils.aton6(data.ip);
+      self.postMessage({
+        tabId: data.tabId,
         country: geo.lookup6(ip)
-      }));
+      });
     }
   }
   catch (e) {
-    self.postMessage(Object.assign(obj.data, {
+    self.postMessage({
+      tabId: data.tabId,
       error: e.message
-    }));
+    });
   }
 };

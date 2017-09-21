@@ -1,8 +1,9 @@
 /* globals utils, countries */
 'use strict';
 
-var cache = {};
 var lastError;
+var tabs = {};
+chrome.tabs.onRemoved.addListener(tabId => delete tabs[tabId]);
 
 var useDNS = false;
 chrome.storage.local.get({
@@ -26,11 +27,9 @@ var dns = (host, callback) => chrome.runtime.sendNativeMessage('com.add0n.node',
   `
 }, callback);
 
-function update({hostname, tabId}) {
-  if (!hostname) {
-    return;
-  }
-  const obj = cache[hostname];
+function update(tabId, reason) {
+  console.log('updating', tabId, reason);
+  const obj = tabs[tabId];
   if (obj) {
     const country = obj.country;
     let path;
@@ -51,7 +50,7 @@ function update({hostname, tabId}) {
         64: './data/icons/private/64.png'
       };
       title += 'Server is on your private network';
-      title += '\nHost: ' + hostname;
+      title += '\nHost: ' + obj.hostname;
     }
     else {
       path = {
@@ -60,20 +59,29 @@ function update({hostname, tabId}) {
         64: './data/icons/flags/64/' + country + '.png'
       };
       title += 'Country: ' + countries[country];
-      title += '\nHost: ' + hostname;
+      title += '\nHost: ' + obj.hostname;
     }
     title += '\nServer IP: ' + obj.ip;
     //
     chrome.pageAction.setIcon({tabId, path}, () => lastError = chrome.runtime.lastError);
     chrome.pageAction.setTitle({title, tabId});
+    lastError = chrome.runtime.lastError;
     chrome.pageAction.show(tabId);
+    lastError = chrome.runtime.lastError;
   }
 }
 
 var worker = new Worker('./geo.js');
-worker.onmessage = e => {
-  cache[e.data.hostname] = e.data;
-  update(e.data);
+worker.onmessage = ({data}) => {
+  const {tabId, country, error} = data;
+  if (error) {
+    tabs[tabId].error = error;
+  }
+  if (country) {
+    tabs[tabId].country = country;
+  }
+
+  update(tabId, 'IP resolved');
 };
 
 function get4mapped(ip) {
@@ -87,92 +95,72 @@ function get4mapped(ip) {
   }
   return null;
 }
-console.log(12);
-function resolve({ip, tabId, hostname}) {
-  console.log(ip, tabId, hostname)
+
+function resolve(tabId) {
+  const {ip} = tabs[tabId];
   if (utils.isIP4(ip)) {
-    worker.postMessage({
-      ip,
-      type: 4,
-      tabId: tabId,
-      hostname
-    });
+    worker.postMessage({tabId, ip, type: 4});
   }
   else if (utils.isIP6(ip)) {
     const ipv4 = get4mapped(ip);
     if (ipv4) {
-      worker.postMessage({
-        ip: ipv4,
-        type: 4,
-        tabId: tabId,
-        hostname
-      });
+      worker.postMessage({tabId, ip: ipv4, type: 4});
     }
     else {
-      worker.postMessage({
-        ip,
-        type: 6,
-        tabId: tabId,
-        hostname
-      });
+      worker.postMessage({tabId, ip, type: 6});
     }
   }
   else {
-    cache[hostname] = {
-      ip,
-      hostname,
-      error: 'cannot resolve the IP'
-    };
+    tabs[tabId].error = 'cannot resolve the IP';
+    update(tabId, 'cannot resolve ip');
   }
 }
 
-chrome.webRequest.onResponseStarted.addListener(details => {
-  const ip = details.ip;
+chrome.webRequest.onResponseStarted.addListener(({ip, tabId, url}) => {
   if (!ip) {
     return;
   }
-  const hostname = (new URL(details.url)).hostname;
-  const obj = cache[hostname];
-  if (obj && obj.ip === ip) {
-    return;
+  const hostname = (new URL(url)).hostname;
+
+  if (tabs[tabId]) {
+    if (ip === tabs[tabId].ip && hostname === tabs[tabId].hostname) {
+      return;
+    }
   }
+  tabs[tabId] = {
+    hostname,
+    ip
+  };
 
+  const set = (obj, doUpdate = false, doResolve) => {
+    Object.assign(tabs[tabId], obj);
+    if (doUpdate) {
+      update(tabId, 'private address');
+    }
+    if (doResolve) {
+      resolve(tabId);
+    }
+  };
   if (utils.isPrivate(ip)) {
-    const setPrivate = () => {
-      cache[hostname] = {
-        ip,
-        hostname,
-        country: 'private'
-      };
-      update({
-        hostname,
-        tabId: details.tabId
-      });
-    };
-
     if (useDNS) {
       return dns(hostname, resp => {
         if (resp && !resp.err && resp.address) {
           if (utils.isPrivate(resp.address)) {
-            setPrivate();
+            set({country: 'private'}, true);
           }
           else {
-            resolve({
-              ip: resp.address,
-              tabId: details.tabId,
-              hostname
-            });
+            set({ip: resp.address}, false, true);
           }
         }
         else {
-          setPrivate();
+          set({country: 'private'}, true);
         }
       });
     }
-    setPrivate();
+    set({country: 'private'}, true);
   }
   else {
-    resolve({ip, hostname, tabId: details.tabId});
+    set({ip}, false, true);
   }
 }, {
   urls: ['<all_urls>'],
@@ -180,30 +168,33 @@ chrome.webRequest.onResponseStarted.addListener(details => {
 }, []);
 
 // For HTML5 ajax page loading; like YouTube or GitHub
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  if (changeInfo.favIconUrl || changeInfo.url) {
-    update({
-      tabId,
-      hostname: (new URL(tab.url)).hostname
-    });
+chrome.webNavigation.onCommitted.addListener(({url, tabId, frameId}) => {
+  if (frameId === 0) {
+    if (tabs[tabId]) {
+      const {hostname, ip} = tabs[tabId];
+      if (url && url.indexOf(hostname) !== -1 && ip) {
+        update(tabId, 'web navigation');
+      }
+    }
   }
 });
 
 chrome.pageAction.onClicked.addListener(tab => {
-  const hostname = (new URL(tab.url)).hostname;
-  const obj = cache[hostname];
-  if (obj) {
-    chrome.tabs.create({
-      url: 'http://www.tcpiputils.com/browse/ip-address/' + obj.ip
-    });
-  }
-  else {
-    chrome.notifications.create({
-      iconUrl: './data/icons/48.png',
-      message: 'Cannot find IP address of this tab. Please refresh',
-      type: 'basic'
-    });
-  }
+  chrome.storage.local.get({
+    ip: 'http://www.tcpiputils.com/browse/ip-address/[ip]',
+    host: 'https://www.tcpiputils.com/browse/domain/[host]'
+  }, prefs => {
+    if (tabs[tab.id] && tabs[tab.id].ip) {
+      chrome.tabs.create({
+        url: prefs.ip.replace('[ip]', tabs[tab.id].ip)
+      });
+    }
+    else {
+      chrome.tabs.create({
+        url: prefs.host.replace('[host]', (new URL(tab.url)).hostname)
+      });
+    }
+  });
 });
 
 // FAQs & Feedback
