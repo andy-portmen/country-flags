@@ -8,13 +8,13 @@
   "permissions": [
     "storage",
     "tabs",
-    "notifications",
+    "webNavigation",
     "webRequest",
     "<all_urls>",
-    "nativeMessaging",
-    "downloads",
     "contextMenus",
-    "webNavigation"
+    "notifications",
+    "nativeMessaging",
+    "downloads"
   ],
   "homepage_url": "http://add0n.com/country-flags.html",
   "icons": {

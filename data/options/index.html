@@ -2,11 +2,66 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Untitled Document</title>
+    <title>Options page :: Country Flags &amp; IP Whois</title>
+    <style>
+      body {
+        padding: 10px;
+        min-width: 500px;
+      }
+      input[type=text] {
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
     <label><input type="checkbox" id="dns"> Use the native DNS resolver of your OS</label>
     <p>This will allow the extension to resolve IP addresses from hostnames even when your browser is configured to use a SOCKS proxy server.</p>
+
+    <hr>
+
+    <table width="100%">
+      <colgroup>
+        <col width="140px">
+        <col>
+      </colgroup>
+      <tr>
+        <td>Left-click (IP utility)</td>
+        <td><input type="text" id="ip"></td>
+      </tr>
+      <tr>
+        <td>Left-click (Host utility)</td>
+        <td><input type="text" id="host"></td>
+      </tr>
+      <tr>
+        <td>Right-click (SSL Checker)</td>
+        <td><input type="text" id="ssl-checker"></td>
+      </tr>
+      <tr>
+        <td>Right-click (Trace Route)</td>
+        <td><input type="text" id="trace-route"></td>
+      </tr>
+      <tr>
+        <td>Right-click (Ping)</td>
+        <td><input type="text" id="ping"></td>
+      </tr>
+      <tr>
+        <td>Right-click (DNS Lookup)</td>
+        <td><input type="text" id="dns-lookup"></td>
+      </tr>
+      <tr>
+        <td>Right-click (Whois Lookup)</td>
+        <td><input type="text" id="whois-lookup"></td>
+      </tr>
+      <tr>
+        <td>Right-click (HTTP Headers)</td>
+        <td><input type="text" id="http-headers"></td>
+      </tr>
+    </table>
+
+    <div>
+      <button id="save">Save</button>
+      <span id="status"></span>
+    </div>
 
     <script src="index.js"></script>
   </body>

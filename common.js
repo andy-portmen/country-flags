@@ -15,6 +15,13 @@ chrome.storage.onChanged.addListener(prefs => {
   }
 });
 
+var notify = message => chrome.notifications.create(null, {
+  type: 'basic',
+  iconUrl: '/data/icons/48.png',
+  title: 'Country Flags & IP Whois',
+  message
+});
+
 var dns = (host, callback) => chrome.runtime.sendNativeMessage('com.add0n.node', {
   permissions: ['dns'],
   script: `
@@ -28,7 +35,6 @@ var dns = (host, callback) => chrome.runtime.sendNativeMessage('com.add0n.node',
 }, callback);
 
 function update(tabId, reason) {
-  console.log('updating', tabId, reason);
   const obj = tabs[tabId];
   if (obj) {
     const country = obj.country;
@@ -168,16 +174,31 @@ chrome.webRequest.onResponseStarted.addListener(({ip, tabId, url}) => {
 }, []);
 
 // For HTML5 ajax page loading; like YouTube or GitHub
-chrome.webNavigation.onCommitted.addListener(({url, tabId, frameId}) => {
-  if (frameId === 0) {
-    if (tabs[tabId]) {
-      const {hostname, ip} = tabs[tabId];
-      if (url && url.indexOf(hostname) !== -1 && ip) {
-        update(tabId, 'web navigation');
+if (navigator.userAgent.indexOf('Firefox') === -1) {
+  chrome.webNavigation.onCommitted.addListener(({url, tabId, frameId}) => {
+    if (frameId === 0) {
+      if (tabs[tabId]) {
+        const {hostname, ip} = tabs[tabId];
+        if (url && url.indexOf(hostname) !== -1 && ip) {
+          update(tabId, 'web navigation');
+        }
       }
     }
-  }
-});
+  });
+}
+// Firefox only
+else {
+  chrome.tabs.onUpdated.addListener((tabId, changeInfo, {id, url}) => {
+    if (changeInfo.favIconUrl || changeInfo.url) {
+      if (tabs[id]) {
+        const {hostname, ip} = tabs[id];
+        if (url && url.indexOf(hostname) !== -1 && ip) {
+          update(tabId, 'web navigation');
+        }
+      }
+    }
+  });
+}
 
 chrome.pageAction.onClicked.addListener(tab => {
   chrome.storage.local.get({
@@ -194,6 +215,56 @@ chrome.pageAction.onClicked.addListener(tab => {
         url: prefs.host.replace('[host]', (new URL(tab.url)).hostname)
       });
     }
+  });
+});
+
+// context menu
+[{
+  id: 'ssl-checker',
+  title: 'SSL Checker'
+}, {
+  id: 'trace-route',
+  title: 'Trace Route'
+}, {
+  id: 'ping',
+  title: 'Ping'
+}, {
+  id: 'dns-lookup',
+  title: 'DNS Lookup'
+}, {
+  id: 'whois-lookup',
+  title: 'Whois Lookup'
+}, {
+  id: 'http-headers',
+  title: 'HTTP Headers'
+}].forEach(({id, title}) => chrome.contextMenus.create({
+  contexts: ['page_action'],
+  id, title
+}));
+
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+  chrome.storage.local.get({
+    'ssl-checker': 'https://www.sslshopper.com/ssl-checker.html#hostname=[host]',
+    'trace-route': 'https://api.hackertarget.com/mtr/?q=[ip]',
+    'ping': 'https://api.hackertarget.com/nping/?q=[ip]',
+    'dns-lookup': 'https://api.hackertarget.com/dnslookup/?q=[host]',
+    'whois-lookup': 'https://api.hackertarget.com/whois/?q=[ip]',
+    'http-headers': 'https://api.hackertarget.com/httpheaders/?q=[host]'
+  }, prefs => {
+    let url = prefs[info.menuItemId];
+    if (url.indexOf('[host]') !== -1) {
+      const hostname = (new URL(tab.url)).hostname;
+      url = url.replace('[host]', hostname);
+    }
+    if (url.indexOf('[ip]') !== -1) {
+      if (tabs[tab.id] && tabs[tab.id].ip) {
+        url = url.replace('[ip]', tabs[tab.id].ip);
+      }
+      else {
+        return notify('Cannot find IP address for this tab. Refresh may help!');
+      }
+    }
+    chrome.tabs.create({url});
   });
 });
 
