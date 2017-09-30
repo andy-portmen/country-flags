@@ -200,20 +200,32 @@ else {
   });
 }
 
+function open(url, prefs, tab) {
+  const prop = {
+    url,
+    active: !prefs['open-in-background']
+  };
+  if (prefs['open-adjacent']) {
+    prop.index = tab.index + 1;
+  }
+  chrome.tabs.create(prop);
+}
+
 chrome.pageAction.onClicked.addListener(tab => {
   chrome.storage.local.get({
-    ip: 'http://www.tcpiputils.com/browse/ip-address/[ip]',
-    host: 'https://www.tcpiputils.com/browse/domain/[host]'
+    'ip': 'http://www.tcpiputils.com/browse/ip-address/[ip]',
+    'host': 'https://www.tcpiputils.com/browse/domain/[host]',
+    'open-in-background': false,
+    'open-adjacent': true
   }, prefs => {
-    if (tabs[tab.id] && tabs[tab.id].ip) {
-      chrome.tabs.create({
-        url: prefs.ip.replace('[ip]', tabs[tab.id].ip)
-      });
+    const ip = tabs[tab.id].ip;
+    const hostname = (new URL(tab.url)).hostname;
+
+    if (tabs[tab.id] && ip) {
+      open(prefs.ip.replace('[ip]', ip).replace('[host]', hostname), prefs, tab);
     }
     else {
-      chrome.tabs.create({
-        url: prefs.host.replace('[host]', (new URL(tab.url)).hostname)
-      });
+      open(prefs.host.replace('[ip]', ip).replace('[host]', hostname), prefs, tab);
     }
   });
 });
@@ -255,7 +267,7 @@ function contexts() {
           id,
           title: dictionary[id]
         });
-    });
+      });
   });
 }
 contexts();
@@ -336,14 +348,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         return notify('Cannot find IP address for this tab. Refresh may help!');
       }
     }
-    const prop = {
-      url,
-      active: !prefs['open-in-background']
-    };
-    if (prefs['open-adjacent']) {
-      prop.index = tab.index + 1;
-    }
-    chrome.tabs.create(prop);
+    open(url, prefs, tab);
   });
 });
 
