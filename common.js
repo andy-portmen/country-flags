@@ -178,8 +178,8 @@ if (navigator.userAgent.indexOf('Firefox') === -1) {
   chrome.webNavigation.onCommitted.addListener(({url, tabId, frameId}) => {
     if (frameId === 0) {
       if (tabs[tabId]) {
-        const {hostname, ip} = tabs[tabId];
-        if (url && url.indexOf(hostname) !== -1 && ip) {
+        const {hostname, ip, country} = tabs[tabId];
+        if (url && url.indexOf(hostname) !== -1 && ip && country) {
           update(tabId, 'web navigation');
         }
       }
@@ -191,8 +191,8 @@ else {
   chrome.tabs.onUpdated.addListener((tabId, changeInfo, {id, url}) => {
     if (changeInfo.favIconUrl || changeInfo.url) {
       if (tabs[id]) {
-        const {hostname, ip} = tabs[id];
-        if (url && url.indexOf(hostname) !== -1 && ip) {
+        const {hostname, ip, country} = tabs[id];
+        if (url && url.indexOf(hostname) !== -1 && ip && country) {
           update(tabId, 'web navigation');
         }
       }
@@ -219,42 +219,114 @@ chrome.pageAction.onClicked.addListener(tab => {
 });
 
 // context menu
-[{
-  id: 'ssl-checker',
-  title: 'SSL Checker'
-}, {
-  id: 'trace-route',
-  title: 'Trace Route'
-}, {
-  id: 'ping',
-  title: 'Ping'
-}, {
-  id: 'dns-lookup',
-  title: 'DNS Lookup'
-}, {
-  id: 'whois-lookup',
-  title: 'Whois Lookup'
-}, {
-  id: 'http-headers',
-  title: 'HTTP Headers'
-}].forEach(({id, title}) => chrome.contextMenus.create({
-  contexts: ['page_action'],
-  id, title
-}));
+function contexts() {
+  chrome.storage.local.get({
+    'ssl-checker-menuitem': true,
+    'trace-route-menuitem': true,
+    'ping-menuitem': true,
+    'tinyurl-menuitem': true,
+    'dns-lookup-menuitem': false,
+    'whois-lookup-menuitem': true,
+    'http-headers-menuitem': false,
+    'copy-ip-menuitem': true,
+    'custom-cmd-1-menuitem': false,
+    'custom-cmd-1-title': '',
+    'custom-cmd-2-menuitem': false,
+    'custom-cmd-2-title': ''
+  }, prefs => {
+    const dictionary = {
+      'ssl-checker': 'SSL Checker: Check SSL certificate',
+      'trace-route': 'Traceroute: Display the route and transit delays of packets',
+      'ping': 'Ping: Test the reachability of this IP address',
+      'tinyurl': 'TinyURL: Shorten the URL using TinyURL.com',
+      'dns-lookup': 'DNS Lookup: Perform an authoritative DNS lookup',
+      'whois-lookup': 'Whois Lookup: Find the registration and delegation of a domain name',
+      'http-headers': 'HTTP Headers: List all the response HTTP headers',
+      'copy-ip': 'Copy IP: Copy IP address to the clipboard',
+      'custom-cmd-1': prefs['custom-cmd-1-title'] || 'Custom command 1',
+      'custom-cmd-2': prefs['custom-cmd-2-title'] || 'Custom command 2'
+    };
+    Object.keys(prefs)
+      .filter(key => key.endsWith('-menuitem'))
+      .filter(key => prefs[key]).forEach(key => {
+        const id = key.replace('-menuitem', '');
+        chrome.contextMenus.create({
+          contexts: ['page_action'],
+          id,
+          title: dictionary[id]
+        });
+    });
+  });
+}
+contexts();
+chrome.runtime.onMessage.addListener(request => {
+  if (request.method === 'contexts') {
+    contexts();
+  }
+});
+
+function copy(str, tabId) {
+  if (/Firefox/.test(navigator.userAgent)) {
+    chrome.tabs.executeScript(tabId, {
+      allFrames: false,
+      runAt: 'document_start',
+      code: `
+        document.oncopy = (event) => {
+          event.clipboardData.setData('text/plain', '${str}');
+          event.preventDefault();
+        };
+        window.focus();
+        document.execCommand('Copy', false, null);
+      `
+    }, () => {
+      notify(
+        chrome.runtime.lastError ?
+          'Cannot copy to the clipboard on this page!' :
+          'IP address is stored to the clipboard'
+      );
+    });
+  }
+  else {
+    document.oncopy = e => {
+      e.clipboardData.setData('text/plain', str);
+      e.preventDefault();
+      notify('IP address is stored to the clipboard');
+    };
+    document.execCommand('Copy', false, null);
+  }
+}
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
+  if (info.menuItemId === 'copy-ip') {
+    if (tabs[tab.id] && tabs[tab.id].ip) {
+      copy(tabs[tab.id].ip, tab.id);
+    }
+    else {
+      notify('Cannot find IP address for this tab. Refresh may help!');
+    }
+    return;
+  }
+
   chrome.storage.local.get({
     'ssl-checker': 'https://www.sslshopper.com/ssl-checker.html#hostname=[host]',
     'trace-route': 'https://api.hackertarget.com/mtr/?q=[ip]',
     'ping': 'https://api.hackertarget.com/nping/?q=[ip]',
+    'tinyurl': 'https://tinyurl.com/create.php?url=[url]',
     'dns-lookup': 'https://api.hackertarget.com/dnslookup/?q=[host]',
     'whois-lookup': 'https://api.hackertarget.com/whois/?q=[ip]',
-    'http-headers': 'https://api.hackertarget.com/httpheaders/?q=[host]'
+    'http-headers': 'https://api.hackertarget.com/httpheaders/?q=[url]',
+    'custom-cmd-1': '',
+    'custom-cmd-2': '',
+    'open-in-background': false,
+    'open-adjacent': true
   }, prefs => {
     let url = prefs[info.menuItemId];
     if (url.indexOf('[host]') !== -1) {
       const hostname = (new URL(tab.url)).hostname;
       url = url.replace('[host]', hostname);
+    }
+    if (url.indexOf('[url]') !== -1) {
+      url = url.replace('[url]', tab.url);
     }
     if (url.indexOf('[ip]') !== -1) {
       if (tabs[tab.id] && tabs[tab.id].ip) {
@@ -264,7 +336,14 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         return notify('Cannot find IP address for this tab. Refresh may help!');
       }
     }
-    chrome.tabs.create({url});
+    const prop = {
+      url,
+      active: !prefs['open-in-background']
+    };
+    if (prefs['open-adjacent']) {
+      prop.index = tab.index + 1;
+    }
+    chrome.tabs.create(prop);
   });
 });
 
@@ -274,7 +353,6 @@ chrome.storage.local.get({
   'faqs': navigator.userAgent.indexOf('Firefox') === -1
 }, prefs => {
   const version = chrome.runtime.getManifest().version;
-
   if (prefs.version ? (prefs.faqs && prefs.version !== version) : true) {
     chrome.storage.local.set({version}, () => {
       chrome.tabs.create({

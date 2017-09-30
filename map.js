@@ -63,6 +63,7 @@ var countries = {
   'DO': 'Dominican Republic',
   'EC': 'Ecuador',
   'EG': 'Egypt',
+  'EU': 'European Union',
   'SV': 'El Salvador',
   'GQ': 'Equatorial Guinea',
   'ER': 'Eritrea',

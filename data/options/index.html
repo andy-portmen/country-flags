@@ -7,61 +7,162 @@
       body {
         padding: 10px;
         min-width: 500px;
+        font-family: "Helvetica Neue",Helvetica,sans-serif;
+        font-size: 13px;
       }
       input[type=text] {
         width: 100%;
+        box-sizing: border-box;
+      }
+      table {
+        border-collapse: collapse;
+      }
+      td {
+        white-space: nowrap;
+      }
+      td:nth-child(2) {
+        padding-right: 10px;
+      }
+      th {
+        font-weight: normal;
+        text-align: left;
+        padding: 5px 0;
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+      .spacer {
+        border-bottom: solid 10px #fff;
+      }
+      .spacer:not(:first-of-type) {
+        border-top: solid 10px #fff;
       }
     </style>
   </head>
   <body>
-    <label><input type="checkbox" id="dns"> Use the native DNS resolver of your OS</label>
-    <p>This will allow the extension to resolve IP addresses from hostnames even when your browser is configured to use a SOCKS proxy server.</p>
-
-    <hr>
-
     <table width="100%">
       <colgroup>
-        <col width="140px">
+        <col width="30px">
+        <col width="100px">
         <col>
       </colgroup>
-      <tr>
-        <td>Left-click (IP utility)</td>
-        <td><input type="text" id="ip"></td>
-      </tr>
-      <tr>
-        <td>Left-click (Host utility)</td>
-        <td><input type="text" id="host"></td>
-      </tr>
-      <tr>
-        <td>Right-click (SSL Checker)</td>
-        <td><input type="text" id="ssl-checker"></td>
-      </tr>
-      <tr>
-        <td>Right-click (Trace Route)</td>
-        <td><input type="text" id="trace-route"></td>
-      </tr>
-      <tr>
-        <td>Right-click (Ping)</td>
-        <td><input type="text" id="ping"></td>
-      </tr>
-      <tr>
-        <td>Right-click (DNS Lookup)</td>
-        <td><input type="text" id="dns-lookup"></td>
-      </tr>
-      <tr>
-        <td>Right-click (Whois Lookup)</td>
-        <td><input type="text" id="whois-lookup"></td>
-      </tr>
-      <tr>
-        <td>Right-click (HTTP Headers)</td>
-        <td><input type="text" id="http-headers"></td>
-      </tr>
+      <thead class="spacer">
+        <tr>
+          <th></th>
+          <th>Left Click</th>
+          <th>Service URL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td>IP utility</td>
+          <td><input type="text" id="ip"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Host utility</td>
+          <td><input type="text" id="host"></td>
+        </tr>
+      </tbody>
+      <thead class="spacer">
+        <tr>
+          <th></th>
+          <th>Right Click</th>
+          <th>Service URL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="checkbox" id="ssl-checker-menuitem"></td>
+          <td><label for="ssl-checker-menuitem">SSL Checker</label></td>
+          <td><input type="text" id="ssl-checker"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="trace-route-menuitem"></td>
+          <td><label for="trace-route-menuitem">Trace Route</label></td>
+          <td><input type="text" id="trace-route"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="ping-menuitem"></td>
+          <td><label for="ping-menuitem">Ping</label></td>
+          <td><input type="text" id="ping"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="tinyurl-menuitem"></td>
+          <td><label for="tinyurl-menuitem">TinyUrl</label></td>
+          <td><input type="text" id="tinyurl"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="dns-lookup-menuitem"></td>
+          <td><label for="dns-lookup-menuitem">DNS Lookup</label></td>
+          <td><input type="text" id="dns-lookup"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="whois-lookup-menuitem"></td>
+          <td><label for="whois-lookup-menuitem">Whois Lookup</label></td>
+          <td><input type="text" id="whois-lookup"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="http-headers-menuitem"></td>
+          <td><label for="http-headers-menuitem">HTTP Headers</label></td>
+          <td><input type="text" id="http-headers"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="custom-cmd-1-menuitem"></td>
+          <td><input type="text" placeholder="Custom title" id="custom-cmd-1-title"></td>
+          <td><input type="text" id="custom-cmd-1" placeholder="Custom URL"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="custom-cmd-2-menuitem"></td>
+          <td><input type="text" placeholder="Custom title" id="custom-cmd-2-title"></td>
+          <td><input type="text" id="custom-cmd-2" placeholder="Custom URL"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="copy-ip-menuitem"></td>
+          <td><label for="copy-ip-menuitem">Copy IP address</label></td>
+          <td></td>
+        </tr>
+      </tbody>
+      <thead class="spacer">
+        <tr>
+          <th></th>
+          <th>Misc</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="checkbox" id="open-in-background"></td>
+          <td><label for="open-in-background">Open links in a background</label></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="open-adjacent"></td>
+          <td><label for="open-adjacent">Open tabs next to the active</label></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="faqs"></td>
+          <td><label for="faqs">Open FAQs on updates</label></td>
+          <td></td>
+        </tr>
+      </tbody>
     </table>
 
     <div>
-      <button id="save">Save</button>
-      <span id="status"></span>
+      <p>
+        <button id="save">Save</button>
+        <span id="status"></span>
+      </p>
     </div>
+
+    <div style="border-top: dashed 1px #ccc; margin-top: 10px; padding-top: 10px;">
+      <label><input type="checkbox" id="dns"> Use the native DNS resolver of your OS</l</label>abel>
+      <p style="color: #888; font-size: 90%;">This will allow the extension to resolve IP addresses from hostnames even when your browser is configured to use a SOCKS proxy server.</p>
+    </div>
+
+
+
+
 
     <script src="index.js"></script>
   </body>
