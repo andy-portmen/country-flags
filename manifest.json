@@ -4,6 +4,7 @@
   "description": "Displays country flag of website's server location, Whois and Geo info",
   "author": "Andy Portmen",
   "version": "0.2.0",
+  "default_locale": "en",
   "manifest_version": 2,
   "permissions": [
     "storage",

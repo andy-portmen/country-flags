@@ -1,0 +1,134 @@
+{
+    "appDesc": {
+        "message": "Strictly block all popup requests from any website"
+    },
+    "bgCopy": {
+        "message": "Copy IP: Copy IP address to the clipboard"
+    },
+    "bgCountry": {
+        "message": "Country"
+    },
+    "bgCustom1": {
+        "message": "Custom command 1"
+    },
+    "bgCustom2": {
+        "message": "Custom command 2"
+    },
+    "bgDNS": {
+        "message": "DNS Lookup: Perform an authoritative DNS lookup"
+    },
+    "bgErr": {
+        "message": "Error: "
+    },
+    "bgErr1": {
+        "message": "obj.country is null"
+    },
+    "bgErr2": {
+        "message": "Cannot resolve the IP"
+    },
+    "bgErr3": {
+        "message": "Cannot copy to the clipboard on this page!"
+    },
+    "bgErr4": {
+        "message": "Cannot find IP address for this tab. Refresh may help!"
+    },
+    "bgHeaders": {
+        "message": "HTTP Headers: List all the response HTTP headers"
+    },
+    "bgHost": {
+        "message": "Host"
+    },
+    "bgIP": {
+        "message": "Server IP"
+    },
+    "bgMSG1": {
+        "message": "Server is on your private network"
+    },
+    "bgMSG2": {
+        "message": "IP address is stored to the clipboard"
+    },
+    "bgPing": {
+        "message": "Ping: Test the reachability of this IP address"
+    },
+    "bgSSL": {
+        "message": "SSL Checker: Check SSL certificate"
+    },
+    "bgTinyURL": {
+        "message": "TinyURL: Shorten the URL using TinyURL.com"
+    },
+    "bgTrace": {
+        "message": "Traceroute: Display the route and transit delays of packets"
+    },
+    "bgWHOIS": {
+        "message": "Whois Lookup: Find the registration and delegation of a domain name"
+    },
+    "optionsTitle": {
+        "message": "Options page :: Country Flags & IP Whois"
+    },
+    "optionsLClick": {
+        "message": "Left Click"
+    },
+    "optionsRClick": {
+        "message": "Right Click"
+    },
+    "optionsHost": {
+        "message": "Host utility"
+    },
+    "optionsIP": {
+        "message": "IP utility"
+    },
+    "optionsURL": {
+        "message": "Service URL"
+    },
+    "optionsSSL": {
+        "message": "SSL Checker"
+    },
+    "optionsTrace": {
+        "message": "Trace Route"
+    },
+    "optionsPing": {
+        "message": "Ping"
+    },
+    "optionsTinyUrl": {
+        "message": "TinyUrl"
+    },
+    "optionsDNS": {
+        "message": "DNS Lookup"
+    },
+    "optionsWHOIS": {
+        "message": "Whois Lookup"
+    },
+    "optionsHeaders": {
+        "message": "HTTP Headers"
+    },
+    "optionsCopy": {
+        "message": "Copy IP address"
+    },
+    "optionsMisc": {
+        "message": "Misc"
+    },
+    "optionsOpenBG": {
+        "message": "Open links in a background"
+    },
+    "optionsNextTo": {
+        "message": "Open tabs next to the active"
+    },
+    "optionsFAQs": {
+        "message": "Open FAQs on updates"
+    },
+    "optionsNative": {
+        "message": "Use the native DNS resolver of your OS"
+    },
+    "optionsNativeDescp": {
+        "message": "This will allow the extension to resolve IP addresses from hostnames even when your browser is configured to use a SOCKS proxy server."
+    },
+    "optionsPlaceHolder1": {
+        "message": "Custom title"
+    },
+    "optionsPlaceHolder2": {
+        "message": "Custom URL"
+    },
+    "optionsMSG": {
+        "message": "Options saved."
+    }
+}

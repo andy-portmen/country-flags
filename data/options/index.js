@@ -1,5 +1,7 @@
 'use strict';
 
+var _ = id => chrome.i18n.getMessage(id);
+
 document.getElementById('dns').addEventListener('change', ({target}) => {
   if (target.checked) {
     chrome.runtime.sendNativeMessage('com.add0n.node', {
@@ -64,7 +66,7 @@ function save() {
           method: 'contexts'
         });
         const status = document.getElementById('status');
-        status.textContent = 'Options saved.';
+        status.textContent = _('optionsMSG');
         setTimeout(() => status.textContent = '', 750);
       });
     });
@@ -109,3 +111,16 @@ function restore() {
 }
 document.addEventListener('DOMContentLoaded', restore);
 document.getElementById('save').addEventListener('click', save);
+
+// localization
+[...document.querySelectorAll('[data-i18n]')].forEach(e => {
+  const value = e.dataset.value;
+  const message = chrome.i18n.getMessage(e.dataset.i18n);
+  if (value) {
+    e.setAttribute(value, message);
+    console.log(value, message);
+  }
+  else {
+    e.textContent = message;
+  }
+});

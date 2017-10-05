@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Options page :: Country Flags &amp; IP Whois</title>
+    <title data-i18n="optionsTitle"></title>
     <style>
       body {
         padding: 10px;
@@ -47,102 +47,102 @@
       <thead class="spacer">
         <tr>
           <th></th>
-          <th>Left Click</th>
-          <th>Service URL</th>
+          <th data-i18n="optionsLClick"></th>
+          <th data-i18n="optionsURL"></th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td></td>
-          <td>IP utility</td>
+          <td data-i18n="optionsIP"></td>
           <td><input type="text" id="ip"></td>
         </tr>
         <tr>
           <td></td>
-          <td>Host utility</td>
+          <td data-i18n="optionsHost"></td>
           <td><input type="text" id="host"></td>
         </tr>
       </tbody>
       <thead class="spacer">
         <tr>
           <th></th>
-          <th>Right Click</th>
-          <th>Service URL</th>
+          <th data-i18n="optionsRClick"></th>
+          <th data-i18n="optionsURL"></th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><input type="checkbox" id="ssl-checker-menuitem"></td>
-          <td><label for="ssl-checker-menuitem">SSL Checker</label></td>
+          <td><label for="ssl-checker-menuitem" data-i18n="optionsSSL"></label></td>
           <td><input type="text" id="ssl-checker"></td>
         </tr>
         <tr>
           <td><input type="checkbox" id="trace-route-menuitem"></td>
-          <td><label for="trace-route-menuitem">Trace Route</label></td>
+          <td><label for="trace-route-menuitem" data-i18n="optionsTrace"></label></td>
           <td><input type="text" id="trace-route"></td>
         </tr>
         <tr>
           <td><input type="checkbox" id="ping-menuitem"></td>
-          <td><label for="ping-menuitem">Ping</label></td>
+          <td><label for="ping-menuitem" data-i18n="optionsPing"></label></td>
           <td><input type="text" id="ping"></td>
         </tr>
         <tr>
           <td><input type="checkbox" id="tinyurl-menuitem"></td>
-          <td><label for="tinyurl-menuitem">TinyUrl</label></td>
+          <td><label for="tinyurl-menuitem" data-i18n="optionsTinyUrl"></label></td>
           <td><input type="text" id="tinyurl"></td>
         </tr>
         <tr>
           <td><input type="checkbox" id="dns-lookup-menuitem"></td>
-          <td><label for="dns-lookup-menuitem">DNS Lookup</label></td>
+          <td><label for="dns-lookup-menuitem" data-i18n="optionsDNS"></label></td>
           <td><input type="text" id="dns-lookup"></td>
         </tr>
         <tr>
           <td><input type="checkbox" id="whois-lookup-menuitem"></td>
-          <td><label for="whois-lookup-menuitem">Whois Lookup</label></td>
+          <td><label for="whois-lookup-menuitem" data-i18n="optionsWHOIS"></label></td>
           <td><input type="text" id="whois-lookup"></td>
         </tr>
         <tr>
           <td><input type="checkbox" id="http-headers-menuitem"></td>
-          <td><label for="http-headers-menuitem">HTTP Headers</label></td>
+          <td><label for="http-headers-menuitem" data-i18n="optionsHeaders"></label></td>
           <td><input type="text" id="http-headers"></td>
         </tr>
         <tr>
           <td><input type="checkbox" id="custom-cmd-1-menuitem"></td>
-          <td><input type="text" placeholder="Custom title" id="custom-cmd-1-title"></td>
-          <td><input type="text" id="custom-cmd-1" placeholder="Custom URL"></td>
+          <td><input type="text" data-i18n="optionsPlaceHolder1" data-value="placeholder" id="custom-cmd-1-title"></td>
+          <td><input type="text" id="custom-cmd-1" data-i18n="optionsPlaceHolder2" data-value="placeholder"></td>
         </tr>
         <tr>
           <td><input type="checkbox" id="custom-cmd-2-menuitem"></td>
-          <td><input type="text" placeholder="Custom title" id="custom-cmd-2-title"></td>
-          <td><input type="text" id="custom-cmd-2" placeholder="Custom URL"></td>
+          <td><input type="text" data-i18n="optionsPlaceHolder1" data-value="placeholder" id="custom-cmd-2-title"></td>
+          <td><input type="text" id="custom-cmd-2" data-i18n="optionsPlaceHolder2" data-value="placeholder"></td>
         </tr>
         <tr>
           <td><input type="checkbox" id="copy-ip-menuitem"></td>
-          <td><label for="copy-ip-menuitem">Copy IP address</label></td>
+          <td><label for="copy-ip-menuitem" data-i18n="optionsCopy"></label></td>
           <td></td>
         </tr>
       </tbody>
       <thead class="spacer">
         <tr>
           <th></th>
-          <th>Misc</th>
-          <th>Description</th>
+          <th data-i18n="optionsMisc"></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><input type="checkbox" id="open-in-background"></td>
-          <td><label for="open-in-background">Open links in a background</label></td>
+          <td><label for="open-in-background" data-i18n="optionsOpenBG"></label></td>
           <td></td>
         </tr>
         <tr>
           <td><input type="checkbox" id="open-adjacent"></td>
-          <td><label for="open-adjacent">Open tabs next to the active</label></td>
+          <td><label for="open-adjacent" data-i18n="optionsNextTo"></label></td>
           <td></td>
         </tr>
         <tr>
           <td><input type="checkbox" id="faqs"></td>
-          <td><label for="faqs">Open FAQs on updates</label></td>
+          <td><label for="faqs" data-i18n="optionsFAQs"></label></td>
           <td></td>
         </tr>
       </tbody>
@@ -156,14 +156,9 @@
     </div>
 
     <div style="border-top: dashed 1px #ccc; margin-top: 10px; padding-top: 10px;">
-      <label><input type="checkbox" id="dns"> Use the native DNS resolver of your OS</l</label>abel>
-      <p style="color: #888; font-size: 90%;">This will allow the extension to resolve IP addresses from hostnames even when your browser is configured to use a SOCKS proxy server.</p>
+      <label><input type="checkbox" id="dns"> <span data-i18n="optionsNative"></span></label>
+      <p style="color: #888; font-size: 90%;" data-i18n="optionsNativeDescp"></p>
     </div>
-
-
-
-
-
     <script src="index.js"></script>
   </body>
 </html>

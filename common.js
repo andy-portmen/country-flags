@@ -1,6 +1,8 @@
 /* globals utils, countries */
 'use strict';
 
+var _ = id => chrome.i18n.getMessage(id);
+
 var lastError;
 var tabs = {};
 chrome.tabs.onRemoved.addListener(tabId => delete tabs[tabId]);
@@ -47,7 +49,7 @@ function update(tabId, reason) {
         32: './data/icons/error/32.png',
         64: './data/icons/error/64.png'
       };
-      title += 'Error: ' + obj.error || 'obj.country is null';
+      title += _('bgErr') + ': ' + obj.error || _('bgErr1');
     }
     else if (country === 'private') {
       path = {
@@ -55,7 +57,7 @@ function update(tabId, reason) {
         32: './data/icons/private/32.png',
         64: './data/icons/private/64.png'
       };
-      title += 'Server is on your private network';
+      title += _('bgMSG1');
       title += '\nHost: ' + obj.hostname;
     }
     else {
@@ -64,10 +66,10 @@ function update(tabId, reason) {
         32: './data/icons/flags/32/' + country + '.png',
         64: './data/icons/flags/64/' + country + '.png'
       };
-      title += 'Country: ' + countries[country];
-      title += '\nHost: ' + obj.hostname;
+      title += _('bgCountry') + ': ' + countries[country];
+      title += '\n' + _('bgHost') + ': ' + obj.hostname;
     }
-    title += '\nServer IP: ' + obj.ip;
+    title += '\n' + _('bgIP') + ': ' + obj.ip;
     //
     chrome.pageAction.setIcon({tabId, path}, () => lastError = chrome.runtime.lastError);
     chrome.pageAction.setTitle({title, tabId});
@@ -117,7 +119,7 @@ function resolve(tabId) {
     }
   }
   else {
-    tabs[tabId].error = 'cannot resolve the IP';
+    tabs[tabId].error = _('bgErr2');
     update(tabId, 'cannot resolve ip');
   }
 }
@@ -247,16 +249,16 @@ function contexts() {
     'custom-cmd-2-title': ''
   }, prefs => {
     const dictionary = {
-      'ssl-checker': 'SSL Checker: Check SSL certificate',
-      'trace-route': 'Traceroute: Display the route and transit delays of packets',
-      'ping': 'Ping: Test the reachability of this IP address',
-      'tinyurl': 'TinyURL: Shorten the URL using TinyURL.com',
-      'dns-lookup': 'DNS Lookup: Perform an authoritative DNS lookup',
-      'whois-lookup': 'Whois Lookup: Find the registration and delegation of a domain name',
-      'http-headers': 'HTTP Headers: List all the response HTTP headers',
-      'copy-ip': 'Copy IP: Copy IP address to the clipboard',
-      'custom-cmd-1': prefs['custom-cmd-1-title'] || 'Custom command 1',
-      'custom-cmd-2': prefs['custom-cmd-2-title'] || 'Custom command 2'
+      'ssl-checker': _('bgSSL'),
+      'trace-route': _('bgTrace'),
+      'ping': _('bgPing'),
+      'tinyurl': _('bgTinyURL'),
+      'dns-lookup': _('bgDNS'),
+      'whois-lookup': _('bgWHOIS'),
+      'http-headers': _('bgHeaders'),
+      'copy-ip': _('bgCopy'),
+      'custom-cmd-1': prefs['custom-cmd-1-title'] || _('bgCustom1'),
+      'custom-cmd-2': prefs['custom-cmd-2-title'] || _('bgCustom2')
     };
     Object.keys(prefs)
       .filter(key => key.endsWith('-menuitem'))
@@ -293,8 +295,8 @@ function copy(str, tabId) {
     }, () => {
       notify(
         chrome.runtime.lastError ?
-          'Cannot copy to the clipboard on this page!' :
-          'IP address is stored to the clipboard'
+          _('bgErr3') :
+          _('bgMSG2')
       );
     });
   }
@@ -302,7 +304,7 @@ function copy(str, tabId) {
     document.oncopy = e => {
       e.clipboardData.setData('text/plain', str);
       e.preventDefault();
-      notify('IP address is stored to the clipboard');
+      notify(_('bgMSG2'));
     };
     document.execCommand('Copy', false, null);
   }
@@ -314,7 +316,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
       copy(tabs[tab.id].ip, tab.id);
     }
     else {
-      notify('Cannot find IP address for this tab. Refresh may help!');
+      notify(_('bgErr4'));
     }
     return;
   }
@@ -345,7 +347,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         url = url.replace('[ip]', tabs[tab.id].ip);
       }
       else {
-        return notify('Cannot find IP address for this tab. Refresh may help!');
+        return notify(_('bgErr4'));
       }
     }
     open(url, prefs, tab);
