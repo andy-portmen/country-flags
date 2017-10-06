@@ -1,0 +1,31 @@
+Country Flags & IP Whois add-on is an extension that displays a flag toolbar button indicating the current webserver's physical location using an off-line database. Knowing the server location adds an extra layer of awareness to your browsing and can be useful to indicate the native languages and legal jurisdictions that may apply. Additional information about Geolocation or Whois info can be obtained via the click on the toolbar icon.
+
+For FAQs and general bug reports please visit:
+-> http://add0n.com/country-flags.html
+For technical bug reports use:
+-> https://github.com/andy-portmen/country-flags/issues
+
+Database info:
+[IP4] https://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip
+[IP6] https://geolite.maxmind.com/download/geoip/database/GeoIPv6.csv.gz
+
+Note that the CSV databases are compressed. For more info please visit the FAQs page and the source code.
+
+Available tools in the right-click menu:
+<ul>
+<li>SSL Checker: Check SSL certificate</li>
+<li>Traceroute: Display the route and transit delays of packets</li>
+<li>Ping: Test the reachability of this IP address</li>
+<li>TinyURL: Shorten the URL using TinyURL.com</li>
+<li>DNS Lookup: Perform an authoritative DNS lookup</li>
+<li>Whois Lookup: Find the registration and delegation of a domain name</li>
+<li>HTTP Headers: List all the response HTTP headers</li>
+<li>Copy IP: Copy IP address to the clipboard</li>
+<li>Custom Commands accepting [ip], [host], and [url] keywords</li>
+</ul>
+
+As of version 0.2.0, it is possible to ask extension to open new tabs in the background and adjacent to the current tab.
+
+-- Permissions:
+For comprehensive description of why a permission is required by this extension check:
+https://add0n.com/country-flags.html#permissions
