@@ -1,0 +1,134 @@
+{
+    "appDesc": {
+        "message": "Blochează strict toate solicitările de tip pop-up de la orice sait web"
+    },
+    "bgCopy": {
+        "message": "Copiere IP: Copiază adresa IP în clipboard"
+    },
+    "bgCountry": {
+        "message": "Țară"
+    },
+    "bgCustom1": {
+        "message": "Comandă 1"
+    },
+    "bgCustom2": {
+        "message": "Comandă 2"
+    },
+    "bgDNS": {
+        "message": "Căutare DNS: Efectuează o căutare DNS autorizată"
+    },
+    "bgErr": {
+        "message": "Eroare: "
+    },
+    "bgErr1": {
+        "message": "obj.country este vid"
+    },
+    "bgErr2": {
+        "message": "IP-ul nu se poate rezolva"
+    },
+    "bgErr3": {
+        "message": "Nu se poate face o copiere în clipboard în această pagină!"
+    },
+    "bgErr4": {
+        "message": "Nu se poate găsi adresa IP pentru această filă. Reîmprospătarea ar putea ajuta!"
+    },
+    "bgHeaders": {
+        "message": "Anteturi HTTP: Listează toate anteturile HTTP de răspuns"
+    },
+    "bgHost": {
+        "message": "Gazdă"
+    },
+    "bgIP": {
+        "message": "Server IP"
+    },
+    "bgMSG1": {
+        "message": "Serverul nu este în rețeaua dvs. privată"
+    },
+    "bgMSG2": {
+        "message": "Adresa IP a fost copiată în clipboard"
+    },
+    "bgPing": {
+        "message": "Ping: Testează accesibilitatea acestei adrese IP"
+    },
+    "bgSSL": {
+        "message": "Verificator SSL: Verifică certificatul SSL"
+    },
+    "bgTinyURL": {
+        "message": "TinyURL: Scurtează URL-ul utilizând TinyURL.com"
+    },
+    "bgTrace": {
+        "message": "TraceRoute: Afișează întârzierile pe traseu și de tranzit ale pachetelor"
+    },
+    "bgWHOIS": {
+        "message": "Căutare Whois: Caută înregistrarea și delegarea unui nume de domeniu"
+    },
+    "optionsTitle": {
+        "message": "Opțiuni :: Country Flags & IP Whois"
+    },
+    "optionsLClick": {
+        "message": "Clic-stânga"
+    },
+    "optionsRClick": {
+        "message": "Clic-dreapta"
+    },
+    "optionsHost": {
+        "message": "Utilitar rezolvare gazdă"
+    },
+    "optionsIP": {
+        "message": "Utilitar rezolvare IP"
+    },
+    "optionsURL": {
+        "message": "URL de lucru"
+    },
+    "optionsSSL": {
+        "message": "Verificator SSL"
+    },
+    "optionsTrace": {
+        "message": "TraceRoute"
+    },
+    "optionsPing": {
+        "message": "Ping"
+    },
+    "optionsTinyUrl": {
+        "message": "TinyUrl"
+    },
+    "optionsDNS": {
+        "message": "Căutare DNS"
+    },
+    "optionsWHOIS": {
+        "message": "Căutare Whois"
+    },
+    "optionsHeaders": {
+        "message": "Anteturi HTTP"
+    },
+    "optionsCopy": {
+        "message": "Copiere adresă"
+    },
+    "optionsMisc": {
+        "message": "Diverse"
+    },
+    "optionsOpenBG": {
+        "message": "Se deschid legăturile în fundal"
+    },
+    "optionsNextTo": {
+        "message": "Se deschid filele alături de fila activă"
+    },
+    "optionsFAQs": {
+        "message": "Se deschide FAQ după actualizare"
+    },
+    "optionsNative": {
+        "message": "Se folosește rezoleverul DNS nativ al sistemului de operare"
+    },
+    "optionsNativeDescp": {
+        "message": "Aceasta va permite extensiei să rezolve adresele IP de la nume de gazde, chiar dacă navigatorul este configurat să utilizeze un server proxy SOCKS."
+    },
+    "optionsPlaceHolder1": {
+        "message": "Denumire comandă"
+    },
+    "optionsPlaceHolder2": {
+        "message": "URL"
+    },
+    "optionsMSG": {
+        "message": "Opțiunile au fost salvate."
+    }
+}
