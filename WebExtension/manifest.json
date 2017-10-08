@@ -28,7 +28,6 @@
   "background": {
     "scripts": [
       "utils.js",
-      "map.js",
       "common.js"
     ]
   },

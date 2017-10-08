@@ -1,4 +1,4 @@
-/* globals utils, countries */
+/* globals utils */
 'use strict';
 
 var _ = id => chrome.i18n.getMessage(id);
@@ -66,7 +66,7 @@ function update(tabId, reason) {
         32: './data/icons/flags/32/' + country + '.png',
         64: './data/icons/flags/64/' + country + '.png'
       };
-      title += _('bgCountry') + ': ' + countries[country];
+      title += _('bgCountry') + ': ' + _('country_' + country);
       title += '\n' + _('bgHost') + ': ' + obj.hostname;
     }
     title += '\n' + _('bgIP') + ': ' + obj.ip;
