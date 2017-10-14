@@ -15,16 +15,16 @@
         "message": "Comandă 2"
     },
     "bgDNS": {
-        "message": "Căutare DNS: Efectuează o căutare DNS autorizată"
+        "message": "Căutare DNS: Efectuează o căutare DNS autoritară"
     },
     "bgErr": {
         "message": "Eroare: "
     },
     "bgErr1": {
-        "message": "obj.country este vid"
+        "message": "obj.country este vid."
     },
     "bgErr2": {
-        "message": "IP-ul nu se poate rezolva"
+        "message": "IP-ul nu se poate rezolva."
     },
     "bgErr3": {
         "message": "Nu se poate face o copiere în clipboard în această pagină!"
@@ -48,10 +48,10 @@
         "message": "Adresa IP a fost copiată în clipboard"
     },
     "bgPing": {
-        "message": "Ping: Testează accesibilitatea acestei adrese IP"
+        "message": "Ping: Testează accesibilitatea adresei IP"
     },
     "bgSSL": {
-        "message": "Verificator SSL: Verifică certificatul SSL"
+        "message": "Verificare SSL: Verifică certificatul SSL"
     },
     "bgTinyURL": {
         "message": "TinyURL: Scurtează URL-ul utilizând TinyURL.com"
@@ -60,7 +60,7 @@
         "message": "TraceRoute: Afișează întârzierile pe traseu și de tranzit ale pachetelor"
     },
     "bgWHOIS": {
-        "message": "Căutare Whois: Caută înregistrarea și delegarea unui nume de domeniu"
+        "message": "Căutare Whois: Caută înregistrarea și delegarea numelui de domeniu"
     },
     "optionsTitle": {
         "message": "Opțiuni :: Country Flags & IP Whois"
@@ -72,16 +72,16 @@
         "message": "Clic-dreapta"
     },
     "optionsHost": {
-        "message": "Utilitar rezolvare gazdă"
+        "message": "Rezolvare nume gazdă"
     },
     "optionsIP": {
-        "message": "Utilitar rezolvare IP"
+        "message": "Rezolvare adresă IP"
     },
     "optionsURL": {
         "message": "URL de lucru"
     },
     "optionsSSL": {
-        "message": "Verificator SSL"
+        "message": "Verificare SSL"
     },
     "optionsTrace": {
         "message": "TraceRoute"
@@ -114,13 +114,13 @@
         "message": "Se deschid filele alături de fila activă"
     },
     "optionsFAQs": {
-        "message": "Se deschide FAQ după actualizare"
+        "message": "Se deschide pagina de întrebări frecvente (FAQ) după actualizare"
     },
     "optionsNative": {
         "message": "Se folosește rezoleverul DNS nativ al sistemului de operare"
     },
     "optionsNativeDescp": {
-        "message": "Aceasta va permite extensiei să rezolve adresele IP de la nume de gazde, chiar dacă navigatorul este configurat să utilizeze un server proxy SOCKS."
+        "message": "Aceasta va permite rezolvarea adreselor IP de la nume de gazde, chiar dacă navigatorul este configurat să utilizeze un server proxy SOCKS."
     },
     "optionsPlaceHolder1": {
         "message": "Denumire comandă"
@@ -130,5 +130,770 @@
     },
     "optionsMSG": {
         "message": "Opțiunile au fost salvate."
-    }
+    },
+    "country_AD": {
+        "message": "Andorra"
+        },
+    "country_AE": {
+        "message": "Emiratele Arabe Unite"
+        },
+    "country_AF": {
+        "message": "Afganistan"
+        },
+    "country_AG": {
+        "message": "Antigua și Barbuda"
+        },
+    "country_AI": {
+        "message": "Anguilla"
+        },
+    "country_AL": {
+        "message": "Albania"
+        },
+    "country_AM": {
+        "message": "Armenia"
+        },
+    "country_AN": {
+        "message": "Antilele Olandeze"
+        },
+    "country_AO": {
+        "message": "Angola"
+        },
+    "country_AP": {
+        "message": "Regiunea Asia-Pacific"
+        },
+    "country_AQ": {
+        "message": "Antarctica"
+        },
+    "country_AR": {
+        "message": "Argentina"
+        },
+    "country_AS": {
+        "message": "Samoa Americană"
+        },
+    "country_AT": {
+        "message": "Austria"
+        },
+    "country_AU": {
+        "message": "Australia"
+        },
+    "country_AW": {
+        "message": "Aruba"
+        },
+    "country_AX": {
+        "message": "Insulele Åland"
+        },
+    "country_AZ": {
+        "message": "Azerbaidjan"
+        },
+    "country_BA": {
+        "message": "Bosnia și Herțegovina"
+        },
+    "country_BB": {
+        "message": "Barbados"
+        },
+    "country_BD": {
+        "message": "Bangladesh"
+        },
+    "country_BE": {
+        "message": "Belgia"
+        },
+    "country_BF": {
+        "message": "Burkina Faso"
+        },
+    "country_BG": {
+        "message": "Bulgaria"
+        },
+    "country_BH": {
+        "message": "Bahrain"
+        },
+    "country_BI": {
+        "message": "Burundi"
+        },
+    "country_BJ": {
+        "message": "Benin"
+        },
+    "country_BL": {
+        "message": "Saint-Barthélemy"
+        },
+    "country_BM": {
+        "message": "Bermuda"
+        },
+    "country_BN": {
+        "message": "Brunei"
+        },
+    "country_BO": {
+        "message": "Bolivia"
+        },
+    "country_BQ": {
+        "message": "Bonaire, Sint Eustatius și Saba"
+        },
+    "country_BR": {
+        "message": "Brazilia"
+        },
+    "country_BS": {
+        "message": "Bahamas"
+        },
+    "country_BT": {
+        "message": "Bhutan"
+        },
+    "country_BV": {
+        "message": "Insula Bouvet"
+        },
+    "country_BW": {
+        "message": "Botswana"
+        },
+    "country_BY": {
+        "message": "Belarus"
+        },
+    "country_BZ": {
+        "message": "Belize"
+        },
+    "country_CA": {
+        "message": "Canada"
+        },
+    "country_CC": {
+        "message": "Insulele Cocos (Keeling)"
+        },
+    "country_CD": {
+        "message": "Republica Democratică Congo"
+        },
+    "country_CF": {
+        "message": "Republica Centrafricană"
+        },
+    "country_CG": {
+        "message": "Congo"
+        },
+    "country_CH": {
+        "message": "Elveția"
+        },
+    "country_CI": {
+        "message": "Coasta de Fildeș"
+        },
+    "country_CK": {
+        "message": "Insulele Cook"
+        },
+    "country_CL": {
+        "message": "Chile"
+        },
+    "country_CM": {
+        "message": "Camerun"
+        },
+    "country_CN": {
+        "message": "China"
+        },
+    "country_CO": {
+        "message": "Columbia"
+        },
+    "country_CR": {
+        "message": "Costa Rica"
+        },
+    "country_CU": {
+        "message": "Cuba"
+        },
+    "country_CV": {
+        "message": "Capul Verde"
+        },
+    "country_CW": {
+        "message": "Curaçao"
+        },
+    "country_CX": {
+        "message": "Insula Crăciunului"
+        },
+    "country_CY": {
+        "message": "Cipru"
+        },
+    "country_CZ": {
+        "message": "Cehia"
+        },
+    "country_DE": {
+        "message": "Germania"
+        },
+    "country_DJ": {
+        "message": "Djibouti"
+        },
+    "country_DK": {
+        "message": "Danemarca"
+        },
+    "country_DM": {
+        "message": "Dominica"
+        },
+    "country_DO": {
+        "message": "Republica Dominicană"
+        },
+    "country_DZ": {
+        "message": "Algeria"
+        },
+    "country_EC": {
+        "message": "Ecuador"
+        },
+    "country_EE": {
+        "message": "Estonia"
+        },
+    "country_EG": {
+        "message": "Egipt"
+        },
+    "country_EH": {
+        "message": "Sahara Occidentală"
+        },
+    "country_ER": {
+        "message": "Eritreea"
+        },
+    "country_ES": {
+        "message": "Spania"
+        },
+    "country_ET": {
+        "message": "Etiopia"
+        },
+    "country_EU": {
+        "message": "Uniunea Europeană"
+        },
+    "country_FI": {
+        "message": "Finlanda"
+        },
+    "country_FJ": {
+        "message": "Fiji"
+        },
+    "country_FK": {
+        "message": "Insulele Falkland (Malvine)"
+        },
+    "country_FM": {
+        "message": "Statele Federate ale Microneziei"
+        },
+    "country_FO": {
+        "message": "Insulele Feroe"
+        },
+    "country_FR": {
+        "message": "Franța"
+        },
+    "country_GA": {
+        "message": "Gabon"
+        },
+    "country_GB": {
+        "message": "Regatul Unit"
+        },
+    "country_GD": {
+        "message": "Grenada"
+        },
+    "country_GE": {
+        "message": "Georgia"
+        },
+    "country_GF": {
+        "message": "Guyana Franceză"
+        },
+    "country_GG": {
+        "message": "Guernsey"
+        },
+    "country_GH": {
+        "message": "Ghana"
+        },
+    "country_GI": {
+        "message": "Gibraltar"
+        },
+    "country_GL": {
+        "message": "Groenlanda"
+        },
+    "country_GM": {
+        "message": "Gambia"
+        },
+    "country_GN": {
+        "message": "Guineea"
+        },
+    "country_GP": {
+        "message": "Guadelupa"
+        },
+    "country_GQ": {
+        "message": "Guineea Ecuatorială"
+        },
+    "country_GR": {
+        "message": "Grecia"
+        },
+    "country_GS": {
+        "message": "Georgia de Sud și Insulele Sandwich"
+        },
+    "country_GT": {
+        "message": "Guatemala"
+        },
+    "country_GU": {
+        "message": "Guam"
+        },
+    "country_GW": {
+        "message": "Guineea-Bissau"
+        },
+    "country_GY": {
+        "message": "Guyana"
+        },
+    "country_HK": {
+        "message": "Hong Kong"
+        },
+    "country_HM": {
+        "message": "Insula Heard și Insulele McDonald"
+        },
+    "country_HN": {
+        "message": "Honduras"
+        },
+    "country_HR": {
+        "message": "Croația"
+        },
+    "country_HT": {
+        "message": "Haiti"
+        },
+    "country_HU": {
+        "message": "Ungaria"
+        },
+    "country_ID": {
+        "message": "Indonezia"
+        },
+    "country_IE": {
+        "message": "Irlanda"
+        },
+    "country_IL": {
+        "message": "Israel"
+        },
+    "country_IM": {
+        "message": "Insula Man"
+        },
+    "country_IN": {
+        "message": "India"
+        },
+    "country_IO": {
+        "message": "Teritoriul Britanic din Oceanul Indian"
+        },
+    "country_IQ": {
+        "message": "Irak"
+        },
+    "country_IR": {
+        "message": "Iran"
+        },
+    "country_IS": {
+        "message": "Islanda"
+        },
+    "country_IT": {
+        "message": "Italia"
+        },
+    "country_JE": {
+        "message": "Jersey"
+        },
+    "country_JM": {
+        "message": "Jamaica"
+        },
+    "country_JO": {
+        "message": "Iordania"
+        },
+    "country_JP": {
+        "message": "Japonia"
+        },
+    "country_KE": {
+        "message": "Kenya"
+        },
+    "country_KG": {
+        "message": "Kârgâzstan"
+        },
+    "country_KH": {
+        "message": "Cambodgia"
+        },
+    "country_KI": {
+        "message": "Kiribati"
+        },
+    "country_KM": {
+        "message": "Insulele Comore"
+        },
+    "country_KN": {
+        "message": "Sfântul Cristofor și Nevis"
+        },
+    "country_KP": {
+        "message": "Coreea de Nord"
+        },
+    "country_KR": {
+        "message": "Coreea"
+        },
+    "country_KW": {
+        "message": "Kuweit"
+        },
+    "country_KY": {
+        "message": "Insulele Cayman"
+        },
+    "country_KZ": {
+        "message": "Kazahstan"
+        },
+    "country_LA": {
+        "message": "Laos"
+        },
+    "country_LB": {
+        "message": "Liban"
+        },
+    "country_LC": {
+        "message": "Sfânta Lucia"
+        },
+    "country_LI": {
+        "message": "Liechtenstein"
+        },
+    "country_LK": {
+        "message": "Sri Lanka"
+        },
+    "country_LR": {
+        "message": "Liberia"
+        },
+    "country_LS": {
+        "message": "Lesotho"
+        },
+    "country_LT": {
+        "message": "Lituania"
+        },
+    "country_LU": {
+        "message": "Luxemburg"
+        },
+    "country_LV": {
+        "message": "Letonia"
+        },
+    "country_LY": {
+        "message": "Libia"
+        },
+    "country_MA": {
+        "message": "Maroc"
+        },
+    "country_MC": {
+        "message": "Monaco"
+        },
+    "country_MD": {
+        "message": "Moldova"
+        },
+    "country_ME": {
+        "message": "Muntenegru"
+        },
+    "country_MF": {
+        "message": "Insula Sfântul Martin"
+        },
+    "country_MG": {
+        "message": "Madagascar"
+        },
+    "country_MH": {
+        "message": "Insulele Marshall"
+        },
+    "country_MK": {
+        "message": "Macedonia"
+        },
+    "country_ML": {
+        "message": "Mali"
+        },
+    "country_MM": {
+        "message": "Myanmar"
+        },
+    "country_MN": {
+        "message": "Mongolia"
+        },
+    "country_MO": {
+        "message": "Macao"
+        },
+    "country_MP": {
+        "message": "Insulele Mariane de Nord"
+        },
+    "country_MQ": {
+        "message": "Martinica"
+        },
+    "country_MR": {
+        "message": "Mauritania"
+        },
+    "country_MS": {
+        "message": "Montserrat"
+        },
+    "country_MT": {
+        "message": "Malta"
+        },
+    "country_MU": {
+        "message": "Mauritius"
+        },
+    "country_MV": {
+        "message": "Maldive"
+        },
+    "country_MW": {
+        "message": "Malawi"
+        },
+    "country_MX": {
+        "message": "Mexic"
+        },
+    "country_MY": {
+        "message": "Malaezia"
+        },
+    "country_MZ": {
+        "message": "Mozambic"
+        },
+    "country_NA": {
+        "message": "Namibia"
+        },
+    "country_NC": {
+        "message": "Noua Caledonie"
+        },
+    "country_NE": {
+        "message": "Niger"
+        },
+    "country_NF": {
+        "message": "Insula Norfolk"
+        },
+    "country_NG": {
+        "message": "Nigeria"
+        },
+    "country_NI": {
+        "message": "Nicaragua"
+        },
+    "country_NL": {
+        "message": "Olanda"
+        },
+    "country_NO": {
+        "message": "Norvegia"
+        },
+    "country_NP": {
+        "message": "Nepal"
+        },
+    "country_NR": {
+        "message": "Nauru"
+        },
+    "country_NU": {
+        "message": "Niue"
+        },
+    "country_NZ": {
+        "message": "Noua Zeelandă"
+        },
+    "country_OM": {
+        "message": "Oman"
+        },
+    "country_PA": {
+        "message": "Panama"
+        },
+    "country_PE": {
+        "message": "Peru"
+        },
+    "country_PF": {
+        "message": "Polinezia Franceză"
+        },
+    "country_PG": {
+        "message": "Papua Noua Guinee"
+        },
+    "country_PH": {
+        "message": "Filipine"
+        },
+    "country_PK": {
+        "message": "Pakistan"
+        },
+    "country_PL": {
+        "message": "Polonia"
+        },
+    "country_PM": {
+        "message": "Saint Pierre și Miquelon"
+        },
+    "country_PN": {
+        "message": "Pitcairn"
+        },
+    "country_PR": {
+        "message": "Puerto Rico"
+        },
+    "country_PS": {
+        "message": "Teritoriile palestiniene ocupate"
+        },
+    "country_PT": {
+        "message": "Portugalia"
+        },
+    "country_PW": {
+        "message": "Palau"
+        },
+    "country_PY": {
+        "message": "Paraguay"
+        },
+    "country_QA": {
+        "message": "Qatar"
+        },
+    "country_RE": {
+        "message": "Reunion"
+        },
+    "country_RO": {
+        "message": "România"
+        },
+    "country_RS": {
+        "message": "Serbia"
+        },
+    "country_RU": {
+        "message": "Rusia"
+        },
+    "country_RW": {
+        "message": "Rwanda"
+        },
+    "country_SA": {
+        "message": "Arabia Saudită"
+        },
+    "country_SB": {
+        "message": "Insulele Solomon"
+        },
+    "country_SC": {
+        "message": "Seychelles"
+        },
+    "country_SD": {
+        "message": "Sudan"
+        },
+    "country_SE": {
+        "message": "Suedia"
+        },
+    "country_SG": {
+        "message": "Singapore"
+        },
+    "country_SH": {
+        "message": "Insula Sfânta Elena"
+        },
+    "country_SI": {
+        "message": "Slovenia"
+        },
+    "country_SJ": {
+        "message": "Svalbard și Jan Mayen"
+        },
+    "country_SK": {
+        "message": "Slovacia"
+        },
+    "country_SL": {
+        "message": "Sierra Leone"
+        },
+    "country_SM": {
+        "message": "San Marino"
+        },
+    "country_SN": {
+        "message": "Senegal"
+        },
+    "country_SO": {
+        "message": "Somalia"
+        },
+    "country_SR": {
+        "message": "Surinam"
+        },
+    "country_SS": {
+        "message": "Sudanul de Sud"
+        },
+    "country_ST": {
+        "message": "São Tomé și Príncipe"
+        },
+    "country_SV": {
+        "message": "El Salvador"
+        },
+    "country_SX": {
+        "message": "Sint Maarten"
+        },
+    "country_SY": {
+        "message": "Siria"
+        },
+    "country_SZ": {
+        "message": "Swaziland"
+        },
+    "country_TC": {
+        "message": "Insulele Turks și Caicos"
+        },
+    "country_TD": {
+        "message": "Ciad"
+        },
+    "country_TF": {
+        "message": "Teritoriile franceze de sud"
+        },
+    "country_TG": {
+        "message": "Togo"
+        },
+    "country_TH": {
+        "message": "Thailanda"
+        },
+    "country_TJ": {
+        "message": "Tadjikistan"
+        },
+    "country_TK": {
+        "message": "Tokelau"
+        },
+    "country_TL": {
+        "message": "Timorul de Est"
+        },
+    "country_TM": {
+        "message": "Turkmenistan"
+        },
+    "country_TN": {
+        "message": "Tunisia"
+        },
+    "country_TO": {
+        "message": "Tonga"
+        },
+    "country_TR": {
+        "message": "Turcia"
+        },
+    "country_TT": {
+        "message": "Trinidad și Tobago"
+        },
+    "country_TV": {
+        "message": "Tuvalu"
+        },
+    "country_TW": {
+        "message": "Taiwan"
+        },
+    "country_TZ": {
+        "message": "Tanzania"
+        },
+    "country_UA": {
+        "message": "Ucraina"
+        },
+    "country_UG": {
+        "message": "Uganda"
+        },
+    "country_UM": {
+        "message": "Insulele Minore Îndepărtate ale SUA"
+        },
+    "country_US": {
+        "message": "Statele Unite ale Americii"
+        },
+    "country_UY": {
+        "message": "Uruguay"
+        },
+    "country_UZ": {
+        "message": "Uzbekistan"
+        },
+    "country_VA": {
+        "message": "Vatican"
+        },
+    "country_VC": {
+        "message": "Sfântul Vicențiu și Grenadinele"
+        },
+    "country_VE": {
+        "message": "Venezuela"
+        },
+    "country_VG": {
+        "message": "Insulele Virgine Britanice"
+        },
+    "country_VI": {
+        "message": "Insulele Virgine Americane"
+        },
+    "country_VN": {
+        "message": "Vietnam"
+        },
+    "country_VU": {
+        "message": "Vanuatu"
+        },
+    "country_WF": {
+        "message": "Wallis și Futuna"
+        },
+    "country_WS": {
+        "message": "Samoa"
+        },
+    "country_YE": {
+        "message": "Yemen"
+        },
+    "country_YT": {
+        "message": "Mayotte"
+        },
+    "country_ZA": {
+        "message": "Africa de Sud"
+        },
+    "country_ZM": {
+        "message": "Zambia"
+        },
+    "country_ZW": {
+        "message": "Zimbabwe"
+        },
+    "country_private": {
+        "message": "Adresă IP privată"
+        },
+    "country_A1": {
+        "message": "Proxy anonim"
+        },
+    "country_A2": {
+        "message": "Furnizor de servicii prin satelit"
+        }
 }
