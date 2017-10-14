@@ -9,7 +9,7 @@ Verwendete Datenbanken:
 [IP4] https://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip
 [IP6] https://geolite.maxmind.com/download/geoip/database/GeoIPv6.csv.gz
 
-Beachte, dass die CSV-Datenbanken komprimmiert sind. Für mehr Informationen die FAQ-Seite und den Quellcode beachten.
+Beachte, dass die CSV-Datenbanken komprimiert sind. Für mehr Informationen die FAQ-Seite und den Quellcode beachten.
 
 Werkzeuge im Rechtsklick-Menü:
 <ul>
