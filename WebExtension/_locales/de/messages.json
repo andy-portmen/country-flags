@@ -1,0 +1,875 @@
+{
+    "appDesc": {
+        "message": "Striktes Blocken aller Popup-Anfragen von jeder Webseite"
+    },
+    "bgCopy": {
+        "message": "IP kopieren: kopiere die IP-Adresse in die Zwischenablage"
+    },
+    "bgCountry": {
+        "message": "Land"
+    },
+    "bgCustom1": {
+        "message": "Benutzerdefinierter Befehl 1"
+    },
+    "bgCustom2": {
+        "message": "Benutzerdefinierter Befehl 2"
+    },
+    "bgDNS": {
+        "message": "DNS Lookup: einen authoritativen DNS lookup durchführen"
+    },
+    "bgErr": {
+        "message": "Fehler: "
+    },
+    "bgErr1": {
+        "message": "obj.country ist null"
+    },
+    "bgErr2": {
+        "message": "Kann IP nicht auflösen"
+    },
+    "bgErr3": {
+        "message": "Kann auf dieser Seite nicht in die Zwischenablage kopieren!"
+    },
+    "bgErr4": {
+        "message": "Kann die IP-Adresse für diesen Tab nicht ermitteln. Neuladen könnte helfen."
+    },
+    "bgHeaders": {
+        "message": "HTTP Headers: Alle HTTP-Antwort-Header auflisten"
+    },
+    "bgHost": {
+        "message": "Host"
+    },
+    "bgIP": {
+        "message": "Server IP"
+    },
+    "bgMSG1": {
+        "message": "Server ist im lokalen Netzwerk"
+    },
+    "bgMSG2": {
+        "message": "IP-Adresse in die Zwischenablage kopiert"
+    },
+    "bgPing": {
+        "message": "Ping: die Erreichbarkeit der IP-Adresse prüfen"
+    },
+    "bgSSL": {
+        "message": "SSL Checker: SSL-Zertifikat überprüfen"
+    },
+    "bgTinyURL": {
+        "message": "TinyURL: Die Webseiten-Adresse per TinyURL.com verkürzen"
+    },
+    "bgTrace": {
+        "message": "Traceroute: Den Weg und die Laufzeiten der Pakete anzeigen"
+    },
+    "bgWHOIS": {
+        "message": "Whois Lookup: Die Registrierung und Delegation einer Domain herausfinden"
+    },
+    "optionsTitle": {
+        "message": "Optionen :: Country Flags & IP Whois"
+    },
+    "optionsLClick": {
+        "message": "Linksklick"
+    },
+    "optionsRClick": {
+        "message": "Rechtsklick"
+    },
+    "optionsHost": {
+        "message": "Host Dienstprogramm"
+    },
+    "optionsIP": {
+        "message": "IP Dienstprogramm"
+    },
+    "optionsURL": {
+        "message": "Service URL"
+    },
+    "optionsSSL": {
+        "message": "SSL Checker"
+    },
+    "optionsTrace": {
+        "message": "Trace Route"
+    },
+    "optionsPing": {
+        "message": "Ping"
+    },
+    "optionsTinyUrl": {
+        "message": "TinyUrl"
+    },
+    "optionsDNS": {
+        "message": "DNS Lookup"
+    },
+    "optionsWHOIS": {
+        "message": "Whois Lookup"
+    },
+    "optionsHeaders": {
+        "message": "HTTP Headers"
+    },
+    "optionsCopy": {
+        "message": "IP-Adresse kopieren"
+    },
+    "optionsMisc": {
+        "message": "Verschiedenes"
+    },
+    "optionsOpenBG": {
+        "message": "Links im Hintergrund öffnen"
+    },
+    "optionsNextTo": {
+        "message": "Tabs neben dem Aktiven öffnen"
+    },
+    "optionsFAQs": {
+        "message": "FAQs zu Updates öffnen"
+    },
+    "optionsNative": {
+        "message": "Den native DNS-Auflösung des Betriebssystems nutzen"
+    },
+    "optionsNativeDescp": {
+        "message": "Dies erlaubt der Erweiterung die IP-Adressen von Hostnamen aufzulösen, selbst wenn der Browser einen SOCKS Proxyserver verwendet."
+    },
+    "optionsPlaceHolder1": {
+        "message": "Benutzerdefinierter Titel"
+    },
+    "optionsPlaceHolder2": {
+        "message": "Benutzerdefinierte URL"
+    },
+    "optionsMSG": {
+        "message": "Einstellungen gespeichert."
+    },
+    "country_AF": {
+            "message": "Afghanistan"
+        },
+    "country_AX": {
+            "message": "Aland Inseln"
+        },
+    "country_AL": {
+            "message": "Albanien"
+        },
+    "country_DZ": {
+            "message": "Algerien"
+        },
+    "country_AS": {
+            "message": "Amerikanisch-Samoa"
+        },
+    "country_AD": {
+            "message": "Andorra"
+        },
+    "country_AO": {
+            "message": "Angola"
+        },
+    "country_AI": {
+            "message": "Anguilla"
+        },
+    "country_AQ": {
+            "message": "Antarktis"
+        },
+    "country_AG": {
+            "message": "Antigua und Barbuda"
+        },
+    "country_AR": {
+            "message": "Argentinien"
+        },
+    "country_AM": {
+            "message": "Armenien"
+        },
+    "country_AW": {
+            "message": "Aruba"
+        },
+    "country_AU": {
+            "message": "Australien"
+        },
+    "country_AT": {
+            "message": "Österreich"
+        },
+    "country_AZ": {
+            "message": "Aserbaidschan"
+        },
+    "country_BS": {
+            "message": "Bahamas"
+        },
+    "country_BH": {
+            "message": "Bahrain"
+        },
+    "country_BD": {
+            "message": "Bangladesh"
+        },
+    "country_BB": {
+            "message": "Barbados"
+        },
+    "country_BY": {
+            "message": "Weißrussland"
+        },
+    "country_BE": {
+            "message": "Belgien"
+        },
+    "country_BZ": {
+            "message": "Belize"
+        },
+    "country_BJ": {
+            "message": "Benin"
+        },
+    "country_BM": {
+            "message": "Bermuda"
+        },
+    "country_BT": {
+            "message": "Bhutan"
+        },
+    "country_BO": {
+            "message": "Bolivien"
+        },
+    "country_BA": {
+            "message": "Bosnien und Herzegowina"
+        },
+    "country_BW": {
+            "message": "Botswana"
+        },
+    "country_BV": {
+            "message": "Bouvet-Insel"
+        },
+    "country_BR": {
+            "message": "Brasilien"
+        },
+    "country_IO": {
+            "message": "Britisches Territorium im Indischen Ozean"
+        },
+    "country_BN": {
+            "message": "Brunei Darussalam"
+        },
+    "country_BG": {
+            "message": "Bulgarien"
+        },
+    "country_BF": {
+            "message": "Burkina Faso"
+        },
+    "country_BI": {
+            "message": "Burundi"
+        },
+    "country_KH": {
+            "message": "Kambodscha"
+        },
+    "country_CM": {
+            "message": "Kamerun"
+        },
+    "country_CA": {
+            "message": "Kanada"
+        },
+    "country_CV": {
+            "message": "Kap Verde"
+        },
+    "country_KY": {
+            "message": "Cayman-Inseln"
+        },
+    "country_CF": {
+        "message": "Zentralafrikanische Republik"
+    },
+    "country_TD": {
+        "message": "Tschad"
+    },
+    "country_CL": {
+        "message": "Chile"
+    },
+    "country_CN": {
+        "message": "China"
+    },
+    "country_CX": {
+        "message": "Weihnachtsinsel"
+    },
+    "country_CC": {
+        "message": "Kokosinseln"
+    },
+    "country_CO": {
+        "message": "Kolumbien"
+    },
+    "country_KM": {
+        "message": "Komoren"
+    },
+    "country_CG": {
+        "message": "Kongo"
+    },
+    "country_CD": {
+        "message": "Demokratische Republik Kongo"
+    },
+    "country_CK": {
+        "message": "Cookinseln"
+    },
+    "country_CR": {
+        "message": "Costa Rica"
+    },
+    "country_CI": {
+        "message": "Elfenbeinküste"
+    },
+    "country_HR": {
+        "message": "Kroatien"
+    },
+    "country_CU": {
+        "message": "Kuba"
+    },
+    "country_CY": {
+        "message": "Zypern"
+    },
+    "country_CZ": {
+        "message": "Tschechien"
+    },
+    "country_DK": {
+        "message": "Dänemark"
+    },
+    "country_DJ": {
+        "message": "Dschibuti"
+    },
+    "country_DM": {
+        "message": "Dominica"
+    },
+    "country_DO": {
+        "message": "Dominikanische Republik"
+    },
+    "country_EC": {
+        "message": "Ecuador"
+    },
+    "country_EG": {
+        "message": "Ägypten"
+    },
+    "country_EU": {
+        "message": "Europäische Union"
+    },
+    "country_SV": {
+        "message": "El Salvador"
+    },
+    "country_GQ": {
+        "message": "Äquatorialguinea"
+    },
+    "country_ER": {
+        "message": "Eritrea"
+    },
+    "country_EE": {
+        "message": "Estland"
+    },
+    "country_ET": {
+        "message": "Äthiopien"
+    },
+    "country_FK": {
+        "message": "Falklandinseln"
+    },
+    "country_FO": {
+        "message": "Faroer-Inseln"
+    },
+    "country_FJ": {
+        "message": "Fidschi"
+    },
+    "country_FI": {
+        "message": "Finnland"
+    },
+    "country_FR": {
+        "message": "Frankreich"
+    },
+     "country_GF": {
+        "message": "Französisch-Guayana"
+    },
+    "country_PF": {
+        "message": "Französisch-Polynesien"
+    },
+    "country_TF": {
+        "message": "Französische Südgebiete"
+    },
+    "country_GA": {
+        "message": "Gabun"
+    },
+    "country_GM": {
+        "message": "Gambia"
+    },
+    "country_GE": {
+        "message": "Georgien"
+    },
+    "country_DE": {
+        "message": "Deutschland"
+    },
+    "country_GH": {
+        "message": "Ghana"
+    },
+    "country_GI": {
+        "message": "Gibraltar"
+    },
+    "country_GR": {
+        "message": "Griechenland"
+    },
+    "country_GL": {
+        "message": "Grönland"
+    },
+    "country_GD": {
+        "message": "Grenada"
+    },
+    "country_GP": {
+        "message": "Guadeloupe"
+    },
+    "country_GU": {
+        "message": "Guam"
+    },
+    "country_GT": {
+        "message": "Guatemala"
+    },
+    "country_GG": {
+        "message": "Guernsey"
+    },
+    "country_GN": {
+        "message": "Guinea"
+    },
+    "country_GW": {
+        "message": "Guinea-Bissau"
+    },
+    "country_GY": {
+        "message": "Guyana"
+    },
+    "country_HT": {
+        "message": "Haiti"
+    },
+    "country_HM": {
+        "message": "Heard und McDonald-Inseln"
+    },
+    "country_VA": {
+        "message": "Vatikanstaat"
+    },
+    "country_HN": {
+        "message": "Honduras"
+    },
+    "country_HK": {
+        "message": "Hong Kong"
+    },
+    "country_HU": {
+        "message": "Ungarn"
+    },
+    "country_IS": {
+        "message": "Island"
+    },
+    "country_IN": {
+        "message": "Indien"
+    },
+    "country_ID": {
+        "message": "Indonesien"
+    },
+    "country_IR": {
+        "message": "Iran"
+    },
+    "country_IQ": {
+        "message": "Irak"
+    },
+    "country_IE": {
+        "message": "Irland"
+    },
+    "country_IM": {
+        "message": "Isle Of Man"
+    },
+    "country_IL": {
+        "message": "Israel"
+    },
+    "country_IT": {
+        "message": "Italien"
+    },
+    "country_JM": {
+        "message": "Jamaika"
+    },
+    "country_JP": {
+        "message": "Japan"
+    },
+    "country_JE": {
+        "message": "Jersey"
+    },
+    "country_JO": {
+        "message": "Jordanien"
+    },
+    "country_KZ": {
+        "message": "Kasachstan"
+    },
+    "country_KE": {
+        "message": "Kenia"
+    },
+    "country_KI": {
+        "message": "Kiribati"
+    },
+    "country_KR": {
+        "message": "Korea"
+    },
+    "country_KW": {
+        "message": "Kuwait"
+    },
+    "country_KG": {
+        "message": "Kirgisistan"
+    },
+    "country_LA": {
+        "message": "Volksdemokratische Republik Laos"
+    },
+    "country_LV": {
+        "message": "Lettland"
+    },
+    "country_LB": {
+        "message": "Libanon"
+    },
+    "country_LS": {
+        "message": "Lesotho"
+    },
+    "country_LR": {
+        "message": "Liberia"
+    },
+    "country_LY": {
+        "message": "Libysch-Arabische Dschamahirija"
+    },
+    "country_LI": {
+        "message": "Liechtenstein"
+    },
+    "country_LT": {
+        "message": "Litauen"
+    },
+    "country_LU": {
+        "message": "Luxemburg"
+    },
+    "country_MO": {
+        "message": "Macao"
+    },
+    "country_MK": {
+        "message": "Makedonien"
+    },
+    "country_MG": {
+        "message": "Madagaskar"
+    },
+    "country_MW": {
+        "message": "Malawi"
+    },
+    "country_MY": {
+        "message": "Malaysia"
+    },
+    "country_MV": {
+        "message": "Malediven"
+    },
+    "country_ML": {
+        "message": "Mali"
+    },
+    "country_MT": {
+        "message": "Malta"
+    },
+    "country_MH": {
+        "message": "Marshallinseln"
+    },
+    "country_MQ": {
+        "message": "Martinique"
+    },
+    "country_MR": {
+        "message": "Mauretanien"
+    },
+    "country_MU": {
+        "message": "Mauritius"
+    },
+    "country_YT": {
+        "message": "Mayotte"
+    },
+    "country_MX": {
+        "message": "Mexiko"
+    },
+    "country_FM": {
+        "message": "Föderierte Staaten von Mikronesien"
+    },
+    "country_MD": {
+        "message": "Moldawien"
+    },
+    "country_MC": {
+        "message": "Monaco"
+    },
+    "country_MN": {
+        "message": "Mongolei"
+    },
+    "country_ME": {
+        "message": "Montenegro"
+    },
+    "country_MS": {
+        "message": "Montserrat"
+    },
+    "country_MA": {
+        "message": "Marokko"
+    },
+    "country_MZ": {
+        "message": "Mosambik"
+    },
+    "country_MM": {
+        "message": "Myanmar"
+    },
+    "country_NA": {
+        "message": "Namibia"
+    },
+    "country_NR": {
+        "message": "Nauru"
+    },
+    "country_NP": {
+        "message": "Nepal"
+    },
+    "country_NL": {
+        "message": "Niederlande"
+    },
+    "country_AN": {
+        "message": "Niederländische Antillen"
+    },
+    "country_NC": {
+        "message": "Neukaledonien"
+    },
+    "country_NZ": {
+        "message": "Neuseeland"
+    },
+    "country_NI": {
+        "message": "Nicaragua"
+    },
+    "country_NE": {
+        "message": "Niger"
+    },
+    "country_NG": {
+        "message": "Nigeria"
+    },
+    "country_NU": {
+        "message": "Niue"
+    },
+    "country_NF": {
+        "message": "Norfolkinseln"
+    },
+    "country_MP": {
+        "message": "Nördliche Marianen"
+    },
+    "country_NO": {
+        "message": "Norwegen"
+    },
+    "country_OM": {
+        "message": "Oman"
+    },
+    "country_PK": {
+        "message": "Pakistan"
+    },
+    "country_PW": {
+        "message": "Palau"
+    },
+    "country_PS": {
+        "message": "Palästinensergebiete"
+    },
+    "country_PA": {
+        "message": "Panama"
+    },
+    "country_PG": {
+        "message": "Papua-Neuguinea"
+    },
+    "country_PY": {
+        "message": "Paraguay"
+    },
+    "country_PE": {
+        "message": "Peru"
+    },
+    "country_PH": {
+        "message": "Philippinen"
+    },
+    "country_PN": {
+        "message": "Pitcairn"
+    },
+    "country_PL": {
+        "message": "Polen"
+    },
+    "country_PT": {
+        "message": "Portugal"
+    },
+    "country_PR": {
+        "message": "Puerto Rico"
+    },
+    "country_QA": {
+        "message": "Qatar"
+    },
+    "country_RE": {
+        "message": "Reunion"
+    },
+    "country_RO": {
+        "message": "Rumänien"
+    },
+    "country_RU": {
+        "message": "Russische Föderation"
+    },
+    "country_RW": {
+        "message": "Ruanda"
+    },
+    "country_BL": {
+        "message": "Saint Barthelemy"
+    },
+    "country_SH": {
+        "message": "Saint Helena"
+    },
+    "country_KN": {
+        "message": "Saint Kitts und Nevis"
+    },
+    "country_LC": {
+        "message": "Saint Lucia"
+    },
+    "country_MF": {
+        "message": "Saint Martin"
+    },
+    "country_PM": {
+        "message": "Saint Pierre und Miquelon"
+    },
+    "country_VC": {
+        "message": "Saint Vincent und Grenadinen"
+    },
+    "country_WS": {
+        "message": "Samoa"
+    },
+    "country_SM": {
+        "message": "San Marino"
+    },
+    "country_ST": {
+        "message": "Sao Tome und Principe"
+    },
+    "country_SA": {
+        "message": "Saudi-Arabien"
+    },
+    "country_SN": {
+        "message": "Senegal"
+    },
+    "country_RS": {
+        "message": "Serbien"
+    },
+    "country_SC": {
+        "message": "Seychellen"
+    },
+    "country_SL": {
+        "message": "Sierra Leone"
+    },
+    "country_SG": {
+        "message": "Singapur"
+    },
+    "country_SK": {
+        "message": "Slowakei"
+    },
+    "country_SI": {
+        "message": "Slowenien"
+    },
+    "country_SB": {
+        "message": "Solomoninseln"
+    },
+    "country_SO": {
+        "message": "Somalia"
+    },
+    "country_ZA": {
+        "message": "Südafrika"
+    },
+    "country_GS": {
+        "message": "Südgeorgien und Südliche Sandwichinseln"
+    },
+    "country_ES": {
+        "message": "Spanien"
+    },
+    "country_LK": {
+        "message": "Sri Lanka"
+    },
+    "country_SD": {
+        "message": "Sudan"
+    },
+    "country_SR": {         
+        "message": "Suriname"
+    },
+    "country_SJ": {
+        "message": "Svalbard und Jan Mayen"
+    },
+    "country_SZ": {
+        "message": "Swasiland"
+    },
+    "country_SE": {
+        "message": "Schweden"
+    },
+    "country_CH": {
+        "message": "Schweiz"
+    },
+    "country_SY": {
+        "message": "Syrische Arabische Republik"
+    },
+    "country_TW": {
+        "message": "Taiwan"
+    },
+    "country_TJ": {
+        "message": "Tadschikistan"
+    },
+    "country_TZ": {
+        "message": "Tansania"
+    },
+    "country_TH": {
+        "message": "Thailand"
+    },
+    "country_TL": {
+        "message": "Ost-Timor"
+    },
+    "country_TG": {
+        "message": "Togo"
+    },
+    "country_TK": {
+        "message": "Tokelau"
+    },
+    "country_TO": {
+        "message": "Tonga"
+    },
+    "country_TT": {
+        "message": "Trinidad und Tobago"
+    },
+    "country_TN": {
+        "message": "Tunesien"
+    },
+    "country_TR": {
+        "message": "Türkei"
+    },
+    "country_TM": {
+        "message": "Turkmenistan"
+    },
+    "country_TC": {
+        "message": "Turks- und Caicosinseln"
+    },
+    "country_TV": {
+        "message": "Tuvalu"
+    },
+    "country_UG": {
+        "message": "Uganda"
+    },
+    "country_UA": {
+        "message": "Ukraine"
+    },
+    "country_AE": {
+        "message": "Vereinigte Arabische Emirate"
+    },
+    "country_GB": {
+        "message": "Vereinigtes Königreich"
+    },
+    "country_US": {
+        "message": "Vereinigte Staaten von Amerika"
+    },
+    "country_UM": {
+        "message": "Amerikanische Überseeinseln"
+    },
+    "country_UY": {
+        "message": "Uruguay"
+    },
+    "country_UZ": {
+        "message": "Usbekistan"
+    },
+    "country_VU": {
+        "message": "Vanuatu"
+    },
+    "country_VE": {
+        "message": "Venezuela"
+    },
+    "country_VN": {
+        "message": "Vietnam"
+    },
+    "country_VG": {
+        "message": "Britische Jungferninseln"
+    },
+    "country_VI": {
+        "message": "Amerikanische Jungferninseln"
+    },
+    "country_WF": {
+        "message": "Wallis und Futuna"
+    },
+    "country_EH": {
+        "message": "Westliche Sahara"
+    },
+    "country_YE": {
+        "message": "jemen"
+    },
+    "country_ZM": {
+        "message": "Sambia"
+    },
+    "country_ZW": {
+        "message": "Simbabwe"
+    },
+    "country_private": {
+        "message": "Private IP-Adresse"
+    }
+}
