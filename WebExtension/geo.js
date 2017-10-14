@@ -20,40 +20,37 @@ var geo = {
   },
 
   init4: () => {
-    const req = new XMLHttpRequest();
-    req.open('GET', './data/assets/geoip-country4.dat');
-    req.responseType = 'arraybuffer';
-    req.onload = () => {
-      geo.cache4.buffer = req.response;
-      const size = req.response.byteLength;
+    return fetch('/data/assets/geoip-country4.dat')
+      .then(r => r.arrayBuffer())
+      .then(buffer => {
+        geo.cache4.buffer = buffer;
+        const size = buffer.byteLength;
 
-      geo.cache4.lastLine = (size / geo.cache4.recordSize) - 1;
+        geo.cache4.lastLine = (size / geo.cache4.recordSize) - 1;
 
-      geo.cache4.lastIP = new DataView(
-        geo.cache4.buffer,
-        (geo.cache4.lastLine * geo.cache4.recordSize) + 4, 4
-      ).getUint32(0);
-      geo.cache4.firstIP = new DataView(geo.cache4.buffer, 0, 4).getUint32(0);
-    };
-    req.send();
+        geo.cache4.lastIP = new DataView(
+          geo.cache4.buffer,
+          (geo.cache4.lastLine * geo.cache4.recordSize) + 4, 4
+        ).getUint32(0);
+        geo.cache4.firstIP = new DataView(geo.cache4.buffer, 0, 4).getUint32(0);
+
+      });
   },
   init6: () => {
-    const req = new XMLHttpRequest();
-    req.open('GET', './data/assets/geoip-country6.dat');
-    req.responseType = 'arraybuffer';
-    req.onload = () => {
-      geo.cache6.buffer = req.response;
-      const size = req.response.byteLength;
+    return fetch('/data/assets/geoip-country6.dat')
+      .then(r => r.arrayBuffer())
+      .then(buffer => {
+        geo.cache6.buffer = buffer;
+        const size = buffer.byteLength;
 
-      geo.cache6.lastLine = (size / geo.cache6.recordSize) - 1;
+        geo.cache6.lastLine = (size / geo.cache6.recordSize) - 1;
 
-      geo.cache6.lastIP = new DataView(
-        geo.cache6.buffer,
-        (geo.cache6.lastLine * geo.cache6.recordSize) + 4, 4
-      ).getUint32(0);
-      geo.cache6.firstIP = new DataView(geo.cache6.buffer, 0, 4).getUint32(0);
-    };
-    req.send();
+        geo.cache6.lastIP = new DataView(
+          geo.cache6.buffer,
+          (geo.cache6.lastLine * geo.cache6.recordSize) + 4, 4
+        ).getUint32(0);
+        geo.cache6.firstIP = new DataView(geo.cache6.buffer, 0, 4).getUint32(0);
+      });
   },
   lookup4: ip => {
     if (!geo.cache4.buffer) {
@@ -162,10 +159,10 @@ var geo = {
   }
 };
 
-geo.init4();
-geo.init6();
+var isLoaded = false;
+var requests = [];
 
-self.onmessage = function({data}) {
+var perform = data => {
   try {
     if (data.type === 4) {
       const ip = utils.aton4(data.ip);
@@ -187,5 +184,17 @@ self.onmessage = function({data}) {
       tabId: data.tabId,
       error: e.message
     });
+  }
+};
+
+Promise.all([geo.init4(), geo.init6()]).then(() => {
+  isLoaded = true;
+  requests.forEach(r => perform(r));
+});
+
+self.onmessage = function({data}) {
+  if (isLoaded) {
+    perform(data);
+    requests.push(data);
   }
 };
