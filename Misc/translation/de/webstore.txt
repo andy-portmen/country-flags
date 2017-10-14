@@ -1,0 +1,31 @@
+Das Country Flags & IP Whois Add-on ist eine Erweiterung, mit der in der Adresszeile eine Flagge angezeigt wird, welche auf Basis einer Offline-Datenbank den Standort des momentanen Webservers darstellt. Den Server-Standort zu kennen erhöht das Bewusstsein beim Surfen und ermöglicht es, auf die Muttersprache und die Gerichtsbarkeit zu schließen. Zusätzliche Informationen über die Geolocation oder ein Whois können per Klick auf das Flaggen-Symbol erlangt werden.
+
+Für häufig gestellte Fragen und Fehlerberichte besuche:
+-> http://add0n.com/country-flags.html
+Für technische Fehlerberichte verwende:
+-> https://github.com/andy-portmen/country-flags/issues
+
+Verwendete Datenbanken:
+[IP4] https://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip
+[IP6] https://geolite.maxmind.com/download/geoip/database/GeoIPv6.csv.gz
+
+Beachte, dass die CSV-Datenbanken komprimmiert sind. Für mehr Informationen die FAQ-Seite und den Quellcode beachten.
+
+Werkzeuge im Rechtsklick-Menü:
+<ul>
+<li>SSL Checker: SSL-Zertifikat überprüfen</li>
+<li>Traceroute: Den Weg und die Laufzeiten der Pakete anzeigen</li>
+<li>Ping: die Erreichbarkeit der IP-Adresse prüfen</li>
+<li>TinyURL: Die Webseiten-Adresse per TinyURL.com verkürzen</li>
+<li>DNS Lookup: einen authoritativen DNS lookup durchführen</li>
+<li>Whois Lookup: Die Registrierung und Delegation einer Domain herausfinden</li>
+<li>HTTP Headers: Alle HTTP-Antwort-Header auflisten</li>
+<li>IP kopieren: kopiere die IP-Adresse in die Zwischenablage</li>
+<li>Benutzerdefinierte Befehle, die [ip], [host], und [url] Verknüpfungen akzeptieren</li>
+</ul>
+
+Ab Version 0.2.0 ist es möglich, die Erweiterung so einzustellen, dass neue Tabs im Hintergrund und neben dem aktiven geöffnet werden.
+
+-- Berechtigungen:
+Eine vollständige Beschreibung warum welche Berechtigungen benötigt werden ist hier verfügbar:
+https://add0n.com/country-flags.html#permissions
