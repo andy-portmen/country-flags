@@ -1,6 +1,6 @@
 {
     "appDesc": {
-        "message": "Blochează strict toate solicitările de tip pop-up de la orice sait web"
+        "message": "Afișează drapelul țării unde este localizat serverul web curent și informații Whois și de geolocalizare"
     },
     "bgCopy": {
         "message": "Copiere IP: Copiază adresa IP în clipboard"
@@ -127,6 +127,9 @@
     },
     "optionsPlaceHolder2": {
         "message": "URL"
+    },
+    "optionsSaveButton": {
+        "message": "Salvează"
     },
     "optionsMSG": {
         "message": "Opțiunile au fost salvate."
