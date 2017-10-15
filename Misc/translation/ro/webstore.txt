@@ -8,7 +8,6 @@ Pentru rapoartele despre erori tehnice folosiți:
 Informații despre bazele de date:
 [IP4] https://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip
 [IP6] https://geolite.maxmind.com/download/geoip/database/GeoIPv6.csv.gz
-
 Rețineți că bazele de date CSV sunt comprimate. Pentru mai multe informații, vizitați pagina de întrebări frecvente (FAQ) și vizualizați codul sursă.
 
 Instrumente disponibile în meniul contextual afișat cu clic-dreapta:
@@ -21,10 +20,9 @@ Instrumente disponibile în meniul contextual afișat cu clic-dreapta:
 <li>Căutare Whois: Caută înregistrarea și delegarea numelui de domeniu</li>
 <li>Anteturi HTTP: Listează toate anteturile HTTP de răspuns</li>
 <li>Copiere IP: Copiază adresa IP în clipboard</li>
-<li>Comenzile personalizate acceptă ca parametrii [ip], [host], și [url]</li>
+<li>Comenzile personalizate acceptă ca parametri [ip], [host] și [url]</li>
 </ul>
 
-As of version 0.2.0, it is possible to ask extension to open new tabs in the background and adjacent to the current tab.
 Începând cu versiunea 0.2.0, este posibilă deschiderea filelor noi în fundal și/sau alături de fila curentă.
 
 -- Permisiuni:
