@@ -1,7 +1,7 @@
 {
   "name": "Country Flags & IP Whois",
   "short_name": "icflags",
-  "description": "Displays country flag of website's server location, Whois and Geo info",
+  "description": "__MSG_appDesc__",
   "author": "Andy Portmen",
   "version": "0.2.0",
   "default_locale": "en",

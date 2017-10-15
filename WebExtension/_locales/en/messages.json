@@ -1,6 +1,6 @@
 {
     "appDesc": {
-        "message": "Strictly block all popup requests from any website"
+        "message": "Displays country flag of website's server location, Whois and Geo info"
     },
     "bgCopy": {
         "message": "Copy IP: Copy IP address to the clipboard"
@@ -127,6 +127,9 @@
     },
     "optionsPlaceHolder2": {
         "message": "Custom URL"
+    },
+    "optionsSaveButton": {
+        "message": "Save"
     },
     "optionsMSG": {
         "message": "Options saved."
