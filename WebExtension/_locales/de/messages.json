@@ -1,6 +1,6 @@
 {
     "appDesc": {
-        "message": "Striktes Blocken aller Popup-Anfragen von jeder Webseite"
+        "message": "Zeigt die Länderflagge, Whois und geographische Informationen des Serverstandorts der Webseite"
     },
     "bgCopy": {
         "message": "IP kopieren: kopiere die IP-Adresse in die Zwischenablage"
@@ -128,6 +128,9 @@
     "optionsPlaceHolder2": {
         "message": "Benutzerdefinierte URL"
     },
+    "optionsSaveButton": {
++        "message": "Speichern"
++    },
     "optionsMSG": {
         "message": "Einstellungen gespeichert."
     },
