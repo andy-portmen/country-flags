@@ -1,0 +1,30 @@
+Suplimentul „Country Flags & IP Whois” este o extensie care afișează în bara de unelte un buton cu drapelul statului/țării/teritoriului unde este localizat fizic serverul web curent, folosind o bază de date offline.  Cunoașterea locației serverului adaugă un nivel suplimentar de conștientizare privind navigarea pe internet și poate fi utilă prin indicarea limbilor native și a jurisdicțiilor legale care ar putea fi aplicate.  Informații suplimentare despre geolocalizare sau informații despre Whois pot fi obținute printr-un clic pe pictograma-drapel din bara de unelte.
+
+Pentru întrebări frecvente (FAQ) și rapoarte generale despre erori, vizitați:
+-> http://add0n.com/country-flags.html
+Pentru rapoartele despre erori tehnice folosiți:
+-> https://github.com/andy-portmen/country-flags/issues
+
+Informații despre bazele de date:
+[IP4] https://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip
+[IP6] https://geolite.maxmind.com/download/geoip/database/GeoIPv6.csv.gz
+Rețineți că bazele de date CSV sunt comprimate. Pentru mai multe informații, vizitați pagina de întrebări frecvente (FAQ) și vizualizați codul sursă.
+
+Instrumente disponibile în meniul contextual afișat cu clic-dreapta:
+<ul>
+<li>Verificare SSL: Verifică certificatul SSL</li>
+<li>TraceRoute: Afișează întârzierile pe traseu și de tranzit ale pachetelor</li>
+<li>Ping: Testează accesibilitatea adresei IP</li>
+<li>TinyURL: Scurtează URL-ul utilizând TinyURL.com</li>
+<li>Căutare DNS: Efectuează o căutare DNS autoritară</li>
+<li>Căutare Whois: Caută înregistrarea și delegarea numelui de domeniu</li>
+<li>Anteturi HTTP: Listează toate anteturile HTTP de răspuns</li>
+<li>Copiere IP: Copiază adresa IP în clipboard</li>
+<li>Comenzile personalizate acceptă ca parametri [ip], [host] și [url]</li>
+</ul>
+
+Începând cu versiunea 0.2.0, este posibilă deschiderea filelor noi în fundal și/sau alături de fila curentă.
+
+-- Permisiuni:
+Pentru o descriere detaliată a motivului pentru care sunt necesare permisiuni pentru acest supliment, vizitați:
+https://add0n.com/country-flags.html#permissions
