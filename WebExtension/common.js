@@ -124,7 +124,7 @@ function resolve(tabId) {
   }
 }
 
-chrome.webRequest.onResponseStarted.addListener(({ip, tabId, url}) => {
+var onResponseStarted = ({ip, tabId, url}) => {
   if (!ip) {
     return;
   }
@@ -170,7 +170,8 @@ chrome.webRequest.onResponseStarted.addListener(({ip, tabId, url}) => {
   else {
     set({ip}, false, true);
   }
-}, {
+};
+chrome.webRequest.onResponseStarted.addListener(onResponseStarted, {
   urls: ['<all_urls>'],
   types: ['main_frame']
 }, []);

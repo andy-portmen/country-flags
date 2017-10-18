@@ -129,8 +129,8 @@
         "message": "Benutzerdefinierte URL"
     },
     "optionsSaveButton": {
-+        "message": "Speichern"
-+    },
+        "message": "Speichern"
+    },
     "optionsMSG": {
         "message": "Einstellungen gespeichert."
     },
@@ -758,7 +758,7 @@
     "country_SD": {
         "message": "Sudan"
     },
-    "country_SR": {         
+    "country_SR": {
         "message": "Suriname"
     },
     "country_SJ": {
