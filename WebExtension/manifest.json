@@ -28,6 +28,7 @@
   "background": {
     "scripts": [
       "utils.js",
+      "services.js",
       "common.js",
       "existing.js"
     ]

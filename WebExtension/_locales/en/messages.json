@@ -14,6 +14,15 @@
     "bgCustom2": {
         "message": "Custom command 2"
     },
+    "bgCustom3": {
+        "message": "Custom command 3"
+    },
+    "bgCustom4": {
+        "message": "Custom command 4"
+    },
+    "bgCustom5": {
+        "message": "Custom command 5"
+    },
     "bgDNS": {
         "message": "DNS Lookup: Perform an authoritative DNS lookup"
     },
@@ -62,6 +71,54 @@
     "bgWHOIS": {
         "message": "Whois Lookup: Find the registration and delegation of a domain name"
     },
+    "bgAlexa": {
+        "message": "Alexa: Website traffic, statistics and analytics"
+    },
+    "bgWOT": {
+        "message": "WOT Scorecard: Website reputation ratings"
+    },
+    "bgVirustotal": {
+        "message": "Virustotal: A free virus, malware and URL scanning service"
+    },
+    "bgIsitdownrightnow": {
+        "message": "Check Server Status: Helps finding whether a website is down or not"
+    },
+    "bgGoogletranslate": {
+        "message": "Google Translate: Free service instantly translates words, phrases, and web pages"
+    },
+    "bgGooglecache": {
+        "message": "Google Cache: Google cached pages for any web site"
+    },
+    "bgWikipediadomain": {
+        "message": "Wikipedia: Domain search"
+    },
+    "bgIntodns": {
+        "message": "intoDNS: Checks the health and configuration of DNS and mail servers"
+    },
+    "bgNetcraft": {
+        "message": "Netcraft: Provides internet security services including anti-fraud and anti-phishing services"
+    },
+    "bgWebaim": {
+        "message": "Wave Report: Provides web accessibility solutions"
+    },
+    "bgNuValidator": {
+        "message": "Validate.nu: HTML5 Validator"
+    },
+    "bgCSSValidator": {
+        "message": "W3C CSS Validator: CSS Validator"
+    },
+    "bgW3CValidator": {
+        "message": "W3C Validator: HTML5 Validator"
+    },
+    "bgArchive": {
+        "message": "Internet Archive: Free universal access to archived web pages"
+    },
+    "bgGoogle": {
+        "message": "Google: Search by domain"
+    },
+    "bgWolframalpha": {
+        "message": "Wolfram|Alpha : Access to the world's facts and data"
+    },
     "optionsTitle": {
         "message": "Options page :: Country Flags & IP Whois"
     },
@@ -78,7 +135,10 @@
         "message": "IP utility"
     },
     "optionsURL": {
-        "message": "Service URL"
+        "message": "Service URL (IP has higher priority)"
+    },
+    "optionsRClickURL": {
+        "message": "Service URL (only 6 will be visible)"
     },
     "optionsSSL": {
         "message": "SSL Checker"
@@ -100,6 +160,54 @@
     },
     "optionsHeaders": {
         "message": "HTTP Headers"
+    },
+    "optionsAlexa": {
+        "message": "Alexa"
+    },
+    "optionsWOT": {
+        "message": "WOT Scorecard"
+    },
+    "optionsVirustotal": {
+        "message": "Virustotal Scan"
+    },
+    "optionsIsitdownrightnow": {
+        "message": "Check Server Status"
+    },
+    "optionsGoogletranslate": {
+        "message": "Google Translate"
+    },
+    "optionsGooglecache": {
+        "message": "Google Cache"
+    },
+    "optionsWikipediadomain": {
+        "message": "Wikipedia: Domain"
+    },
+    "optionsIntodns": {
+        "message": "intoDNS"
+    },
+    "optionsNetcraft": {
+        "message": "Netcraft"
+    },
+    "optionsWebaim": {
+        "message": "Wave Report"
+    },
+    "optionsNuValidator": {
+        "message": "Validate.nu"
+    },
+    "optionsCSSValidator": {
+        "message": "W3C CSS Validator"
+    },
+    "optionsW3CValidator": {
+        "message": "W3C Validator"
+    },
+    "optionsArchive": {
+        "message": "Internet Archive"
+    },
+    "optionsGoogle": {
+        "message": "Google"
+    },
+    "optionsWolframalpha": {
+        "message": "Wolfram|Alpha"
     },
     "optionsCopy": {
         "message": "Copy IP address"
@@ -130,6 +238,9 @@
     },
     "optionsSaveButton": {
         "message": "Save"
+    },
+    "optionsDonationButton": {
+        "message": "Support Development"
     },
     "optionsMSG": {
         "message": "Options saved."

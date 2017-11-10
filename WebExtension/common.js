@@ -1,4 +1,4 @@
-/* globals utils */
+/* globals utils, services */
 'use strict';
 
 var _ = id => chrome.i18n.getMessage(id);
@@ -235,32 +235,27 @@ chrome.pageAction.onClicked.addListener(tab => {
 
 // context menu
 function contexts() {
-  chrome.storage.local.get({
-    'ssl-checker-menuitem': true,
-    'trace-route-menuitem': true,
-    'ping-menuitem': true,
-    'tinyurl-menuitem': true,
-    'dns-lookup-menuitem': false,
-    'whois-lookup-menuitem': true,
-    'http-headers-menuitem': false,
-    'copy-ip-menuitem': true,
-    'custom-cmd-1-menuitem': false,
+  const prefs = services.menuitems().reduce((p, c) => {
+    p[c] = services.default(c);
+    return p;
+  }, {});
+
+  chrome.storage.local.get(Object.assign(prefs, {
+    'copy-ip-menuitem': false,
     'custom-cmd-1-title': '',
-    'custom-cmd-2-menuitem': false,
-    'custom-cmd-2-title': ''
-  }, prefs => {
-    const dictionary = {
-      'ssl-checker': _('bgSSL'),
-      'trace-route': _('bgTrace'),
-      'ping': _('bgPing'),
-      'tinyurl': _('bgTinyURL'),
-      'dns-lookup': _('bgDNS'),
-      'whois-lookup': _('bgWHOIS'),
-      'http-headers': _('bgHeaders'),
-      'copy-ip': _('bgCopy'),
+    'custom-cmd-2-title': '',
+    'custom-cmd-3-title': '',
+    'custom-cmd-4-title': '',
+    'custom-cmd-5-title': ''
+  }), prefs => {
+    const dictionary = Object.assign({
       'custom-cmd-1': prefs['custom-cmd-1-title'] || _('bgCustom1'),
-      'custom-cmd-2': prefs['custom-cmd-2-title'] || _('bgCustom2')
-    };
+      'custom-cmd-2': prefs['custom-cmd-2-title'] || _('bgCustom2'),
+      'custom-cmd-3': prefs['custom-cmd-3-title'] || _('bgCustom3'),
+      'custom-cmd-4': prefs['custom-cmd-4-title'] || _('bgCustom4'),
+      'custom-cmd-5': prefs['custom-cmd-5-title'] || _('bgCustom5')
+    }, services.dictionary);
+
     Object.keys(prefs)
       .filter(key => key.endsWith('-menuitem'))
       .filter(key => prefs[key]).forEach(key => {
@@ -322,23 +317,21 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     return;
   }
 
-  chrome.storage.local.get({
-    'ssl-checker': 'https://www.sslshopper.com/ssl-checker.html#hostname=[host]',
-    'trace-route': 'https://api.hackertarget.com/mtr/?q=[ip]',
-    'ping': 'https://api.hackertarget.com/nping/?q=[ip]',
-    'tinyurl': 'https://tinyurl.com/create.php?url=[url]',
-    'dns-lookup': 'https://api.hackertarget.com/dnslookup/?q=[host]',
-    'whois-lookup': 'https://api.hackertarget.com/whois/?q=[ip]',
-    'http-headers': 'https://api.hackertarget.com/httpheaders/?q=[url]',
-    'custom-cmd-1': '',
-    'custom-cmd-2': '',
+  chrome.storage.local.get(Object.assign({
     'open-in-background': false,
     'open-adjacent': true
-  }, prefs => {
+  }, services.urls), prefs => {
     let url = prefs[info.menuItemId];
     if (url.indexOf('[host]') !== -1) {
       const hostname = (new URL(tab.url)).hostname;
       url = url.replace('[host]', hostname);
+    }
+    if (url.indexOf('[enurl]') !== -1) {
+      url = url.replace('[enurl]', encodeURIComponent(tab.url));
+    }
+    if (url.indexOf('[curl]') !== -1) {
+      const curl = tab.url.split('?')[0].split('#')[0];
+      url = url.replace('[curl]', curl);
     }
     if (url.indexOf('[url]') !== -1) {
       url = url.replace('[url]', tab.url);
