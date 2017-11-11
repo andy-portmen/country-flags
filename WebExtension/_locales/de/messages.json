@@ -14,6 +14,15 @@
     "bgCustom2": {
         "message": "Benutzerdefinierter Befehl 2"
     },
+    "bgCustom3": {
+        "message": "Benutzerdefinierter Befehl 3"
+    },
+    "bgCustom4": {
+        "message": "Benutzerdefinierter Befehl 4"
+    },
+    "bgCustom5": {
+        "message": "Benutzerdefinierter Befehl 5"
+    },
     "bgDNS": {
         "message": "DNS Lookup: einen authoritativen DNS lookup durchführen"
     },
@@ -62,6 +71,54 @@
     "bgWHOIS": {
         "message": "Whois Lookup: Die Registrierung und Delegation einer Domain herausfinden"
     },
+    "bgAlexa": {
+        "message": "Alexa: Webseiten-Datenaufkommen, -Statistiken and -Analytik"
+    },
+    "bgWOT": {
+        "message": "WOT Scorecard: Webseiten-Reputationsratings"
+    },
+    "bgVirustotal": {
+        "message": "Virustotal: ein kostenloser Virus-, Malware- und URL-Scanning-Service"
+    },
+    "bgIsitdownrightnow": {
+        "message": "Serverstatus checken: Eine Hilfe, um rauszufinden ob eine Webseite offline ist"
+    },
+    "bgGoogletranslate": {
+        "message": "Google Translate: Kostenlos Wörter, Sätze oder ganze Webseiten übersetzen"
+    },
+    "bgGooglecache": {
+        "message": "Google Cache: von Google zwischengespeicherte Seiten für jede URL"
+    },
+    "bgWikipediadomain": {
+        "message": "Wikipedia: Domain-Suche"
+    },
+    "bgIntodns": {
+        "message": "intoDNS: Checkt den Zustand und die Konfiguration von DNS und E-Mail-Servern"
+    },
+    "bgNetcraft": {
+        "message": "Netcraft: Stellt Internet-Sicherheits-Dienstleistungen zur Verfügung, unter anderem Anti-Betrugs und Anti-Phishing"
+    },
+    "bgWebaim": {
+        "message": "Wave Report: Werkzeug, um die Barrierefreiheit einer Webseite zu bewerten"
+    },
+    "bgNuValidator": {
+        "message": "Validate.nu: HTML5 Prüfer"
+    },
+    "bgCSSValidator": {
+        "message": "W3C CSS Validator: CSS Prüfer"
+    },
+    "bgW3CValidator": {
+        "message": "W3C Validator: HTML5 Prüfer"
+    },
+    "bgArchive": {
+        "message": "Internet Archive: Freier Zugang zu archivierten Webseiten"
+    },
+    "bgGoogle": {
+        "message": "Google: Domain-Suche"
+    },
+    "bgWolframalpha": {
+        "message": "Wolfram|Alpha : Zugang zu den Daten und Fakten der Welt"
+    },
     "optionsTitle": {
         "message": "Optionen :: Country Flags & IP Whois"
     },
@@ -78,7 +135,10 @@
         "message": "IP Dienstprogramm"
     },
     "optionsURL": {
-        "message": "Service URL"
+        "message": "Service URL (IP hat höhere Priorität)"
+    },
+    "optionsRClickURL": {
+        "message": "Service URL (nur 6 sichtbar)"    
     },
     "optionsSSL": {
         "message": "SSL Checker"
@@ -100,6 +160,54 @@
     },
     "optionsHeaders": {
         "message": "HTTP Headers"
+    },
+    "optionsAlexa": {
+        "message": "Alexa"
+    },
+    "optionsWOT": {
+        "message": "WOT Scorecard"
+    },
+    "optionsVirustotal": {
+        "message": "Virustotal Scan"
+    },
+    "optionsIsitdownrightnow": {
+        "message": "Check Server Status"
+    },
+    "optionsGoogletranslate": {
+        "message": "Google Translate"
+    },
+    "optionsGooglecache": {
+        "message": "Google Cache"
+    },
+    "optionsWikipediadomain": {
+        "message": "Wikipedia: Domain"
+    },
+    "optionsIntodns": {
+        "message": "intoDNS"
+    },
+    "optionsNetcraft": {
+        "message": "Netcraft"
+    },
+    "optionsWebaim": {
+        "message": "Wave Report"
+    },
+    "optionsNuValidator": {
+        "message": "Validate.nu"
+    },
+    "optionsCSSValidator": {
+        "message": "W3C CSS Validator"
+    },
+    "optionsW3CValidator": {
+        "message": "W3C Validator"
+    },
+    "optionsArchive": {
+        "message": "Internet Archive"
+    },
+    "optionsGoogle": {
+        "message": "Google"
+    },
+    "optionsWolframalpha": {
+        "message": "Wolfram|Alpha"
     },
     "optionsCopy": {
         "message": "IP-Adresse kopieren"
@@ -130,6 +238,9 @@
     },
     "optionsSaveButton": {
         "message": "Speichern"
+    },
+     "optionsDonationButton": {
+        "message": "Entwicklung unterstützen"
     },
     "optionsMSG": {
         "message": "Einstellungen gespeichert."
