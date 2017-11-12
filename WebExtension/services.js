@@ -16,7 +16,7 @@ services.urls = {
   'wot': 'https://www.mywot.com/scorecard/[host]',
   'virustotal': 'https://www.virustotal.com/#/domain/[host]',
   'isitdownrightnow': 'https://www.isitdownrightnow.com/[host].html',
-  'googletranslate': 'https://translate.google.com/translate?tl=en-us&u=[enurl]',
+  'googletranslate': 'https://translate.google.com/translate?tl=[lang]&u=[enurl]',
   'googlecache': 'https://webcache.googleusercontent.com/search?q=cache:[enurl]',
   'wikipediadomain': 'https://en.wikipedia.org/wiki/Special:Search?search=[host]&go=Go&variant=en-us',
   'intodns': 'https://intodns.com/[host]',

@@ -321,20 +321,18 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     'open-in-background': false,
     'open-adjacent': true
   }, services.urls), prefs => {
-    let url = prefs[info.menuItemId];
+    let url = prefs[info.menuItemId]
+      .replace('[lang]', chrome.i18n.getUILanguage())
+      .replace('[url]', tab.url)
+      .replace('[enurl]', encodeURIComponent(tab.url));
+
     if (url.indexOf('[host]') !== -1) {
       const hostname = (new URL(tab.url)).hostname;
       url = url.replace('[host]', hostname);
     }
-    if (url.indexOf('[enurl]') !== -1) {
-      url = url.replace('[enurl]', encodeURIComponent(tab.url));
-    }
     if (url.indexOf('[curl]') !== -1) {
       const curl = tab.url.split('?')[0].split('#')[0];
       url = url.replace('[curl]', curl);
-    }
-    if (url.indexOf('[url]') !== -1) {
-      url = url.replace('[url]', tab.url);
     }
     if (url.indexOf('[ip]') !== -1) {
       if (tabs[tab.id] && tabs[tab.id].ip) {
