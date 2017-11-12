@@ -14,6 +14,15 @@
     "bgCustom2": {
         "message": "Comandă 2"
     },
+    "bgCustom3": {
+        "message": "Comandă 3"
+    },
+    "bgCustom4": {
+        "message": "Comandă 4"
+    },
+    "bgCustom5": {
+        "message": "Comandă 5"
+    },
     "bgDNS": {
         "message": "Căutare DNS: Efectuează o căutare DNS autoritară"
     },
@@ -39,7 +48,7 @@
         "message": "Gazdă"
     },
     "bgIP": {
-        "message": "Server IP"
+        "message": "Adresă IP"
     },
     "bgMSG1": {
         "message": "Serverul nu este în rețeaua dvs. privată"
@@ -54,13 +63,61 @@
         "message": "Verificare SSL: Verifică certificatul SSL"
     },
     "bgTinyURL": {
-        "message": "TinyURL: Scurtează URL-ul utilizând TinyURL.com"
+        "message": "TinyURL: Scurtează adresa URL utilizând TinyURL.com"
     },
     "bgTrace": {
         "message": "TraceRoute: Afișează întârzierile pe traseu și de tranzit ale pachetelor"
     },
     "bgWHOIS": {
         "message": "Căutare Whois: Caută înregistrarea și delegarea numelui de domeniu"
+    },
+    "bgAlexa": {
+        "message": "Alexa: Analizează traficul web, generează statistici și analize"
+    },
+    "bgWOT": {
+        "message": "Fișe WOT: Evaluează reputația saitului"
+    },
+    "bgVirustotal": {
+        "message": "Virustotal: Scanează gratuit de viruși și malware adresa URL"
+    },
+    "bgIsitdownrightnow": {
+        "message": "Stare server: Verifică dacă saitul este activ sau nu"
+    },
+    "bgGoogletranslate": {
+        "message": "Google Translate: Traduce instantaneu pagina web"
+    },
+    "bgGooglecache": {
+        "message": "Google Cache: Afișează conținutul paginii din memoria cache de la Google"
+    },
+    "bgWikipediadomain": {
+        "message": "Wikipedia: Caută informații despre domeniu"
+    },
+    "bgIntodns": {
+        "message": "intoDNS: Verifică starea și configurația domeniului și furnizează rapoarte DNS și ale serverelor de mail"
+    },
+    "bgNetcraft": {
+        "message": "Netcraft: Furnizează informații privind securitatea saitului"
+    },
+    "bgWebaim": {
+        "message": "Wave Report: Furnizează informații despre accesibilitate și stil și erorile din pagina web"
+    },
+    "bgNuValidator": {
+        "message": "Validate.nu: Validator HTML5"
+    },
+    "bgCSSValidator": {
+        "message": "W3C CSS Validator: Validator CSS"
+    },
+    "bgW3CValidator": {
+        "message": "W3C Validator: Validator HTML5"
+    },
+    "bgArchive": {
+        "message": "Arhivă Internet: Accesează arhiva universală a paginii web"
+    },
+    "bgGoogle": {
+        "message": "Google: Caută pe Google după domeniu"
+    },
+    "bgWolframalpha": {
+        "message": "Wolfram|Alpha : Furnizează diferite date și calcule despre domeniu"
     },
     "optionsTitle": {
         "message": "Opțiuni :: Country Flags & IP Whois"
@@ -78,7 +135,10 @@
         "message": "Rezolvare adresă IP"
     },
     "optionsURL": {
-        "message": "URL de lucru"
+        "message": "Adresa URL a serviciului (adresa IP are prioritate mai mare)"
+    },
+    "optionsRClickURL": {
+        "message": "Adresa URL a serviciului (doar 6 servicii vor fi afișate)"
     },
     "optionsSSL": {
         "message": "Verificare SSL"
@@ -100,6 +160,54 @@
     },
     "optionsHeaders": {
         "message": "Anteturi HTTP"
+    },
+    "optionsAlexa": {
+        "message": "Alexa"
+    },
+    "optionsWOT": {
+        "message": "Fișe WOT"
+    },
+    "optionsVirustotal": {
+        "message": "Scanare cu Virustotal"
+    },
+    "optionsIsitdownrightnow": {
+        "message": "Verificare stare server"
+    },
+    "optionsGoogletranslate": {
+        "message": "Google Translate"
+    },
+    "optionsGooglecache": {
+        "message": "Google Cache"
+    },
+    "optionsWikipediadomain": {
+        "message": "Wikipedia: Domeniu"
+    },
+    "optionsIntodns": {
+        "message": "intoDNS"
+    },
+    "optionsNetcraft": {
+        "message": "Netcraft"
+    },
+    "optionsWebaim": {
+        "message": "Wave Report"
+    },
+    "optionsNuValidator": {
+        "message": "Validate.nu"
+    },
+    "optionsCSSValidator": {
+        "message": "Validator CSS W3C"
+    },
+    "optionsW3CValidator": {
+        "message": "Validator W3C"
+    },
+    "optionsArchive": {
+        "message": "Arhiva Universală a Internetului"
+    },
+    "optionsGoogle": {
+        "message": "Google"
+    },
+    "optionsWolframalpha": {
+        "message": "Wolfram|Alpha"
     },
     "optionsCopy": {
         "message": "Copiere adresă"
@@ -126,10 +234,13 @@
         "message": "Denumire comandă"
     },
     "optionsPlaceHolder2": {
-        "message": "URL"
+        "message": "Adresă URL"
     },
     "optionsSaveButton": {
         "message": "Salvează"
+    },
+    "optionsDonationButton": {
+        "message": "Contribuiți"
     },
     "optionsMSG": {
         "message": "Opțiunile au fost salvate."
