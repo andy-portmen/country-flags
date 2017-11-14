@@ -23,9 +23,6 @@
     "bgCustom5": {
         "message": "Benutzerdefinierter Befehl 5"
     },
-    "bgDNS": {
-        "message": "DNS Lookup: einen authoritativen DNS lookup durchführen"
-    },
     "bgErr": {
         "message": "Fehler: "
     },
@@ -42,7 +39,7 @@
         "message": "Kann die IP-Adresse für diesen Tab nicht ermitteln. Neuladen könnte helfen."
     },
     "bgHeaders": {
-        "message": "HTTP Headers: Alle HTTP-Antwort-Header auflisten"
+        "message": "HTTP Header: Alle HTTP-Antwort-Header auflisten"
     },
     "bgHost": {
         "message": "Host"
@@ -59,6 +56,9 @@
     "bgPing": {
         "message": "Ping: die Erreichbarkeit der IP-Adresse prüfen"
     },
+    "bgDNS": {
+        "message": "DNS nachschlagen: einen autoritativen DNS Lookup durchführen"
+    },
     "bgSSL": {
         "message": "SSL Checker: SSL-Zertifikat überprüfen"
     },
@@ -69,25 +69,25 @@
         "message": "Traceroute: Den Weg und die Laufzeiten der Pakete anzeigen"
     },
     "bgWHOIS": {
-        "message": "Whois Lookup: Die Registrierung und Delegation einer Domain herausfinden"
+        "message": "Whois nachschlagen: Die Registrierung und Delegation einer Domain herausfinden"
     },
     "bgAlexa": {
         "message": "Alexa: Webseiten-Datenaufkommen, -Statistiken and -Analytik"
     },
     "bgWOT": {
-        "message": "WOT Scorecard: Webseiten-Reputationsratings"
+        "message": "WOT Scorecard: Webseiten-Reputationsbewertungen"
     },
     "bgVirustotal": {
-        "message": "Virustotal: ein kostenloser Virus-, Malware- und URL-Scanning-Service"
+        "message": "Virustotal: ein kostenloser Virus-, Malware- und URL-Scan-Dienst"
     },
     "bgIsitdownrightnow": {
-        "message": "Serverstatus checken: Eine Hilfe, um rauszufinden ob eine Webseite offline ist"
+        "message": "Serverstatus überprüfen: Eine Hilfe, um rauszufinden ob eine Webseite offline ist"
     },
     "bgGoogletranslate": {
         "message": "Google Translate: Kostenlos Wörter, Sätze oder ganze Webseiten übersetzen"
     },
     "bgGooglecache": {
-        "message": "Google Cache: von Google zwischengespeicherte Seiten für jede URL"
+        "message": "Google Cache: von Google zwischengespeicherte Version der Seite abrufen"
     },
     "bgWikipediadomain": {
         "message": "Wikipedia: Domain-Suche"
@@ -102,13 +102,13 @@
         "message": "Wave Report: Werkzeug, um die Barrierefreiheit einer Webseite zu bewerten"
     },
     "bgNuValidator": {
-        "message": "Validate.nu: HTML5 Prüfer"
+        "message": "Validate.nu: HTML5 validieren"
     },
     "bgCSSValidator": {
-        "message": "W3C CSS Validator: CSS Prüfer"
+        "message": "W3C CSS Validator: CSS validieren"
     },
     "bgW3CValidator": {
-        "message": "W3C Validator: HTML5 Prüfer"
+        "message": "W3C Validator: HTML5 validieren"
     },
     "bgArchive": {
         "message": "Internet Archive: Freier Zugang zu archivierten Webseiten"
@@ -120,7 +120,7 @@
         "message": "Wolfram|Alpha : Zugang zu den Daten und Fakten der Welt"
     },
     "optionsTitle": {
-        "message": "Optionen :: Country Flags & IP Whois"
+        "message": "Optionen :: Länderflaggen & IP Whois"
     },
     "optionsLClick": {
         "message": "Linksklick"
@@ -135,31 +135,31 @@
         "message": "IP Dienstprogramm"
     },
     "optionsURL": {
-        "message": "Service URL (IP hat höhere Priorität)"
+        "message": "Dienst URL (IP hat höhere Priorität)"
     },
     "optionsRClickURL": {
-        "message": "Service URL (nur 6 sichtbar)"    
+        "message": "Dienst URL (Bis zu 6 sichtbar)"    
     },
     "optionsSSL": {
         "message": "SSL Checker"
     },
     "optionsTrace": {
-        "message": "Trace Route"
+        "message": "Traceroute"
     },
     "optionsPing": {
         "message": "Ping"
     },
     "optionsTinyUrl": {
-        "message": "TinyUrl"
+        "message": "TinyURL"
     },
     "optionsDNS": {
-        "message": "DNS Lookup"
+        "message": "DNS nachschlagen"
     },
     "optionsWHOIS": {
-        "message": "Whois Lookup"
+        "message": "Whois nachschlagen"
     },
     "optionsHeaders": {
-        "message": "HTTP Headers"
+        "message": "HTTP Header"
     },
     "optionsAlexa": {
         "message": "Alexa"
@@ -168,10 +168,10 @@
         "message": "WOT Scorecard"
     },
     "optionsVirustotal": {
-        "message": "Virustotal Scan"
+        "message": "Virustotal"
     },
     "optionsIsitdownrightnow": {
-        "message": "Check Server Status"
+        "message": "Serverstatus überprüfen"
     },
     "optionsGoogletranslate": {
         "message": "Google Translate"
@@ -216,16 +216,16 @@
         "message": "Verschiedenes"
     },
     "optionsOpenBG": {
-        "message": "Links im Hintergrund öffnen"
+        "message": "Dienste im Hintergrund öffnen"
     },
     "optionsNextTo": {
-        "message": "Tabs neben dem Aktiven öffnen"
+        "message": "Dienste rechts vom aktiven Tab öffnen"
     },
     "optionsFAQs": {
-        "message": "FAQs zu Updates öffnen"
+        "message": "FAQs bei jedem Update öffnen"
     },
     "optionsNative": {
-        "message": "Den native DNS-Auflösung des Betriebssystems nutzen"
+        "message": "Die native DNS-Auflösung des Betriebssystems verwenden"
     },
     "optionsNativeDescp": {
         "message": "Dies erlaubt der Erweiterung die IP-Adressen von Hostnamen aufzulösen, selbst wenn der Browser einen SOCKS Proxyserver verwendet."
