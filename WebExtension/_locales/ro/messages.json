@@ -102,13 +102,13 @@
         "message": "Wave Report: Furnizează informații despre accesibilitate și stil și erorile din pagina web"
     },
     "bgNuValidator": {
-        "message": "Validate.nu: Validator HTML5"
+        "message": "Validate.nu: Validează conținutului HTML5 al paginii"
     },
     "bgCSSValidator": {
-        "message": "W3C CSS Validator: Validator CSS"
+        "message": "Validator CSS W3C: Validează stilurile CSS ale paginii"
     },
     "bgW3CValidator": {
-        "message": "W3C Validator: Validator HTML5"
+        "message": "Validator W3C: Validează conținutului HTML5 al paginii"
     },
     "bgArchive": {
         "message": "Arhivă Internet: Accesează arhiva universală a paginii web"
@@ -243,7 +243,7 @@
         "message": "Salvează"
     },
     "optionsDonationButton": {
-        "message": "Contribuiți"
+        "message": "Sprijiniți dezvoltarea"
     },
     "optionsMSG": {
         "message": "Opțiunile au fost salvate."
