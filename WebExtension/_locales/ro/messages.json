@@ -119,6 +119,9 @@
     "bgWolframalpha": {
         "message": "Wolfram|Alpha : Furnizează diferite date și calcule despre domeniu"
     },
+    "bgOtherServices": {
+        "message": "Alte servicii"
+    },
     "optionsTitle": {
         "message": "Opțiuni :: Country Flags & IP Whois"
     },
@@ -138,7 +141,7 @@
         "message": "Adresa URL a serviciului (adresa IP are prioritate mai mare)"
     },
     "optionsRClickURL": {
-        "message": "Adresa URL a serviciului (doar 6 servicii vor fi afișate)"
+        "message": "Adresa URL a serviciului (doar 5 servicii vor fi afișate)"
     },
     "optionsSSL": {
         "message": "Verificare SSL"
