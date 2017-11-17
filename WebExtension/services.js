@@ -28,12 +28,16 @@ services.urls = {
   'archive': 'https://web.archive.org/web/*/[curl]',
   'google': 'https://www.google.com/search?q=site:[host]',
   'wolframalpha': 'https://www.wolframalpha.com/input/?i=[host]',
+  'copy-ip': '',
   'custom-cmd-1': '',
   'custom-cmd-2': '',
   'custom-cmd-3': '',
   'custom-cmd-4': '',
   'custom-cmd-5': ''
 };
+
+services.names = Object.keys(services.urls);
+services.menuitems = () => services.names.filter(s => s !== 'ip' && s !== 'host').map(s => s + '-menuitem');
 
 services.dictionary = {
   'ssl-checker': chrome.i18n.getMessage('bgSSL'),
@@ -62,11 +66,9 @@ services.dictionary = {
   'wolframalpha': chrome.i18n.getMessage('bgWolframalpha')
 };
 
-services.names = () => Object.keys(services.urls);
-services.menuitems = () => Object.keys(services.urls).filter(s => s !== 'ip' && s !== 'host').map(s => s + '-menuitem');
-
 services.default = s => {
-  const list = ['tinyurl-menuitem', 'whois-lookup-menuitem', 'wot-menuitem',
-    'virustotal-menuitem', 'googletranslate-menuitem', 'archive-menuitem'];
+  const list = ['tinyurl-menuitem', 'wot-menuitem', 'virustotal-menuitem',
+    'googletranslate-menuitem', 'archive-menuitem'
+  ];
   return list.indexOf(s) !== -1;
 };

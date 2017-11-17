@@ -32,7 +32,7 @@ chrome.storage.local.get({
 
 // preferences
 function save() {
-  const prefs = services.names().reduce((p, c) => {
+  const prefs = services.names.reduce((p, c) => {
     p[c] = document.getElementById(c).value;
     return p;
   }, {});
@@ -48,7 +48,6 @@ function save() {
       return p;
     }, {});
     chrome.storage.local.set(Object.assign(prefs, {
-      'copy-ip-menuitem': document.getElementById('copy-ip-menuitem').checked,
       'open-in-background': document.getElementById('open-in-background').checked,
       'open-adjacent': document.getElementById('open-adjacent').checked,
       'faqs': document.getElementById('faqs').checked
@@ -81,7 +80,6 @@ function restore() {
     return p;
   }, {});
   chrome.storage.local.get(Object.assign(prefs, {
-    'copy-ip-menuitem': false,
     'open-in-background': false,
     'open-adjacent': true,
     'faqs': true

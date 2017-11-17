@@ -241,7 +241,12 @@ function contexts() {
   }, {});
 
   chrome.storage.local.get(Object.assign(prefs, {
-    'copy-ip-menuitem': false,
+    'custom-cmd-1': '',
+    'custom-cmd-2': '',
+    'custom-cmd-3': '',
+    'custom-cmd-4': '',
+    'custom-cmd-5': '',
+
     'custom-cmd-1-title': '',
     'custom-cmd-2-title': '',
     'custom-cmd-3-title': '',
@@ -256,16 +261,31 @@ function contexts() {
       'custom-cmd-5': prefs['custom-cmd-5-title'] || _('bgCustom5')
     }, services.dictionary);
 
-    Object.keys(prefs)
-      .filter(key => key.endsWith('-menuitem'))
-      .filter(key => prefs[key]).forEach(key => {
-        const id = key.replace('-menuitem', '');
-        chrome.contextMenus.create({
-          contexts: ['page_action'],
-          id,
-          title: dictionary[id]
-        });
+    const names = services.names
+      .filter(id => id !== 'ip' && id !== 'host')
+      // do not display custom commands when the URL is not set
+      .filter(id => id.startsWith('custom-cmd-') ? prefs[id] : true);
+    const items = names.filter(key => prefs[key + '-menuitem']).slice(0, 5);
+    items.forEach(id => {
+      chrome.contextMenus.create({
+        contexts: ['page_action'],
+        id,
+        title: dictionary[id]
       });
+    });
+    // other services
+    const parentId = chrome.contextMenus.create({
+      contexts: ['page_action'],
+      title: _('bgOtherServices')
+    });
+    names.filter(id => items.indexOf(id) === -1).forEach(id => {
+      chrome.contextMenus.create({
+        contexts: ['page_action'],
+        id,
+        title: dictionary[id],
+        parentId
+      });
+    });
   });
 }
 contexts();
