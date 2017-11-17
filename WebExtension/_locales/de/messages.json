@@ -119,6 +119,9 @@
     "bgWolframalpha": {
         "message": "Wolfram|Alpha : Zugang zu den Daten und Fakten der Welt"
     },
+    "bgOtherServices": {
+        "message": "Andere Dienste"
+    },
     "optionsTitle": {
         "message": "Optionen :: Länderflaggen & IP Whois"
     },
@@ -138,7 +141,7 @@
         "message": "Dienst URL (IP hat höhere Priorität)"
     },
     "optionsRClickURL": {
-        "message": "Dienst URL (Bis zu 6 sichtbar)"    
+        "message": "Dienst URL (nur 5 Dienste sind sichtbar)"    
     },
     "optionsSSL": {
         "message": "SSL Checker"
