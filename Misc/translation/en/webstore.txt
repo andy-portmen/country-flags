@@ -11,21 +11,60 @@ Database info:
 
 Note that the CSV databases are compressed. For more info please visit the FAQs page and the source code.
 
-Available tools in the right-click menu:
-<ul>
-<li>SSL Checker: Check SSL certificate</li>
-<li>Traceroute: Display the route and transit delays of packets</li>
-<li>Ping: Test the reachability of this IP address</li>
-<li>TinyURL: Shorten the URL using TinyURL.com</li>
-<li>DNS Lookup: Perform an authoritative DNS lookup</li>
-<li>Whois Lookup: Find the registration and delegation of a domain name</li>
-<li>HTTP Headers: List all the response HTTP headers</li>
-<li>Copy IP: Copy IP address to the clipboard</li>
-<li>Custom Commands accepting [ip], [host], and [url] keywords</li>
-</ul>
+Available tools in the right-click menu (only 5 menu items are visible in the root menu):
+1. SSL Checker: Check SSL certificate
+2. Traceroute: Display the route and transit delays of packets
+3. Ping: Test the reachability of this IP address
+4. TinyURL: Shorten the URL using TinyURL.com
+5. DNS Lookup: Perform an authoritative DNS lookup
+6. Whois Lookup: Find the registration and delegation of a domain name
+7. HTTP Headers: List all the response HTTP headers
+8. Copy IP: Copy IP address to the clipboard
+9. Alexa: Website traffic, statistics, and analytics
+10. WOT Scorecard: Website reputation ratings
+11. Virustotal: A free virus, malware, and URL scanning service
+12. Check Server Status: Helps finding whether a website is down or not
+13. Google Translate: Free service instantly translates words, phrases, and web pages
+14. Google Cache: Google cached pages for any website
+15. Wikipedia: Domain search
+16. intoDNS: Checks the health and configuration of DNS and mail servers
+17. Netcraft: Provides internet security services including anti-fraud and anti-phishing services
+18. Wave Report: Provides web accessibility solutions
+19. Validate.nu: HTML5 Validator
+20. W3C CSS Validator: CSS Validator
+21. W3C Validator: HTML5 Validator
+22. Internet Archive: Free universal access to archived web pages
+23. Google: Search by domain
+24. Wolfram|Alpha : Access to the world's facts and data
+
+Custom Commands accepting [ip], [host], [curl], [enurl] and [url] keywords
 
 As of version 0.2.0, it is possible to ask extension to open new tabs in the background and adjacent to the current tab.
 
 -- Permissions:
-For comprehensive description of why a permission is required by this extension check:
+For the comprehensive description of why a permission is required by this extension check:
 https://add0n.com/country-flags.html#permissions
+
+-- Change Log
+0.1.3
+Updating ip4 and ip6 databases
+Optimizing code to access minimum number of possible requests
+
+0.1.4
+Updating ip4 and ip6 databases
+Checking local IP before searching databases
+
+0.1.5
+It is now possible to use the native DNS resolver if user is under a SOCKS proxy (disabled by default; requires native integration)
+
+0.1.6
+Adding new tools to the right-click context menu: SSL Checker, Trace Route, Ping, DNS Lookup, Whois Lookup, and HTTP Headers
+
+0.1.7
+Adding two new tools: copy IP address to the clipboard and TinyURL current tab.
+
+0.2.2
+Extension now refreshes all the badges upon start-up
+
+0.2.3
+All the supported services are now being displayed in the right-click menu either in the root menu or "other services" sub-menu
