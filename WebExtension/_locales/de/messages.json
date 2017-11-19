@@ -117,13 +117,13 @@
         "message": "Google: Domain-Suche"
     },
     "bgWolframalpha": {
-        "message": "Wolfram|Alpha : Zugang zu den Daten und Fakten der Welt"
+        "message": "Wolfram|Alpha: Zugang zu den Daten und Fakten der Welt"
     },
     "bgOtherServices": {
         "message": "Andere Dienste"
     },
     "optionsTitle": {
-        "message": "Optionen :: Länderflaggen & IP Whois"
+        "message": "Optionen :: Country Flags & IP Whois"
     },
     "optionsLClick": {
         "message": "Linksklick"
