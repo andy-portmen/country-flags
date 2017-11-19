@@ -11,21 +11,60 @@ Verwendete Datenbanken:
 
 Beachten Sie, dass die CSV-Datenbanken komprimiert sind. Für mehr Informationen beachten Sie die FAQ-Seite und den Quellcode.
 
-Werkzeuge im Rechtsklick-Menü:
-<ul>
-<li>SSL Checker: SSL-Zertifikat überprüfen</li>
-<li>Traceroute: Den Weg und die Laufzeiten der Pakete anzeigen</li>
-<li>Ping: die Erreichbarkeit der IP-Adresse prüfen</li>
-<li>TinyURL: Die Webseiten-Adresse per TinyURL.com verkürzen</li>
-<li>DNS nachschlagen: einen authoritativen DNS lookup durchführen</li>
-<li>Whois nachschlagen: Die Registrierung und Delegation einer Domain herausfinden</li>
-<li>HTTP Header: Alle HTTP-Antwort-Header auflisten</li>
-<li>IP kopieren: kopiere die IP-Adresse in die Zwischenablage</li>
-<li>Benutzerdefinierte Befehle, die u.a. [ip], [host] und [url] Parameter akzeptieren</li>
-</ul>
+Verfügbare Werkzeuge im Rechtsklick-Menü (bis zu 5 Einträge werden gleichzeitig im obersten Menü gelistet):
+1. SSL Checker: SSL-Zertifikat überprüfen
+2. Traceroute: Den Weg und die Laufzeiten der Pakete anzeigen
+3. Ping: die Erreichbarkeit der IP-Adresse prüfen
+4. TinyURL: Die Webseiten-Adresse per TinyURL.com verkürzen
+5. DNS nachschlagen: einen autoritativen DNS lookup durchführen
+6. Whois nachschlagen: Die Registrierung und Delegation einer Domain herausfinden
+7. HTTP Header: Alle HTTP-Antwort-Header auflisten
+8. IP kopieren: kopiere die IP-Adresse in die Zwischenablage
+9. Alexa: Webseiten-Datenaufkommen, -Statistiken and -Analytik
+10. WOT Scorecard: Webseiten-Reputationsbewertungen
+11. Virustotal: ein kostenloser Virus-, Malware- und URL-Scan-Dienst
+12. Serverstatus überprüfen: Eine Hilfe, um rauszufinden ob eine Webseite offline ist
+13. Google Translate: Kostenlos Wörter, Sätze oder ganze Webseiten übersetzen
+14. Google Cache: von Google zwischengespeicherte Version der Seite abrufen
+15. Wikipedia: Domain-Suche
+16. intoDNS: Checkt den Zustand und die Konfiguration von DNS und E-Mail-Servern
+17. Netcraft: Stellt Internet-Sicherheits-Dienstleistungen zur Verfügung, unter anderem Anti-Betrugs und Anti-Phishing
+18. Wave Report: Werkzeug, um die Barrierefreiheit einer Webseite zu bewerten
+19. Validate.nu: HTML5 validieren
+20. W3C CSS Validator: CSS validieren
+21. W3C Validator: HTML5 validieren
+22. Internet Archive: Freier Zugang zu archivierten Webseiten
+23. Google: Domain-Suche
+24. Wolfram|Alpha: Zugang zu den Daten und Fakten der Welt
+
+Benutzerdefinierte Befehle, die u.a. [ip], [host], [curl], [enurl] und [url] als Schlüsselwörter akzeptieren
 
 Ab Version 0.2.0 ist es möglich, die Erweiterung so einzustellen, dass neue Tabs im Hintergrund und rechts vom aktiven Tab geöffnet werden.
 
 -- Berechtigungen:
 Eine vollständige Beschreibung, warum welche Berechtigungen benötigt werden, finden Sie hier:
 https://add0n.com/country-flags.html#permissions
+
+-- Änderungsprotokoll
+0.1.3
+IPv4 und IPv6 Datenbanken wurden aktualisiert
+Code-Optimierungen — Es werden nun weniger Hintergrundabfragen zur Auflösung von IP-Adressen in Ländercodes getätigt
+
+0.1.4
+IPv4 und IPv6 Datenbanken wurden aktualisiert
+IP-Adressen im lokalen Netzwerk werden nun keine Flaggen mehr zugeordnet
+
+0.1.5
+Es ist nun möglich auf die native DNS-Auflösung (Betriebssystem) zurückzugreifen, was nützlich ist, wenn man einen SOCKS Proxy verwendet (standardmäßig deaktiviert; das Betriebssystem muss die DNS-Auflösung auch bereitstellen)
+
+0.1.6
+Es wurden neue Werkzeuge zum Rechtsklick-Menü hinzugefügt: SSL Checker, Traceroute, Ping, DNS nachschlagen, Whois nachschlagen und HTTP Header
+
+0.1.7
+Es gibt zwei neue Tools: IP-Adresse in die Zwischenablage kopieren und URL-Verkürzung durch TinyURL
+
+0.2.2
+Die Länderzuordnung wird nun bei jedem Browserstart für alle bereits offenen Tabs abgerufen
+
+0.2.3
+Von nun an sind immer alle unterstützten Dienste im Rechtsklick-Menü verfügbar. Wenn sie nicht ausgewählt sind, werden sie im Untermenü "Andere Dienste" gelistet.
