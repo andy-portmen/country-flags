@@ -48,11 +48,11 @@ https://add0n.com/country-flags.html#permissions
 -- Change Log
 0.1.3
 Updating ip4 and ip6 databases
-Optimizing code to access minimum number of possible requests
+Reduces the total number of background requests for resolving country codes from IP addresses.
 
 0.1.4
 Updating ip4 and ip6 databases
-Checking local IP before searching databases
+Do not call the country code resolution worker if an IP address in the local range.
 
 0.1.5
 It is now possible to use the native DNS resolver if user is under a SOCKS proxy (disabled by default; requires native integration)
@@ -64,7 +64,7 @@ Adding new tools to the right-click context menu: SSL Checker, Trace Route, Ping
 Adding two new tools: copy IP address to the clipboard and TinyURL current tab.
 
 0.2.2
-Extension now refreshes all the badges upon start-up
+Extension now requests country code resolution for all open tabs upon start-up
 
 0.2.3
 All the supported services are now being displayed in the right-click menu either in the root menu or "other services" sub-menu
