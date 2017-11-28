@@ -275,7 +275,11 @@ function contexts() {
       contexts: ['page_action'],
       title: _('bgOtherServices')
     });
-    names.filter(id => items.indexOf(id) === -1).forEach(id => {
+    // change order (everything checked above 5 is located on top of the others menu)
+    [
+      ...names.filter(id => items.indexOf(id) === -1).filter(key => prefs[key + '-menuitem'] === true),
+      ...names.filter(id => items.indexOf(id) === -1).filter(key => prefs[key + '-menuitem'] === false)
+    ].forEach(id => {
       chrome.contextMenus.create({
         contexts: ['page_action'],
         id,
