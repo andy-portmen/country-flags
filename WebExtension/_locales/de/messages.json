@@ -248,6 +248,12 @@
     "optionsMSG": {
         "message": "Einstellungen gespeichert."
     },
+    "optionsNativeCmd": {
+        "message": "Nativer Befehl"
+    },
+    "optionsNativeCmdDescp": {
+        "message": "Einen nativen Befehl ausführen, nachdem die IP aufgelöst wurde. Es wird entweder der \"stdout\" oder der \"stderr\" String an den Tooltip des Symbolleistenknopfes angehängt. Beispiel: \"host [ip]\". Verfügbare Schlüsselworte: [ip], [host], und [url]. Achtung: dieser Befehl wird für jeden Tab nach jedem Laden ausgeführt."
+    },
     "country_AF": {
             "message": "Afghanistan"
         },
