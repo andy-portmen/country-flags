@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => chrome.tabs.query({
     Promise.all(
       tabs.map(t => fetch(t.url).then(r => r.headers.get('content-type')).catch(() => {}))
     ).then(() => {
-      chrome.webRequest.onResponseStarted.removeListener(init);
+      window.setTimeout(() => chrome.webRequest.onResponseStarted.removeListener(init), 5000);
     });
   }
 }));

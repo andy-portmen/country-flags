@@ -374,6 +374,9 @@ chrome.storage.local.get({
   const version = chrome.runtime.getManifest().version;
   if (prefs.version ? (prefs.faqs && prefs.version !== version) : true) {
     chrome.storage.local.set({version}, () => {
+      if (prefs.version === '0.2.2') {
+        return;
+      }
       chrome.tabs.create({
         url: 'http://add0n.com/country-flags.html?version=' + version +
           '&type=' + (prefs.version ? ('upgrade&p=' + prefs.version) : 'install')

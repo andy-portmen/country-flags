@@ -11,42 +11,40 @@ Informații despre bazele de date:
 Rețineți că bazele de date CSV sunt comprimate. Pentru mai multe informații, vizitați pagina de întrebări frecvente (FAQ) și vizualizați codul sursă.
 
 Instrumente disponibile în meniul contextual afișat cu clic-dreapta:
-<ul>
-<li>Verificare SSL: Verifică certificatul SSL</li>
-<li>TraceRoute: Afișează întârzierile pe traseu și de tranzit ale pachetelor</li>
-<li>Ping: Testează accesibilitatea adresei IP</li>
-<li>TinyURL: Scurtează adresa URL utilizând TinyURL.com</li>
-<li>Căutare DNS: Efectuează o căutare DNS autoritară</li>
-<li>Căutare Whois: Caută înregistrarea și delegarea numelui de domeniu</li>
-<li>Anteturi HTTP: Listează toate anteturile HTTP de răspuns</li>
-<li>Alexa: Analizează traficul web, generează statistici și analize</li>
-<li>Fișe WOT: Evaluează reputația saitului</li>
-<li>Virustotal: Scanează gratuit de viruși și malware adresa URL</li>
-<li>Stare server: Verifică dacă saitul este activ sau nu</li>
-<li>Google Translate: Traduce instantaneu pagina web</li>
-<li>Google Cache: Afișează conținutul paginii din memoria cache de la Google</li>
-<li>Wikipedia: Caută informații despre domeniu</li>
-<li>intoDNS: Verifică starea și configurația domeniului și furnizează rapoarte DNS și ale serverelor de mail</li>
-<li>Netcraft: Furnizează informații privind securitatea saitului</li>
-<li>Wave Report: Furnizează informații despre accesibilitate și stil și erorile din pagina web</li>
-<li>Validate.nu: Validează conținutului HTML5 al paginii</li>
-<li>Validator CSS W3C: Validează stilurile CSS ale paginii</li>
-<li>Validator W3C: Validează conținutului HTML5 al paginii</li>
-<li>Arhivă Internet: Accesează arhiva universală a paginii web</li>
-<li>Google: Caută pe Google după domeniu</li>
-<li>Wolfram|Alpha: Furnizează diferite date și calcule despre domeniu</li>
-<li>Copiere IP: Copiază adresa IP în clipboard</li>
-</ul>
+
+1. Verificare SSL: Verifică certificatul SSL
+2. TraceRoute: Afișează întârzierile pe traseu și de tranzit ale pachetelor
+3. Ping: Testează accesibilitatea adresei IP
+4. TinyURL: Scurtează adresa URL utilizând TinyURL.com
+5. Căutare DNS: Efectuează o căutare DNS autoritară
+6. Căutare Whois: Caută înregistrarea și delegarea numelui de domeniu
+7. Anteturi HTTP: Listează toate anteturile HTTP de răspuns
+8. Alexa: Analizează traficul web, generează statistici și analize
+9. Fișe WOT: Evaluează reputația saitului
+10. Virustotal: Scanează gratuit de viruși și malware adresa URL
+11. Stare server: Verifică dacă saitul este activ sau nu
+12. Google Translate: Traduce instantaneu pagina web
+13. Google Cache: Afișează conținutul paginii din memoria cache de la Google
+14. Wikipedia: Caută informații despre domeniu
+15. intoDNS: Verifică starea și configurația domeniului și furnizează rapoarte DNS și ale serverelor de mail
+16. Netcraft: Furnizează informații privind securitatea saitului
+17. Wave Report: Furnizează informații despre accesibilitate și stil și erorile din pagina web
+18. Validate.nu: Validează conținutului HTML5 al paginii
+19. Validator CSS W3C: Validează stilurile CSS ale paginii
+20. Validator W3C: Validează conținutului HTML5 al paginii
+21. Arhivă Internet: Accesează arhiva universală a paginii web
+22. Google: Caută pe Google după domeniu
+23. Wolfram|Alpha: Furnizează diferite date și calcule despre domeniu
+24. Copiere IP: Copiază adresa IP în clipboard
 
 Comenzile personalizate acceptă următorii parametri:
-<ul>
-<li><code>[lang]</code>: codul limbii navigatorului (ex.: en-US, ro, de)</li>
-<li><code>[url]</code>: adresa URL completă</li>
-<li><code>[enurl]</code>: adresa URL codată cu <i>encodeURIComponent()</i></li>
-<li><code>[host]</code>: numele serverului gazdă</li>
-<li><code>[curl]</code>: adresa URL fără parametri</li>
-<li><code>[ip]</code>: adresa IP a serverului</li>
-</ul>
+
+[lang]: codul limbii navigatorului (ex.: en-US, ro, de)
+[url]: adresa URL completă
+[enurl]: adresa URL codată cu <i>encodeURIComponent()</i>
+[host]: numele serverului gazdă
+[curl]: adresa URL fără parametri
+[ip]: adresa IP a serverului
 
 Începând cu versiunea 0.2.0, este posibilă deschiderea filelor noi în fundal și/sau alături de fila curentă.
 
