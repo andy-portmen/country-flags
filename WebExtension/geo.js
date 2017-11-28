@@ -19,39 +19,34 @@ var geo = {
     firstIP: 0
   },
 
-  init4: () => {
-    return fetch('/data/assets/geoip-country4.dat')
-      .then(r => r.arrayBuffer())
-      .then(buffer => {
-        geo.cache4.buffer = buffer;
-        const size = buffer.byteLength;
+  init4: () => fetch('/data/assets/geoip-country4.dat')
+  .then(r => r.arrayBuffer())
+  .then(buffer => {
+    geo.cache4.buffer = buffer;
+    const size = buffer.byteLength;
 
-        geo.cache4.lastLine = (size / geo.cache4.recordSize) - 1;
+    geo.cache4.lastLine = (size / geo.cache4.recordSize) - 1;
 
-        geo.cache4.lastIP = new DataView(
-          geo.cache4.buffer,
-          (geo.cache4.lastLine * geo.cache4.recordSize) + 4, 4
-        ).getUint32(0);
-        geo.cache4.firstIP = new DataView(geo.cache4.buffer, 0, 4).getUint32(0);
+    geo.cache4.lastIP = new DataView(
+      geo.cache4.buffer,
+      (geo.cache4.lastLine * geo.cache4.recordSize) + 4, 4
+    ).getUint32(0);
+    geo.cache4.firstIP = new DataView(geo.cache4.buffer, 0, 4).getUint32(0);
+  }),
+  init6: () => fetch('/data/assets/geoip-country6.dat')
+  .then(r => r.arrayBuffer())
+  .then(buffer => {
+    geo.cache6.buffer = buffer;
+    const size = buffer.byteLength;
 
-      });
-  },
-  init6: () => {
-    return fetch('/data/assets/geoip-country6.dat')
-      .then(r => r.arrayBuffer())
-      .then(buffer => {
-        geo.cache6.buffer = buffer;
-        const size = buffer.byteLength;
+    geo.cache6.lastLine = (size / geo.cache6.recordSize) - 1;
 
-        geo.cache6.lastLine = (size / geo.cache6.recordSize) - 1;
-
-        geo.cache6.lastIP = new DataView(
-          geo.cache6.buffer,
-          (geo.cache6.lastLine * geo.cache6.recordSize) + 4, 4
-        ).getUint32(0);
-        geo.cache6.firstIP = new DataView(geo.cache6.buffer, 0, 4).getUint32(0);
-      });
-  },
+    geo.cache6.lastIP = new DataView(
+      geo.cache6.buffer,
+      (geo.cache6.lastLine * geo.cache6.recordSize) + 4, 4
+    ).getUint32(0);
+    geo.cache6.firstIP = new DataView(geo.cache6.buffer, 0, 4).getUint32(0);
+  }),
   lookup4: ip => {
     if (!geo.cache4.buffer) {
       throw Error('cache4.buffer is not ready');

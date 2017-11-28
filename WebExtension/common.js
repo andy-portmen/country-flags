@@ -7,15 +7,30 @@ var lastError;
 var tabs = {};
 chrome.tabs.onRemoved.addListener(tabId => delete tabs[tabId]);
 
-var useDNS = false;
-chrome.storage.local.get({
-  dns: false
-}, prefs => useDNS = prefs.dns);
-chrome.storage.onChanged.addListener(prefs => {
-  if (prefs.dns) {
-    useDNS = prefs.dns.newValue;
-  }
-});
+var prefs = {
+  'dns': false,
+  'open-in-background': false,
+  'open-adjacent': true,
+  'ip': 'http://www.tcpiputils.com/browse/ip-address/[ip]',
+  'host': 'https://www.tcpiputils.com/browse/domain/[host]',
+  'custom-cmd-1': '',
+  'custom-cmd-2': '',
+  'custom-cmd-3': '',
+  'custom-cmd-4': '',
+  'custom-cmd-5': '',
+  'custom-cmd-1-title': '',
+  'custom-cmd-2-title': '',
+  'custom-cmd-3-title': '',
+  'custom-cmd-4-title': '',
+  'custom-cmd-5-title': '',
+  'version': null,
+  'faqs': navigator.userAgent.indexOf('Firefox') === -1,
+  'custom-command': ''
+};
+Object.assign(prefs, services.urls);
+services.menuitems().forEach(p => {
+  prefs[p] = services.default(p);
+}, {});
 
 var notify = message => chrome.notifications.create(null, {
   type: 'basic',
@@ -31,6 +46,17 @@ var dns = (host, callback) => chrome.runtime.sendNativeMessage('com.add0n.node',
 
     dns.lookup('${host}', (err, address, family) => {
       push({err, address, family});
+      done();
+    });
+  `
+}, callback);
+var exec = (cmd, callback) => chrome.runtime.sendNativeMessage('com.add0n.node', {
+  permissions: ['child_process'],
+  args: [cmd],
+  script: `
+    const {exec} = require('child_process');
+    exec(args[0], (err, stdout, stderr) => {
+      push({err, stdout, stderr});
       done();
     });
   `
@@ -73,10 +99,28 @@ function update(tabId, reason) {
     title += '\n' + _('bgIP') + ': ' + obj.ip;
     //
     chrome.pageAction.setIcon({tabId, path}, () => lastError = chrome.runtime.lastError);
-    chrome.pageAction.setTitle({title, tabId});
     lastError = chrome.runtime.lastError;
     chrome.pageAction.show(tabId);
     lastError = chrome.runtime.lastError;
+    if (prefs['custom-command']) {
+      exec(prefs['custom-command']
+        .replace('[ip]', obj.ip)
+        .replace('[host]', obj.hostname)
+        .replace('[url]', obj.url),
+        o => {
+          if (o.err) {
+            title += '\n\n' + (o.err || o.stderr).trim();
+          }
+          else {
+            title += '\n\n' + (o.stdout || o.stderr).trim();
+          }
+          chrome.pageAction.setTitle({title, tabId});
+        }
+      );
+    }
+    else {
+      chrome.pageAction.setTitle({title, tabId});
+    }
   }
 }
 
@@ -152,7 +196,7 @@ var onResponseStarted = ({ip, tabId, url}) => {
     }
   };
   if (utils.isPrivate(ip)) {
-    if (useDNS) {
+    if (prefs.dns) {
       return dns(hostname, resp => {
         if (resp && !resp.err && resp.address) {
           if (utils.isPrivate(resp.address)) {
@@ -200,7 +244,7 @@ if (navigator.userAgent.indexOf('Firefox') !== -1) {
   });
 }
 
-function open(url, prefs, tab) {
+function open(url, tab) {
   const prop = {
     url,
     active: !prefs['open-in-background']
@@ -212,84 +256,57 @@ function open(url, prefs, tab) {
 }
 
 chrome.pageAction.onClicked.addListener(tab => {
-  chrome.storage.local.get({
-    'ip': 'http://www.tcpiputils.com/browse/ip-address/[ip]',
-    'host': 'https://www.tcpiputils.com/browse/domain/[host]',
-    'open-in-background': false,
-    'open-adjacent': true
-  }, prefs => {
-    const ip = tabs[tab.id].ip;
-    const hostname = (new URL(tab.url)).hostname;
+  const ip = tabs[tab.id].ip;
+  const hostname = (new URL(tab.url)).hostname;
 
-    if (tabs[tab.id] && ip) {
-      open(prefs.ip.replace('[ip]', ip).replace('[host]', hostname), prefs, tab);
-    }
-    else {
-      open(prefs.host.replace('[ip]', ip).replace('[host]', hostname), prefs, tab);
-    }
-  });
+  if (tabs[tab.id] && ip) {
+    open(prefs.ip.replace('[ip]', ip).replace('[host]', hostname), tab);
+  }
+  else {
+    open(prefs.host.replace('[ip]', ip).replace('[host]', hostname), tab);
+  }
 });
 
 // context menu
 function contexts() {
-  const prefs = services.menuitems().reduce((p, c) => {
-    p[c] = services.default(c);
-    return p;
-  }, {});
+  const dictionary = Object.assign({
+    'custom-cmd-1': prefs['custom-cmd-1-title'] || _('bgCustom1'),
+    'custom-cmd-2': prefs['custom-cmd-2-title'] || _('bgCustom2'),
+    'custom-cmd-3': prefs['custom-cmd-3-title'] || _('bgCustom3'),
+    'custom-cmd-4': prefs['custom-cmd-4-title'] || _('bgCustom4'),
+    'custom-cmd-5': prefs['custom-cmd-5-title'] || _('bgCustom5')
+  }, services.dictionary);
 
-  chrome.storage.local.get(Object.assign(prefs, {
-    'custom-cmd-1': '',
-    'custom-cmd-2': '',
-    'custom-cmd-3': '',
-    'custom-cmd-4': '',
-    'custom-cmd-5': '',
-
-    'custom-cmd-1-title': '',
-    'custom-cmd-2-title': '',
-    'custom-cmd-3-title': '',
-    'custom-cmd-4-title': '',
-    'custom-cmd-5-title': ''
-  }), prefs => {
-    const dictionary = Object.assign({
-      'custom-cmd-1': prefs['custom-cmd-1-title'] || _('bgCustom1'),
-      'custom-cmd-2': prefs['custom-cmd-2-title'] || _('bgCustom2'),
-      'custom-cmd-3': prefs['custom-cmd-3-title'] || _('bgCustom3'),
-      'custom-cmd-4': prefs['custom-cmd-4-title'] || _('bgCustom4'),
-      'custom-cmd-5': prefs['custom-cmd-5-title'] || _('bgCustom5')
-    }, services.dictionary);
-
-    const names = services.names
-      .filter(id => id !== 'ip' && id !== 'host')
-      // do not display custom commands when the URL is not set
-      .filter(id => id.startsWith('custom-cmd-') ? prefs[id] : true);
-    const items = names.filter(key => prefs[key + '-menuitem']).slice(0, 5);
-    items.forEach(id => {
-      chrome.contextMenus.create({
-        contexts: ['page_action'],
-        id,
-        title: dictionary[id]
-      });
-    });
-    // other services
-    const parentId = chrome.contextMenus.create({
+  const names = services.names
+    .filter(id => id !== 'ip' && id !== 'host')
+    // do not display custom commands when the URL is not set
+    .filter(id => id.startsWith('custom-cmd-') ? prefs[id] : true);
+  const items = names.filter(key => prefs[key + '-menuitem']).slice(0, 5);
+  items.forEach(id => {
+    chrome.contextMenus.create({
       contexts: ['page_action'],
-      title: _('bgOtherServices')
+      id,
+      title: dictionary[id]
     });
-    // change order (everything checked above 5 is located on top of the others menu)
-    [
-      ...names.filter(id => items.indexOf(id) === -1).filter(key => prefs[key + '-menuitem'] === true),
-      ...names.filter(id => items.indexOf(id) === -1).filter(key => prefs[key + '-menuitem'] === false)
-    ].forEach(id => {
-      chrome.contextMenus.create({
-        contexts: ['page_action'],
-        id,
-        title: dictionary[id],
-        parentId
-      });
+  });
+  // other services
+  const parentId = chrome.contextMenus.create({
+    contexts: ['page_action'],
+    title: _('bgOtherServices')
+  });
+  // change order (everything checked above 5 is located on top of the others menu)
+  [
+    ...names.filter(id => items.indexOf(id) === -1).filter(key => prefs[key + '-menuitem'] === true),
+    ...names.filter(id => items.indexOf(id) === -1).filter(key => prefs[key + '-menuitem'] === false)
+  ].forEach(id => {
+    chrome.contextMenus.create({
+      contexts: ['page_action'],
+      id,
+      title: dictionary[id],
+      parentId
     });
   });
 }
-contexts();
 chrome.runtime.onMessage.addListener(request => {
   if (request.method === 'contexts') {
     contexts();
@@ -338,54 +355,53 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     return;
   }
 
-  chrome.storage.local.get(Object.assign({
-    'open-in-background': false,
-    'open-adjacent': true
-  }, services.urls), prefs => {
-    let url = prefs[info.menuItemId]
-      .replace('[lang]', chrome.i18n.getUILanguage())
-      .replace('[url]', tab.url)
-      .replace('[enurl]', encodeURIComponent(tab.url));
+  let url = prefs[info.menuItemId]
+    .replace('[lang]', chrome.i18n.getUILanguage())
+    .replace('[url]', tab.url)
+    .replace('[enurl]', encodeURIComponent(tab.url));
 
-    if (url.indexOf('[host]') !== -1) {
-      const hostname = (new URL(tab.url)).hostname;
-      url = url.replace('[host]', hostname);
+  if (url.indexOf('[host]') !== -1) {
+    const hostname = (new URL(tab.url)).hostname;
+    url = url.replace('[host]', hostname);
+  }
+  if (url.indexOf('[curl]') !== -1) {
+    const curl = tab.url.split('?')[0].split('#')[0];
+    url = url.replace('[curl]', curl);
+  }
+  if (url.indexOf('[ip]') !== -1) {
+    if (tabs[tab.id] && tabs[tab.id].ip) {
+      url = url.replace('[ip]', tabs[tab.id].ip);
     }
-    if (url.indexOf('[curl]') !== -1) {
-      const curl = tab.url.split('?')[0].split('#')[0];
-      url = url.replace('[curl]', curl);
+    else {
+      return notify(_('bgErr4'));
     }
-    if (url.indexOf('[ip]') !== -1) {
-      if (tabs[tab.id] && tabs[tab.id].ip) {
-        url = url.replace('[ip]', tabs[tab.id].ip);
-      }
-      else {
-        return notify(_('bgErr4'));
-      }
-    }
-    open(url, prefs, tab);
-  });
+  }
+  open(url, tab);
 });
 
-// FAQs & Feedback
-chrome.storage.local.get({
-  'version': null,
-  'faqs': navigator.userAgent.indexOf('Firefox') === -1
-}, prefs => {
+// prefs
+chrome.storage.onChanged.addListener(ps => {
+  Object.keys(ps).forEach(k => prefs[k] = ps[k].newValue);
+});
+chrome.storage.local.get(prefs, ps => {
+  // prefs
+  Object.assign(prefs, ps);
+  // context
+  contexts();
+  // FAQs & Feedback
   const version = chrome.runtime.getManifest().version;
   if (prefs.version ? (prefs.faqs && prefs.version !== version) : true) {
+    const pVersion = prefs.version;
+    const p = Boolean(pVersion);
     chrome.storage.local.set({version}, () => {
-      if (prefs.version === '0.2.2') {
-        return;
-      }
       chrome.tabs.create({
         url: 'http://add0n.com/country-flags.html?version=' + version +
-          '&type=' + (prefs.version ? ('upgrade&p=' + prefs.version) : 'install')
+          '&type=' + (p ? ('upgrade&p=' + pVersion) : 'install'),
+        active: p === false
       });
     });
   }
 });
-
 {
   const {name, version} = chrome.runtime.getManifest();
   chrome.runtime.setUninstallURL('http://add0n.com/feedback.html?name=' + name + '&version=' + version);

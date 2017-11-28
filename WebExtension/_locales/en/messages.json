@@ -248,6 +248,12 @@
     "optionsMSG": {
         "message": "Options saved."
     },
+    "optionsNativeCmd": {
+        "message": "Native command"
+    },
+    "optionsNativeCmdDescp": {
+        "message": "Run a native command after IP is resolved. Either the \"stdout\" or \"stderr\" string will be appended to the tooltip of the toolbar button. Example: \"host [ip]\". Available keywords: [ip], [host], and [url]. Be careful that this command will be executed for each tab after each refresh."
+    },
     "country_AF": {
             "message": "Afghanistan"
         },

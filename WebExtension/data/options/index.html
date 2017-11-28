@@ -245,18 +245,19 @@
       </tbody>
     </table>
 
-    <div>
-      <p>
+    <div style="border-top: dashed 1px #ccc; margin-top: 10px; padding-top: 10px;">
+      <label><input type="checkbox" id="dns"> <span data-i18n="optionsNative"></span></label>
+      <p style="color: #888; font-size: 90%;" data-i18n="optionsNativeDescp"></p>
+      <input type="text" id="custom-command" data-value="placeholder" data-i18n="optionsNativeCmd">
+      <p style="color: #888; font-size: 90%;" data-i18n="optionsNativeCmdDescp"></p>
+    </div>
+
+      <p style="border-top: dashed 1px #ccc; margin-top: 10px; padding-top: 10px;">
         <button id="donation" data-i18n="optionsDonationButton"></button>
         <button id="save" data-i18n="optionsSaveButton"></button>
         <span id="status"></span>
       </p>
-    </div>
 
-    <div style="border-top: dashed 1px #ccc; margin-top: 10px; padding-top: 10px;">
-      <label><input type="checkbox" id="dns"> <span data-i18n="optionsNative"></span></label>
-      <p style="color: #888; font-size: 90%;" data-i18n="optionsNativeDescp"></p>
-    </div>
     <script src="/services.js"></script>
     <script src="index.js"></script>
   </body>
