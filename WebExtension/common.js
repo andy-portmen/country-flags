@@ -37,6 +37,7 @@ var dns = (host, callback) => chrome.runtime.sendNativeMessage('com.add0n.node',
 }, callback);
 
 function update(tabId, reason) {
+  // console.log(reason);
   const obj = tabs[tabId];
   if (obj) {
     const country = obj.country;
@@ -137,6 +138,7 @@ var onResponseStarted = ({ip, tabId, url}) => {
   }
   tabs[tabId] = {
     hostname,
+    url,
     ip
   };
 
@@ -177,27 +179,22 @@ chrome.webRequest.onResponseStarted.addListener(onResponseStarted, {
 }, []);
 
 // For HTML5 ajax page loading; like YouTube or GitHub
-if (navigator.userAgent.indexOf('Firefox') === -1) {
-  chrome.webNavigation.onCommitted.addListener(({url, tabId, frameId}) => {
-    if (frameId === 0) {
-      if (tabs[tabId]) {
-        const {hostname, ip, country} = tabs[tabId];
-        if (url && url.indexOf(hostname) !== -1 && ip && country) {
-          update(tabId, 'web navigation');
-        }
-      }
+chrome.webNavigation.onCommitted.addListener(({url, tabId, frameId}) => {
+  if (frameId === 0 && tabs[tabId]) {
+    const {hostname, ip, country} = tabs[tabId];
+    if (url && url.indexOf(hostname) !== -1 && ip && country) {
+      update(tabId, 'web navigation');
     }
-  });
-}
+  }
+});
 // Firefox only
-else {
+if (navigator.userAgent.indexOf('Firefox') !== -1) {
   chrome.tabs.onUpdated.addListener((tabId, changeInfo, {id, url}) => {
-    if (changeInfo.favIconUrl || changeInfo.url) {
-      if (tabs[id]) {
-        const {hostname, ip, country} = tabs[id];
-        if (url && url.indexOf(hostname) !== -1 && ip && country) {
-          update(tabId, 'web navigation');
-        }
+    if (tabs[id] && url !== tabs[id].url) {
+      const {hostname, ip, country} = tabs[id];
+      if (url && url.indexOf(hostname) !== -1 && ip && country) {
+        tabs[id].url = url;
+        update(tabId, 'onUpdated');
       }
     }
   });
