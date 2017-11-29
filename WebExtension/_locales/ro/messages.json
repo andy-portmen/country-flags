@@ -228,7 +228,7 @@
         "message": "Se deschide pagina de întrebări frecvente (FAQ) după actualizare"
     },
     "optionsNative": {
-        "message": "Se folosește rezoleverul DNS nativ al sistemului de operare"
+        "message": "Se folosește rezolverul DNS nativ al sistemului de operare"
     },
     "optionsNativeDescp": {
         "message": "Aceasta va permite rezolvarea adreselor IP de la nume de gazde, chiar dacă navigatorul este configurat să utilizeze un server proxy SOCKS."
@@ -247,6 +247,12 @@
     },
     "optionsMSG": {
         "message": "Opțiunile au fost salvate."
+    },
+    "optionsNativeCmd": {
+        "message": "Comandă nativă a rezolverului"
+    },
+    "optionsNativeCmdDescp": {
+        "message": "Comanda nativă DNS va fi executată după ce adresa IP a fost rezolvată. Unul dintre fluxurile \"stdout\" sau \"stderr\" va fi atașat la mesajul butonului-drapel din bara de instrumente. Exemplu: \"host [ip]\". Cuvinte cheie disponibile: [ip], [host] și [url]. Atenție, această comandă va fi executată pentru fiecare filă după fiecare actualizare."
     },
     "country_AD": {
         "message": "Andorra"
