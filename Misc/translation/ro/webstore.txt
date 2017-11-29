@@ -46,8 +46,33 @@ Comenzile personalizate acceptă următorii parametri:
 [curl]: adresa URL fără parametri
 [ip]: adresa IP a serverului
 
-Începând cu versiunea 0.2.0, este posibilă deschiderea filelor noi în fundal și/sau alături de fila curentă.
-
 -- Permisiuni:
 Pentru o descriere detaliată a motivului pentru care sunt necesare permisiuni pentru acest supliment, vizitați:
 https://add0n.com/country-flags.html#permissions
+
+-- Istoricul versiunilor
+0.1.3
+S-au actualizat bazele de date IPv4 and IPv6.
+S-a redus numărul total de solicitări în fundal pentru rezolvarea codurilor de țară din adresele IP.
+
+0.1.4
+S-au actualizat bazele de date IPv4 and IPv6.
+S-a renunțat la executarea funcției de căutarea a codului de țară pentru adresele IP locale.
+
+0.1.5
+S-a introdus posibilitatea folosirii rezolverului nativ al sistemului de operare pentru navigatoarele care rulează sub un proxy SOCKS (dezactivată inițial; necesită integrare cu rezolverul)
+
+0.1.6
+S-au adăugat instrumente noi în meniul contextual pentru clic-dreapta: verificare SSL, Trace Route, Ping, căutare DNS, căutare Whois și anteturi HTTP.
+
+0.1.7
+S-au adăugat două noi instrumente: copierea adresei IP în clipboard și TinyURL pentru fila curentă.
+
+0.2.0
+S-a introdus posibilitatea deschiderii filelor noi în fundal și/sau alături de fila curentă.
+
+0.2.2
+S-a introdus căutarea codurilor de țară pentru toate filele deschise la pornire.
+
+0.2.3
+S-a rearanjat meniul contextual pentru clic-dreapta, serviciile fiind afișate în meniul principal și în submeniul „Alte servicii”.
