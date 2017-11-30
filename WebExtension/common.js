@@ -395,7 +395,7 @@ chrome.storage.local.get(prefs, ps => {
     const p = Boolean(pVersion);
     chrome.storage.local.set({version}, () => {
       chrome.tabs.create({
-        url: 'http://add0n.com/country-flags.html?version=' + version +
+        url: chrome.runtime.getManifest().homepage_url + '?version=' + version +
           '&type=' + (p ? ('upgrade&p=' + pVersion) : 'install'),
         active: p === false
       });
