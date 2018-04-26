@@ -44,18 +44,21 @@ function save() {
     'custom-cmd-4-title': document.getElementById('custom-cmd-4-title').value,
     'custom-cmd-5-title': document.getElementById('custom-cmd-5-title').value,
     'custom-command': document.getElementById('custom-command').value,
+    'display-delay': Math.max(0, Number(document.getElementById('display-delay').value))
   }), () => {
-    native(response => {
-      if (!response) {
-        chrome.tabs.create({
-          url: '/data/helper/index.html'
-        });
-        document.getElementById('custom-command').value = '';
-        chrome.storage.local.set({
-          'custom-command': ''
-        });
-      }
-    });
+    if (document.getElementById('dns').checked) {
+      native(response => {
+        if (!response) {
+          chrome.tabs.create({
+            url: '/data/helper/index.html'
+          });
+          document.getElementById('custom-command').value = '';
+          chrome.storage.local.set({
+            'custom-command': ''
+          });
+        }
+      });
+    }
 
     const prefs = services.menuitems().reduce((p, c) => {
       p[c] = document.getElementById(c).checked;
@@ -76,7 +79,6 @@ function save() {
       });
     });
   });
-
 }
 
 function restore() {
@@ -86,7 +88,8 @@ function restore() {
     'custom-cmd-3-title': '',
     'custom-cmd-4-title': '',
     'custom-cmd-5-title': '',
-    'custom-command': ''
+    'custom-command': '',
+    'display-delay': navigator.userAgent.indexOf('Edge') === -1 ? 0 : 1
   }, services.urls), prefs => {
     Object.entries(prefs).forEach(([key, value]) => document.getElementById(key).value = value);
   });

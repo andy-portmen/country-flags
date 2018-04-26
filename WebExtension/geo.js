@@ -3,6 +3,17 @@
 
 self.importScripts('utils.js');
 
+if (navigator.userAgent.indexOf('Edge') !== -1) {
+  var TextDecoder = function() {};
+  TextDecoder.prototype.decode = function(uint8Arr) {
+    let str = '';
+    for (let i = 0; i < uint8Arr.byteLength; i += 1) {
+      str += String.fromCharCode(uint8Arr.getInt8(i));
+    }
+    return str;
+  };
+}
+
 var geo = {
   cache4: {
     buffer: null,

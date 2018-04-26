@@ -227,6 +227,9 @@
     "optionsFAQs": {
         "message": "Open FAQs on updates"
     },
+    "optionsDisplyDelay": {
+        "message": "Display icons with delay (in seconds)"
+    },
     "optionsNative": {
         "message": "Use the native DNS resolver of your OS"
     },

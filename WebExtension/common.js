@@ -2,6 +2,7 @@
 'use strict';
 
 var _ = id => chrome.i18n.getMessage(id);
+var isEdge = navigator.userAgent.indexOf('Edge') !== -1;
 
 var lastError;
 var tabs = {};
@@ -25,7 +26,8 @@ var prefs = {
   'custom-cmd-5-title': '',
   'version': null,
   'faqs': navigator.userAgent.indexOf('Firefox') === -1,
-  'custom-command': ''
+  'custom-command': '',
+  'display-delay': isEdge ? 1 : 0
 };
 Object.assign(prefs, services.urls);
 services.menuitems().forEach(p => {
@@ -72,59 +74,70 @@ function update(tabId, reason) {
 
     if (obj.error || !country) {
       path = {
-        16: './data/icons/error/16.png',
-        32: './data/icons/error/32.png',
-        64: './data/icons/error/64.png'
+        16: '/data/icons/error/16.png',
+        19: '/data/icons/error/19.png',
+        32: '/data/icons/error/32.png',
+        64: '/data/icons/error/64.png'
       };
       title += _('bgErr') + ': ' + obj.error || _('bgErr1');
     }
     else if (country === 'private') {
       path = {
-        16: './data/icons/private/16.png',
-        32: './data/icons/private/32.png',
-        64: './data/icons/private/64.png'
+        16: '/data/icons/private/16.png',
+        19: '/data/icons/private/19.png',
+        32: '/data/icons/private/32.png',
+        64: '/data/icons/private/64.png'
       };
       title += _('bgMSG1');
       title += '\nHost: ' + obj.hostname;
     }
     else {
       path = {
-        16: './data/icons/flags/16/' + country + '.png',
-        32: './data/icons/flags/32/' + country + '.png',
-        64: './data/icons/flags/64/' + country + '.png'
+        16: '/data/icons/flags/16/' + country + '.png',
+        19: '/data/icons/flags/19/' + country + '.png',
+        32: '/data/icons/flags/32/' + country + '.png',
+        64: '/data/icons/flags/64/' + country + '.png'
       };
       title += _('bgCountry') + ': ' + _('country_' + country);
       title += '\n' + _('bgHost') + ': ' + obj.hostname;
     }
     title += '\n' + _('bgIP') + ': ' + obj.ip;
     //
-    chrome.pageAction.setIcon({tabId, path}, () => lastError = chrome.runtime.lastError);
-    lastError = chrome.runtime.lastError;
-    chrome.pageAction.show(tabId);
-    lastError = chrome.runtime.lastError;
-    if (prefs['custom-command']) {
-      exec(prefs['custom-command']
-        .replace('[ip]', obj.ip)
-        .replace('[host]', obj.hostname)
-        .replace('[url]', obj.url),
-        o => {
-          if (o.err) {
-            title += '\n\n' + (o.err || o.stderr).trim();
-          }
-          else {
-            title += '\n\n' + (o.stdout || o.stderr).trim();
-          }
-          chrome.pageAction.setTitle({title, tabId});
-        }
-      );
+    if (isEdge) {
+      delete path['16'];
+      delete path['32'];
+      delete path['64'];
     }
-    else {
-      chrome.pageAction.setTitle({title, tabId});
-    }
+    //
+    window.setTimeout(() => {
+      chrome.pageAction.setIcon({tabId, path}, () => lastError = chrome.runtime.lastError);
+      lastError = chrome.runtime.lastError;
+      chrome.pageAction.show(tabId);
+      lastError = chrome.runtime.lastError;
+      if (prefs['custom-command']) {
+        exec(prefs['custom-command']
+          .replace('[ip]', obj.ip)
+          .replace('[host]', obj.hostname)
+          .replace('[url]', obj.url),
+          o => {
+            if (o.err) {
+              title += '\n\n' + (o.err || o.stderr).trim();
+            }
+            else {
+              title += '\n\n' + (o.stdout || o.stderr).trim();
+            }
+            chrome.pageAction.setTitle({title, tabId});
+          }
+        );
+      }
+      else {
+        chrome.pageAction.setTitle({title, tabId});
+      }
+    }, prefs['display-delay'] * 1000);
   }
 }
 
-var worker = new Worker('./geo.js');
+var worker = new Worker('/geo.js');
 worker.onmessage = ({data}) => {
   const {tabId, country, error} = data;
   if (error) {
@@ -172,6 +185,14 @@ function resolve(tabId) {
 var onResponseStarted = ({ip, tabId, url}) => {
   if (!ip) {
     return;
+  }
+  if (isEdge) {
+    if (ip.startsWith('[')) {
+      ip = ip.replace('[', '').split(']')[0];
+    }
+    else if (ip.indexOf('.') !== -1 && ip.indexOf(':') !== -1) {
+      ip = ip.split(':')[0];
+    }
   }
   const hostname = (new URL(url)).hostname;
 
