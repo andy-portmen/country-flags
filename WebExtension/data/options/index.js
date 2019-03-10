@@ -2,6 +2,7 @@
 'use strict';
 
 var _ = id => chrome.i18n.getMessage(id);
+var info = document.getElementById('status');
 
 var native = callback => chrome.runtime.sendNativeMessage('com.add0n.node', {
   cmd: 'version'
@@ -59,6 +60,7 @@ function save() {
         }
       });
     }
+    localStorage.setItem('type', document.getElementById('subframes').checked ? 'main_frame, sub_frame' : 'main_frame');
 
     const prefs = services.menuitems().reduce((p, c) => {
       p[c] = document.getElementById(c).checked;
@@ -73,9 +75,8 @@ function save() {
         chrome.runtime.sendMessage({
           method: 'contexts'
         });
-        const status = document.getElementById('status');
-        status.textContent = _('optionsMSG');
-        setTimeout(() => status.textContent = '', 750);
+        info.textContent = _('optionsMSG');
+        setTimeout(() => info.textContent = '', 750);
       });
     });
   });
@@ -105,12 +106,29 @@ function restore() {
   }), prefs => {
     Object.entries(prefs).forEach(([key, value]) => document.getElementById(key).checked = value);
   });
+  document.getElementById('subframes').checked = localStorage.getItem('type').indexOf('sub_frame') !== -1;
 }
 document.addEventListener('DOMContentLoaded', restore);
 document.getElementById('save').addEventListener('click', save);
-document.getElementById('donation').addEventListener('click', () => chrome.tabs.create({
-  url: 'https://www.paypal.me/addondonation/10usd'
+// reset
+document.getElementById('reset').addEventListener('click', e => {
+  if (e.detail === 1) {
+    info.textContent = 'Double-click to reset!';
+    window.setTimeout(() => info.textContent = '', 750);
+  }
+  else {
+    localStorage.clear();
+    chrome.storage.local.clear(() => {
+      chrome.runtime.reload();
+      window.close();
+    });
+  }
+});
+// support
+document.getElementById('support').addEventListener('click', () => chrome.tabs.create({
+  url: chrome.runtime.getManifest().homepage_url + '?rd=donate'
 }));
+
 
 // localization
 [...document.querySelectorAll('[data-i18n]')].forEach(e => {

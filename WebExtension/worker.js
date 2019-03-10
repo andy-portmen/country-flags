@@ -119,7 +119,9 @@ var requests = [];
 
 var perform = data => {
   try {
-    const obj = module.exports.lookup(data.ip);
+    const obj = module.exports.lookup(data.ip) || {
+      error: 'Cannot resolve this IP'
+    };
     self.postMessage(Object.assign(obj, data));
   }
   catch (e) {

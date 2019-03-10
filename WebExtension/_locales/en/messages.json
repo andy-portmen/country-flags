@@ -50,6 +50,9 @@
     "bgIP": {
         "message": "Server IP"
     },
+    "bgFrames": {
+        "message": "Connected Sites"
+    },
     "bgMSG1": {
         "message": "Server is on your private network"
     },
@@ -225,7 +228,7 @@
         "message": "Open tabs next to the active"
     },
     "optionsFAQs": {
-        "message": "Open FAQs on updates"
+        "message": "Open FAQs page on updates"
     },
     "optionsDisplyDelay": {
         "message": "Display icons with delay (in seconds)"
@@ -248,6 +251,10 @@
     "optionsDonationButton": {
         "message": "Support Development"
     },
+
+    "optionsResetButton": {
+        "message": "Factory Reset"
+    },
     "optionsMSG": {
         "message": "Options saved."
     },
@@ -256,6 +263,12 @@
     },
     "optionsNativeCmdDescp": {
         "message": "Run a native command after IP is resolved. Either the \"stdout\" or \"stderr\" string will be appended to the tooltip of the toolbar button. Example: \"host [ip]\". Available keywords: [ip], [host], and [url]. Be careful that this command will be executed for each tab after each refresh."
+    },
+    "optionsObserveSubFrames": {
+        "message": "Consider all sub-frames"
+    },
+    "optionsObserveSubFramesInfo": {
+        "message": " Add hostname, IP address, and country code of all connected frames to the tooltip area (restart required)"
     },
     "country_AF": {
             "message": "Afghanistan"

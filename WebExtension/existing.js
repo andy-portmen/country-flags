@@ -15,10 +15,11 @@ document.addEventListener('DOMContentLoaded', () => chrome.tabs.query({
       return p;
     }, {});
 
-    const init = d => cache[d.url] && cache[d.url].forEach(tabId => onResponseStarted({
+    const init = d => d.ip && cache[d.url] && cache[d.url].forEach(tabId => onResponseStarted({
       ip: d.ip,
       tabId,
-      url: d.url
+      url: d.url,
+      type: 'main_frame'
     }));
 
     chrome.webRequest.onResponseStarted.addListener(init, {

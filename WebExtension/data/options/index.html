@@ -238,6 +238,11 @@
           <td></td>
         </tr>
         <tr>
+          <td><input type="checkbox" id="subframes"></td>
+          <td><label for="subframes" data-i18n="optionsObserveSubFrames"></label><sup>1</sup></td>
+          <td></td>
+        </tr>
+        <tr>
           <td><input type="checkbox" id="faqs"></td>
           <td><label for="faqs" data-i18n="optionsFAQs"></label></td>
           <td></td>
@@ -251,17 +256,20 @@
     </table>
 
     <div style="border-top: dashed 1px #ccc; margin-top: 10px; padding-top: 10px;">
-      <label><input type="checkbox" id="dns"> <span data-i18n="optionsNative"></span></label>
+      <label style="  display: flex; align-items: center;"><input type="checkbox" id="dns">&nbsp;<span data-i18n="optionsNative"></span></label>
       <p style="color: #888; font-size: 90%;" data-i18n="optionsNativeDescp"></p>
       <input type="text" id="custom-command" data-value="placeholder" data-i18n="optionsNativeCmd">
       <p style="color: #888; font-size: 90%;" data-i18n="optionsNativeCmdDescp"></p>
     </div>
 
-      <p style="border-top: dashed 1px #ccc; margin-top: 10px; padding-top: 10px;">
-        <button id="donation" data-i18n="optionsDonationButton"></button>
-        <button id="save" data-i18n="optionsSaveButton"></button>
-        <span id="status"></span>
-      </p>
+    <p style="border-top: dashed 1px #ccc; margin-top: 10px; padding-top: 10px;">
+      <button id="reset" data-i18n="optionsResetButton"></button>
+      <button id="support" data-i18n="optionsDonationButton"></button> - <button id="save" data-i18n="optionsSaveButton"></button>
+      <span id="status"></span>
+    </p>
+    <p style="border-top: dashed 1px #ccc; margin-top: 10px; padding-top: 10px;">
+      1. <span data-i18n="optionsObserveSubFramesInfo"></span>
+    </p>
 
     <script src="/services.js"></script>
     <script src="index.js"></script>

@@ -74,8 +74,7 @@ var exec = (cmd, callback) => chrome.runtime.sendNativeMessage('com.add0n.node',
   `
 }, callback);
 
-function update(tabId, reason) {
-  // console.log(reason);
+function update(tabId/* , reason */) {
   const obj = tabs[tabId];
   if (obj) {
     const country = obj.country;
@@ -112,6 +111,13 @@ function update(tabId, reason) {
       title += '\n' + _('bgHost') + ': ' + obj.hostname;
     }
     title += '\n' + _('bgIP') + ': ' + obj.ip;
+    const connecteds = Object.keys(obj.frames);
+    if (connecteds.length) {
+      title += `\n\n${_('bgFrames')}:\n`;
+      connecteds.forEach((ip, i) => {
+        title += obj.frames[ip].country + ' -> ' + obj.frames[ip].hostname + ` (${ip})` + (i !== connecteds.length - 1 ? '\n' : '');
+      });
+    }
     //
     if (isEdge) {
       delete path['16'];
@@ -144,23 +150,35 @@ function update(tabId, reason) {
 
 var worker = new Worker('/worker.js');
 worker.onmessage = ({data}) => {
-  const {tabId, country, error} = data;
-  if (error) {
+  const {tabId, country, error, ip} = data;
+  const top = tabs[tabId].ip === ip;
+  const frames = tabs[tabId].frames;
+  if (error && top) {
     tabs[tabId].error = error;
   }
+  else if (error && frames && frames[ip]) {
+    frames[ip].error = error;
+  }
   if (country) {
-    tabs[tabId].country = country;
+    if (top) {
+      tabs[tabId].country = country;
+    }
+    if (frames && frames[ip]) {
+      frames[ip].country = country;
+    }
   }
 
   update(tabId, 'IP resolved');
 };
 
-function resolve(tabId) {
-  const {ip} = tabs[tabId];
+function resolve(tabId, ip = tabs[tabId].ip) {
   worker.postMessage({tabId, ip});
 }
 
-var onResponseStarted = ({ip, tabId, url}) => {
+var onResponseStarted = ({ip, tabId, url, type}) => {
+  if (type === 'main_frame' && tabs[tabId]) {
+    tabs[tabId].frames = {};
+  }
   if (!ip) {
     return;
   }
@@ -172,26 +190,42 @@ var onResponseStarted = ({ip, tabId, url}) => {
       ip = ip.split(':')[0];
     }
   }
-  const hostname = (new URL(url)).hostname;
-
-  if (tabs[tabId]) {
+  if (type === 'main_frame' && tabs[tabId]) {
     if (ip === tabs[tabId].ip && hostname === tabs[tabId].hostname) {
       return;
     }
   }
-  tabs[tabId] = {
-    hostname,
-    url,
-    ip
-  };
+  const hostname = (new URL(url)).hostname;
+
+  if (type === 'main_frame') {
+    tabs[tabId] = {
+      hostname,
+      url,
+      ip,
+      frames: {}
+    };
+  }
 
   const set = (obj, doUpdate = false, doResolve) => {
-    Object.assign(tabs[tabId], obj);
+    if (type === 'sub_frame') {
+      if (tabs[tabId] === undefined || tabs[tabId].frames[ip]) {
+        return;
+      }
+      tabs[tabId].frames[obj.ip || ip] = {
+        hostname
+      };
+      if (obj.country) {
+        tabs[tabId].frames[obj.ip || ip].country = obj.country;
+      }
+    }
+    else {
+      Object.assign(tabs[tabId], obj);
+    }
     if (doUpdate) {
       update(tabId, 'private address');
     }
     if (doResolve) {
-      resolve(tabId);
+      resolve(tabId, obj.ip || ip);
     }
   };
   if (isPrivate(ip)) {
@@ -218,7 +252,7 @@ var onResponseStarted = ({ip, tabId, url}) => {
 };
 chrome.webRequest.onResponseStarted.addListener(onResponseStarted, {
   urls: ['<all_urls>'],
-  types: ['main_frame']
+  types: (localStorage.getItem('type') || 'main_frame').split(', ')
 }, []);
 
 // For HTML5 ajax page loading; like YouTube or GitHub
