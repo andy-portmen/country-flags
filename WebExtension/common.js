@@ -75,7 +75,7 @@ var exec = (cmd, callback) => chrome.runtime.sendNativeMessage('com.add0n.node',
 }, callback);
 
 function update(tabId, reason) {
-  console.log(reason);
+  // console.log(reason);
   const obj = tabs[tabId];
   if (obj) {
     const country = obj.country;
@@ -387,21 +387,30 @@ chrome.storage.local.get(prefs, ps => {
   Object.assign(prefs, ps);
   // context
   contexts();
-  // FAQs & Feedback
-  const version = chrome.runtime.getManifest().version;
-  if (prefs.version ? (prefs.faqs && prefs.version !== version) : true) {
-    const pVersion = prefs.version;
-    const p = Boolean(pVersion);
-    chrome.storage.local.set({version}, () => {
-      chrome.tabs.create({
-        url: chrome.runtime.getManifest().homepage_url + '?version=' + version +
-          '&type=' + (p ? ('upgrade&p=' + pVersion) : 'install'),
-        active: p === false
-      });
-    });
-  }
 });
+
 {
-  const {name, version} = chrome.runtime.getManifest();
-  chrome.runtime.setUninstallURL('http://add0n.com/feedback.html?name=' + name + '&version=' + version);
+  const {onInstalled, setUninstallURL, getManifest} = chrome.runtime;
+  const {name, version} = getManifest();
+  const page = getManifest().homepage_url;
+  onInstalled.addListener(({reason, previousVersion}) => {
+    chrome.storage.local.get({
+      'faqs': true,
+      'last-update': 0
+    }, prefs => {
+      if (reason === 'install' || (prefs.faqs && reason === 'update')) {
+        const doUpdate = (Date.now() - prefs['last-update']) / 1000 / 60 / 60 / 24 > 45;
+        if (doUpdate && previousVersion !== version) {
+          chrome.tabs.create({
+            url: page + '?version=' + version +
+              (previousVersion ? '&p=' + previousVersion : '') +
+              '&type=' + reason,
+            active: reason === 'install'
+          });
+          chrome.storage.local.set({'last-update': Date.now()});
+        }
+      }
+    });
+  });
+  setUninstallURL(page + '?rd=feedback&name=' + encodeURIComponent(name) + '&version=' + version);
 }

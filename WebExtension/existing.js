@@ -6,15 +6,20 @@ document.addEventListener('DOMContentLoaded', () => chrome.tabs.query({
 }, tabs => {
   if (tabs.length) {
     const cache = tabs.reduce((p, c) => {
-      p[c.url] = c.id;
+      if (p[c.url]) {
+        p[c.url].push(c.id);
+      }
+      else {
+        p[c.url] = [c.id];
+      }
       return p;
     }, {});
 
-    const init = d => cache[d.url] && onResponseStarted({
+    const init = d => cache[d.url] && cache[d.url].forEach(tabId => onResponseStarted({
       ip: d.ip,
-      tabId: cache[d.url],
+      tabId,
       url: d.url
-    });
+    }));
 
     chrome.webRequest.onResponseStarted.addListener(init, {
       urls: ['*://*/*'],

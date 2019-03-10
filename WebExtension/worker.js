@@ -25,7 +25,7 @@ var require = path => {
       },
       fstatSync(path) {
         return {
-          size: path.indexOf('city') === -1 ? _fs.content[path].byteLength : 0
+          size: _fs.content[path] ? _fs.content[path].byteLength : 0
         };
       },
       readSync(path, obj) {
@@ -69,6 +69,9 @@ var _fs = {
   content: {
     '/data/assets/geoip-country.dat': null,
     '/data/assets/geoip-country6.dat': null
+    // '/data/assets/geoip-city.dat': null,
+    // '/data/assets/geoip-city6.dat': null,
+    // '/data/assets/geoip-city-names.dat': null
   }
 };
 {
@@ -89,8 +92,19 @@ var _fs = {
 var Buffer = {};
 Buffer.alloc = () => {
   return {
+    readInt32BE(offset) {
+      const ab = _fs.content[this.path];
+      if (ab) {
+        return new DataView(ab, offset, 4).getInt32(0);
+      }
+      return 0;
+    },
     readUInt32BE(offset) {
-      return new DataView(_fs.content[this.path], offset, 4).getUint32(0);
+      const ab = _fs.content[this.path];
+      if (ab) {
+        return new DataView(ab, offset, 4).getUint32(0);
+      }
+      return 0;
     },
     toString(encoding, offset) {
       const uint8array = new DataView(_fs.content[this.path], offset, 2);
@@ -103,17 +117,23 @@ Buffer.alloc = () => {
 var isLoaded = false;
 var requests = [];
 
+var perform = data => {
+  try {
+    const obj = module.exports.lookup(data.ip);
+    self.postMessage(Object.assign(obj, data));
+  }
+  catch (e) {
+    console.error(e);
+    self.postMessage({
+      tabId: data.tabId,
+      error: e.message
+    });
+  }
+};
+
 self.onmessage = function({data}) {
   if (isLoaded) {
-    try {
-      self.postMessage(Object.assign(data, module.exports.lookup(data.ip)));
-    }
-    catch (e) {
-      self.postMessage({
-        tabId: data.tabId,
-        error: e.message
-      });
-    }
+    perform(data);
   }
   else {
     requests.push(data);
