@@ -3,7 +3,7 @@
   "short_name": "icflags",
   "description": "__MSG_appDesc__",
   "author": "Andy Portmen",
-  "version": "0.2.6",
+  "version": "0.2.7.1",
   "default_locale": "en",
   "manifest_version": 2,
   "permissions": [
@@ -29,7 +29,6 @@
   },
   "background": {
     "scripts": [
-      "utils.js",
       "services.js",
       "worker-polyfill.js",
       "common.js",

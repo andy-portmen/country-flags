@@ -1,12 +1,22 @@
-/* globals utils, services */
+/* globals services */
 'use strict';
 
 var _ = id => chrome.i18n.getMessage(id);
 var isEdge = navigator.userAgent.indexOf('Edge') !== -1;
 
-var lastError;
 var tabs = {};
 chrome.tabs.onRemoved.addListener(tabId => delete tabs[tabId]);
+
+var isPrivate = ip => ip === '::1' ||
+  ip === 'd0::11' ||
+  ip === '0.0.0.0' ||
+  ip.match(/^10\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})/) !== null ||
+  ip.match(/^192\.168\.([0-9]{1,3})\.([0-9]{1,3})/) !== null ||
+  ip.match(/^172\.16\.([0-9]{1,3})\.([0-9]{1,3})/) !== null ||
+  ip.match(/^127\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})/) !== null ||
+  ip.match(/^169\.254\.([0-9]{1,3})\.([0-9]{1,3})/) !== null ||
+  ip.match(/^fc00:/) !== null ||
+  ip.match(/^fe80:/) !== null;
 
 var prefs = {
   'dns': false,
@@ -65,7 +75,7 @@ var exec = (cmd, callback) => chrome.runtime.sendNativeMessage('com.add0n.node',
 }, callback);
 
 function update(tabId, reason) {
-  // console.log(reason);
+  console.log(reason);
   const obj = tabs[tabId];
   if (obj) {
     const country = obj.country;
@@ -110,25 +120,20 @@ function update(tabId, reason) {
     }
     //
     window.setTimeout(() => {
-      chrome.pageAction.setIcon({tabId, path}, () => lastError = chrome.runtime.lastError);
-      lastError = chrome.runtime.lastError;
+      chrome.pageAction.setIcon({tabId, path}, () => chrome.runtime.lastError);
+      chrome.runtime.lastError;
       chrome.pageAction.show(tabId);
-      lastError = chrome.runtime.lastError;
+      chrome.runtime.lastError;
       if (prefs['custom-command']) {
-        exec(prefs['custom-command']
-          .replace('[ip]', obj.ip)
-          .replace('[host]', obj.hostname)
-          .replace('[url]', obj.url),
-          o => {
-            if (o.err) {
-              title += '\n\n' + (o.err || o.stderr).trim();
-            }
-            else {
-              title += '\n\n' + (o.stdout || o.stderr).trim();
-            }
-            chrome.pageAction.setTitle({title, tabId});
+        exec(prefs['custom-command'].replace('[ip]', obj.ip).replace('[host]', obj.hostname).replace('[url]', obj.url), o => {
+          if (o.err) {
+            title += '\n\n' + (o.err || o.stderr).trim();
           }
-        );
+          else {
+            title += '\n\n' + (o.stdout || o.stderr).trim();
+          }
+          chrome.pageAction.setTitle({title, tabId});
+        });
       }
       else {
         chrome.pageAction.setTitle({title, tabId});
@@ -137,7 +142,7 @@ function update(tabId, reason) {
   }
 }
 
-var worker = new Worker('/geo.js');
+var worker = new Worker('/worker.js');
 worker.onmessage = ({data}) => {
   const {tabId, country, error} = data;
   if (error) {
@@ -150,36 +155,9 @@ worker.onmessage = ({data}) => {
   update(tabId, 'IP resolved');
 };
 
-function get4mapped(ip) {
-  const ipv6 = ip.toUpperCase();
-  const v6prefixes = ['0:0:0:0:0:FFFF:', '::FFFF:'];
-  for (let i = 0; i < v6prefixes.length; i++) {
-    const v6prefix = v6prefixes[i];
-    if (ipv6.indexOf(v6prefix) === 0) {
-      return ipv6.substring(v6prefix.length);
-    }
-  }
-  return null;
-}
-
 function resolve(tabId) {
   const {ip} = tabs[tabId];
-  if (utils.isIP4(ip)) {
-    worker.postMessage({tabId, ip, type: 4});
-  }
-  else if (utils.isIP6(ip)) {
-    const ipv4 = get4mapped(ip);
-    if (ipv4) {
-      worker.postMessage({tabId, ip: ipv4, type: 4});
-    }
-    else {
-      worker.postMessage({tabId, ip, type: 6});
-    }
-  }
-  else {
-    tabs[tabId].error = _('bgErr2');
-    update(tabId, 'cannot resolve ip');
-  }
+  worker.postMessage({tabId, ip});
 }
 
 var onResponseStarted = ({ip, tabId, url}) => {
@@ -216,11 +194,11 @@ var onResponseStarted = ({ip, tabId, url}) => {
       resolve(tabId);
     }
   };
-  if (utils.isPrivate(ip)) {
+  if (isPrivate(ip)) {
     if (prefs.dns) {
       return dns(hostname, resp => {
         if (resp && !resp.err && resp.address) {
-          if (utils.isPrivate(resp.address)) {
+          if (isPrivate(resp.address)) {
             set({country: 'private'}, true);
           }
           else {
