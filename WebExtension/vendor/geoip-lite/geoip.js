@@ -28,10 +28,10 @@ var dataFiles = {
 };
 
 var privateRange4 = [
-		[utils.aton4('10.0.0.0'), utils.aton4('10.255.255.255')],
-		[utils.aton4('172.16.0.0'), utils.aton4('172.31.255.255')],
-		[utils.aton4('192.168.0.0'), utils.aton4('192.168.255.255')]
-	]
+	[utils.aton4('10.0.0.0'), utils.aton4('10.255.255.255')],
+	[utils.aton4('172.16.0.0'), utils.aton4('172.31.255.255')],
+	[utils.aton4('192.168.0.0'), utils.aton4('192.168.255.255')]
+];
 
 var cache4 = {
 	firstIP: null,
@@ -52,7 +52,7 @@ var cache6 = {
 };
 
 var RECORD_SIZE = 10;
-var RECORD_SIZE6 = 34
+var RECORD_SIZE6 = 34;
 
 function lookup4(ip) {
 	var fline = 0;
@@ -106,14 +106,14 @@ function lookup4(ip) {
 				locId = buffer.readUInt32BE((line * recordSize) + 8);
 
 				geodata.country = locBuffer.toString('utf8', (locId * locRecordSize) + 0, (locId * locRecordSize) + 2).replace(/\u0000.*/, '');
-				geodata.region = locBuffer.toString('utf8', (locId * locRecordSize) + 2, (locId * locRecordSize) + 4).replace(/\u0000.*/, '');
-				geodata.metro = locBuffer.readInt32BE((locId * locRecordSize) + 4);
+				geodata.region = locBuffer.toString('utf8', (locId * locRecordSize) + 2, (locId * locRecordSize) + 5).replace(/\u0000.*/, '');
+				geodata.metro = locBuffer.readInt32BE((locId * locRecordSize) + 5);
 				geodata.ll[0] = buffer.readInt32BE((line * recordSize) + 12)/10000;//latitude
 				geodata.ll[1] = buffer.readInt32BE((line * recordSize) + 16)/10000; //longitude
 				geodata.area = buffer.readUInt32BE((line * recordSize) + 20); //longitude
-				geodata.eu = locBuffer.toString('utf8', (locId * locRecordSize) + 8, (locId * locRecordSize) + 9).replace(/\u0000.*/, '');
-				geodata.timezone = locBuffer.toString('utf8', (locId * locRecordSize) + 9, (locId * locRecordSize) + 33).replace(/\u0000.*/, '');
-				geodata.city = locBuffer.toString('utf8', (locId * locRecordSize) + 33, (locId * locRecordSize) + locRecordSize).replace(/\u0000.*/, '');
+				geodata.eu = locBuffer.toString('utf8', (locId * locRecordSize) + 9, (locId * locRecordSize) + 10).replace(/\u0000.*/, '');
+				geodata.timezone = locBuffer.toString('utf8', (locId * locRecordSize) + 10, (locId * locRecordSize) + 42).replace(/\u0000.*/, '');
+				geodata.city = locBuffer.toString('utf8', (locId * locRecordSize) + 42, (locId * locRecordSize) + locRecordSize).replace(/\u0000.*/, '');
 			}
 
 			return geodata;
@@ -165,6 +165,7 @@ function lookup6(ip) {
 	var cline = cache6.lastLine;
 	var ceil = cache6.firstIP;
 	var line;
+	var locId;
 
 	if (utils.cmp6(ip, cache6.lastIP) > 0 || utils.cmp6(ip, cache6.firstIP) < 0) {
 		return null;
@@ -182,14 +183,14 @@ function lookup6(ip) {
 				locId = buffer.readUInt32BE((line * recordSize) + 32);
 
 				geodata.country = locBuffer.toString('utf8', (locId * locRecordSize) + 0, (locId * locRecordSize) + 2).replace(/\u0000.*/, '');
-				geodata.region = locBuffer.toString('utf8', (locId * locRecordSize) + 2, (locId * locRecordSize) + 4).replace(/\u0000.*/, '');
-				geodata.metro = locBuffer.readInt32BE((locId * locRecordSize) + 4);
+				geodata.region = locBuffer.toString('utf8', (locId * locRecordSize) + 2, (locId * locRecordSize) + 5).replace(/\u0000.*/, '');
+				geodata.metro = locBuffer.readInt32BE((locId * locRecordSize) + 5);
 				geodata.ll[0] = buffer.readInt32BE((line * recordSize) + 36)/10000;//latitude
 				geodata.ll[1] = buffer.readInt32BE((line * recordSize) + 40)/10000; //longitude
 				geodata.area = buffer.readUInt32BE((line * recordSize) + 44); //area
-				geodata.eu = locBuffer.toString('utf8', (locId * locRecordSize) + 8, (locId * locRecordSize) + 9).replace(/\u0000.*/, '');
-				geodata.timezone = locBuffer.toString('utf8', (locId * locRecordSize) + 9, (locId * locRecordSize) + 33).replace(/\u0000.*/, '');
-				geodata.city = locBuffer.toString('utf8', (locId * locRecordSize) + 33, (locId * locRecordSize) + locRecordSize).replace(/\u0000.*/, '');
+				geodata.eu = locBuffer.toString('utf8', (locId * locRecordSize) + 9, (locId * locRecordSize) + 10).replace(/\u0000.*/, '');
+				geodata.timezone = locBuffer.toString('utf8', (locId * locRecordSize) + 10, (locId * locRecordSize) + 42).replace(/\u0000.*/, '');
+				geodata.city = locBuffer.toString('utf8', (locId * locRecordSize) + 42, (locId * locRecordSize) + locRecordSize).replace(/\u0000.*/, '');
 			}
 			// We do not currently have detailed region/city info for IPv6, but finally have coords
 			return geodata;
@@ -289,7 +290,7 @@ function preload(callback) {
 								});
 							}
 						});
-
+						
 					} else {
 						cb();
 					}
@@ -297,7 +298,7 @@ function preload(callback) {
 			},
 			function () {
 				asyncCache.mainBuffer = Buffer.alloc(datSize);
-
+				
 				async.series([
 					function (cb2) {
 						fs.read(datFile, asyncCache.mainBuffer, 0, datSize, 0, cb2);
@@ -409,7 +410,7 @@ function preload6(callback) {
 			},
 			function () {
 				asyncCache6.mainBuffer = Buffer.alloc(datSize);
-
+				
 				async.series([
 					function (cb2) {
 						fs.read(datFile, asyncCache6.mainBuffer, 0, datSize, 0, cb2);
@@ -491,7 +492,7 @@ module.exports = {
 		return n;
 	},
 
-	// Start watching for data updates. The watcher waits one minute for file transfer to
+	// Start watching for data updates. The watcher waits one minute for file transfer to 
 	// completete before triggering the callback.
 	startWatchingDataUpdate: function (callback) {
 		fsWatcher.makeFsWatchFilter(watcherName, geodatadir, 60*1000, function () {
@@ -510,7 +511,26 @@ module.exports = {
 	// Stop watching for data updates.
 	stopWatchingDataUpdate: function () {
 		fsWatcher.stopWatching(watcherName);
-	}
+	},
+	
+	// Reload data synchronously
+	reloadDataSync: function () {
+		preload();
+		preload6();
+	},
+	
+	// Reload data asynchronously
+	reloadData: function (callback) {
+		//Reload data
+		async.series([
+			function (cb) {
+				preload(cb);
+			},
+			function (cb) {
+				preload6(cb);
+			}
+		], callback);
+	},
 };
 
 preload();
