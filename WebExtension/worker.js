@@ -12,114 +12,60 @@ if (typeof TextDecoder === 'undefined') {
 }
 
 var module = {};
-
-var global = {
-  geodatadir: '/data/assets'
-};
-
-var require = path => {
-  if (path === 'fs') {
+var require = name => {
+  if (name === 'fs') {
     return {
-      openSync(path) {
-        return path;
-      },
-      fstatSync(path) {
-        return {
-          size: _fs.content[path] ? _fs.content[path].byteLength : 0
-        };
-      },
-      readSync(path, obj) {
-        obj.path = path;
-      },
-      closeSync() {}
+      accessSync: () => true,
+      readFileSync: () => new Buffer(require.file)
     };
   }
-  else if (path === 'path') {
-    return {
-      join(...args) {
-        return args.join('/');
-      }
-    };
-  }
-  else if (path === 'net') {
-    const IP4 = /^([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\.([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\.([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\.([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])$/;
-    const isIP4 = ip => IP4.test(ip);
-    const IP6 = /(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))/;
-    const isIP6 = ip => IP6.test(ip);
-    return {
-      isIP(ip) {
-        if (isIP4(ip)) {
-          return 4;
-        }
-        else if (isIP6(ip)) {
-          return 6;
-        }
-      }
-    };
-  }
-  else if (path === 'async' || path === './fsWatcher') {
-    return {};
-  }
-  else if (path === './utils') {
+  else if (name === 'jgeoip') {
     return module.exports;
   }
-};
-
-var _fs = {
-  content: {
-    '/data/assets/geoip-country.dat': null,
-    '/data/assets/geoip-country6.dat': null
-    // '/data/assets/geoip-city.dat': null,
-    // '/data/assets/geoip-city6.dat': null,
-    // '/data/assets/geoip-city-names.dat': null
+  else {
+    throw Error('no module', name);
   }
 };
-{
-  const keys = Object.keys(_fs.content);
-  Promise.all(keys.map(s => fetch(s).then(r => r.arrayBuffer()))).then(arr => {
-    keys.forEach((key, i) => _fs.content[key] = arr[i]);
 
-    self.importScripts('vendor/geoip-lite/utils.js');
-    self.importScripts('vendor/geoip-lite/geoip.js');
-
-    isLoaded = true;
-    requests.forEach(r => perform(r));
-    requests = [];
-  });
+class CUint8Array extends Uint8Array {
+  readUInt8(offset) {
+    return new DataView(this.buffer, offset, 8).getUint8(0);
+  }
+  toString(encoding, start, end) {
+    const uint8array = new DataView(this.buffer, start, end - start);
+    return new TextDecoder(encoding).decode(uint8array);
+  }
 }
 
+var jGeoIP;
 
-var Buffer = {};
-Buffer.alloc = () => {
-  return {
-    readInt32BE(offset) {
-      const ab = _fs.content[this.path];
-      if (ab) {
-        return new DataView(ab, offset, 4).getInt32(0);
-      }
-      return 0;
-    },
-    readUInt32BE(offset) {
-      const ab = _fs.content[this.path];
-      if (ab) {
-        return new DataView(ab, offset, 4).getUint32(0);
-      }
-      return 0;
-    },
-    toString(encoding, offset) {
-      const uint8array = new DataView(_fs.content[this.path], offset, 2);
-      return new TextDecoder('utf-8').decode(uint8array);
-    }
-  };
+var Buffer = function(a, b) {
+  if (b === 'hex') {
+    return new CUint8Array(a.match(/[\da-f]{2}/gi).map(h => parseInt(h, 16)));
+  }
+  return new CUint8Array(a);
 };
 
+fetch('/data/assets/GeoLite2-Country.mmdb').then(r => r.arrayBuffer()).then(r => {
+  require.file = r;
+
+  self.importScripts('vendor/jgeoip/jgeoip.js');
+
+  const GeoIP = require('jgeoip');
+  // Load synchronously MaxMind database in memory
+  jGeoIP = new GeoIP('');
+  isLoaded = true;
+  requests.forEach(r => perform(r));
+  requests = [];
+});
 
 var isLoaded = false;
 var requests = [];
 
 var perform = data => {
+
   try {
-    const obj = module.exports.lookup(data.ip) || {
+    const obj = jGeoIP.getRecord(data.ip) || {
       error: 'Cannot resolve this IP'
     };
     self.postMessage(Object.assign(obj, data));

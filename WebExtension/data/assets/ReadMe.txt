@@ -1,4 +1,1 @@
-updating database:
-
-npm install geoip-lite
-npm run-script updatedb
+https://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz

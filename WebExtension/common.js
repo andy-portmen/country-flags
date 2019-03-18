@@ -7,16 +7,28 @@ var isEdge = navigator.userAgent.indexOf('Edge') !== -1;
 var tabs = {};
 chrome.tabs.onRemoved.addListener(tabId => delete tabs[tabId]);
 
-var isPrivate = ip => ip === '::1' ||
-  ip === 'd0::11' ||
-  ip === '0.0.0.0' ||
-  ip.match(/^10\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})/) !== null ||
-  ip.match(/^192\.168\.([0-9]{1,3})\.([0-9]{1,3})/) !== null ||
-  ip.match(/^172\.16\.([0-9]{1,3})\.([0-9]{1,3})/) !== null ||
-  ip.match(/^127\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})/) !== null ||
-  ip.match(/^169\.254\.([0-9]{1,3})\.([0-9]{1,3})/) !== null ||
-  ip.match(/^fc00:/) !== null ||
-  ip.match(/^fe80:/) !== null;
+var isPrivate = (() => {
+  const rs = [
+    /^10\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})/,
+    /^192\.168\.([0-9]{1,3})\.([0-9]{1,3})/,
+    /^172\.16\.([0-9]{1,3})\.([0-9]{1,3})/,
+    /^127\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})/,
+    /^169\.254\.([0-9]{1,3})\.([0-9]{1,3})/,
+    /^fc00:/,
+    /^fe80:/
+  ];
+
+  return ip => ip === '::1' ||
+    ip === 'd0::11' ||
+    ip === '0.0.0.0' ||
+    ip.match(rs[0]) !== null ||
+    ip.match(rs[1]) !== null ||
+    ip.match(rs[2]) !== null ||
+    ip.match(rs[3]) !== null ||
+    ip.match(rs[4]) !== null ||
+    ip.match(rs[5]) !== null ||
+    ip.match(rs[6]) !== null;
+})();
 
 var prefs = {
   'dns': false,
@@ -35,7 +47,7 @@ var prefs = {
   'custom-cmd-4-title': '',
   'custom-cmd-5-title': '',
   'version': null,
-  'faqs': navigator.userAgent.indexOf('Firefox') === -1,
+  'faqs': true,
   'custom-command': '',
   'display-delay': isEdge ? 1 : 0
 };
@@ -150,7 +162,9 @@ function update(tabId/* , reason */) {
 
 var worker = new Worker('/worker.js');
 worker.onmessage = ({data}) => {
-  const {tabId, country, error, ip} = data;
+  const {tabId, error, ip} = data;
+  const country = (data.country ? data.country.iso_code : (data.continent ? data.continent.code : ''));
+
   const top = tabs[tabId].ip === ip;
   const frames = tabs[tabId].frames;
   if (error && top) {
@@ -190,12 +204,13 @@ var onResponseStarted = ({ip, tabId, url, type}) => {
       ip = ip.split(':')[0];
     }
   }
+  const hostname = (new URL(url)).hostname;
+
   if (type === 'main_frame' && tabs[tabId]) {
     if (ip === tabs[tabId].ip && hostname === tabs[tabId].hostname) {
       return;
     }
   }
-  const hostname = (new URL(url)).hostname;
 
   if (type === 'main_frame') {
     tabs[tabId] = {
