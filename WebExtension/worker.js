@@ -46,7 +46,7 @@ var Buffer = function(a, b) {
   return new CUint8Array(a);
 };
 
-fetch('/data/assets/GeoLite2-Country.mmdb').then(r => r.arrayBuffer()).then(r => {
+fetch('/data/assets/GeoLite2-Country.db').then(r => r.arrayBuffer()).then(r => {
   require.file = r;
 
   self.importScripts('vendor/jgeoip/jgeoip.js');
