@@ -1,0 +1,32 @@
+{
+  "name": "Server IP",
+  "description": "Displays server IP address on every website",
+  "author": "Andy Portmen",
+  "version": "0.1.1",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "tabs",
+    "webRequest",
+    "*://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "common.js"
+    ]
+  },
+  "homepage_url": "https://add0n.com/country-flags.html?from=server-ip",
+  "icons": {
+    "16": "data/icons/16.png",
+    "32": "data/icons/32.png",
+    "48": "data/icons/48.png",
+    "128": "data/icons/128.png"
+  },
+  "web_accessible_resources": [
+    "data/ip/*"
+  ],
+  "options_ui": {
+    "page": "data/options/index.html",
+    "chrome_style": true
+  }
+}

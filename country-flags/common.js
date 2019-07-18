@@ -112,6 +112,16 @@ function update(tabId/* , reason */) {
       title += _('bgMSG1');
       title += '\nHost: ' + obj.hostname;
     }
+    else if (country === 'chrome') {
+      path = {
+        16: '/data/icons/chrome/16.png',
+        19: '/data/icons/chrome/19.png',
+        32: '/data/icons/chrome/32.png',
+        64: '/data/icons/chrome/64.png'
+      };
+      title += _('bgMSG1');
+      title += '\nHost: ' + obj.hostname;
+    }
     else {
       path = {
         16: '/data/icons/flags/16/' + country + '.png',
@@ -281,7 +291,7 @@ chrome.webNavigation.onCommitted.addListener(({url, tabId, frameId}) => {
 });
 // Firefox only
 if (navigator.userAgent.indexOf('Firefox') !== -1) {
-  chrome.tabs.onUpdated.addListener((tabId, changeInfo, {id, url}) => {
+  chrome.tabs.onUpdated.addListener((tabId, info, {id, url}) => {
     if (tabs[id] && url !== tabs[id].url) {
       const {hostname, ip, country} = tabs[id];
       if (url && url.indexOf(hostname) !== -1 && ip && country) {
@@ -291,6 +301,22 @@ if (navigator.userAgent.indexOf('Firefox') !== -1) {
     }
   });
 }
+// Internal Pages
+/*
+chrome.tabs.onUpdated.addListener((tabId, info) => {
+  if (info.url && info.url.startsWith('chrome://')) {
+    console.log(info);
+    tabs[tabId] = {
+      hostname: 'internal page',
+      country: 'chrome',
+      url: info.url,
+      ip: '',
+      frames: {}
+    };
+    update(tabId, 'onUpdated');
+  }
+});
+*/
 
 function open(url, tab) {
   const prop = {

@@ -1,0 +1,1 @@
+../country-flags/worker.js

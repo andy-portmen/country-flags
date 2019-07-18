@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Options :: Server IP</title>
+  <style type="text/css">
+    body {
+      min-width: 500px;
+    }
+    input[type=text] {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  </style>
+  <meta charset="utf-8">
+</head>
+<body>
+  <table width="100%">
+    <colgroup>
+      <col width=100>
+      <col>
+    </colgroup>
+    <tr>
+      <td>Server:</td>
+      <td><input type="text" id="info"></td>
+    </tr>
+    <tr>
+      <td colspan="2"><code>[ip]</code> keyword will be replaced with the actual IP address.</td>
+    </tr>
+  </table>
+  <div id="explore"></div>
+  <p>For more settings, use my <a href="https://add0n.com/country-flags.html">Country Flags</a> extension.</p>
+  <p>
+    <input type="button" value="Support Development" id="support">
+    <input type="button" value="Factory Reset" id="reset"> - <input type="button" value="Save" id="save">
+    <span id="toast"></span>
+  </p>
+  <script type="text/javascript" src="index.js"></script>
+  <script asyn type="text/javascript" src="matched.js"></script>
+</body>
+</html>
