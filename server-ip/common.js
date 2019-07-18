@@ -1,30 +1,40 @@
 'use strict';
 
-const style = 'background-color: #fff; position: fixed; bottom: 20px; left: 30px; z-index: 100000000000; border: solid 1px #ccc;' +
+const style = 'background-color: #fff; position: fixed; bottom: 20px; left: 30px; z-index: 100000000000; border: none;' +
   'width: [width]px; min-width: [width]px; max-width: [width]px; height: 24px; min-height: 24px; max-height: 24px;';
 
 const worker = new Worker('/worker.js');
 worker.onmessage = ({data}) => {
-  const {tabId, error, ip} = data;
+  const {tabId, error} = data;
+  let {ip} = data;
   const flag = (data.country ? data.country.iso_code : (data.continent ? data.continent.code : ''));
-  chrome.tabs.executeScript(tabId, {
-    runAt: 'document_start',
-    code: `
-      if (window.iframe === undefined) {
-        window.iframe = document.createElement('iframe');
-        window.iframe.setAttribute('src', "${chrome.runtime.getURL('/data/ip/ip.html?ip=' + ip + '&flag=' + flag + '&error=' + error)}");
-        window.iframe.setAttribute('style', '${style.replace(/\[width\]/g, 48 + ip.length * 7)}');
-        if (document.body) {
-          document.body.appendChild(window.iframe);
-        }
-        else {
-          document.addEventListener('DOMContentLoaded', () => {
+  chrome.storage.local.get({
+    'char': 7,
+    'padding': 48,
+    'uppercase': true
+  }, prefs => {
+    if (prefs['uppercase']) {
+      ip = ip.toUpperCase();
+    }
+    chrome.tabs.executeScript(tabId, {
+      runAt: 'document_start',
+      code: `
+        if (window.iframe === undefined) {
+          window.iframe = document.createElement('iframe');
+          window.iframe.setAttribute('src', "${chrome.runtime.getURL('/data/ip/ip.html?ip=' + ip + '&flag=' + flag + '&error=' + error)}");
+          window.iframe.setAttribute('style', '${style.replace(/\[width\]/g, prefs.padding + ip.length * prefs.char)}');
+          if (document.body) {
             document.body.appendChild(window.iframe);
-          });
+          }
+          else {
+            document.addEventListener('DOMContentLoaded', () => {
+              document.body.appendChild(window.iframe);
+            });
+          }
         }
-      }
-    `
-  }, () => chrome.runtime.lastError);
+      `
+    }, () => chrome.runtime.lastError);
+  });
 };
 
 chrome.webRequest.onResponseStarted.addListener(({tabId, ip}) => {

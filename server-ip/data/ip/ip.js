@@ -2,6 +2,12 @@
 
 const args = new URLSearchParams(location.search);
 
+chrome.storage.local.get({
+  'ip-css': ''
+}, prefs => {
+  document.getElementById('css').textContent = prefs['ip-css'];
+});
+
 const a = document.querySelector('a');
 a.textContent = args.get('ip');
 a.href = '/';
