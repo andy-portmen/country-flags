@@ -3,7 +3,7 @@
   "short_name": "icflags",
   "description": "__MSG_appDesc__",
   "author": "Andy Portmen",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "default_locale": "en",
   "manifest_version": 2,
   "permissions": [
@@ -39,11 +39,5 @@
   "options_ui": {
     "page": "data/options/index.html",
     "chrome_style": true
-  },
-  "applications": {
-    "gecko": {
-      "id": "{802a552e-13d1-4683-a40a-1e5325fba4bb}",
-      "strict_min_version": "57.0"
-    }
   }
 }

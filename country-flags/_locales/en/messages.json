@@ -2,6 +2,12 @@
     "appDesc": {
         "message": "Displays country flag of website's server location, Whois and Geo info"
     },
+    "bgWhatIsMyIP": {
+        "message": "What is my IP: Server Response and WebRTC"
+    },
+    "bgWhatIsMyUA": {
+        "message": "What is my UA: User-Agent from Web Worker"
+    },
     "bgCopy": {
         "message": "Copy IP: Copy IP address to the clipboard"
     },
@@ -145,6 +151,12 @@
     },
     "optionsRClickURL": {
         "message": "Service URL (only 5 services will be visible)"
+    },
+    "optionsWhatIsMyIP": {
+        "message": "What is my IP"
+    },
+    "optionsWhatIsMyUA": {
+        "message": "What is my UA string"
     },
     "optionsSSL": {
         "message": "SSL Checker"

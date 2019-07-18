@@ -3,6 +3,8 @@
 var services = {};
 
 services.urls = {
+  'what-is-my-ip': 'https://webbrowsertools.com/ip-address/',
+  'what-is-my-ua': 'https://webbrowsertools.com/useragent/',
   'ip': 'http://www.tcpiputils.com/browse/ip-address/[ip]',
   'host': 'https://www.tcpiputils.com/browse/domain/[host]',
   'ssl-checker': 'https://www.sslshopper.com/ssl-checker.html#hostname=[host]',
@@ -40,6 +42,8 @@ services.names = Object.keys(services.urls);
 services.menuitems = () => services.names.filter(s => s !== 'ip' && s !== 'host').map(s => s + '-menuitem');
 
 services.dictionary = {
+  'what-is-my-ip': chrome.i18n.getMessage('bgWhatIsMyIP'),
+  'what-is-my-ua': chrome.i18n.getMessage('bgWhatIsMyUA'),
   'ssl-checker': chrome.i18n.getMessage('bgSSL'),
   'trace-route': chrome.i18n.getMessage('bgTrace'),
   'ping': chrome.i18n.getMessage('bgPing'),
@@ -67,8 +71,7 @@ services.dictionary = {
 };
 
 services.default = s => {
-  const list = ['tinyurl-menuitem', 'wot-menuitem', 'virustotal-menuitem',
-    'googletranslate-menuitem', 'archive-menuitem'
-  ];
+  const list = ['what-is-my-ip-menuitem', 'tinyurl-menuitem', 'wot-menuitem',
+    'virustotal-menuitem', 'googletranslate-menuitem'];
   return list.indexOf(s) !== -1;
 };
