@@ -1,13 +1,13 @@
 /* globals services */
 'use strict';
 
-var _ = id => chrome.i18n.getMessage(id);
-var isEdge = navigator.userAgent.indexOf('Edge') !== -1;
+const _ = id => chrome.i18n.getMessage(id);
+const isEdge = navigator.userAgent.indexOf('Edge') !== -1;
 
-var tabs = {};
+const tabs = {};
 chrome.tabs.onRemoved.addListener(tabId => delete tabs[tabId]);
 
-var isPrivate = (() => {
+const isPrivate = (() => {
   const rs = [
     /^10\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})/,
     /^192\.168\.([0-9]{1,3})\.([0-9]{1,3})/,
@@ -30,7 +30,7 @@ var isPrivate = (() => {
     ip.match(rs[6]) !== null;
 })();
 
-var prefs = {
+const prefs = {
   'dns': false,
   'open-in-background': false,
   'open-adjacent': true,
@@ -56,14 +56,14 @@ services.menuitems().forEach(p => {
   prefs[p] = services.default(p);
 }, {});
 
-var notify = message => chrome.notifications.create(null, {
+const notify = message => chrome.notifications.create(null, {
   type: 'basic',
   iconUrl: '/data/icons/48.png',
   title: 'Country Flags & IP Whois',
   message
 });
 
-var dns = (host, callback) => chrome.runtime.sendNativeMessage('com.add0n.node', {
+const dns = (host, callback) => chrome.runtime.sendNativeMessage('com.add0n.node', {
   permissions: ['dns'],
   script: `
     const dns = require('dns');
@@ -74,7 +74,7 @@ var dns = (host, callback) => chrome.runtime.sendNativeMessage('com.add0n.node',
     });
   `
 }, callback);
-var exec = (cmd, callback) => chrome.runtime.sendNativeMessage('com.add0n.node', {
+const exec = (cmd, callback) => chrome.runtime.sendNativeMessage('com.add0n.node', {
   permissions: ['child_process'],
   args: [cmd],
   script: `
@@ -170,7 +170,7 @@ function update(tabId/* , reason */) {
   }
 }
 
-var worker = new Worker('/worker.js');
+const worker = new Worker('/worker.js');
 worker.onmessage = ({data}) => {
   const {tabId, error, ip} = data;
   const country = (data.country ? data.country.iso_code : (data.continent ? data.continent.code : ''));
@@ -199,7 +199,7 @@ function resolve(tabId, ip = tabs[tabId].ip) {
   worker.postMessage({tabId, ip});
 }
 
-var onResponseStarted = ({ip, tabId, url, type}) => {
+const onResponseStarted = ({ip, tabId, url, type}) => {
   if (type === 'main_frame' && tabs[tabId]) {
     tabs[tabId].frames = {};
   }
@@ -289,18 +289,7 @@ chrome.webNavigation.onCommitted.addListener(({url, tabId, frameId}) => {
     }
   }
 });
-// Firefox only
-if (navigator.userAgent.indexOf('Firefox') !== -1) {
-  chrome.tabs.onUpdated.addListener((tabId, info, {id, url}) => {
-    if (tabs[id] && url !== tabs[id].url) {
-      const {hostname, ip, country} = tabs[id];
-      if (url && url.indexOf(hostname) !== -1 && ip && country) {
-        tabs[id].url = url;
-        update(tabId, 'onUpdated');
-      }
-    }
-  });
-}
+
 // Internal Pages
 /*
 chrome.tabs.onUpdated.addListener((tabId, info) => {
@@ -387,41 +376,18 @@ chrome.runtime.onMessage.addListener(request => {
   }
 });
 
-function copy(str, tabId) {
-  if (/Firefox/.test(navigator.userAgent)) {
-    chrome.tabs.executeScript(tabId, {
-      allFrames: false,
-      runAt: 'document_start',
-      code: `
-        document.oncopy = (event) => {
-          event.clipboardData.setData('text/plain', '${str}');
-          event.preventDefault();
-        };
-        window.focus();
-        document.execCommand('Copy', false, null);
-      `
-    }, () => {
-      notify(
-        chrome.runtime.lastError ?
-          _('bgErr3') :
-          _('bgMSG2')
-      );
-    });
-  }
-  else {
-    document.oncopy = e => {
-      e.clipboardData.setData('text/plain', str);
-      e.preventDefault();
-      notify(_('bgMSG2'));
-    };
-    document.execCommand('Copy', false, null);
-  }
-}
-
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === 'copy-ip') {
     if (tabs[tab.id] && tabs[tab.id].ip) {
-      copy(tabs[tab.id].ip, tab.id);
+      const str = tabs[tab.id].ip;
+      navigator.clipboard.writeText(str).catch(() => new Promise(resolve => {
+        document.oncopy = e => {
+          e.clipboardData.setData('text/plain', str);
+          e.preventDefault();
+          resolve();
+        };
+        document.execCommand('Copy', false, null);
+      })).then(() => notify(_('bgMSG2')));
     }
     else {
       notify(_('bgErr4'));

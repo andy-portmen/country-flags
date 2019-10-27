@@ -1,7 +1,7 @@
 'use strict';
 
 if (typeof TextDecoder === 'undefined') {
-  var TextDecoder = function() {};
+  const TextDecoder = function() {};
   TextDecoder.prototype.decode = function(uint8Arr) {
     let str = '';
     for (let i = 0; i < uint8Arr.byteLength; i += 1) {
@@ -11,8 +11,8 @@ if (typeof TextDecoder === 'undefined') {
   };
 }
 
-var module = {};
-var require = name => {
+const module = {};
+const require = name => {
   if (name === 'fs') {
     return {
       accessSync: () => true,
@@ -37,9 +37,9 @@ class CUint8Array extends Uint8Array {
   }
 }
 
-var jGeoIP;
+let jGeoIP;
 
-var Buffer = function(a, b) {
+const Buffer = function(a, b) {
   if (b === 'hex') {
     return new CUint8Array(a.match(/[\da-f]{2}/gi).map(h => parseInt(h, 16)));
   }
@@ -59,11 +59,10 @@ fetch('/data/assets/GeoLite2-Country.db').then(r => r.arrayBuffer()).then(r => {
   requests = [];
 });
 
-var isLoaded = false;
-var requests = [];
+let isLoaded = false;
+let requests = [];
 
-var perform = data => {
-
+const perform = data => {
   try {
     const obj = jGeoIP.getRecord(data.ip) || {
       error: 'Cannot resolve this IP'
@@ -78,7 +77,6 @@ var perform = data => {
     });
   }
 };
-
 self.onmessage = function({data}) {
   if (isLoaded) {
     perform(data);

@@ -8,17 +8,18 @@
   "manifest_version": 2,
   "permissions": [
     "storage",
-    "tabs",
     "webNavigation",
     "webRequest",
-    "<all_urls>",
+    "*://*/*",
     "contextMenus",
-    "notifications",
-    "nativeMessaging",
-    "downloads",
-    "clipboardWrite"
+    "notifications"
   ],
-  "homepage_url": "http://add0n.com/country-flags.html",
+  "optional_permissions": [
+    "clipboardWrite",
+    "downloads",
+    "nativeMessaging"
+  ],
+  "homepage_url": "https://add0n.com/country-flags.html",
   "icons": {
     "16": "data/icons/16.png",
     "19": "data/icons/19.png",

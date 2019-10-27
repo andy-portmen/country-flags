@@ -1,0 +1,44 @@
+{
+  "name": "Country Flags & IP Whois",
+  "short_name": "icflags",
+  "description": "__MSG_appDesc__",
+  "author": "Andy Portmen",
+  "version": "0.3.0",
+  "default_locale": "en",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "*://*/*",
+    "contextMenus",
+    "notifications",
+    "nativeMessaging"
+  ],
+  "optional_permissions": [
+    "clipboardWrite",
+    "downloads"
+  ],
+  "homepage_url": "https://add0n.com/country-flags.html",
+  "icons": {
+    "16": "data/icons/16.png",
+    "19": "data/icons/19.png",
+    "32": "data/icons/32.png",
+    "38": "data/icons/38.png",
+    "48": "data/icons/48.png",
+    "128": "data/icons/128.png"
+  },
+  "background": {
+    "scripts": [
+      "services.js",
+      "common.js",
+      "existing.js"
+    ]
+  },
+  "page_action": {},
+  "options_ui": {
+    "page": "data/options/index.html",
+    "chrome_style": true
+  }
+}

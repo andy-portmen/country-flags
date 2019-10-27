@@ -1,29 +1,49 @@
 /* globals services */
 'use strict';
 
-var _ = id => chrome.i18n.getMessage(id);
-var info = document.getElementById('status');
+const _ = id => chrome.i18n.getMessage(id);
+const info = document.getElementById('status');
 
-var native = callback => chrome.runtime.sendNativeMessage('com.add0n.node', {
+const native = callback => chrome.runtime.sendNativeMessage('com.add0n.node', {
   cmd: 'version'
 }, callback);
 document.getElementById('dns').addEventListener('change', ({target}) => {
   if (target.checked) {
-    native(response => {
-      if (response) {
-        return chrome.storage.local.set({
-          dns: true
+    chrome.permissions.request({
+      permissions: ['nativeMessaging']
+    }, granted => {
+      if (granted) {
+        native(response => {
+          if (response) {
+            return chrome.storage.local.set({
+              dns: true
+            });
+          }
+          target.checked = false;
+          chrome.tabs.create({
+            url: '/data/helper/index.html'
+          });
         });
       }
-      target.checked = false;
-      chrome.tabs.create({
-        url: '/data/helper/index.html'
-      });
+      else {
+        target.checked = false;
+      }
     });
   }
   else {
     chrome.storage.local.set({
       dns: false
+    });
+  }
+});
+// copy ip permission
+document.getElementById('copy-ip-menuitem').addEventListener('change', ({target}) => {
+  if (target.checked) {
+    chrome.permissions.request({
+      permissions: ['clipboardWrite'],
+      origins: []
+    }, granted => {
+      target.checked = granted;
     });
   }
 });
