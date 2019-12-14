@@ -6,7 +6,7 @@ services.urls = {
   'what-is-my-ip': 'https://webbrowsertools.com/ip-address/',
   'what-is-my-ua': 'https://webbrowsertools.com/useragent/',
   'ip': 'http://www.tcpiputils.com/browse/ip-address/[ip]',
-  'host': 'https://www.tcpiputils.com/browse/domain/[host]',
+  'host': 'https://webbrowsertools.com/whois-lookup?query=[host]',
   'ssl-checker': 'https://www.sslshopper.com/ssl-checker.html#hostname=[host]',
   'trace-route': 'https://api.hackertarget.com/mtr/?q=[ip]',
   'ping': 'https://api.hackertarget.com/nping/?q=[ip]',

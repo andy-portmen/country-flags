@@ -1,9 +1,8 @@
 {
   "name": "Country Flags & IP Whois",
-  "short_name": "icflags",
   "description": "__MSG_appDesc__",
   "author": "Andy Portmen",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "default_locale": "en",
   "manifest_version": 2,
   "permissions": [

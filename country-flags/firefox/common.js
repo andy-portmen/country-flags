@@ -35,7 +35,7 @@ const prefs = {
   'open-in-background': false,
   'open-adjacent': true,
   'ip': 'http://www.tcpiputils.com/browse/ip-address/[ip]',
-  'host': 'https://www.tcpiputils.com/browse/domain/[host]',
+  'host': 'https://webbrowsertools.com/whois-lookup?query=[host]',
   'custom-cmd-1': '',
   'custom-cmd-2': '',
   'custom-cmd-3': '',
@@ -322,7 +322,10 @@ chrome.pageAction.onClicked.addListener(tab => {
   const ip = tabs[tab.id].ip;
   const hostname = (new URL(tab.url)).hostname;
 
-  if (tabs[tab.id] && ip) {
+  if (hostname) {
+    open(prefs.host.replace('[ip]', ip).replace('[host]', hostname), tab);
+  }
+  else if (tabs[tab.id] && ip) {
     open(prefs.ip.replace('[ip]', ip).replace('[host]', hostname), tab);
   }
   else {

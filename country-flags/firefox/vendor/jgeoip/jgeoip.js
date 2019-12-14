@@ -2,7 +2,8 @@
 /* eslint curly: 0, max-len: [1, 150], no-underscore-dangle: 0, no-param-reassign: 0,
   no-plusplus: 0, no-bitwise: 0, vars-on-top: 0, dot-notation: 0, quote-props: 0,
   no-mixed-operators: 0, key-spacing: 0, no-else-return: 0, consistent-return: 0,
-  no-return-assign: 0 */
+  no-return-assign: 0, semi-style: 0, no-multi-spaces: 0, nonblock-statement-body-position: 0,
+  no-buffer-constructor: 0 */
 
 'use strict';
 
@@ -293,9 +294,9 @@ function _getPointer(db, offset, pointerBase, payload) {
   // payload: 001S SVVV
   // 001 type pointer, SS pointer size, VVV pointer value
   var value = 0x7 & payload
-      , size = 0x3 & (payload >> 3)
-      , p
-      ;
+    , size = 0x3 & (payload >> 3)
+    , p
+    ;
 
   // SS = 0 => p = vvv:byte(n+1)
   if (size === 0) {
@@ -374,7 +375,6 @@ function _decode(db, offset, pointerBase) {
 
   // Decode the type.
   switch (type) {
-
     case 'pointer':
       var pData = _getPointer(db, offset, pointerBase, payloadSize);
       var pType = _decode(db, pData.pointer, pointerBase);
@@ -546,9 +546,9 @@ function _decode(db, offset, pointerBase) {
 function _expandIP(ip) {
   //  https://en.wikipedia.org/wiki/IPv6#Software, IPv4-mapped IPv6 addresses, "::ffff:192.168.13.13"
   var regexIPv4 = /^(::ffff:){0,1}(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/
-      // Standard IPv6 only.
-      // regexIPv6 = /^(?:[A-F0-9]{1,4}:){7}[A-F0-9]{1,4}$/
-      // Compacted IPv6 form too.
+    // Standard IPv6 only.
+    // regexIPv6 = /^(?:[A-F0-9]{1,4}:){7}[A-F0-9]{1,4}$/
+    // Compacted IPv6 form too.
     , regexIPv6c = /^((([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}:[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){5}:([0-9A-Fa-f]{1,4}:)?[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){4}:([0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){3}:([0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){2}:([0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}((b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b).){3}(b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b))|(([0-9A-Fa-f]{1,4}:){0,5}:((b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b).){3}(b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b))|(::([0-9A-Fa-f]{1,4}:){0,5}((b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b).){3}(b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b))|([0-9A-Fa-f]{1,4}::([0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})|(::([0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){1,7}:))$/
     , bits
     ;
@@ -615,7 +615,6 @@ function _returnNodePointer(nodeNumber, index, db, metadata) {
     ;
 
   switch (metadata.record_size) {
-
     // Node layout is 24 bits (6 bytes)
     // => each pointer is 3 bytes
     case 24:
