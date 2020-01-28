@@ -9,7 +9,7 @@ setup() {
 commit() {
   dateAndMonth=`date "+%b %Y"`
   # Stage the modified files in dist/output
-  git add -f country-flags/firefox/data/assets/GeoLite2-Country.db
+  git add -f *.db
   # Create a new commit with a custom build message
   # with "[skip ci]" to avoid a build loop
   # and Travis build number for reference
