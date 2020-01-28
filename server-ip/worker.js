@@ -1,1 +1,1 @@
-../country-flags/worker.js
+../country-flags/firefox/worker.js

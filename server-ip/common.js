@@ -5,7 +5,7 @@ const style = 'background-color: #fff; position: fixed; bottom: 20px; left: 30px
 
 const worker = new Worker('/worker.js');
 worker.onmessage = ({data}) => {
-  const {tabId, error} = data;
+  const {tabId, error, url} = data;
   let {ip} = data;
   const flag = (data.country ? data.country.iso_code : (data.continent ? data.continent.code : ''));
   chrome.storage.local.get({
@@ -16,12 +16,15 @@ worker.onmessage = ({data}) => {
     if (prefs['uppercase']) {
       ip = ip.toUpperCase();
     }
+    const dest = chrome.runtime.getURL(
+      '/data/ip/ip.html?ip=' + ip + '&flag=' + flag + '&url=' + encodeURIComponent(url) + '&error=' + error
+    );
     chrome.tabs.executeScript(tabId, {
       runAt: 'document_start',
       code: `
         if (window.iframe === undefined) {
           window.iframe = document.createElement('iframe');
-          window.iframe.setAttribute('src', "${chrome.runtime.getURL('/data/ip/ip.html?ip=' + ip + '&flag=' + flag + '&error=' + error)}");
+          window.iframe.setAttribute('src', "${dest}");
           window.iframe.setAttribute('style', '${style.replace(/\[width\]/g, prefs.padding + ip.length * prefs.char)}');
           if (document.body) {
             document.body.appendChild(window.iframe);
@@ -37,10 +40,11 @@ worker.onmessage = ({data}) => {
   });
 };
 
-chrome.webRequest.onResponseStarted.addListener(({tabId, ip}) => {
+chrome.webRequest.onResponseStarted.addListener(({tabId, ip, url}) => {
   if (ip) {
     window.setTimeout(() => worker.postMessage({
       ip,
+      url,
       tabId
     }), 500);
   }

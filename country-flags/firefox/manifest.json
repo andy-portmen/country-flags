@@ -13,7 +13,8 @@
     "*://*/*",
     "contextMenus",
     "notifications",
-    "nativeMessaging"
+    "nativeMessaging",
+    "alarms"
   ],
   "optional_permissions": [
     "clipboardWrite",
@@ -32,7 +33,8 @@
     "scripts": [
       "services.js",
       "common.js",
-      "existing.js"
+      "existing.js",
+      "cache.js"
     ]
   },
   "page_action": {},

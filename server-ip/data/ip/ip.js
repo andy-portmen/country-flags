@@ -1,6 +1,8 @@
 'use strict';
 
 const args = new URLSearchParams(location.search);
+const ip = args.get('ip');
+const flag = args.get('flag');
 
 chrome.storage.local.get({
   'ip-css': ''
@@ -9,26 +11,29 @@ chrome.storage.local.get({
 });
 
 const a = document.querySelector('a');
-a.textContent = args.get('ip');
+a.textContent = ip;
 a.href = '/';
 a.dataset.cmd = 'open-external';
-const flag = args.get('flag');
 if (flag) {
   document.querySelector('img').src = './flags/' + flag + '.png';
 }
 else {
+  const error = args.get('error');
   document.querySelector('img').src = './error.png';
-  a.title = args.get('error');
+  a.title = error;
 }
 
 document.addEventListener('click', e => {
   const cmd = e.target.dataset.cmd;
   if (cmd === 'open-external') {
     e.preventDefault();
+    const url = args.get('url');
     chrome.storage.local.get({
-      'info': 'https://isc.sans.edu/ipinfo.html?ip=[ip]'
+      'info': 'https://webbrowsertools.com/whois-lookup/?query=[url]'
     }, prefs => chrome.tabs.create({
-      url: prefs.info.replace(/\[ip\]/g, args.get('ip'))
+      url: prefs.info
+        .replace(/\[ip\]/g, ip)
+        .replace(/\[url\]/g, encodeURIComponent(url))
     }));
   }
   else if (cmd) {

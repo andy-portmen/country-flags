@@ -1,0 +1,1 @@
+../firefox/cache.js

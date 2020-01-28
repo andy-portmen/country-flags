@@ -16,7 +16,9 @@ const require = name => {
   if (name === 'fs') {
     return {
       accessSync: () => true,
-      readFileSync: () => new Buffer(require.file)
+      readFileSync() {
+        return new Buffer(require.file);
+      }
     };
   }
   else if (name === 'jgeoip') {
@@ -46,8 +48,11 @@ const Buffer = function(a, b) {
   return new CUint8Array(a);
 };
 
-fetch('/data/assets/GeoLite2-Country.db').then(r => r.arrayBuffer()).then(r => {
-  require.file = r;
+caches.open('cache').then(async cache => {
+  // get the latest version of GEO Country database if it is not cached
+  const m = 'https://cdn.jsdelivr.net/gh/andy-portmen/country-flags@master/country-flags/firefox/data/assets/GeoLite2-Country.db';
+  const response = await cache.match(m) || await fetch('/data/assets/GeoLite2-Country.db');
+  require.file = await response.arrayBuffer();
 
   self.importScripts('vendor/jgeoip/jgeoip.js');
 
@@ -57,7 +62,27 @@ fetch('/data/assets/GeoLite2-Country.db').then(r => r.arrayBuffer()).then(r => {
   isLoaded = true;
   requests.forEach(r => perform(r));
   requests = [];
+  // cache the request
+  if (await cache.match(m) === undefined) {
+    try {
+      await cache.add(m);
+      const response = await cache.match(m);
+      require.file = await response.arrayBuffer();
+      console.log('GeoLite2-Country.db updated');
+      jGeoIP = new GeoIP('');
+    }
+    catch (e) {
+      console.warn('database updating is failed', e);
+    }
+  }
 });
+
+fetch('https://raw.githubusercontent.com/GitSquared/node-geolite2-redist/master/redist/GeoLite2-Country.tar.gz')
+  .then(r => r.arrayBuffer())
+  .then(ab => {
+    self.importScripts('vendor/pako_inflate.js');
+    console.log(pako.inflate(ab));
+  });
 
 let isLoaded = false;
 let requests = [];
