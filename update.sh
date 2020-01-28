@@ -1,29 +1,5 @@
 #!/bin/sh
-# Credit: https://gist.github.com/willprice/e07efd73fb7f13f917ea
 
-setup() {
-  git config user.email "travis@travis-ci.org"
-  git config user.name "Travis CI"
-}
-
-commit() {
-  dateAndMonth=`date "+%b %Y"`
-  # Stage the modified files in dist/output
-  git add -f *.db
-  # Create a new commit with a custom build message
-  # with "[skip ci]" to avoid a build loop
-  # and Travis build number for reference
-  git commit -m "Travis update: $dateAndMonth (Build $TRAVIS_BUILD_NUMBER)" -m "[skip ci]"
-}
-
-upload() {
-  # Remove existing "origin"
-  git remote rm origin
-  # Add new "origin" with access token in the git URL for authentication
-  git remote add origin https://andy-portmen:${GH_TOKEN}@github.com/andy-portmen/country-flags.git
-  git push origin master
-}
-
-setup
-commit
-upload
+git add -f *.db
+git commit -m "Travis update: `date "+%b %Y"` (Build $TRAVIS_BUILD_NUMBER)" -m "[skip ci]" --author="Travis CI <builds@travis-ci.org>"
+git push --force https://andy-portmen:${GH_TOKEN}@github.com/andy-portmen/country-flags.git master
