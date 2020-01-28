@@ -37,10 +37,18 @@ const Buffer = function(a, b) {
   return new CUint8Array(a);
 };
 
-caches.open('cache').then(async cache => {
+caches.open('cache').catch(e => {
+  console.warn('cannot use window.cache', e);
+  return {
+    match() {
+      return false;
+    }
+  };
+}).then(async cache => {
   // get the latest version of GEO Country database if it is not cached
   const m = 'https://cdn.jsdelivr.net/gh/andy-portmen/country-flags@master/country-flags/firefox/data/assets/GeoLite2-Country.db';
   const response = await cache.match(m) || await fetch('/data/assets/GeoLite2-Country.db');
+
   require.file = await response.arrayBuffer();
 
   self.importScripts('vendor/jgeoip/jgeoip.js');
@@ -52,8 +60,10 @@ caches.open('cache').then(async cache => {
   requests.forEach(r => perform(r));
   requests = [];
   // cache the request
+
   if (await cache.match(m) === undefined) {
     try {
+      console.log(m)
       await cache.add(m);
       const response = await cache.match(m);
       require.file = await response.arrayBuffer();

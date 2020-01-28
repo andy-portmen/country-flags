@@ -31,7 +31,6 @@
   "background": {
     "scripts": [
       "services.js",
-      "worker-polyfill.js",
       "common.js",
       "existing.js",
       "cache.js"

@@ -458,3 +458,4 @@ chrome.storage.local.get(prefs, ps => {
   });
   setUninstallURL(page + '?rd=feedback&name=' + encodeURIComponent(name) + '&version=' + version);
 }
+
