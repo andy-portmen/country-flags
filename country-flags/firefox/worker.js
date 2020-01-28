@@ -1,16 +1,5 @@
 'use strict';
 
-if (typeof TextDecoder === 'undefined') {
-  const TextDecoder = function() {};
-  TextDecoder.prototype.decode = function(uint8Arr) {
-    let str = '';
-    for (let i = 0; i < uint8Arr.byteLength; i += 1) {
-      str += String.fromCharCode(uint8Arr.getInt8(i));
-    }
-    return str;
-  };
-}
-
 const module = {};
 const require = name => {
   if (name === 'fs') {
