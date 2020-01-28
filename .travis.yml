@@ -1,7 +1,6 @@
 language: node_js
 node_js:
   - "12"
-install:
-  - "npm i geolite2-redist"
 script:
+  - npm install geolite2-redist
   - node update.js
