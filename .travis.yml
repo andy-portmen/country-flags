@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - "10"
+cache:
+  npm: false
+install:
+  - "npm i geolite2-redist"
+script:
+  - node update.js
