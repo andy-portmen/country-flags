@@ -77,13 +77,6 @@ caches.open('cache').then(async cache => {
   }
 });
 
-fetch('https://raw.githubusercontent.com/GitSquared/node-geolite2-redist/master/redist/GeoLite2-Country.tar.gz')
-  .then(r => r.arrayBuffer())
-  .then(ab => {
-    self.importScripts('vendor/pako_inflate.js');
-    console.log(pako.inflate(ab));
-  });
-
 let isLoaded = false;
 let requests = [];
 
