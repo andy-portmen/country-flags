@@ -1,36 +1,19 @@
-/* globals onResponseStarted */
+/* globals onResponseStarted, xDNS */
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => chrome.tabs.query({
   url: '*://*/*'
 }, tabs => {
-  if (tabs.length) {
-    const cache = tabs.reduce((p, c) => {
-      if (p[c.url]) {
-        p[c.url].push(c.id);
+  if (tabs) {
+    for (const tab of tabs) {
+      if (tab.url.startsWith('http')) {
+        xDNS(tab.url).then(d => onResponseStarted({
+          ip: d.ip,
+          tabId: tab.id,
+          url: d.url,
+          type: 'main_frame'
+        })).catch(e => console.warn('Cannot resolve using xDNS', tab.url, e));
       }
-      else {
-        p[c.url] = [c.id];
-      }
-      return p;
-    }, {});
-
-    const init = d => d.ip && cache[d.url] && cache[d.url].forEach(tabId => onResponseStarted({
-      ip: d.ip,
-      tabId,
-      url: d.url,
-      type: 'main_frame'
-    }));
-
-    chrome.webRequest.onResponseStarted.addListener(init, {
-      urls: ['*://*/*'],
-      types: ['xmlhttprequest']
-    }, []);
-
-    Promise.all(
-      tabs.map(t => fetch(t.url).then(r => r.headers.get('content-type')).catch(() => {}))
-    ).then(() => {
-      window.setTimeout(() => chrome.webRequest.onResponseStarted.removeListener(init), 5000);
-    });
+    }
   }
 }));

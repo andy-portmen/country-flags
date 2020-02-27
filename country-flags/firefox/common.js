@@ -1,11 +1,44 @@
-/* globals services */
+/* globals services, browser */
 'use strict';
 
 const _ = id => chrome.i18n.getMessage(id);
-const isEdge = navigator.userAgent.indexOf('Edge') !== -1;
 
 const tabs = {};
 chrome.tabs.onRemoved.addListener(tabId => delete tabs[tabId]);
+
+// use in case ip is not resolved by top_frame request
+const xDNS = href => new Promise((resolve, reject) => {
+  if (typeof browser !== 'undefined' && browser.dns) {
+    const {hostname} = new URL(href);
+    return browser.dns.resolve(hostname).then(d => {
+      resolve({
+        ip: d.addresses[0],
+        url: href
+      });
+    });
+  }
+
+  const done = () => {
+    window.clearTimeout(id);
+    chrome.webRequest.onResponseStarted.removeListener(init);
+  };
+  const init = d => {
+    resolve(d);
+    done();
+  };
+  const id = window.setTimeout(() => {
+    reject(Error('timeout'));
+    done();
+  }, 5000);
+  chrome.webRequest.onResponseStarted.addListener(init, {
+    urls: [href],
+    types: ['xmlhttprequest']
+  }, []);
+  fetch(href).then(r => r.headers.get('content-type')).catch(e => {
+    reject(e);
+    done();
+  });
+});
 
 const isPrivate = (() => {
   const rs = [
@@ -49,7 +82,7 @@ const prefs = {
   'version': null,
   'faqs': true,
   'custom-command': '',
-  'display-delay': isEdge ? 1 : 0
+  'display-delay': 0
 };
 Object.assign(prefs, services.urls);
 services.menuitems().forEach(p => {
@@ -141,12 +174,6 @@ function update(tabId/* , reason */) {
       });
     }
     //
-    if (isEdge) {
-      delete path['16'];
-      delete path['32'];
-      delete path['64'];
-    }
-    //
     window.setTimeout(() => {
       chrome.pageAction.setIcon({tabId, path}, () => chrome.runtime.lastError);
       chrome.runtime.lastError;
@@ -205,14 +232,6 @@ const onResponseStarted = ({ip, tabId, url, type}) => {
   }
   if (!ip) {
     return;
-  }
-  if (isEdge) {
-    if (ip.startsWith('[')) {
-      ip = ip.replace('[', '').split(']')[0];
-    }
-    else if (ip.indexOf('.') !== -1 && ip.indexOf(':') !== -1) {
-      ip = ip.split(':')[0];
-    }
   }
   const hostname = (new URL(url)).hostname;
 
@@ -282,10 +301,22 @@ chrome.webRequest.onResponseStarted.addListener(onResponseStarted, {
 
 // For HTML5 ajax page loading; like YouTube or GitHub
 chrome.webNavigation.onCommitted.addListener(({url, tabId, frameId}) => {
-  if (frameId === 0 && tabs[tabId]) {
-    const {hostname, ip, country} = tabs[tabId];
-    if (url && url.indexOf(hostname) !== -1 && ip && country) {
-      update(tabId, 'web navigation');
+  if (frameId === 0) {
+    if (tabs[tabId]) {
+      const {hostname, ip, country} = tabs[tabId];
+      if (url && url.indexOf(hostname) !== -1 && ip && country) {
+        return update(tabId, 'web navigation');
+      }
+    }
+    // the request is missed (for instance if a service worker is responding instead of a server)
+    if (url.startsWith('http')) {
+      // console.log('missed');
+      xDNS(url).then(d => onResponseStarted({
+        ip: d.ip,
+        tabId,
+        url: d.url,
+        type: 'main_frame'
+      })).catch(e => console.warn('Cannot resolve using xDNS', url, e));
     }
   }
 });
