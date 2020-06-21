@@ -6,7 +6,7 @@ const require = name => {
     return {
       accessSync: () => true,
       readFileSync() {
-        return new Buffer(require.file);
+        return Buffer.from(require.file);
       }
     };
   }
@@ -30,12 +30,14 @@ class CUint8Array extends Uint8Array {
 
 let jGeoIP;
 
-const Buffer = function(a, b) {
-  if (b === 'hex') {
-    return new CUint8Array(a.match(/[\da-f]{2}/gi).map(h => parseInt(h, 16)));
+const Buffer = {
+  from(a, b) {
+    if (b === 'hex') {
+      return new CUint8Array(a.match(/[\da-f]{2}/gi).map(h => parseInt(h, 16)));
+    }
+    return new CUint8Array(a);
   }
-  return new CUint8Array(a);
-};
+}
 
 caches.open('cache').catch(e => {
   console.warn('cannot use window.cache', e);
@@ -63,11 +65,10 @@ caches.open('cache').catch(e => {
 
   if (await cache.match(m) === undefined) {
     try {
-      console.log(m)
       await cache.add(m);
       const response = await cache.match(m);
       require.file = await response.arrayBuffer();
-      console.log('GeoLite2-Country.db updated');
+      console.log('GeoLite2-Country.db updated', m);
       jGeoIP = new GeoIP('');
     }
     catch (e) {

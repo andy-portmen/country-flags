@@ -246,7 +246,7 @@
         "message": "Display icons with delay (in seconds)"
     },
     "optionsNative": {
-        "message": "Use the native DNS resolver of your OS"
+        "message": "Use the native DNS resolver of your OS (restart required)"
     },
     "optionsNativeDescp": {
         "message": "This will allow the extension to resolve IP addresses from hostnames even when your browser is configured to use a SOCKS proxy server."

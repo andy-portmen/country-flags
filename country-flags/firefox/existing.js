@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', () => chrome.tabs.query({
           ip: d.ip,
           tabId: tab.id,
           url: d.url,
-          type: 'main_frame'
+          type: 'main_frame',
+          timeStamp: Date.now()
         })).catch(e => console.warn('Cannot resolve using xDNS', tab.url, e));
       }
     }

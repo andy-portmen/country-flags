@@ -1,2 +1,9 @@
 https://www.nwradu.ro/ -> eu
 https://www.razer.com/
+
+https://twitter.com/ -> worker
+https://soundcloud.com
+
+https://dash.cloudflare.com/login
+
+https://ipv6.google.com/

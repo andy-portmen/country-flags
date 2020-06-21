@@ -205,7 +205,7 @@ function _findWhereMetadataStart(db) {
     ;
 
   // Metadata pattern to find: '\xab\xcd\xefMaxMind.com'
-  METADATA_START_MARKER = new Buffer('abcdef4d61784d696e642e636f6d', 'hex');
+  METADATA_START_MARKER = Buffer.from('abcdef4d61784d696e642e636f6d', 'hex');
   metadataPointer = METADATA_START_MARKER.length - 1;
   dbPointer = db.length - 1;
   match = 0;

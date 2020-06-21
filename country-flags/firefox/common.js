@@ -34,7 +34,14 @@ const xDNS = href => new Promise((resolve, reject) => {
     urls: [href],
     types: ['xmlhttprequest']
   }, []);
-  fetch(href).then(r => r.headers.get('content-type')).catch(e => {
+
+  const controller = new AbortController();
+  const signal = controller.signal;
+  fetch(href, {signal}).then(r => {
+    controller.abort();
+
+    return r.headers.get('content-type');
+  }).catch(e => {
     reject(e);
     done();
   });
@@ -82,7 +89,7 @@ const prefs = {
   'version': null,
   'faqs': true,
   'custom-command': '',
-  'display-delay': 0
+  'display-delay': 0.2
 };
 Object.assign(prefs, services.urls);
 services.menuitems().forEach(p => {
@@ -177,8 +184,6 @@ function update(tabId/* , reason */) {
     window.setTimeout(() => {
       chrome.pageAction.setIcon({tabId, path}, () => chrome.runtime.lastError);
       chrome.runtime.lastError;
-      chrome.pageAction.show(tabId);
-      chrome.runtime.lastError;
       if (prefs['custom-command']) {
         exec(prefs['custom-command'].replace('[ip]', obj.ip).replace('[host]', obj.hostname).replace('[url]', obj.url), o => {
           if (o.err) {
@@ -193,6 +198,8 @@ function update(tabId/* , reason */) {
       else {
         chrome.pageAction.setTitle({title, tabId});
       }
+      chrome.pageAction.show(tabId);
+      chrome.runtime.lastError;
     }, prefs['display-delay'] * 1000);
   }
 }
@@ -226,28 +233,10 @@ function resolve(tabId, ip = tabs[tabId].ip) {
   worker.postMessage({tabId, ip});
 }
 
-const onResponseStarted = ({ip, tabId, url, type}) => {
-  if (type === 'main_frame' && tabs[tabId]) {
-    tabs[tabId].frames = {};
-  }
+const onResponseStarted = d => {
+  const {ip, tabId, url, type, timeStamp} = d;
   if (!ip) {
     return;
-  }
-  const hostname = (new URL(url)).hostname;
-
-  if (type === 'main_frame' && tabs[tabId]) {
-    if (ip === tabs[tabId].ip && hostname === tabs[tabId].hostname) {
-      return;
-    }
-  }
-
-  if (type === 'main_frame') {
-    tabs[tabId] = {
-      hostname,
-      url,
-      ip,
-      frames: {}
-    };
   }
 
   const set = (obj, doUpdate = false, doResolve) => {
@@ -272,6 +261,28 @@ const onResponseStarted = ({ip, tabId, url, type}) => {
       resolve(tabId, obj.ip || ip);
     }
   };
+
+  if (tabs[tabId]) {
+    if (url && url.indexOf(tabs[tabId].hostname) !== -1 && tabs[tabId].country && ip === tabs[tabId].ip) {
+      tabs[tabId].frames = {};
+      tabs[tabId].timeStamp = timeStamp;
+
+      return set(tabs[tabId], true, false);
+    }
+  }
+
+  const hostname = (new URL(url)).hostname;
+
+  if (type === 'main_frame') {
+    tabs[tabId] = {
+      hostname,
+      url,
+      ip,
+      frames: {},
+      timeStamp
+    };
+  }
+
   if (isPrivate(ip)) {
     if (prefs.dns) {
       return dns(hostname, resp => {
@@ -299,44 +310,31 @@ chrome.webRequest.onResponseStarted.addListener(onResponseStarted, {
   types: (localStorage.getItem('type') || 'main_frame').split(', ')
 }, []);
 
-// For HTML5 ajax page loading; like YouTube or GitHub
-chrome.webNavigation.onCommitted.addListener(({url, tabId, frameId}) => {
-  if (frameId === 0) {
-    if (tabs[tabId]) {
-      const {hostname, ip, country} = tabs[tabId];
-      if (url && url.indexOf(hostname) !== -1 && ip && country) {
-        return update(tabId, 'web navigation');
-      }
-    }
-    // the request is missed (for instance if a service worker is responding instead of a server)
-    if (url.startsWith('http')) {
-      // console.log('missed');
-      xDNS(url).then(d => onResponseStarted({
-        ip: d.ip,
-        tabId,
-        url: d.url,
-        type: 'main_frame'
-      })).catch(e => console.warn('Cannot resolve using xDNS', url, e));
-    }
-  }
-});
+// For worker-based websites; https://twitter.com/
+chrome.webNavigation.onCommitted.addListener(d => {
+  const {url, tabId, frameId} = d;
 
-// Internal Pages
-/*
-chrome.tabs.onUpdated.addListener((tabId, info) => {
-  if (info.url && info.url.startsWith('chrome://')) {
-    console.log(info);
-    tabs[tabId] = {
-      hostname: 'internal page',
-      country: 'chrome',
-      url: info.url,
-      ip: '',
-      frames: {}
-    };
-    update(tabId, 'onUpdated');
+  if (frameId !== 0) {
+    return;
   }
+  if (url.startsWith('http') === false) {
+    return;
+  }
+  // already resolved with webRequest
+  if (tabs[tabId]) {
+    if (d.timeStamp - tabs[tabId].timeStamp < 500) {
+      return;
+    }
+  }
+  // console.log('missed');
+  xDNS(url).then(d => onResponseStarted({
+    ip: d.ip,
+    tabId,
+    url: d.url,
+    type: 'main_frame',
+    timeStamp: Date.now()
+  })).catch(e => console.warn('Cannot resolve using xDNS', url, e));
 });
-*/
 
 function open(url, tab) {
   const prop = {
@@ -410,18 +408,31 @@ chrome.runtime.onMessage.addListener(request => {
   }
 });
 
+const copy = str => {
+  const next = () => navigator.clipboard.writeText(str).catch(() => new Promise(resolve => {
+    document.oncopy = e => {
+      e.clipboardData.setData('text/plain', str);
+      e.preventDefault();
+      resolve();
+    };
+    document.execCommand('Copy', false, null);
+  })).then(() => notify(_('bgMSG2')));
+
+  if (/Firefox/.test(navigator.userAgent)) {
+    chrome.permissions.request({
+      permissions: ['clipboardWrite']
+    }, granted => granted && next());
+  }
+  else {
+    next();
+  }
+};
+
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === 'copy-ip') {
     if (tabs[tab.id] && tabs[tab.id].ip) {
       const str = tabs[tab.id].ip;
-      navigator.clipboard.writeText(str).catch(() => new Promise(resolve => {
-        document.oncopy = e => {
-          e.clipboardData.setData('text/plain', str);
-          e.preventDefault();
-          resolve();
-        };
-        document.execCommand('Copy', false, null);
-      })).then(() => notify(_('bgMSG2')));
+      copy(str);
     }
     else {
       notify(_('bgErr4'));
@@ -464,29 +475,29 @@ chrome.storage.local.get(prefs, ps => {
   contexts();
 });
 
+/* FAQs & Feedback */
 {
-  const {onInstalled, setUninstallURL, getManifest} = chrome.runtime;
-  const {name, version} = getManifest();
-  const page = getManifest().homepage_url;
-  onInstalled.addListener(({reason, previousVersion}) => {
-    chrome.storage.local.get({
-      'faqs': true,
-      'last-update': 0
-    }, prefs => {
-      if (reason === 'install' || (prefs.faqs && reason === 'update')) {
-        const doUpdate = (Date.now() - prefs['last-update']) / 1000 / 60 / 60 / 24 > 45;
-        if (doUpdate && previousVersion !== version) {
-          chrome.tabs.create({
-            url: page + '?version=' + version +
-              (previousVersion ? '&p=' + previousVersion : '') +
-              '&type=' + reason,
-            active: reason === 'install'
-          });
-          chrome.storage.local.set({'last-update': Date.now()});
+  const {management, runtime: {onInstalled, setUninstallURL, getManifest}, storage, tabs} = chrome;
+  if (navigator.webdriver !== true) {
+    const page = getManifest().homepage_url;
+    const {name, version} = getManifest();
+    onInstalled.addListener(({reason, previousVersion}) => {
+      management.getSelf(({installType}) => installType === 'normal' && storage.local.get({
+        'faqs': true,
+        'last-update': 0
+      }, prefs => {
+        if (reason === 'install' || (prefs.faqs && reason === 'update')) {
+          const doUpdate = (Date.now() - prefs['last-update']) / 1000 / 60 / 60 / 24 > 45;
+          if (doUpdate && previousVersion !== version) {
+            tabs.create({
+              url: page + '?version=' + version + (previousVersion ? '&p=' + previousVersion : '') + '&type=' + reason,
+              active: reason === 'install'
+            });
+            storage.local.set({'last-update': Date.now()});
+          }
         }
-      }
+      }));
     });
-  });
-  setUninstallURL(page + '?rd=feedback&name=' + encodeURIComponent(name) + '&version=' + version);
+    setUninstallURL(page + '?rd=feedback&name=' + encodeURIComponent(name) + '&version=' + version);
+  }
 }
-

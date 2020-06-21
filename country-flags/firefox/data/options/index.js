@@ -36,17 +36,6 @@ document.getElementById('dns').addEventListener('change', ({target}) => {
     });
   }
 });
-// copy ip permission
-document.getElementById('copy-ip-menuitem').addEventListener('change', ({target}) => {
-  if (target.checked) {
-    chrome.permissions.request({
-      permissions: ['clipboardWrite'],
-      origins: []
-    }, granted => {
-      target.checked = granted;
-    });
-  }
-});
 
 chrome.storage.local.get({
   dns: false
@@ -110,7 +99,7 @@ function restore() {
     'custom-cmd-4-title': '',
     'custom-cmd-5-title': '',
     'custom-command': '',
-    'display-delay': navigator.userAgent.indexOf('Edge') === -1 ? 0 : 1
+    'display-delay': 0.2
   }, services.urls), prefs => {
     Object.entries(prefs).forEach(([key, value]) => document.getElementById(key).value = value);
   });

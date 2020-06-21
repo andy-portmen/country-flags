@@ -2,24 +2,24 @@
   "name": "Country Flags & IP Whois",
   "description": "__MSG_appDesc__",
   "author": "Andy Portmen",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "default_locale": "en",
   "manifest_version": 2,
   "permissions": [
     "storage",
     "tabs",
-    "webNavigation",
     "webRequest",
     "*://*/*",
     "contextMenus",
     "notifications",
     "nativeMessaging",
     "dns",
-    "alarms"
+    "alarms",
+    "webNavigation"
   ],
   "optional_permissions": [
-    "clipboardWrite",
-    "downloads"
+    "downloads",
+    "clipboardWrite"
   ],
   "homepage_url": "https://add0n.com/country-flags.html",
   "icons": {
