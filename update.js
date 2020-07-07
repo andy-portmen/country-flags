@@ -1,6 +1,6 @@
 const fs = require('fs');
 const geolite2 = require('geolite2-redist');
-const { exec } = require('child_process');
+const {exec} = require('child_process');
 
 geolite2.open('GeoLite2-Country', path => {
   fs.stat(path, (err, s) => {
@@ -15,6 +15,7 @@ geolite2.open('GeoLite2-Country', path => {
           console.log('stdout', stdout);
           console.log('stderr', stderr);
         }
+        process.exit();
       }));
       console.log('Updating GeoLite2-Country.db');
       stream.pipe(fs.createWriteStream('country-flags/firefox/data/assets/GeoLite2-Country.db'));
