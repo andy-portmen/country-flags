@@ -4,4 +4,3 @@ node_js:
 script:
   - npm install geolite2-redist
   - node update.js
-  - ./update.sh
