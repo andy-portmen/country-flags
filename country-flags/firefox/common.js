@@ -366,8 +366,15 @@ chrome.pageAction.onClicked.addListener(tab => {
     chrome.pageAction.getTitle({
       tabId: tab.id
     }, s => {
+      s = `Link: ${tab.url}
+Title: ${tab.title}
+
+
+` + (s || 'empty').replace(chrome.runtime.getManifest().name, '').trim();
+
+
       if (prefs['page-action-type'] === 'copy-tooltip') {
-        copy(s || 'empty', 'bgMSG3');
+        copy(s, 'bgMSG3');
       }
       else {
         chrome.storage.local.get({
@@ -377,7 +384,7 @@ chrome.pageAction.onClicked.addListener(tab => {
           'window.top': screen.availTop + Math.round((screen.availHeight - 400) / 2)
         }, prefs => {
           chrome.windows.create({
-            url: 'data/alert/index.html?msg=' + encodeURIComponent(s || 'empty'),
+            url: 'data/alert/index.html?msg=' + encodeURIComponent(s),
             width: prefs['window.width'],
             height: prefs['window.height'],
             left: prefs['window.left'],
