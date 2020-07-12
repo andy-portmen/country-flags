@@ -2,13 +2,14 @@
   "name": "Server IP",
   "description": "Displays server IP address on every website",
   "author": "Andy Portmen",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "manifest_version": 2,
   "permissions": [
     "storage",
     "tabs",
     "webRequest",
-    "*://*/*"
+    "*://*/*",
+    "dns"
   ],
   "background": {
     "scripts": [
@@ -25,6 +26,13 @@
   "web_accessible_resources": [
     "data/ip/*"
   ],
+  "content_scripts": [{
+    "matches": ["*://*/*"],
+    "run_at": "document_start",
+    "js": [
+      "data/verify.js"
+    ]
+  }],
   "options_ui": {
     "page": "data/options/index.html",
     "chrome_style": true

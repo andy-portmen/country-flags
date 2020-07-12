@@ -1,3 +1,4 @@
+/* global browser */
 'use strict';
 
 const style = 'background-color: #fff; position: fixed; bottom: 20px; left: 30px; z-index: 100000000000; border: none;' +
@@ -40,7 +41,47 @@ worker.onmessage = ({data}) => {
   });
 };
 
+// use in case ip is not resolved by top_frame request
+const xDNS = href => new Promise((resolve, reject) => {
+  const {hostname, origin} = new URL(href);
+  if (typeof browser !== 'undefined' && browser.dns) {
+    return browser.dns.resolve(hostname).then(d => resolve({
+      ip: d.addresses[0],
+      url: href
+    }), reject);
+  }
+
+  const controller = new AbortController();
+  const signal = controller.signal;
+  const done = (d, e) => {
+    controller.abort();
+    clearTimeout(id);
+    chrome.webRequest.onResponseStarted.removeListener(init);
+    if (e) {
+      reject(e);
+    }
+    else {
+      resolve(d);
+    }
+  };
+  const init = d => done(d);
+  const id = setTimeout(() => done(null, Error('timeout')), 5000);
+  chrome.webRequest.onResponseStarted.addListener(init, {
+    urls: [origin + '/*'],
+    types: ['xmlhttprequest']
+  }, []);
+
+  fetch(href, {
+    cache: 'no-cache',
+    signal
+  }).then(r => r.text()).catch(e => done(null, e));
+});
+
+const cache = {};
+chrome.tabs.onRemoved.addListener(tabId => delete cache[tabId]);
+
 chrome.webRequest.onResponseStarted.addListener(({tabId, ip, url}) => {
+  cache[tabId] = url;
   if (ip) {
     window.setTimeout(() => worker.postMessage({
       ip,
@@ -66,6 +107,16 @@ chrome.runtime.onMessage.addListener((request, sender) => {
         }
       `
     });
+  }
+  else if (request.cmd === 'verify') {
+    const tabId = sender.tab.id;
+    if (cache[tabId] !== sender.tab.url) {
+      xDNS(sender.tab.url).then(d => worker.postMessage({
+        ip: d.ip,
+        url: sender.tab.url,
+        tabId: sender.tab.id
+      })).catch(e => console.warn('xDNS failed to get IP address', e));
+    }
   }
 });
 
