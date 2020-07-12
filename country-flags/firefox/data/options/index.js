@@ -54,7 +54,8 @@ function save() {
     'custom-cmd-4-title': document.getElementById('custom-cmd-4-title').value,
     'custom-cmd-5-title': document.getElementById('custom-cmd-5-title').value,
     'custom-command': document.getElementById('custom-command').value,
-    'display-delay': Math.max(0, Number(document.getElementById('display-delay').value))
+    'display-delay': Math.max(0, Number(document.getElementById('display-delay').value)),
+    'page-action-type': document.getElementById('page-action-type').value
   }), () => {
     if (document.getElementById('dns').checked) {
       native(response => {
@@ -78,7 +79,8 @@ function save() {
     chrome.storage.local.set(Object.assign(prefs, {
       'open-in-background': document.getElementById('open-in-background').checked,
       'open-adjacent': document.getElementById('open-adjacent').checked,
-      'faqs': document.getElementById('faqs').checked
+      'faqs': document.getElementById('faqs').checked,
+      'other-services': document.getElementById('other-services').checked
     }), () => {
       chrome.contextMenus.removeAll(() => {
         chrome.runtime.sendMessage({
@@ -99,7 +101,8 @@ function restore() {
     'custom-cmd-4-title': '',
     'custom-cmd-5-title': '',
     'custom-command': '',
-    'display-delay': 0.2
+    'display-delay': 0.2,
+    'page-action-type': 'ip-host'
   }, services.urls), prefs => {
     Object.entries(prefs).forEach(([key, value]) => document.getElementById(key).value = value);
   });
@@ -111,7 +114,8 @@ function restore() {
   chrome.storage.local.get(Object.assign(prefs, {
     'open-in-background': false,
     'open-adjacent': true,
-    'faqs': true
+    'faqs': true,
+    'other-services': true
   }), prefs => {
     Object.entries(prefs).forEach(([key, value]) => document.getElementById(key).checked = value);
   });

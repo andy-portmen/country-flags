@@ -42,7 +42,7 @@
         "message": "Cannot resolve the IP"
     },
     "bgErr3": {
-        "message": "Cannot copy to the clipboard on this page!"
+        "message": "Cannot copy to the clipboard"
     },
     "bgErr4": {
         "message": "Cannot find IP address for this tab. Refresh may help!"
@@ -64,6 +64,9 @@
     },
     "bgMSG2": {
         "message": "IP address is stored to the clipboard"
+    },
+    "bgMSG3": {
+        "message": "Whois details are stored to the clipboard"
     },
     "bgPing": {
         "message": "Ping: Test the reachability of this IP address"
@@ -142,6 +145,21 @@
     },
     "optionsHost": {
         "message": "Host utility"
+    },
+    "optionsLClickType": {
+        "message": "Action"
+    },
+    "optionsLClickType1": {
+        "message": "Open IP or Host Service"
+    },
+    "optionsLClickType2": {
+        "message": "Open Options Page"
+    },
+    "optionsLClickType3": {
+        "message": "Display Tooltip Text"
+    },
+    "optionsLClickType4": {
+        "message": "Copy Tooltip Text"
     },
     "optionsIP": {
         "message": "IP utility"
@@ -263,7 +281,6 @@
     "optionsDonationButton": {
         "message": "Support Development"
     },
-
     "optionsResetButton": {
         "message": "Factory Reset"
     },
@@ -282,134 +299,137 @@
     "optionsObserveSubFramesInfo": {
         "message": " Add hostname, IP address, and country code of all connected frames to the tooltip area (restart required)"
     },
+    "optionsOtherServices": {
+        "message": "Show 'Other services' menu for page action's button"
+    },
     "country_AF": {
-            "message": "Afghanistan"
-        },
+        "message": "Afghanistan"
+    },
     "country_AX": {
-            "message": "Aland Islands"
-        },
+        "message": "Aland Islands"
+    },
     "country_AL": {
-            "message": "Albania"
-        },
+        "message": "Albania"
+    },
     "country_DZ": {
-            "message": "Algeria"
-        },
+        "message": "Algeria"
+    },
     "country_AS": {
-            "message": "American Samoa"
-        },
+        "message": "American Samoa"
+    },
     "country_AD": {
-            "message": "Andorra"
-        },
+        "message": "Andorra"
+    },
     "country_AO": {
-            "message": "Angola"
-        },
+        "message": "Angola"
+    },
     "country_AI": {
-            "message": "Anguilla"
-        },
+        "message": "Anguilla"
+    },
     "country_AQ": {
-            "message": "Antarctica"
-        },
+        "message": "Antarctica"
+    },
     "country_AG": {
-            "message": "Antigua And Barbuda"
-        },
+        "message": "Antigua And Barbuda"
+    },
     "country_AR": {
-            "message": "Argentina"
-        },
+        "message": "Argentina"
+    },
     "country_AM": {
-            "message": "Armenia"
-        },
+        "message": "Armenia"
+    },
     "country_AW": {
-            "message": "Aruba"
-        },
+        "message": "Aruba"
+    },
     "country_AU": {
-            "message": "Australia"
-        },
+        "message": "Australia"
+    },
     "country_AT": {
-            "message": "Austria"
-        },
+        "message": "Austria"
+    },
     "country_AZ": {
-            "message": "Azerbaijan"
-        },
+        "message": "Azerbaijan"
+    },
     "country_BS": {
-            "message": "Bahamas"
-        },
+        "message": "Bahamas"
+    },
     "country_BH": {
-            "message": "Bahrain"
-        },
+        "message": "Bahrain"
+    },
     "country_BD": {
-            "message": "Bangladesh"
-        },
+        "message": "Bangladesh"
+    },
     "country_BB": {
-            "message": "Barbados"
-        },
+        "message": "Barbados"
+    },
     "country_BY": {
-            "message": "Belarus"
-        },
+        "message": "Belarus"
+    },
     "country_BE": {
-            "message": "Belgium"
-        },
+        "message": "Belgium"
+    },
     "country_BZ": {
-            "message": "Belize"
-        },
+        "message": "Belize"
+    },
     "country_BJ": {
-            "message": "Benin"
-        },
+        "message": "Benin"
+    },
     "country_BM": {
-            "message": "Bermuda"
-        },
+        "message": "Bermuda"
+    },
     "country_BT": {
-            "message": "Bhutan"
-        },
+        "message": "Bhutan"
+    },
     "country_BO": {
-            "message": "Bolivia"
-        },
+        "message": "Bolivia"
+    },
     "country_BA": {
-            "message": "Bosnia And Herzegovina"
-        },
+        "message": "Bosnia And Herzegovina"
+    },
     "country_BW": {
-            "message": "Botswana"
-        },
+        "message": "Botswana"
+    },
     "country_BV": {
-            "message": "Bouvet Island"
-        },
+        "message": "Bouvet Island"
+    },
     "country_BR": {
-            "message": "Brazil"
-        },
+        "message": "Brazil"
+    },
     "country_IO": {
-            "message": "British Indian Ocean Territory"
-        },
+        "message": "British Indian Ocean Territory"
+    },
     "country_BN": {
-            "message": "Brunei Darussalam"
-        },
+        "message": "Brunei Darussalam"
+    },
     "country_BG": {
-            "message": "Bulgaria"
-        },
+        "message": "Bulgaria"
+    },
     "country_BF": {
-            "message": "Burkina Faso"
-        },
+        "message": "Burkina Faso"
+    },
     "country_BI": {
-            "message": "Burundi"
-        },
+        "message": "Burundi"
+    },
     "country_KH": {
-            "message": "Cambodia"
-        },
+        "message": "Cambodia"
+    },
     "country_CM": {
-            "message": "Cameroon"
-        },
+        "message": "Cameroon"
+    },
     "country_CA": {
-            "message": "Canada"
-        },
+        "message": "Canada"
+    },
     "country_CV": {
-            "message": "Cape Verde"
-        },
+        "message": "Cape Verde"
+    },
     "country_KY": {
-            "message": "Cayman Islands"
-        },
+        "message": "Cayman Islands"
+    },
     "country_CF": {
         "message": "Central African Republic"
     },
     "country_TD": {
-        "message": "Chad"
+      "message": "Chad"
     },
     "country_CL": {
         "message": "Chile"

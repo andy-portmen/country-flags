@@ -37,7 +37,7 @@ const Buffer = {
     }
     return new CUint8Array(a);
   }
-}
+};
 
 caches.open('cache').catch(e => {
   console.warn('cannot use window.cache', e);
@@ -61,14 +61,14 @@ caches.open('cache').catch(e => {
   isLoaded = true;
   requests.forEach(r => perform(r));
   requests = [];
-  // cache the request
 
+  // cache the request
   if (await cache.match(m) === undefined) {
     try {
       await cache.add(m);
       const response = await cache.match(m);
       require.file = await response.arrayBuffer();
-      console.log('GeoLite2-Country.db updated', m);
+      console.warn('GeoLite2-Country.db updated', m);
       jGeoIP = new GeoIP('');
     }
     catch (e) {
@@ -88,7 +88,7 @@ const perform = data => {
     self.postMessage(Object.assign(obj, data));
   }
   catch (e) {
-    console.error(e);
+    console.warn(e);
     self.postMessage({
       tabId: data.tabId,
       error: e.message

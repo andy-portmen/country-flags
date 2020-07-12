@@ -4,11 +4,25 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title data-i18n="optionsTitle"></title>
     <style>
-      body {
-        padding: 10px;
-        min-width: 500px;
-        font-family: "Helvetica Neue",Helvetica,sans-serif;
-        font-size: 13px;
+      @supports (-moz-appearance:none) {
+        body {
+          font-size: 13px;
+          font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+          margin: 15px;
+        }
+        button,
+        input[type=submit],
+        input[type=button] {
+          height: 24px;
+          color: rgb(68, 68, 68);
+          background-image: linear-gradient(rgb(237, 237, 237), rgb(237, 237, 237) 38%, rgb(222, 222, 222));
+          box-shadow: rgba(0, 0, 0, 0.08) 0 1px 0, rgba(255, 255, 255, 0.75) 0 1px 2px inset;
+          text-shadow: rgb(240, 240, 240) 0 1px 0;
+          border: solid 1px rgba(0, 0, 0, 0.25);
+        }
+        input[type=button]:disabled {
+          opacity: 0.2;
+        }
       }
       input[type=text] {
         width: 100%;
@@ -53,6 +67,16 @@
         </tr>
       </thead>
       <tbody>
+        <tr>
+          <td></td>
+          <td data-i18n="optionsLClickType"></td>
+          <td><select id="page-action-type">
+            <option data-i18n="optionsLClickType1" value="ip-host"></option>
+            <option data-i18n="optionsLClickType2" value="options-page"></option>
+            <option data-i18n="optionsLClickType3" value="display-tooltip"></option>
+            <option data-i18n="optionsLClickType4" value="copy-tooltip"></option>
+          </select></td>
+        </tr>
         <tr>
           <td></td>
           <td data-i18n="optionsIP"></td>
@@ -250,6 +274,11 @@
         <tr>
           <td><input type="checkbox" id="subframes"></td>
           <td><label for="subframes" data-i18n="optionsObserveSubFrames"></label><sup>1</sup></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="other-services"></td>
+          <td><label for="other-services" data-i18n="optionsOtherServices"></label></td>
           <td></td>
         </tr>
         <tr>

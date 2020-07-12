@@ -84,7 +84,9 @@ const prefs = {
   'version': null,
   'faqs': true,
   'custom-command': '',
-  'display-delay': 0.2
+  'display-delay': 0.2,
+  'other-services': true,
+  'page-action-type': 'ip-host'
 };
 Object.assign(prefs, services.urls);
 services.menuitems().forEach(p => {
@@ -343,17 +345,48 @@ function open(url, tab) {
 }
 
 chrome.pageAction.onClicked.addListener(tab => {
-  const ip = tabs[tab.id].ip;
-  const hostname = (new URL(tab.url)).hostname;
+  if (prefs['page-action-type'] === 'ip-host') {
+    const ip = tabs[tab.id].ip;
+    const hostname = (new URL(tab.url)).hostname;
 
-  if (hostname) {
-    open(prefs.host.replace('[ip]', ip).replace('[host]', hostname), tab);
+    if (hostname) {
+      open(prefs.host.replace('[ip]', ip).replace('[host]', hostname), tab);
+    }
+    else if (tabs[tab.id] && ip) {
+      open(prefs.ip.replace('[ip]', ip).replace('[host]', hostname), tab);
+    }
+    else {
+      open(prefs.host.replace('[ip]', ip).replace('[host]', hostname), tab);
+    }
   }
-  else if (tabs[tab.id] && ip) {
-    open(prefs.ip.replace('[ip]', ip).replace('[host]', hostname), tab);
+  else if (prefs['page-action-type'] === 'options-page') {
+    chrome.runtime.openOptionsPage();
   }
   else {
-    open(prefs.host.replace('[ip]', ip).replace('[host]', hostname), tab);
+    chrome.pageAction.getTitle({
+      tabId: tab.id
+    }, s => {
+      if (prefs['page-action-type'] === 'copy-tooltip') {
+        copy(s || 'empty', 'bgMSG3');
+      }
+      else {
+        chrome.storage.local.get({
+          'window.width': 300,
+          'window.height': 400,
+          'window.left': screen.availLeft + Math.round((screen.availWidth - 300) / 2),
+          'window.top': screen.availTop + Math.round((screen.availHeight - 400) / 2)
+        }, prefs => {
+          chrome.windows.create({
+            url: 'data/alert/index.html?msg=' + encodeURIComponent(s || 'empty'),
+            width: prefs['window.width'],
+            height: prefs['window.height'],
+            left: prefs['window.left'],
+            top: prefs['window.top'],
+            type: 'popup'
+          });
+        });
+      }
+    });
   }
 });
 
@@ -380,22 +413,24 @@ function contexts() {
     });
   });
   // other services
-  const parentId = chrome.contextMenus.create({
-    contexts: ['page_action'],
-    title: _('bgOtherServices')
-  });
-  // change order (everything checked above 5 is located on top of the others menu)
-  [
-    ...names.filter(id => items.indexOf(id) === -1).filter(key => prefs[key + '-menuitem'] === true),
-    ...names.filter(id => items.indexOf(id) === -1).filter(key => prefs[key + '-menuitem'] === false)
-  ].forEach(id => {
-    chrome.contextMenus.create({
+  if (prefs['other-services']) {
+    const parentId = chrome.contextMenus.create({
       contexts: ['page_action'],
-      id,
-      title: dictionary[id],
-      parentId
+      title: _('bgOtherServices')
     });
-  });
+    // change order (everything checked above 5 is located on top of the others menu)
+    [
+      ...names.filter(id => items.indexOf(id) === -1).filter(key => prefs[key + '-menuitem'] === true),
+      ...names.filter(id => items.indexOf(id) === -1).filter(key => prefs[key + '-menuitem'] === false)
+    ].forEach(id => {
+      chrome.contextMenus.create({
+        contexts: ['page_action'],
+        id,
+        title: dictionary[id],
+        parentId
+      });
+    });
+  }
 }
 chrome.runtime.onMessage.addListener(request => {
   if (request.method === 'contexts') {
@@ -403,20 +438,22 @@ chrome.runtime.onMessage.addListener(request => {
   }
 });
 
-const copy = str => {
+const copy = (str, msg = 'bgMSG2') => {
   const next = () => navigator.clipboard.writeText(str).catch(() => new Promise(resolve => {
     document.oncopy = e => {
       e.clipboardData.setData('text/plain', str);
       e.preventDefault();
       resolve();
     };
-    document.execCommand('Copy', false, null);
-  })).then(() => notify(_('bgMSG2')));
+    if (document.execCommand('Copy', false, null) === false) {
+      throw Error('failed');
+    }
+  })).then(() => notify(_(msg)), () => notify(_('bgErr3')));
 
   if (/Firefox/.test(navigator.userAgent)) {
     chrome.permissions.request({
       permissions: ['clipboardWrite']
-    }, granted => granted && next());
+    }, next);
   }
   else {
     next();
