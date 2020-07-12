@@ -8,43 +8,38 @@ chrome.tabs.onRemoved.addListener(tabId => delete tabs[tabId]);
 
 // use in case ip is not resolved by top_frame request
 const xDNS = href => new Promise((resolve, reject) => {
+  const {hostname, origin} = new URL(href);
   if (typeof browser !== 'undefined' && browser.dns) {
-    const {hostname} = new URL(href);
-    return browser.dns.resolve(hostname).then(d => {
-      resolve({
-        ip: d.addresses[0],
-        url: href
-      });
-    });
+    return browser.dns.resolve(hostname).then(d => resolve({
+      ip: d.addresses[0],
+      url: href
+    }), reject);
   }
-
-  const done = () => {
-    window.clearTimeout(id);
-    chrome.webRequest.onResponseStarted.removeListener(init);
-  };
-  const init = d => {
-    resolve(d);
-    done();
-  };
-  const id = window.setTimeout(() => {
-    reject(Error('timeout'));
-    done();
-  }, 5000);
-  chrome.webRequest.onResponseStarted.addListener(init, {
-    urls: [href],
-    types: ['xmlhttprequest']
-  }, []);
 
   const controller = new AbortController();
   const signal = controller.signal;
-  fetch(href, {signal}).then(r => {
+  const done = (d, e) => {
     controller.abort();
+    clearTimeout(id);
+    chrome.webRequest.onResponseStarted.removeListener(init);
+    if (e) {
+      reject(e);
+    }
+    else {
+      resolve(d);
+    }
+  };
+  const init = d => done(d);
+  const id = setTimeout(() => done(null, Error('timeout')), 5000);
+  chrome.webRequest.onResponseStarted.addListener(init, {
+    urls: [origin + '/*'],
+    types: ['xmlhttprequest']
+  }, []);
 
-    return r.headers.get('content-type');
-  }).catch(e => {
-    reject(e);
-    done();
-  });
+  fetch(href, {
+    cache: 'no-cache',
+    signal
+  }).then(r => r.text()).catch(e => done(null, e));
 });
 
 const isPrivate = (() => {
