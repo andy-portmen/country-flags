@@ -39,8 +39,13 @@ const Buffer = {
   }
 };
 
-caches.open('cache').catch(e => {
-  console.warn('cannot use window.cache', e);
+// https://github.com/andy-portmen/country-flags/issues/72
+(typeof caches === 'undefined' ? {
+  open() {
+    return Promise.reject(Error('caches is disabled'));
+  }
+} : caches).open('cache').catch(e => {
+  console.warn('cannot use window.caches', e);
   return {
     match() {
       return false;
