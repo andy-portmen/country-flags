@@ -137,6 +137,9 @@
     "optionsTitle": {
         "message": "Options page :: Country Flags & IP Whois"
     },
+    "optionsKeywords": {
+       "message": "Supported keywords: [lang]: browser language code (e.g.: en-US, ro, de), [url]: actual URL, [enurl]: encodes URL with encodeURIComponent, [host]: hostname, [curl]: Clean URL. URLs without any parameters, [ip]: IP address of the server"
+    },
     "optionsLClick": {
         "message": "Left Click"
     },
