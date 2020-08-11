@@ -350,13 +350,16 @@ chrome.pageAction.onClicked.addListener(tab => {
     const hostname = (new URL(tab.url)).hostname;
 
     if (hostname) {
-      open(prefs.host.replace('[ip]', ip).replace('[host]', hostname), tab);
+      const url = replace(prefs.host, tab);
+      open(url, tab);
     }
     else if (tabs[tab.id] && ip) {
-      open(prefs.ip.replace('[ip]', ip).replace('[host]', hostname), tab);
+      const url = replace(prefs.ip, tab);
+      open(url, tab);
     }
     else {
-      open(prefs.host.replace('[ip]', ip).replace('[host]', hostname), tab);
+      const url = replace(prefs.host, tab);
+      open(url, tab);
     }
   }
   else if (prefs['page-action-type'] === 'options-page') {
@@ -467,19 +470,8 @@ const copy = (str, msg = 'bgMSG2') => {
   }
 };
 
-chrome.contextMenus.onClicked.addListener((info, tab) => {
-  if (info.menuItemId === 'copy-ip') {
-    if (tabs[tab.id] && tabs[tab.id].ip) {
-      const str = tabs[tab.id].ip;
-      copy(str);
-    }
-    else {
-      notify(_('bgErr4'));
-    }
-    return;
-  }
-
-  let url = prefs[info.menuItemId]
+const replace = (url, tab) => {
+  url = url
     .replace('[lang]', chrome.i18n.getUILanguage())
     .replace('[url]', tab.url)
     .replace('[enurl]', encodeURIComponent(tab.url));
@@ -497,10 +489,32 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
       url = url.replace('[ip]', tabs[tab.id].ip);
     }
     else {
-      return notify(_('bgErr4'));
+      throw Error('');
     }
   }
-  open(url, tab);
+
+  return url;
+};
+
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+  if (info.menuItemId === 'copy-ip') {
+    if (tabs[tab.id] && tabs[tab.id].ip) {
+      const str = tabs[tab.id].ip;
+      copy(str);
+    }
+    else {
+      notify(_('bgErr4'));
+    }
+    return;
+  }
+
+  try {
+    const url = replace(prefs[info.menuItemId], tab);
+    open(url, tab);
+  }
+  catch (e) {
+    notify(_('bgErr4'));
+  }
 });
 
 // prefs
