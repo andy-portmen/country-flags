@@ -133,8 +133,9 @@ function update(tabId/* , reason */) {
     if (obj.error || !country) {
       path = {
         16: '/data/icons/error/16.png',
-        19: '/data/icons/error/19.png',
+        24: '/data/icons/error/24.png',
         32: '/data/icons/error/32.png',
+        48: '/data/icons/error/48.png',
         64: '/data/icons/error/64.png'
       };
       title += _('bgErr') + ': ' + obj.error || _('bgErr1');
@@ -142,8 +143,9 @@ function update(tabId/* , reason */) {
     else if (country === 'private') {
       path = {
         16: '/data/icons/private/16.png',
-        19: '/data/icons/private/19.png',
+        24: '/data/icons/private/24.png',
         32: '/data/icons/private/32.png',
+        48: '/data/icons/private/48.png',
         64: '/data/icons/private/64.png'
       };
       title += _('bgMSG1');
@@ -152,8 +154,9 @@ function update(tabId/* , reason */) {
     else if (country === 'chrome') {
       path = {
         16: '/data/icons/chrome/16.png',
-        19: '/data/icons/chrome/19.png',
+        24: '/data/icons/chrome/24.png',
         32: '/data/icons/chrome/32.png',
+        48: '/data/icons/chrome/48.png',
         64: '/data/icons/chrome/64.png'
       };
       title += _('bgMSG1');
@@ -162,8 +165,9 @@ function update(tabId/* , reason */) {
     else {
       path = {
         16: '/data/icons/flags/16/' + country + '.png',
-        19: '/data/icons/flags/19/' + country + '.png',
+        24: '/data/icons/flags/24/' + country + '.png',
         32: '/data/icons/flags/32/' + country + '.png',
+        48: '/data/icons/flags/48/' + country + '.png',
         64: '/data/icons/flags/64/' + country + '.png'
       };
       title += _('bgCountry') + ': ' + _('country_' + country);
