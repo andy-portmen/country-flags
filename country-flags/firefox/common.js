@@ -1,6 +1,7 @@
 /* globals services, browser */
 'use strict';
 
+const isFF = /Firefox/.test(navigator.userAgent);
 const _ = id => chrome.i18n.getMessage(id);
 
 const tabs = {};
@@ -86,7 +87,8 @@ const prefs = {
   'custom-command': '',
   'display-delay': 0.2,
   'other-services': true,
-  'page-action-type': 'ip-host'
+  'page-action-type': 'ip-host',
+  'use-svg': true
 };
 Object.assign(prefs, services.urls);
 services.menuitems().forEach(p => {
@@ -170,10 +172,14 @@ function update(tabId/* , reason */) {
         48: '/data/icons/flags/48/' + country + '.png',
         64: '/data/icons/flags/64/' + country + '.png'
       };
+      if (isFF && window.devicePixelRatio > 1 && prefs['use-svg']) {
+        path = '/data/icons/flags/svg/' + country + '.svg';
+      }
       title += _('bgCountry') + ': ' + _('country_' + country);
       title += '\n' + _('bgHost') + ': ' + obj.hostname;
     }
     title += '\n' + _('bgIP') + ': ' + obj.ip;
+
     const connecteds = Object.keys(obj.frames);
     if (connecteds.length) {
       title += `\n\n${_('bgFrames')}:\n`;
@@ -464,7 +470,7 @@ const copy = (str, msg = 'bgMSG2') => {
     }
   })).then(() => notify(_(msg)), () => notify(_('bgErr3')));
 
-  if (/Firefox/.test(navigator.userAgent)) {
+  if (isFF) {
     chrome.permissions.request({
       permissions: ['clipboardWrite']
     }, next);

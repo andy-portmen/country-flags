@@ -79,6 +79,7 @@ function save() {
     chrome.storage.local.set(Object.assign(prefs, {
       'open-in-background': document.getElementById('open-in-background').checked,
       'open-adjacent': document.getElementById('open-adjacent').checked,
+      'use-svg': document.getElementById('use-svg').checked,
       'faqs': document.getElementById('faqs').checked,
       'other-services': document.getElementById('other-services').checked
     }), () => {
@@ -114,6 +115,7 @@ function restore() {
   chrome.storage.local.get(Object.assign(prefs, {
     'open-in-background': false,
     'open-adjacent': true,
+    'use-svg': true,
     'faqs': true,
     'other-services': true
   }), prefs => {

@@ -260,6 +260,9 @@
     "optionsNextTo": {
         "message": "Open tabs next to the active"
     },
+    "optionsUseSVG": {
+        "message": "Use SVG flag icons when the device's pixel ratio is greater than one (Firefox Only)"
+    },
     "optionsFAQs": {
         "message": "Open FAQs page on updates"
     },
