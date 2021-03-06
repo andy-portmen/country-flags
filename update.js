@@ -2,7 +2,15 @@ const fs = require('fs');
 const geolite2 = require('geolite2-redist');
 const {exec} = require('child_process');
 
-geolite2.open('GeoLite2-Country', path => {
+geolite2.downloadDbs().then(async () => {
+  let path;
+  try {
+    await geolite2.open('GeoLite2-City', p => {
+      path = p;
+    });
+  }
+  catch (e) {}
+
   fs.stat(path, (err, s) => {
     console.log('File Size', s.size);
     if (s.size > 2 * 1024 * 1024) {
@@ -21,5 +29,5 @@ geolite2.open('GeoLite2-Country', path => {
       stream.pipe(fs.createWriteStream('country-flags/firefox/data/assets/GeoLite2-Country.db'));
     }
   });
-  return {};
-});
+}).catch(e => console.warn(e));
+
