@@ -5,7 +5,7 @@ const {exec} = require('child_process');
 geolite2.downloadDbs().then(async () => {
   let path;
   try {
-    await geolite2.open('GeoLite2-City', p => {
+    await geolite2.open('GeoLite2-Country', p => {
       path = p;
     });
   }
