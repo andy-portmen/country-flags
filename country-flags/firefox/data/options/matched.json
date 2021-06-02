@@ -1,1 +1,62 @@
-../../../../../_/matched/matched.json
+{
+  "work-offline": {
+    "name": "Work Offline"
+  },
+  "save-images": {
+    "name": "Download All Images"
+  },
+  "privacy-settings": {
+    "name": "Privacy Settings"
+  },
+  "media-player": {
+    "name": "YouTube Media Player"
+  },
+  "tab-discard": {
+    "name": "Auto Tab Discard"
+  },
+  "send-to": {
+    "name": "Send to VLC"
+  },
+  "two-factor-authenticator": {
+    "name": "Open Two-Factor Authenticator"
+  },
+  "useragent-switcher": {
+    "name": "User-Agent Switcher and Manager"
+  },
+  "block-site": {
+    "name": "Block Site"
+  },
+  "convert-to": {
+    "name": "Convert to PDF"
+  },
+  "dark-theme": {
+    "name": "Dark Theme"
+  },
+  "mute-tab": {
+    "name": "Mute Tab"
+  },
+  "proxy-switcher": {
+    "name": "Proxy Switcher"
+  },
+  "font-finder": {
+    "name": "Font Finder"
+  },
+  "gmail-notifier": {
+    "name": "Gmail Notifier"
+  },
+  "popup-blocker": {
+    "name": "Popup Blocker"
+  },
+  "sqlite-viewer": {
+    "name": "SQLite Viewer"
+  },
+  "audio-joiner": {
+    "name": "Audio Joiner"
+  },
+  "search-all-tabs": {
+    "name": "Search all Tabs"
+  },
+  "bookmarks-commander": {
+    "name": "Bookmarks Commander"
+  }
+}

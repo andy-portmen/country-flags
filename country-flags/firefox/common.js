@@ -189,7 +189,7 @@ function update(tabId/* , reason */) {
     }
     //
     window.setTimeout(() => {
-      chrome.pageAction.setIcon({tabId, path}, () => chrome.runtime.lastError);
+      chrome.browserAction.setIcon({tabId, path}, () => chrome.runtime.lastError);
       chrome.runtime.lastError;
       if (prefs['custom-command']) {
         exec(prefs['custom-command'].replace('[ip]', obj.ip).replace('[host]', obj.hostname).replace('[url]', obj.url), o => {
@@ -199,13 +199,12 @@ function update(tabId/* , reason */) {
           else {
             title += '\n\n' + (o.stdout || o.stderr).trim();
           }
-          chrome.pageAction.setTitle({title, tabId});
+          chrome.browserAction.setTitle({title, tabId});
         });
       }
       else {
-        chrome.pageAction.setTitle({title, tabId});
+        chrome.browserAction.setTitle({title, tabId});
       }
-      chrome.pageAction.show(tabId);
       chrome.runtime.lastError;
     }, prefs['display-delay'] * 1000);
   }
@@ -354,7 +353,7 @@ function open(url, tab) {
   chrome.tabs.create(prop);
 }
 
-chrome.pageAction.onClicked.addListener(tab => {
+chrome.browserAction.onClicked.addListener(tab => {
   if (prefs['page-action-type'] === 'ip-host') {
     const ip = tabs[tab.id].ip;
     const hostname = (new URL(tab.url)).hostname;
@@ -376,7 +375,7 @@ chrome.pageAction.onClicked.addListener(tab => {
     chrome.runtime.openOptionsPage();
   }
   else {
-    chrome.pageAction.getTitle({
+    chrome.browserAction.getTitle({
       tabId: tab.id
     }, s => {
       s = `Link: ${tab.url}
@@ -552,10 +551,11 @@ chrome.storage.local.get(prefs, ps => {
         if (reason === 'install' || (prefs.faqs && reason === 'update')) {
           const doUpdate = (Date.now() - prefs['last-update']) / 1000 / 60 / 60 / 24 > 45;
           if (doUpdate && previousVersion !== version) {
-            tabs.create({
+            tabs.query({active: true, currentWindow: true}, tbs => tabs.create({
               url: page + '?version=' + version + (previousVersion ? '&p=' + previousVersion : '') + '&type=' + reason,
-              active: reason === 'install'
-            });
+              active: reason === 'install',
+              ...(tbs && tbs.length && {index: tbs[0].index + 1})
+            }));
             storage.local.set({'last-update': Date.now()});
           }
         }
