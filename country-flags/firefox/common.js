@@ -180,7 +180,7 @@ function update(tabId/* , reason */) {
     }
     title += '\n' + _('bgIP') + ': ' + obj.ip;
 
-    const connecteds = Object.keys(obj.frames);
+    const connecteds = Object.keys(obj.frames || {});
     if (connecteds.length) {
       title += `\n\n${_('bgFrames')}:\n`;
       connecteds.forEach((ip, i) => {
@@ -339,7 +339,13 @@ chrome.webNavigation.onCommitted.addListener(d => {
     url: d.url,
     type: 'main_frame',
     timeStamp: Date.now()
-  })).catch(e => console.warn('Cannot resolve using xDNS', url, e));
+  })).catch(e => {
+    tabs[tabId] = {
+      error: e.message
+    };
+    update(tabId, 'xDNS failed');
+    console.warn('Cannot resolve using xDNS', url, e);
+  });
 });
 
 function open(url, tab) {
@@ -426,7 +432,7 @@ function contexts() {
   const items = names.filter(key => prefs[key + '-menuitem']).slice(0, 5);
   items.forEach(id => {
     chrome.contextMenus.create({
-      contexts: ['page_action'],
+      contexts: ['browser_action'],
       id,
       title: dictionary[id]
     });
@@ -434,7 +440,7 @@ function contexts() {
   // other services
   if (prefs['other-services']) {
     const parentId = chrome.contextMenus.create({
-      contexts: ['page_action'],
+      contexts: ['browser_action'],
       title: _('bgOtherServices')
     });
     // change order (everything checked above 5 is located on top of the others menu)
@@ -443,7 +449,7 @@ function contexts() {
       ...names.filter(id => items.indexOf(id) === -1).filter(key => prefs[key + '-menuitem'] === false)
     ].forEach(id => {
       chrome.contextMenus.create({
-        contexts: ['page_action'],
+        contexts: ['browser_action'],
         id,
         title: dictionary[id],
         parentId
