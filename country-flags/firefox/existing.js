@@ -1,4 +1,4 @@
-/* globals onResponseStarted, xDNS, update, tabs */
+/* globals onResponseStarted, xDNS, tabs, update */
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => chrome.tabs.query({
@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', () => chrome.tabs.query({
           tabs[tab.id] = {
             error: e.message
           };
-          update(tab.id, 'xDNS failed');
-          console.warn('Cannot resolve using xDNS', tab.url, e);
+          update(tab.id, 'xDNS');
+          console.warn('Cannot resolve using xDNS', tab.url, e.message);
         });
       }
     }

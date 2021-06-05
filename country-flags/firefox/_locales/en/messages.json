@@ -60,7 +60,7 @@
         "message": "Connected Sites"
     },
     "bgMSG1": {
-        "message": "Server is on your private network"
+        "message": "The server is on your private network. Use native integration to bypass SOCK5 server"
     },
     "bgMSG2": {
         "message": "IP address is stored to the clipboard"

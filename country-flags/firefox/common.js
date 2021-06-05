@@ -172,9 +172,9 @@ function update(tabId/* , reason */) {
         48: '/data/icons/flags/48/' + country + '.png',
         64: '/data/icons/flags/64/' + country + '.png'
       };
-      if (isFF && window.devicePixelRatio > 1 && prefs['use-svg']) {
-        path = '/data/icons/flags/svg/' + country + '.svg';
-      }
+      // if (isFF && window.devicePixelRatio > 1 && prefs['use-svg']) {
+      //   path = '/data/icons/flags/svg/' + country + '.svg';
+      // }
       title += _('bgCountry') + ': ' + _('country_' + country);
       title += '\n' + _('bgHost') + ': ' + obj.hostname;
     }
@@ -189,7 +189,7 @@ function update(tabId/* , reason */) {
     }
     //
     window.setTimeout(() => {
-      chrome.browserAction.setIcon({tabId, path}, () => chrome.runtime.lastError);
+      chrome.pageAction.setIcon({tabId, path}, () => chrome.runtime.lastError);
       chrome.runtime.lastError;
       if (prefs['custom-command']) {
         exec(prefs['custom-command'].replace('[ip]', obj.ip).replace('[host]', obj.hostname).replace('[url]', obj.url), o => {
@@ -199,12 +199,13 @@ function update(tabId/* , reason */) {
           else {
             title += '\n\n' + (o.stdout || o.stderr).trim();
           }
-          chrome.browserAction.setTitle({title, tabId});
+          chrome.pageAction.setTitle({title, tabId});
         });
       }
       else {
-        chrome.browserAction.setTitle({title, tabId});
+        chrome.pageAction.setTitle({title, tabId});
       }
+      chrome.pageAction.show(tabId);
       chrome.runtime.lastError;
     }, prefs['display-delay'] * 1000);
   }
@@ -343,7 +344,7 @@ chrome.webNavigation.onCommitted.addListener(d => {
     tabs[tabId] = {
       error: e.message
     };
-    update(tabId, 'xDNS failed');
+    update(tabId, 'xDNS');
     console.warn('Cannot resolve using xDNS', url, e);
   });
 });
@@ -359,7 +360,7 @@ function open(url, tab) {
   chrome.tabs.create(prop);
 }
 
-chrome.browserAction.onClicked.addListener(tab => {
+chrome.pageAction.onClicked.addListener(tab => {
   if (prefs['page-action-type'] === 'ip-host') {
     const ip = tabs[tab.id].ip;
     const hostname = (new URL(tab.url)).hostname;
@@ -381,7 +382,7 @@ chrome.browserAction.onClicked.addListener(tab => {
     chrome.runtime.openOptionsPage();
   }
   else {
-    chrome.browserAction.getTitle({
+    chrome.pageAction.getTitle({
       tabId: tab.id
     }, s => {
       s = `Link: ${tab.url}
@@ -432,7 +433,7 @@ function contexts() {
   const items = names.filter(key => prefs[key + '-menuitem']).slice(0, 5);
   items.forEach(id => {
     chrome.contextMenus.create({
-      contexts: ['browser_action'],
+      contexts: ['page_action'],
       id,
       title: dictionary[id]
     });
@@ -440,7 +441,7 @@ function contexts() {
   // other services
   if (prefs['other-services']) {
     const parentId = chrome.contextMenus.create({
-      contexts: ['browser_action'],
+      contexts: ['page_action'],
       title: _('bgOtherServices')
     });
     // change order (everything checked above 5 is located on top of the others menu)
@@ -449,7 +450,7 @@ function contexts() {
       ...names.filter(id => items.indexOf(id) === -1).filter(key => prefs[key + '-menuitem'] === false)
     ].forEach(id => {
       chrome.contextMenus.create({
-        contexts: ['browser_action'],
+        contexts: ['page_action'],
         id,
         title: dictionary[id],
         parentId
@@ -557,11 +558,10 @@ chrome.storage.local.get(prefs, ps => {
         if (reason === 'install' || (prefs.faqs && reason === 'update')) {
           const doUpdate = (Date.now() - prefs['last-update']) / 1000 / 60 / 60 / 24 > 45;
           if (doUpdate && previousVersion !== version) {
-            tabs.query({active: true, currentWindow: true}, tbs => tabs.create({
+            tabs.create({
               url: page + '?version=' + version + (previousVersion ? '&p=' + previousVersion : '') + '&type=' + reason,
-              active: reason === 'install',
-              ...(tbs && tbs.length && {index: tbs[0].index + 1})
-            }));
+              active: reason === 'install'
+            });
             storage.local.set({'last-update': Date.now()});
           }
         }
