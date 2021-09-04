@@ -487,22 +487,33 @@ const copy = (str, msg = 'bgMSG2') => {
 };
 
 const replace = (url, tab) => {
+  if (url.startsWith('post:')) {
+    const [data, s] = url.replace('post:', '').split('@');
+    url = 'data/post/index.html?href=' + encodeURIComponent(s) + '&data=' + encodeURIComponent(data);
+  }
+
   url = url
     .replace('[lang]', chrome.i18n.getUILanguage())
+    .replace('%5Blang%5D', chrome.i18n.getUILanguage())
     .replace('[url]', tab.url)
-    .replace('[enurl]', encodeURIComponent(tab.url));
+    .replace('%5Burl%5D', tab.url)
+    .replace('[enurl]', encodeURIComponent(tab.url))
+    .replace('%5Benurl%5D', encodeURIComponent(tab.url));
 
-  if (url.indexOf('[host]') !== -1) {
+  if (url.indexOf('[host]') !== -1 || url.indexOf('%5Bhost%5D') !== -1) {
     const hostname = (new URL(tab.url)).hostname;
     url = url.replace('[host]', hostname);
+    url = url.replace('%5Bhost%5D', hostname);
   }
-  if (url.indexOf('[curl]') !== -1) {
+  if (url.indexOf('[curl]') !== -1 || url.indexOf('%5Bcurl%5D') !== -1) {
     const curl = tab.url.split('?')[0].split('#')[0];
     url = url.replace('[curl]', curl);
+    url = url.replace('%5Bcurl%5D', curl);
   }
-  if (url.indexOf('[ip]') !== -1) {
+  if (url.indexOf('[ip]') !== -1 || url.indexOf('%5Bip%5D') !== -1) {
     if (tabs[tab.id] && tabs[tab.id].ip) {
       url = url.replace('[ip]', tabs[tab.id].ip);
+      url = url.replace('%5Bip%5D', tabs[tab.id].ip);
     }
     else {
       throw Error('');

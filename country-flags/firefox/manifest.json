@@ -2,7 +2,7 @@
   "name": "Country Flags & IP Whois",
   "description": "__MSG_appDesc__",
   "author": "Andy Portmen",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "default_locale": "en",
   "manifest_version": 2,
   "permissions": [
@@ -29,7 +29,7 @@
     "64": "data/icons/64.png",
     "128": "data/icons/128.png",
     "256": "data/icons/256.png",
-    "512": "data/icons/512.png",
+    "512": "data/icons/512.png"
   },
   "background": {
     "scripts": [
