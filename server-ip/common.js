@@ -1,7 +1,7 @@
 /* global browser */
 'use strict';
 
-const style = 'background-color: #fff; position: fixed; bottom: 20px; left: 30px; z-index: 100000000000; border: none;' +
+const style = 'background-color: #fff; position: fixed; bottom: [bottom]px; left: [left]px; z-index: 100000000000; border: none;' +
   'width: [width]px; min-width: [width]px; max-width: [width]px; height: 24px; min-height: 24px; max-height: 24px;';
 
 const worker = new Worker('/worker.js');
@@ -12,7 +12,9 @@ worker.onmessage = ({data}) => {
   chrome.storage.local.get({
     'char': 7,
     'padding': 48,
-    'uppercase': true
+    'uppercase': true,
+    'bottom': 20,
+    'left': 30
   }, prefs => {
     if (prefs['uppercase']) {
       ip = ip.toUpperCase();
@@ -20,13 +22,34 @@ worker.onmessage = ({data}) => {
     const dest = chrome.runtime.getURL(
       '/data/ip/ip.html?ip=' + ip + '&flag=' + flag + '&url=' + encodeURIComponent(url) + '&error=' + error
     );
+
+    const css = style
+      .replace(/\[left\]/g, prefs.left)
+      .replace(/\[bottom\]/g, prefs.bottom)
+      .replace(/\[width\]/g, prefs.padding + ip.length * prefs.char);
+
     chrome.tabs.executeScript(tabId, {
       runAt: 'document_start',
       code: `
         if (window.iframe === undefined) {
+          let x = ${prefs.left};
+          let y = ${prefs.bottom};
           window.iframe = document.createElement('iframe');
           window.iframe.setAttribute('src', "${dest}");
-          window.iframe.setAttribute('style', '${style.replace(/\[width\]/g, prefs.padding + ip.length * prefs.char)}');
+          window.iframe.setAttribute('style', '${css}');
+          window.addEventListener('message', e => {
+            if (e.data && e.data.method === 'move-flag') {
+              x = Math.max(0, x + e.data.dx);
+              y = Math.max(0, y - e.data.dy);
+              window.iframe.style.left = x + 'px';
+              window.iframe.style.bottom = y + 'px';
+
+              chrome.storage.local.set({
+                left: x,
+                bottom: y
+              });
+            }
+          })
           if (document.body) {
             document.body.appendChild(window.iframe);
           }

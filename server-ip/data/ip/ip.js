@@ -40,3 +40,22 @@ document.addEventListener('click', e => {
     chrome.runtime.sendMessage({cmd});
   }
 });
+
+
+const move = e => top.postMessage({
+  method: 'move-flag',
+  dx: e.movementX,
+  dy: e.movementY
+}, '*');
+
+document.querySelector('img').addEventListener('mousedown', e => {
+  e.preventDefault();
+  document.removeEventListener('mousemove', move);
+  document.addEventListener('mousemove', move);
+});
+document.addEventListener('mouseleave', () => {
+  document.removeEventListener('mousemove', move);
+});
+document.addEventListener('mouseup', () => {
+  document.removeEventListener('mousemove', move);
+});
