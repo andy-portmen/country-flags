@@ -5,7 +5,7 @@
 
   caches.open('cache').then(async cache => {
     // get the latest version of GEO Country database if it is not cached
-    const m = 'https://cdn.jsdelivr.net/gh/andy-portmen/country-flags@master/country-flags/firefox/data/assets/GeoLite2-Country.db';
+    const m = 'https://cdn.jsdelivr.net/gh/andy-portmen/country-flags@master/v3/country-flags/data/assets/GeoLite2-Country.db';
     const response = await cache.match(m) || await fetch('/data/assets/GeoLite2-Country.db');
 
     require.file = await response.arrayBuffer();
