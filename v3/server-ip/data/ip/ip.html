@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+      html, body {
+        height:  100%;
+      }
+      body {
+        font-size: 13px;
+        font-family: arial, sans-serif;
+        display: flex;
+        align-items: center;
+        margin: 0;
+        overflow: hidden;
+        user-select: none;
+        border: solid 1px #ececec;
+        box-sizing: border-box;
+      }
+      a {
+        padding-left: 5px;
+        flex: 1;
+        text-decoration: none;
+        text-align: center;
+      }
+      a,
+      a:visited {
+        color: #000;
+      }
+      img {
+        margin: 0 5px;
+        cursor: move;
+      }
+      img[data-cmd="close-me"] {
+        cursor: pointer;
+      }
+      img[data-cmd="close-me"]:hover {
+        background-color: #eee;
+      }
+      img[data-cmd="close-me"]:active {
+        background-color: #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <style type="text/css" id="css"></style>
+    <img src="loading.gif" width=16 title="Drag the falg and slowly move it to change position"><a target="_blank" href="#">127.0.0.1</a><img src="close.svg" width=16 data-cmd="close-me">
+    <script src="ip.js"></script>
+  </body>
+</html>

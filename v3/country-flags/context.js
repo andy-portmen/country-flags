@@ -20,8 +20,6 @@ const contexts = () => chrome.storage.local.get({
   'custom-cmd-5-title': '',
   'other-services': true
 }, async prefs => {
-  console.log('conte');
-
   const dictionary = async id => {
     if (id.startsWith('custom-cmd-')) {
       const n = id.slice(-1);
@@ -115,7 +113,6 @@ const replace = (url, tab, obj) => {
 
 const copy = async str => {
   const win = await chrome.windows.getCurrent();
-  console.log(win, str);
   chrome.storage.local.get({
     width: 400,
     height: 300,
@@ -184,7 +181,6 @@ chrome.action.onClicked.addListener(tab => chrome.storage.local.get({
   try {
     if (prefs['page-action-type'] === 'ip-host') {
       const obj = await pp.get(tab.id);
-      console.log(obj);
 
       const ip = obj.ip;
       const hostname = (new URL(tab.url)).hostname;

@@ -1,0 +1,41 @@
+{
+  "name": "Server IP",
+  "description": "Displays server IP address on every website",
+  "version": "0.2.0",
+  "manifest_version": 3,
+  "permissions": [
+    "storage",
+    "webRequest",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://*/*"
+  ],
+  "background": {
+    "service_worker": "worker.js"
+  },
+  "homepage_url": "https://add0n.com/country-flags.html?from=server-ip",
+  "icons": {
+    "16": "data/icons/16.png",
+    "32": "data/icons/32.png",
+    "48": "data/icons/48.png",
+    "64": "data/icons/64.png",
+    "128": "data/icons/128.png",
+    "256": "data/icons/256.png",
+    "512": "data/icons/512.png"
+  },
+  "content_scripts": [{
+    "matches": ["*://*/*"],
+    "run_at": "document_start",
+    "js": [
+      "data/verify.js"
+    ]
+  }],
+  "options_ui": {
+    "page": "data/options/index.html"
+  },
+  "web_accessible_resources": [{
+    "resources": ["data/ip/*"],
+    "matches": ["*://*/*"]
+  }]
+}
