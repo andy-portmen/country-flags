@@ -45,7 +45,7 @@ const pp = {
 };
 
 const update = async (tabId, reason, tab) => {
-  console.log('update', tabId, reason);
+  // console.log('update', tabId, reason);
   if (tab) {
     const country = tab.country;
     let path;
@@ -54,20 +54,16 @@ const update = async (tabId, reason, tab) => {
     if (tab.error || !country) {
       path = {
         16: '/data/icons/error/16.png',
-        24: '/data/icons/error/24.png',
         32: '/data/icons/error/32.png',
-        48: '/data/icons/error/48.png',
-        64: '/data/icons/error/64.png'
+        48: '/data/icons/error/48.png'
       };
       title += await utils.translate('bgErr') + ': ' + tab.error || await utils.translate('bgErr1');
     }
     else if (country === 'private') {
       path = {
         16: '/data/icons/private/16.png',
-        24: '/data/icons/private/24.png',
         32: '/data/icons/private/32.png',
-        48: '/data/icons/private/48.png',
-        64: '/data/icons/private/64.png'
+        48: '/data/icons/private/48.png'
       };
       title += await utils.translate('bgMSG1');
       title += '\nHost: ' + tab.hostname;
@@ -75,10 +71,8 @@ const update = async (tabId, reason, tab) => {
     else if (country === 'chrome') {
       path = {
         16: '/data/icons/chrome/16.png',
-        24: '/data/icons/chrome/24.png',
         32: '/data/icons/chrome/32.png',
-        48: '/data/icons/chrome/48.png',
-        64: '/data/icons/chrome/64.png'
+        48: '/data/icons/chrome/48.png'
       };
       title += await utils.translate('bgMSG1');
       title += '\nHost: ' + tab.hostname;
@@ -86,10 +80,8 @@ const update = async (tabId, reason, tab) => {
     else {
       path = {
         16: '/data/icons/flags/16/' + country + '.png',
-        24: '/data/icons/flags/24/' + country + '.png',
         32: '/data/icons/flags/32/' + country + '.png',
-        48: '/data/icons/flags/48/' + country + '.png',
-        64: '/data/icons/flags/64/' + country + '.png'
+        48: '/data/icons/flags/48/' + country + '.png'
       };
       title += await utils.translate('bgCountry') + ': ' + await utils.translate('country_' + country);
       title += '\n' + await utils.translate('bgHost') + ': ' + tab.hostname;
