@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title data-i18n="optionsTitle"></title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+  </head>
+  <body>
+    <table width="100%">
+      <colgroup>
+        <col width="30px">
+        <col width="180px">
+        <col>
+      </colgroup>
+      <thead class="spacer">
+        <tr>
+          <th></th>
+          <th data-i18n="optionsLClick"></th>
+          <th data-i18n="optionsURL"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="3">
+            <p data-i18n="optionsKeywords" class="note"></p>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td data-i18n="optionsLClickType"></td>
+          <td><select id="page-action-type">
+            <option data-i18n="optionsLClickType1" value="ip-host"></option>
+            <option data-i18n="optionsLClickType2" value="options-page"></option>
+            <option data-i18n="optionsLClickType3" value="display-tooltip"></option>
+            <option data-i18n="optionsLClickType4" value="copy-tooltip"></option>
+          </select></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td data-i18n="optionsIP"></td>
+          <td><input type="text" id="ip"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td data-i18n="optionsHost"></td>
+          <td><input type="text" id="host"></td>
+        </tr>
+      </tbody>
+      <thead class="spacer">
+        <tr>
+          <th></th>
+          <th data-i18n="optionsRClick"></th>
+          <th data-i18n="optionsRClickURL"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="checkbox" id="what-is-my-ip-menuitem"></td>
+          <td><label for="what-is-my-ip-menuitem" data-i18n="optionsWhatIsMyIP"></label></td>
+          <td><input type="text" id="what-is-my-ip"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="ssl-checker-menuitem"></td>
+          <td><label for="ssl-checker-menuitem" data-i18n="optionsSSL"></label></td>
+          <td><input type="text" id="ssl-checker"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="trace-route-menuitem"></td>
+          <td><label for="trace-route-menuitem" data-i18n="optionsTrace"></label></td>
+          <td><input type="text" id="trace-route"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="ping-menuitem"></td>
+          <td><label for="ping-menuitem" data-i18n="optionsPing"></label></td>
+          <td><input type="text" id="ping"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="tinyurl-menuitem"></td>
+          <td><label for="tinyurl-menuitem" data-i18n="optionsTinyUrl"></label></td>
+          <td><input type="text" id="tinyurl"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="what-is-my-ua-menuitem"></td>
+          <td><label for="what-is-my-ua-menuitem" data-i18n="optionsWhatIsMyUA"></label></td>
+          <td><input type="text" id="what-is-my-ua"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="dns-lookup-menuitem"></td>
+          <td><label for="dns-lookup-menuitem" data-i18n="optionsDNS"></label></td>
+          <td><input type="text" id="dns-lookup"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="whois-lookup-menuitem"></td>
+          <td><label for="whois-lookup-menuitem" data-i18n="optionsWHOIS"></label></td>
+          <td><input type="text" id="whois-lookup"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="http-headers-menuitem"></td>
+          <td><label for="http-headers-menuitem" data-i18n="optionsHeaders"></label></td>
+          <td><input type="text" id="http-headers"></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" id="alexa-menuitem"></td>
+          <td><label for="alexa-menuitem" data-i18n="optionsAlexa"></label></td>
+          <td><input type="text" id="alexa"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="wot-menuitem"></td>
+          <td><label for="wot-menuitem" data-i18n="optionsWOT"></label></td>
+          <td><input type="text" id="wot"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="virustotal-menuitem"></td>
+          <td><label for="virustotal-menuitem" data-i18n="optionsVirustotal"></label></td>
+          <td><input type="text" id="virustotal"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="isitdownrightnow-menuitem"></td>
+          <td><label for="isitdownrightnow-menuitem" data-i18n="optionsIsitdownrightnow"></label></td>
+          <td><input type="text" id="isitdownrightnow"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="googletranslate-menuitem"></td>
+          <td><label for="googletranslate-menuitem" data-i18n="optionsGoogletranslate"></label></td>
+          <td><input type="text" id="googletranslate"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="googlecache-menuitem"></td>
+          <td><label for="googlecache-menuitem" data-i18n="optionsGooglecache"></label></td>
+          <td><input type="text" id="googlecache"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="wikipediadomain-menuitem"></td>
+          <td><label for="wikipediadomain-menuitem" data-i18n="optionsWikipediadomain"></label></td>
+          <td><input type="text" id="wikipediadomain"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="intodns-menuitem"></td>
+          <td><label for="intodns-menuitem" data-i18n="optionsIntodns"></label></td>
+          <td><input type="text" id="intodns"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="netcraft-menuitem"></td>
+          <td><label for="netcraft-menuitem" data-i18n="optionsNetcraft"></label></td>
+          <td><input type="text" id="netcraft"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="webaim-menuitem"></td>
+          <td><label for="webaim-menuitem" data-i18n="optionsWebaim"></label></td>
+          <td><input type="text" id="webaim"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="nuvalidator-menuitem"></td>
+          <td><label for="nuvalidator-menuitem" data-i18n="optionsNuValidator"></label></td>
+          <td><input type="text" id="nuvalidator"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="css-validator-menuitem"></td>
+          <td><label for="css-validator-menuitem" data-i18n="optionsCSSValidator"></label></td>
+          <td><input type="text" id="css-validator"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="w3c-validator-menuitem"></td>
+          <td><label for="w3c-validator-menuitem" data-i18n="optionsW3CValidator"></label></td>
+          <td><input type="text" id="w3c-validator"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="archive-menuitem"></td>
+          <td><label for="archive-menuitem" data-i18n="optionsArchive"></label></td>
+          <td><input type="text" id="archive"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="google-menuitem"></td>
+          <td><label for="google-menuitem" data-i18n="optionsGoogle"></label></td>
+          <td><input type="text" id="google"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="wolframalpha-menuitem"></td>
+          <td><label for="wolframalpha-menuitem" data-i18n="optionsWolframalpha"></label></td>
+          <td><input type="text" id="wolframalpha"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="copy-ip-menuitem"></td>
+          <td><label for="copy-ip-menuitem" data-i18n="optionsCopy"></label></td>
+          <td><input type="text" id="copy-ip" style="opacity: 0;"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="custom-cmd-1-menuitem"></td>
+          <td><input type="text" data-i18n="optionsPlaceHolder1" data-value="placeholder" id="custom-cmd-1-title"></td>
+          <td><input type="text" id="custom-cmd-1" data-i18n="optionsPlaceHolder2" data-value="placeholder"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="custom-cmd-2-menuitem"></td>
+          <td><input type="text" data-i18n="optionsPlaceHolder1" data-value="placeholder" id="custom-cmd-2-title"></td>
+          <td><input type="text" id="custom-cmd-2" data-i18n="optionsPlaceHolder2" data-value="placeholder"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="custom-cmd-3-menuitem"></td>
+          <td><input type="text" data-i18n="optionsPlaceHolder1" data-value="placeholder" id="custom-cmd-3-title"></td>
+          <td><input type="text" id="custom-cmd-3" data-i18n="optionsPlaceHolder2" data-value="placeholder"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="custom-cmd-4-menuitem"></td>
+          <td><input type="text" data-i18n="optionsPlaceHolder1" data-value="placeholder" id="custom-cmd-4-title"></td>
+          <td><input type="text" id="custom-cmd-4" data-i18n="optionsPlaceHolder2" data-value="placeholder"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="custom-cmd-5-menuitem"></td>
+          <td><input type="text" data-i18n="optionsPlaceHolder1" data-value="placeholder" id="custom-cmd-5-title"></td>
+          <td><input type="text" id="custom-cmd-5" data-i18n="optionsPlaceHolder2" data-value="placeholder"></td>
+        </tr>
+      </tbody>
+      <thead class="spacer">
+        <tr>
+          <th></th>
+          <th data-i18n="optionsMisc"></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="checkbox" id="open-in-background"></td>
+          <td><label for="open-in-background" data-i18n="optionsOpenBG"></label></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="open-adjacent"></td>
+          <td><label for="open-adjacent" data-i18n="optionsNextTo"></label></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="subframes"></td>
+          <td><label for="subframes" data-i18n="optionsObserveSubFrames"></label><sup>1</sup></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="other-services"></td>
+          <td><label for="other-services" data-i18n="optionsOtherServices"></label></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="faqs"></td>
+          <td><label for="faqs" data-i18n="optionsFAQs"></label></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><label for="display-delay" data-i18n="optionsDisplyDelay"></label></td>
+          <td align="right"><input type="number" id="display-delay" step="0.1"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="border-top: dashed 1px #ccc; margin-top: 10px; padding-top: 10px;">
+      <label style="  display: flex; align-items: center;"><input type="checkbox" id="dns">&nbsp;<span data-i18n="optionsNative"></span></label>
+      <p style="color: #888; font-size: 90%;" data-i18n="optionsNativeDescp"></p>
+      <input type="text" id="custom-command" data-value="placeholder" data-i18n="optionsNativeCmd">
+      <p style="color: #888; font-size: 90%;" data-i18n="optionsNativeCmdDescp"></p>
+    </div>
+
+    <div id="explore"></div>
+
+    <p style="border-top: dashed 1px #ccc; margin-top: 10px; padding-top: 10px;">
+      <button id="reset" data-i18n="optionsResetButton"></button>
+      <button id="support" data-i18n="optionsDonationButton"></button> - <button id="save" data-i18n="optionsSaveButton"></button>
+      <span id="status"></span>
+    </p>
+    <p style="border-top: dashed 1px #ccc; margin-top: 10px; padding-top: 10px;">
+      1. <span data-i18n="optionsObserveSubFramesInfo"></span>
+    </p>
+
+    <script src="/services.js"></script>
+    <script src="index.js"></script>
+    <script async src="matched.js"></script>
+  </body>
+</html>

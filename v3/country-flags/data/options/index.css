@@ -1,0 +1,83 @@
+body {
+  font-size: 13px;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  background-color: #fff;
+  color: #4d5156;
+  margin: 10px auto;
+  max-width: 1000px;
+}
+@media screen and (max-width: 1000px) {
+  body {
+    margin: 10px;
+  }
+}
+select,
+button,
+input[type=submit],
+input[type=button] {
+  height: 24px;
+  color: #444;
+  background-image: linear-gradient(rgb(237, 237, 237), rgb(237, 237, 237) 38%, rgb(222, 222, 222));
+  box-shadow: rgba(0, 0, 0, 0.08) 0 1px 0, rgba(255, 255, 255, 0.75) 0 1px 2px inset;
+  text-shadow: rgb(240, 240, 240) 0 1px 0;
+}
+select,
+button,
+textarea,
+input {
+  border: solid 1px rgba(0, 0, 0, 0.25);
+}
+input[type=button]:disabled {
+  opacity: 0.5;
+}
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
+}
+textarea,
+input[type=text],
+input[type=number] {
+  padding: 7px 5px;
+  outline: none;
+}
+input[type=text] {
+  width: 100%;
+  box-sizing: border-box;
+}
+textarea:focus,
+input[type=text]:focus,
+input[type=number]:focus {
+  background-color: #e5f8ff;
+}
+a,
+a:visited {
+  color: #07c;
+}
+table {
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+td {
+  white-space: nowrap;
+}
+td:nth-child(2) {
+  padding-right: 10px;
+}
+th {
+  font-weight: normal;
+  text-align: left;
+  padding: 10px 0;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.spacer {
+  border-bottom: solid 10px #fff;
+}
+.spacer:not(:first-of-type) {
+  border-top: solid 10px #fff;
+}
+.note {
+  white-space: normal;
+  background: #f9f9f9;
+  padding: 0 10px;
+}
