@@ -6,7 +6,7 @@
     url: '*://*/*'
   }, tbs => {
     for (const tab of tbs) {
-      if (tab.url.startsWith('http')) {
+      if (tab.url && tab.url.startsWith('http')) {
         xDNS(tab.url).then(d => onResponseStarted({
           ip: d.ip,
           tabId: tab.id,

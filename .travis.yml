@@ -1,6 +1,0 @@
-language: node_js
-node_js:
-  - "12"
-script:
-  - npm install geolite2-redist
-  - node update.js
