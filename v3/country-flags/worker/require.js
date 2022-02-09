@@ -3,8 +3,8 @@ self.require = name => {
   if (name === 'fs') {
     return {
       accessSync: () => true,
-      readFileSync() {
-        return Buffer.from(self.require.file);
+      readFileSync(path) {
+        return Buffer.from(self.require.files[path]);
       }
     };
   }
@@ -15,6 +15,7 @@ self.require = name => {
     throw Error('no module', name);
   }
 };
+self.require.files = [];
 
 class CUint8Array extends Uint8Array {
   readUInt8(offset) {

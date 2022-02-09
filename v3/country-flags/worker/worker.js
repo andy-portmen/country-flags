@@ -1,18 +1,22 @@
 'use strict';
 
 {
-  let jGeoIP;
+  const jGeoIPs = [];
 
   caches.open('cache').then(async cache => {
     // get the latest version of GEO Country database if it is not cached
     const m = 'https://cdn.jsdelivr.net/gh/andy-portmen/country-flags@master/v3/country-flags/data/assets/GeoLite2-Country.db';
     const response = await cache.match(m) || await fetch('/data/assets/GeoLite2-Country.db');
 
-    require.file = await response.arrayBuffer();
+    require.files[0] = await response.arrayBuffer();
+    require.files[1] = await fetch('/data/assets/GeoLite2-Country-Old.db').then(r => r.arrayBuffer());
 
     const GeoIP = require('jgeoip');
     // Load synchronously MaxMind database in memory
-    jGeoIP = new GeoIP('');
+    jGeoIPs[0] = new GeoIP(0);
+    jGeoIPs[1] = new GeoIP(1);
+    require.files = [];
+
     isLoaded = true;
     requests.forEach((data, c) => self.perform(data, c));
     requests = [];
@@ -22,9 +26,9 @@
       try {
         await cache.add(m);
         const response = await cache.match(m);
-        require.file = await response.arrayBuffer();
-        console.warn('GeoLite2-Country.db updated', m);
-        jGeoIP = new GeoIP('');
+        require.files[0] = await response.arrayBuffer();
+        console.log('new GeoLite2-Country.db', m);
+        jGeoIPs[0] = new GeoIP(0);
       }
       catch (e) {
         console.warn('database updating is failed', e);
@@ -38,9 +42,11 @@
   self.perform = (data, c) => {
     if (isLoaded) {
       try {
-        const obj = jGeoIP.getRecord(data.ip) || {
+        const obj = jGeoIPs[0].getRecord(data.ip) || jGeoIPs[1].getRecord(data.ip) || {
           error: 'Cannot resolve this IP'
         };
+        console.log(obj, data);
+
         c(Object.assign(obj, data));
       }
       catch (e) {
