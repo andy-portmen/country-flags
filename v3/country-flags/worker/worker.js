@@ -18,7 +18,7 @@
     require.files = [];
 
     isLoaded = true;
-    requests.forEach((data, c) => self.perform(data, c));
+    requests.forEach(([data, c]) => self.perform(data, c));
     requests = [];
 
     // cache the request
@@ -45,8 +45,6 @@
         const obj = jGeoIPs[0].getRecord(data.ip) || jGeoIPs[1].getRecord(data.ip) || {
           error: 'Cannot resolve this IP'
         };
-        console.log(obj, data);
-
         c(Object.assign(obj, data));
       }
       catch (e) {
