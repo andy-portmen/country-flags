@@ -14,7 +14,7 @@
     // Load synchronously MaxMind database in memory
     jGeoIP = new GeoIP('');
     isLoaded = true;
-    requests.forEach((data, c) => self.perform(data, c));
+    requests.forEach(([data, c]) => self.perform(data, c));
     requests = [];
 
     // cache the request
