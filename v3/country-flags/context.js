@@ -112,22 +112,27 @@ const replace = (url, tab, obj) => {
 };
 
 const copy = async str => {
-  const win = await chrome.windows.getCurrent();
-  chrome.storage.local.get({
-    width: 400,
-    height: 300,
-    left: win.left + Math.round((win.width - 400) / 2),
-    top: win.top + Math.round((win.height - 300) / 2)
-  }, prefs => {
-    chrome.windows.create({
-      url: '/data/copy/index.html?content=' + encodeURIComponent(str),
-      width: prefs.width,
-      height: prefs.height,
-      left: prefs.left,
-      top: prefs.top,
-      type: 'popup'
+  try {
+    await navigator.clipboard.writeText(str);
+  }
+  catch (e) {
+    const win = await chrome.windows.getCurrent();
+    chrome.storage.local.get({
+      width: 400,
+      height: 300,
+      left: win.left + Math.round((win.width - 400) / 2),
+      top: win.top + Math.round((win.height - 300) / 2)
+    }, prefs => {
+      chrome.windows.create({
+        url: '/data/copy/index.html?content=' + encodeURIComponent(str),
+        width: prefs.width,
+        height: prefs.height,
+        left: prefs.left,
+        top: prefs.top,
+        type: 'popup'
+      });
     });
-  });
+  }
 };
 
 const open = (url, tab) => chrome.storage.local.get({

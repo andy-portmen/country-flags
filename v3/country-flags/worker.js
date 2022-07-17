@@ -275,6 +275,8 @@ const xDNS = href => new Promise((resolve, reject) => {
 
   fetch(href, {
     cache: 'no-cache',
+    // https://github.com/andy-portmen/country-flags/issues/79#issuecomment-1186255111
+    credentials: 'omit',
     signal
   }).then(r => r.text()).catch(e => done(null, e));
 });

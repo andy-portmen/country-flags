@@ -3,8 +3,7 @@
   "name": "Country Flags & IP Whois",
   "description": "__MSG_appDesc__",
   "default_locale": "en",
-  "version": "0.5.5",
-  "minimum_chrome_version": "97",
+  "version": "0.5.5.1",
   "permissions": [
     "storage",
     "webRequest",

@@ -1,7 +1,7 @@
 const args = new URLSearchParams(location.search);
 
-const copy = () => navigator.clipboard.writeText(args.get('content')).then(() => {
-  setTimeout(() => window.close(), 1000);
+const copy = e => navigator.clipboard.writeText(args.get('content')).then(() => {
+  setTimeout(() => window.close(), e && e.isTrusted ? 0 : 1000);
 });
 
 copy();
