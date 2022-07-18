@@ -18,7 +18,8 @@ const contexts = () => chrome.storage.local.get({
   'custom-cmd-3-title': '',
   'custom-cmd-4-title': '',
   'custom-cmd-5-title': '',
-  'other-services': true
+  'other-services': true,
+  'sorting': []
 }, async prefs => {
   const dictionary = async id => {
     if (id.startsWith('custom-cmd-')) {
@@ -34,6 +35,11 @@ const contexts = () => chrome.storage.local.get({
     .filter(id => id !== 'ip' && id !== 'host')
     // do not display custom commands when the URL is not set
     .filter(id => id.startsWith('custom-cmd-') ? prefs[id] : true);
+
+
+  names.sort((a, b) => {
+    return prefs.sorting.indexOf(a) - prefs.sorting.indexOf(b);
+  });
 
   const items = names.filter(key => prefs[key + '-menuitem']).slice(0, 5);
   for (const id of items) {

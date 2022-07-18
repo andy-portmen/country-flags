@@ -1,8 +1,14 @@
-/* globals services */
+/* global services, Sortable */
 'use strict';
 
 const _ = id => chrome.i18n.getMessage(id);
 const info = document.getElementById('status');
+
+// sortable
+const sortable = new Sortable(document.getElementById('entries'), {
+  animation: 150,
+  handle: '.move'
+});
 
 const native = callback => chrome.runtime.sendNativeMessage('com.add0n.node', {
   cmd: 'version'
@@ -47,7 +53,9 @@ function save() {
     p[c] = document.getElementById(c).value;
     return p;
   }, {});
+
   chrome.storage.local.set(Object.assign(prefs, {
+    'sorting': sortable.toArray(),
     'custom-cmd-1-title': document.getElementById('custom-cmd-1-title').value,
     'custom-cmd-2-title': document.getElementById('custom-cmd-2-title').value,
     'custom-cmd-3-title': document.getElementById('custom-cmd-3-title').value,
@@ -124,6 +132,10 @@ function restore() {
   }, prefs => {
     document.getElementById('subframes').checked = prefs['observer-types'].indexOf('sub_frame') !== -1;
   });
+
+  chrome.storage.local.get({
+    sorting: []
+  }, prefs => sortable.sort(prefs.sorting));
 }
 document.addEventListener('DOMContentLoaded', restore);
 document.getElementById('save').addEventListener('click', save);

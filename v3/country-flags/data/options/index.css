@@ -81,3 +81,10 @@ th {
   background: #f9f9f9;
   padding: 0 10px;
 }
+.move {
+  width: 16px;
+  height: 16px;
+  background: url('move.svg') center center no-repeat;
+  background-size: 10px;
+  cursor: row-resize;
+}
