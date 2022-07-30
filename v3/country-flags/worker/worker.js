@@ -27,7 +27,7 @@
         await cache.add(m);
         const response = await cache.match(m);
         require.files[0] = await response.arrayBuffer();
-        console.log('new GeoLite2-Country.db', m);
+        console.info('new GeoLite2-Country.db', m);
         jGeoIPs[0] = new GeoIP(0);
       }
       catch (e) {

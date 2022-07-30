@@ -88,6 +88,7 @@ function save() {
       'open-in-background': document.getElementById('open-in-background').checked,
       'open-adjacent': document.getElementById('open-adjacent').checked,
       'faqs': document.getElementById('faqs').checked,
+      'show-from-cache': document.getElementById('show-from-cache').checked,
       'other-services': document.getElementById('other-services').checked
     }), () => {
       chrome.contextMenus.removeAll(() => {
@@ -123,6 +124,7 @@ function restore() {
     'open-in-background': false,
     'open-adjacent': true,
     'faqs': true,
+    'show-from-cache': true,
     'other-services': true
   }), prefs => {
     Object.entries(prefs).forEach(([key, value]) => document.getElementById(key).checked = value);

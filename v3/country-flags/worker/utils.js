@@ -19,18 +19,11 @@ utils.isPrivate.rs = [
   /^fe80:/
 ];
 
-utils.translate = async id => {
-  const lang = navigator.language.split('-')[0];
-  utils.translate.objects = utils.translate.objects || await Promise.all([
-    fetch('_locales/' + lang + '/messages.json').then(r => r.json()).catch(() => ({})),
-    fetch('_locales/en/messages.json').then(r => r.json())
-  ]);
-  return utils.translate.objects[0][id]?.message || utils.translate.objects[1][id]?.message || id;
-};
-
 utils.notify = e => chrome.notifications.create(null, {
   type: 'basic',
   iconUrl: '/data/icons/48.png',
   title: 'Country Flags & IP Whois',
   message: e.message || e
 });
+
+utils.translate = id => chrome.i18n.getMessage(id) || id;

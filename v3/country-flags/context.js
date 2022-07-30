@@ -24,10 +24,10 @@ const contexts = () => chrome.storage.local.get({
   const dictionary = async id => {
     if (id.startsWith('custom-cmd-')) {
       const n = id.slice(-1);
-      return prefs[`custom-cmd-${n}-title`] || await utils.translate('bgCustom' + n);
+      return prefs[`custom-cmd-${n}-title`] || utils.translate('bgCustom' + n);
     }
     else {
-      return await utils.translate(services.dictionary[id]);
+      return utils.translate(services.dictionary[id]);
     }
   };
 
@@ -55,7 +55,7 @@ const contexts = () => chrome.storage.local.get({
     chrome.contextMenus.create({
       id: 'other-services',
       contexts: ['action'],
-      title: await utils.translate('bgOtherServices')
+      title: utils.translate('bgOtherServices')
     });
     // change order (everything checked above 5 is located on top of the others menu)
     for (const id of [
@@ -164,7 +164,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
       copy(str);
     }
     else {
-      utils.notify(await utils.translate('bgErr4'));
+      utils.notify(utils.translate('bgErr4'));
     }
     return;
   }

@@ -134,6 +134,12 @@
     "bgOtherServices": {
         "message": "Other services"
     },
+    "bgResolveMethod": {
+        "message": "Resolve Method"
+    },
+    "bgFromCache": {
+        "message": ">>> Probably Loaded From Cache <<<"
+    },
     "optionsTitle": {
         "message": "Options page :: Country Flags & IP Whois"
     },
@@ -307,6 +313,9 @@
     },
     "optionsOtherServices": {
         "message": "Show 'Other services' menu for page action's button"
+    },
+    "optionsShowFromCache": {
+        "message": "When the browser does not get the top frame element from the internet, show the \"c\" badge text"
     },
     "country_AF": {
         "message": "Afghanistan"

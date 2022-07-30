@@ -5,6 +5,10 @@ importScripts('existing.js');
 importScripts('services.js', 'context.js');
 importScripts('cache.js');
 
+chrome.action.setBadgeBackgroundColor({
+  color: '#666'
+});
+
 chrome.tabs.onRemoved.addListener(tabId => chrome.storage.session.remove('tab-' + tabId));
 
 const exec = (cmd, callback) => chrome.runtime.sendNativeMessage ? chrome.runtime.sendNativeMessage('com.add0n.node', {
@@ -45,7 +49,7 @@ const pp = {
 };
 
 const update = async (tabId, reason, tab) => {
-  // console.log('update', tabId, reason);
+  // console.log('update', tabId, reason, tab?.ip);
   if (tab) {
     const country = tab.country;
     let path;
@@ -57,7 +61,7 @@ const update = async (tabId, reason, tab) => {
         32: '/data/icons/error/32.png',
         48: '/data/icons/error/48.png'
       };
-      title += await utils.translate('bgErr') + ': ' + tab.error || await utils.translate('bgErr1');
+      title += utils.translate('bgErr') + ': ' + tab.error || utils.translate('bgErr1');
     }
     else if (country === 'private') {
       path = {
@@ -65,7 +69,7 @@ const update = async (tabId, reason, tab) => {
         32: '/data/icons/private/32.png',
         48: '/data/icons/private/48.png'
       };
-      title += await utils.translate('bgMSG1');
+      title += utils.translate('bgMSG1');
       title += '\nHost: ' + tab.hostname;
     }
     else if (country === 'chrome') {
@@ -74,7 +78,7 @@ const update = async (tabId, reason, tab) => {
         32: '/data/icons/chrome/32.png',
         48: '/data/icons/chrome/48.png'
       };
-      title += await utils.translate('bgMSG1');
+      title += utils.translate('bgMSG1');
       title += '\nHost: ' + tab.hostname;
     }
     else {
@@ -83,14 +87,16 @@ const update = async (tabId, reason, tab) => {
         32: '/data/icons/flags/32/' + country + '.png',
         48: '/data/icons/flags/48/' + country + '.png'
       };
-      title += await utils.translate('bgCountry') + ': ' + await utils.translate('country_' + country);
-      title += '\n' + await utils.translate('bgHost') + ': ' + tab.hostname;
+      title += utils.translate('bgCountry') + ': ' + utils.translate('country_' + country);
+      title += '\n' + utils.translate('bgHost') + ': ' + tab.hostname;
     }
-    title += '\n' + await utils.translate('bgIP') + ': ' + tab.ip;
+    title += '\n' + utils.translate('bgIP') + ': ' + tab.ip;
+
+    title += '\n\n' + utils.translate('bgResolveMethod') + ': ' + reason;
 
     const connecteds = Object.keys(tab.frames || {});
     if (connecteds.length) {
-      title += `\n\n${await utils.translate('bgFrames')}:\n`;
+      title += `\n\n${utils.translate('bgFrames')}:\n`;
       connecteds.forEach((ip, i) => {
         title += tab.frames[ip].country + ' -> ' + tab.frames[ip].hostname + ` (${ip})` + (i !== connecteds.length - 1 ? '\n' : '');
       });
@@ -98,9 +104,18 @@ const update = async (tabId, reason, tab) => {
     //
     chrome.storage.local.get({
       'display-delay': 0.2,
-      'custom-command': ''
+      'custom-command': '',
+      'show-from-cache': true
     }, prefs => setTimeout(() => {
       chrome.action.setIcon({tabId, path}, () => chrome.runtime.lastError);
+      if (
+        prefs['show-from-cache'] &&
+        reason && reason.startsWith('xDNS') && reason.endsWith('resolved')
+      ) {
+        chrome.action.setBadgeText({tabId, text: 'c'});
+        title += '\n' + utils.translate('bgFromCache');
+      }
+
       chrome.runtime.lastError;
       if (prefs['custom-command']) {
         exec(prefs['custom-command'].replace('[ip]', tab.ip).replace('[host]', tab.hostname).replace('[url]', tab.url), o => {
@@ -123,7 +138,7 @@ const update = async (tabId, reason, tab) => {
   }
 };
 
-const resolve = async (tabId, ip, tab) => {
+const resolve = async (tabId, ip, tab, reason) => {
   ip = ip || tab.ip;
 
   self.perform({tabId, ip}, async data => {
@@ -151,7 +166,7 @@ const resolve = async (tabId, ip, tab) => {
       }
     }
 
-    update(tabId, 'IP resolved', tab);
+    update(tabId, reason || 'IP', tab);
   });
 };
 
@@ -180,15 +195,16 @@ const onResponseStarted = async d => {
     }
     await pp.set(tabId, tab);
     if (doUpdate) {
-      update(tabId, 'private address', tab);
+      // already know the IP address
+      update(tabId, 'database', tab);
     }
     if (doResolve) {
-      resolve(tabId, obj.ip || ip, tab);
+      resolve(tabId, obj.ip || ip, tab, d.reason);
     }
   };
 
   if (tab) {
-    if (url && url.indexOf(tab.hostname) !== -1 && tab.country && ip === tab.ip) {
+    if (url && url.includes(tab.hostname) && tab.country && ip === tab.ip) {
       tab.frames = {};
       tab.timeStamp = timeStamp;
 
@@ -302,6 +318,7 @@ chrome.webNavigation.onCommitted.addListener(async d => {
 
   // console.log('missed');
   xDNS(url).then(d => onResponseStarted({
+    reason: 'xDNS:navigation:resolved',
     ip: d.ip,
     tabId,
     url: d.url,
@@ -313,7 +330,7 @@ chrome.webNavigation.onCommitted.addListener(async d => {
     };
 
     await pp.set(tabId, tab);
-    update(tabId, 'xDNS', tab);
+    update(tabId, 'xDNS:navigation:rejected', tab);
     console.warn('Cannot resolve using xDNS', url, e);
   });
 });
