@@ -3,7 +3,7 @@
   "name": "Country Flags & IP Whois",
   "description": "__MSG_appDesc__",
   "default_locale": "en",
-  "version": "0.5.7",
+  "version": "0.5.8",
   "permissions": [
     "storage",
     "webRequest",
