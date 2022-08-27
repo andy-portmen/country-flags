@@ -124,7 +124,7 @@ function restore() {
     'open-in-background': false,
     'open-adjacent': true,
     'faqs': true,
-    'show-from-cache': true,
+    'show-from-cache': false,
     'other-services': true
   }), prefs => {
     Object.entries(prefs).forEach(([key, value]) => document.getElementById(key).checked = value);

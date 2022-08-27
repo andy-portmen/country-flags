@@ -105,7 +105,7 @@ const update = async (tabId, reason, tab) => {
     chrome.storage.local.get({
       'display-delay': 0.2,
       'custom-command': '',
-      'show-from-cache': true
+      'show-from-cache': false
     }, prefs => setTimeout(() => {
       chrome.action.setIcon({tabId, path}, () => chrome.runtime.lastError);
       if (
