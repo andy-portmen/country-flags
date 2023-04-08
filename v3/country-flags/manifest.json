@@ -3,7 +3,7 @@
   "name": "Country Flags & IP Whois",
   "description": "__MSG_appDesc__",
   "default_locale": "en",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "permissions": [
     "storage",
     "webRequest",
@@ -19,7 +19,7 @@
   "host_permissions": [
     "*://*/*"
   ],
-  "homepage_url": "https://add0n.com/country-flags.html",
+  "homepage_url": "https://webextension.org/listing/country-flags.html",
   "icons": {
     "16": "data/icons/16.png",
     "32": "data/icons/32.png",
