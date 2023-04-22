@@ -14,7 +14,7 @@
   "background": {
     "service_worker": "worker.js"
   },
-  "homepage_url": "https://add0n.com/country-flags.html?from=server-ip",
+  "homepage_url": "https://webextension.org/listing/country-flags.html?from=server-ip",
   "icons": {
     "16": "data/icons/16.png",
     "32": "data/icons/32.png",

@@ -48,7 +48,7 @@ const pp = {
   }, resolve))
 };
 
-const update = async (tabId, reason, tab) => {
+const update = (tabId, reason, tab) => {
   // console.log('update', tabId, reason, tab?.ip);
   if (tab) {
     const country = tab.country;
@@ -138,12 +138,13 @@ const update = async (tabId, reason, tab) => {
   }
 };
 
-const resolve = async (tabId, ip, tab, reason) => {
+const resolve = (tabId, ip, tab, reason) => {
   ip = ip || tab.ip;
 
   self.perform({tabId, ip}, async data => {
     const {error, ip} = data;
-    const country = (data.country ? data.country.iso_code : (data.continent ? data.continent.code : ''));
+    const dc = data.country || data.registered_country;
+    const country = (dc ? dc.iso_code : (data.continent ? data.continent.code : ''));
 
     const top = tab.ip === ip;
     const frames = tab.frames;
