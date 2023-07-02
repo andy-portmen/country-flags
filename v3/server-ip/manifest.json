@@ -1,7 +1,7 @@
 {
   "name": "Server IP",
   "description": "Displays server IP address on every website",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "manifest_version": 3,
   "permissions": [
     "storage",

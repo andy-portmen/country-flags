@@ -41,7 +41,8 @@ chrome.tabs.onRemoved.addListener(tabId => delete cache[tabId]);
 const resolve = (data, url, tabId) => {
   const {error} = data;
   let {ip} = data;
-  const flag = (data.country ? data.country.iso_code : (data.continent ? data.continent.code : ''));
+  const dc = data.country || data.registered_country;
+  const flag = (dc ? dc.iso_code : (data.continent ? data.continent.code : ''));
   chrome.storage.local.get({
     'char': 7,
     'padding': 48,
