@@ -1,0 +1,1061 @@
+{
+    "appDesc": {
+        "message": "顯示網站伺服器位置的國旗、Whois 與地理資訊"
+    },
+    "bgWhatIsMyIP": {
+        "message": "What is my IP：伺服器回應與 WebRTC"
+    },
+    "bgWhatIsMyUA": {
+        "message": "What is my UA：來自 Web Worker 的使用者代理字串"
+    },
+    "bgCopy": {
+        "message": "複製 IP：複製 IP 地址到剪貼簿"
+    },
+    "bgCountry": {
+        "message": "國家"
+    },
+    "bgCustom1": {
+        "message": "自訂指令 1"
+    },
+    "bgCustom2": {
+        "message": "自訂指令 2"
+    },
+    "bgCustom3": {
+        "message": "自訂指令 3"
+    },
+    "bgCustom4": {
+        "message": "自訂指令 4"
+    },
+    "bgCustom5": {
+        "message": "自訂指令 5"
+    },
+    "bgDNS": {
+        "message": "DNS 查詢：執行權威 DNS 查詢"
+    },
+    "bgErr": {
+        "message": "錯誤： "
+    },
+    "bgErr1": {
+        "message": "obj.country 為空"
+    },
+    "bgErr2": {
+        "message": "無法解析 IP"
+    },
+    "bgErr3": {
+        "message": "無法複製到剪貼簿"
+    },
+    "bgErr4": {
+        "message": "找不到此分頁的 IP 地址。重新整理可能會有用！"
+    },
+    "bgHeaders": {
+        "message": "HTTP 標頭：列出所有回應的 HTTP 標頭"
+    },
+    "bgHost": {
+        "message": "主機"
+    },
+    "bgIP": {
+        "message": "伺服器 IP"
+    },
+    "bgFrames": {
+        "message": "已連線的網站"
+    },
+    "bgMSG1": {
+        "message": "伺服器位於您的私有網路。使用原生整合繞過 SOCK5 伺服器"
+    },
+    "bgMSG2": {
+        "message": "IP 位置已儲存至剪貼簿"
+    },
+    "bgMSG3": {
+        "message": "Whois 詳細資訊已儲存至剪貼簿"
+    },
+    "bgPing": {
+        "message": "Ping：測試此 IP 位置的可及性"
+    },
+    "bgSSL": {
+        "message": "SSL 檢查器：檢查 SSL 憑證"
+    },
+    "bgTinyURL": {
+        "message": "TinyURL：使用 TinyURL.com 縮短 URL"
+    },
+    "bgTrace": {
+        "message": "Traceroute：顯示封包的路由與延遲"
+    },
+    "bgWHOIS": {
+        "message": "Whois 查詢：尋找域名註冊與授權"
+    },
+    "bgAlexa": {
+        "message": "Alexa：網站流量、統計資訊與分析"
+    },
+    "bgWOT": {
+        "message": "WOT Scorecard：網站聲譽評分"
+    },
+    "bgVirustotal": {
+        "message": "Virustotal：免費的病毒、惡意軟體與 URL 掃描服務"
+    },
+    "bgIsitdownrightnow": {
+        "message": "Check Server Status：協助確認網站是否離線"
+    },
+    "bgGoogletranslate": {
+        "message": "Google 翻譯：立即翻譯單字、片語與網頁的免費服務"
+    },
+    "bgGooglecache": {
+        "message": "Google 頁庫存檔：任何網站的 Google 快取頁面"
+    },
+    "bgWikipediadomain": {
+        "message": "維基百科：域名搜尋"
+    },
+    "bgIntodns": {
+        "message": "intoDNS：檢查 DNS 與郵件伺服器的運作狀態與設定"
+    },
+    "bgNetcraft": {
+        "message": "Netcraft：提供包含反詐騙與反網路釣魚等網路安全服務"
+    },
+    "bgWebaim": {
+        "message": "Wave Report：提供網路無障礙存取解決方案"
+    },
+    "bgNuValidator": {
+        "message": "Validate.nu：HTML5 驗證器"
+    },
+    "bgCSSValidator": {
+        "message": "W3C CSS Validator：CSS 驗證器"
+    },
+    "bgW3CValidator": {
+        "message": "W3C Validator：HTML5 驗證器"
+    },
+    "bgArchive": {
+        "message": "Internet Archive：免費存取封存網頁"
+    },
+    "bgGoogle": {
+        "message": "Google：透過網域搜尋"
+    },
+    "bgWolframalpha": {
+        "message": "Wolfram|Alpha：存取世界事實與資料"
+    },
+    "bgOtherServices": {
+        "message": "其他服務"
+    },
+    "bgResolveMethod": {
+        "message": "解析方法"
+    },
+    "bgFromCache": {
+        "message": ">>> 可能是從快取載入的 <<<"
+    },
+    "optionsTitle": {
+        "message": "選項頁面 :: Country Flags & IP Whois"
+    },
+    "optionsKeywords": {
+       "message": "支援的關鍵字：[lang]：瀏覽器語言代碼（例如 en-US、ro、de），[url]：實際的 URL，[enurl]：使用 encodeURIComponent 編碼的 URL，[host]：主機名稱，[curl]：乾淨的 URL。不包含任何參數的 URL，[ip]：伺服器的 IP 地址"
+    },
+    "optionsLClick": {
+        "message": "左鍵點擊"
+    },
+    "optionsRClick": {
+        "message": "右鍵點擊"
+    },
+    "optionsHost": {
+        "message": "主機實用工具"
+    },
+    "optionsLClickType": {
+        "message": "動作"
+    },
+    "optionsLClickType1": {
+        "message": "開啟 IP 或主機服務"
+    },
+    "optionsLClickType2": {
+        "message": "開啟選項頁面"
+    },
+    "optionsLClickType3": {
+        "message": "顯示工具提示文字"
+    },
+    "optionsLClickType4": {
+        "message": "複製工具提示文字"
+    },
+    "optionsIP": {
+        "message": "IP 實用工具"
+    },
+    "optionsURL": {
+        "message": "服務 URL（IP 有較高的優先權）"
+    },
+    "optionsRClickURL": {
+        "message": "服務 URL（僅有 5 個服務可見）"
+    },
+    "optionsWhatIsMyIP": {
+        "message": "What is my IP"
+    },
+    "optionsWhatIsMyUA": {
+        "message": "What is my UA string"
+    },
+    "optionsSSL": {
+        "message": "SSL Checker"
+    },
+    "optionsTrace": {
+        "message": "Trace Route"
+    },
+    "optionsPing": {
+        "message": "Ping"
+    },
+    "optionsTinyUrl": {
+        "message": "TinyUrl"
+    },
+    "optionsDNS": {
+        "message": "DNS Lookup"
+    },
+    "optionsWHOIS": {
+        "message": "Whois Lookup"
+    },
+    "optionsHeaders": {
+        "message": "HTTP 標頭"
+    },
+    "optionsAlexa": {
+        "message": "Alexa"
+    },
+    "optionsWOT": {
+        "message": "WOT Scorecard"
+    },
+    "optionsVirustotal": {
+        "message": "Virustotal Scan"
+    },
+    "optionsIsitdownrightnow": {
+        "message": "Check Server Status"
+    },
+    "optionsGoogletranslate": {
+        "message": "Google 翻譯"
+    },
+    "optionsGooglecache": {
+        "message": "Google 頁庫存檔"
+    },
+    "optionsWikipediadomain": {
+        "message": "維基百科：網域"
+    },
+    "optionsIntodns": {
+        "message": "intoDNS"
+    },
+    "optionsNetcraft": {
+        "message": "Netcraft"
+    },
+    "optionsWebaim": {
+        "message": "Wave Report"
+    },
+    "optionsNuValidator": {
+        "message": "Validate.nu"
+    },
+    "optionsCSSValidator": {
+        "message": "W3C CSS Validator"
+    },
+    "optionsW3CValidator": {
+        "message": "W3C Validator"
+    },
+    "optionsArchive": {
+        "message": "Internet Archive"
+    },
+    "optionsGoogle": {
+        "message": "Google"
+    },
+    "optionsWolframalpha": {
+        "message": "Wolfram|Alpha"
+    },
+    "optionsCopy": {
+        "message": "複製 IP 地址"
+    },
+    "optionsMisc": {
+        "message": "雜項"
+    },
+    "optionsOpenBG": {
+        "message": "在背景開啟連結"
+    },
+    "optionsNextTo": {
+        "message": "在作用中的分頁旁開啟分頁"
+    },
+    "optionsUseSVG": {
+        "message": "當裝置的畫素比例大於 1 時使用 SVG 旗幟圖示（僅限 Firefox）"
+    },
+    "optionsFAQs": {
+        "message": "更新時開啟常見問答頁面"
+    },
+    "optionsDisplyDelay": {
+        "message": "延遲顯示圖示（以秒為單位）"
+    },
+    "optionsNative": {
+        "message": "使用您作業系統的原生 DNS 解析程式（需要重新啟動）"
+    },
+    "optionsNativeDescp": {
+        "message": "當您的瀏覽器設定為使用 SOCKS 代理伺服器時，這讓擴充套件可以解析來自主機名稱的 IP 地址。"
+    },
+    "optionsPlaceHolder1": {
+        "message": "自訂標題"
+    },
+    "optionsPlaceHolder2": {
+        "message": "自訂 URL"
+    },
+    "optionsSaveButton": {
+        "message": "儲存選項"
+    },
+    "optionsDonationButton": {
+        "message": "支援開發"
+    },
+    "optionsResetButton": {
+        "message": "重設為預設值"
+    },
+    "optionsMSG": {
+        "message": "已儲存選項。"
+    },
+    "optionsNativeCmd": {
+        "message": "原生指令（需要重新啟動，且必須可存取原生訊息傳遞）"
+    },
+    "optionsNativeCmdDescp": {
+        "message": "在解析 IP 後執行原生指令。無論是標準輸出或標準錯誤字串都會被附加到工具列按鈕的工具提示中。舉例來說：\"host [ip]\"。可用的關鍵字包含了：[ip]、[host] 與 [url]。請小心，此指令會在每次重新整理後在每個分頁執行。"
+    },
+    "optionsObserveSubFrames": {
+        "message": "考慮所有子框架"
+    },
+    "optionsObserveSubFramesInfo": {
+        "message": "將所有已連線的框架的主機名稱、IP 地址與國家代碼新增至工具提示區域（需要重新啟動）"
+    },
+    "optionsOtherServices": {
+        "message": "在頁面動作按鈕顯示「其他服務」選單"
+    },
+    "optionsShowFromCache": {
+        "message": "當瀏覽器未從網際網路取得頂部框架元素時，顯示 \"c\" 徽章文字"
+    },
+    "country_AF": {
+        "message": "阿富汗"
+    },
+    "country_AX": {
+        "message": "奧蘭群島"
+    },
+    "country_AL": {
+        "message": "阿爾巴尼亞"
+    },
+    "country_DZ": {
+        "message": "阿爾及利亞"
+    },
+    "country_AS": {
+        "message": "美屬薩摩亞"
+    },
+    "country_AD": {
+        "message": "安道爾"
+    },
+    "country_AO": {
+        "message": "安哥拉"
+    },
+    "country_AI": {
+        "message": "安吉拉"
+    },
+    "country_AQ": {
+        "message": "南極洲"
+    },
+    "country_AG": {
+        "message": "安地卡及巴布達"
+    },
+    "country_AR": {
+        "message": "阿根廷"
+    },
+    "country_AM": {
+        "message": "亞美尼亞"
+    },
+    "country_AW": {
+        "message": "阿魯巴"
+    },
+    "country_AU": {
+        "message": "澳洲"
+    },
+    "country_AT": {
+        "message": "奧地利"
+    },
+    "country_AZ": {
+        "message": "亞塞拜然"
+    },
+    "country_BS": {
+        "message": "巴哈馬"
+    },
+    "country_BH": {
+        "message": "巴林"
+    },
+    "country_BD": {
+        "message": "孟加拉"
+    },
+    "country_BB": {
+        "message": "巴貝多"
+    },
+    "country_BY": {
+        "message": "白俄羅斯"
+    },
+    "country_BE": {
+        "message": "比利時"
+    },
+    "country_BZ": {
+        "message": "貝里斯"
+    },
+    "country_BJ": {
+        "message": "貝南"
+    },
+    "country_BM": {
+        "message": "百慕達"
+    },
+    "country_BT": {
+        "message": "不丹"
+    },
+    "country_BO": {
+        "message": "玻利維亞"
+    },
+    "country_BA": {
+        "message": "波士尼亞與赫塞哥維納"
+    },
+    "country_BW": {
+        "message": "波札那"
+    },
+    "country_BV": {
+        "message": "布威島"
+    },
+    "country_BR": {
+        "message": "巴西"
+    },
+    "country_IO": {
+        "message": "英屬印度洋領地"
+    },
+    "country_BN": {
+        "message": "汶萊"
+    },
+    "country_BG": {
+        "message": "保加利亞"
+    },
+    "country_BF": {
+        "message": "布吉納法索"
+    },
+    "country_BI": {
+        "message": "蒲隆地"
+    },
+    "country_KH": {
+        "message": "柬埔寨"
+    },
+    "country_CM": {
+        "message": "喀麥隆"
+    },
+    "country_CA": {
+        "message": "加拿大"
+    },
+    "country_CV": {
+        "message": "維德角"
+    },
+    "country_KY": {
+        "message": "開曼群島"
+    },
+    "country_CF": {
+        "message": "中非共和國"
+    },
+    "country_TD": {
+      "message": "查德"
+    },
+    "country_CL": {
+        "message": "智利"
+    },
+    "country_CN": {
+        "message": "中華人民共和國"
+    },
+    "country_CX": {
+        "message": "聖誕島"
+    },
+    "country_CC": {
+        "message": "科寇斯（基林）群島"
+    },
+    "country_CO": {
+        "message": "哥倫比亞"
+    },
+    "country_KM": {
+        "message": "葛摩"
+    },
+    "country_CG": {
+        "message": "剛果共和國"
+    },
+    "country_CD": {
+        "message": "剛果民主共和國"
+    },
+    "country_CK": {
+        "message": "庫克群島"
+    },
+    "country_CR": {
+        "message": "哥斯大黎加"
+    },
+    "country_CI": {
+        "message": "象牙海岸"
+    },
+    "country_HR": {
+        "message": "克羅埃西亞"
+    },
+    "country_CU": {
+        "message": "古巴"
+    },
+    "country_CY": {
+        "message": "賽普勒斯"
+    },
+    "country_CZ": {
+        "message": "捷克"
+    },
+    "country_DK": {
+        "message": "丹麥"
+    },
+    "country_DJ": {
+        "message": "吉布地"
+    },
+    "country_DM": {
+        "message": "多米尼克"
+    },
+    "country_DO": {
+        "message": "多明尼加"
+    },
+    "country_EC": {
+        "message": "厄瓜多"
+    },
+    "country_EG": {
+        "message": "埃及"
+    },
+    "country_EU": {
+        "message": "歐洲聯盟"
+    },
+    "country_SV": {
+        "message": "薩爾瓦多"
+    },
+    "country_GQ": {
+        "message": "赤道幾內亞"
+    },
+    "country_ER": {
+        "message": "厄利垂亞"
+    },
+    "country_EE": {
+        "message": "愛沙尼亞"
+    },
+    "country_ET": {
+        "message": "衣索比亞"
+    },
+    "country_FK": {
+        "message": "福克蘭群島（馬爾維納斯群島）"
+    },
+    "country_FO": {
+        "message": "法羅群島"
+    },
+    "country_FJ": {
+        "message": "斐濟"
+    },
+    "country_FI": {
+        "message": "芬蘭"
+    },
+    "country_FR": {
+        "message": "法國"
+    },
+    "country_GF": {
+        "message": "法屬圭亞那"
+    },
+    "country_PF": {
+        "message": "法屬玻里尼西亞"
+    },
+    "country_TF": {
+        "message": "法屬南部領地"
+    },
+    "country_GA": {
+        "message": "加彭"
+    },
+    "country_GM": {
+        "message": "甘比亞"
+    },
+    "country_GE": {
+        "message": "喬治亞"
+    },
+    "country_DE": {
+        "message": "德國"
+    },
+    "country_GH": {
+        "message": "迦納"
+    },
+    "country_GI": {
+        "message": "直布羅陀"
+    },
+    "country_GR": {
+        "message": "希臘"
+    },
+    "country_GL": {
+        "message": "格陵蘭"
+    },
+    "country_GD": {
+        "message": "格瑞那達"
+    },
+    "country_GP": {
+        "message": "瓜地洛普"
+    },
+    "country_GU": {
+        "message": "關島"
+    },
+    "country_GT": {
+        "message": "瓜地馬拉"
+    },
+    "country_GG": {
+        "message": "根西"
+    },
+    "country_GN": {
+        "message": "幾內亞"
+    },
+    "country_GW": {
+        "message": "幾內亞比索"
+    },
+    "country_GY": {
+        "message": "蓋亞那"
+    },
+    "country_HT": {
+        "message": "海地"
+    },
+    "country_HM": {
+        "message": "赫德島和麥克唐納群島"
+    },
+    "country_VA": {
+        "message": "聖座（梵蒂岡城國）"
+    },
+    "country_HN": {
+        "message": "宏都拉斯"
+    },
+    "country_HK": {
+        "message": "香港"
+    },
+    "country_HU": {
+        "message": "匈牙利"
+    },
+    "country_IS": {
+        "message": "冰島"
+    },
+    "country_IN": {
+        "message": "印度"
+    },
+    "country_ID": {
+        "message": "印度尼西亞"
+    },
+    "country_IR": {
+        "message": "伊朗"
+    },
+    "country_IQ": {
+        "message": "伊拉克"
+    },
+    "country_IE": {
+        "message": "愛爾蘭"
+    },
+    "country_IM": {
+        "message": "曼島"
+    },
+    "country_IL": {
+        "message": "以色列"
+    },
+    "country_IT": {
+        "message": "義大利"
+    },
+    "country_JM": {
+        "message": "牙買加"
+    },
+    "country_JP": {
+        "message": "日本"
+    },
+    "country_JE": {
+        "message": "澤西"
+    },
+    "country_JO": {
+        "message": "約旦"
+    },
+    "country_KZ": {
+        "message": "哈薩克"
+    },
+    "country_KE": {
+        "message": "肯亞"
+    },
+    "country_KI": {
+        "message": "吉里巴斯"
+    },
+    "country_KR": {
+        "message": "韓國"
+    },
+    "country_KW": {
+        "message": "科威特"
+    },
+    "country_KG": {
+        "message": "吉爾吉斯"
+    },
+    "country_LA": {
+        "message": "寮國"
+    },
+    "country_LV": {
+        "message": "拉脫維亞"
+    },
+    "country_LB": {
+        "message": "黎巴嫩"
+    },
+    "country_LS": {
+        "message": "黎巴嫩"
+    },
+    "country_LR": {
+        "message": "賴比瑞亞"
+    },
+    "country_LY": {
+        "message": "利比亞"
+    },
+    "country_LI": {
+        "message": "列支敦斯登"
+    },
+    "country_LT": {
+        "message": "立陶宛"
+    },
+    "country_LU": {
+        "message": "盧森堡"
+    },
+    "country_MO": {
+        "message": "澳門"
+    },
+    "country_MK": {
+        "message": "北馬其頓"
+    },
+    "country_MG": {
+        "message": "馬達加斯加"
+    },
+    "country_MW": {
+        "message": "馬拉威"
+    },
+    "country_MY": {
+        "message": "馬來西亞"
+    },
+    "country_MV": {
+        "message": "馬爾地夫"
+    },
+    "country_ML": {
+        "message": "馬利"
+    },
+    "country_MT": {
+        "message": "馬爾他"
+    },
+    "country_MH": {
+        "message": "馬紹爾群島"
+    },
+    "country_MQ": {
+        "message": "馬丁尼克"
+    },
+    "country_MR": {
+        "message": "茅利塔尼亞"
+    },
+    "country_MU": {
+        "message": "模里西斯"
+    },
+    "country_YT": {
+        "message": "馬約特"
+    },
+    "country_MX": {
+        "message": "墨西哥"
+    },
+    "country_FM": {
+        "message": "密克羅尼西亞聯邦"
+    },
+    "country_MD": {
+        "message": "摩爾多瓦"
+    },
+    "country_MC": {
+        "message": "摩納哥"
+    },
+    "country_MN": {
+        "message": "蒙古"
+    },
+    "country_ME": {
+        "message": "蒙特內哥羅"
+    },
+    "country_MS": {
+        "message": "蒙哲臘"
+    },
+    "country_MA": {
+        "message": "摩洛哥"
+    },
+    "country_MZ": {
+        "message": "莫三比克"
+    },
+    "country_MM": {
+        "message": "緬甸"
+    },
+    "country_NA": {
+        "message": "納米比亞"
+    },
+    "country_NR": {
+        "message": "諾魯"
+    },
+    "country_NP": {
+        "message": "尼泊爾"
+    },
+    "country_NL": {
+        "message": "荷蘭"
+    },
+    "country_AN": {
+        "message": "荷屬安地列斯"
+    },
+    "country_NC": {
+        "message": "新喀里多尼亞"
+    },
+    "country_NZ": {
+        "message": "紐西蘭"
+    },
+    "country_NI": {
+        "message": "尼加拉瓜"
+    },
+    "country_NE": {
+        "message": "尼日"
+    },
+    "country_NG": {
+        "message": "奈及利亞"
+    },
+    "country_NU": {
+        "message": "紐埃"
+    },
+    "country_NF": {
+        "message": "諾福克島"
+    },
+    "country_MP": {
+        "message": "北馬里亞納群島"
+    },
+    "country_NO": {
+        "message": "挪威"
+    },
+    "country_OM": {
+        "message": "阿曼"
+    },
+    "country_PK": {
+        "message": "巴基斯坦"
+    },
+    "country_PW": {
+        "message": "帛琉"
+    },
+    "country_PS": {
+        "message": "巴勒斯坦"
+    },
+    "country_PA": {
+        "message": "巴拿馬"
+    },
+    "country_PG": {
+        "message": "巴布亞紐幾內亞"
+    },
+    "country_PY": {
+        "message": "巴拉圭"
+    },
+    "country_PE": {
+        "message": "秘魯"
+    },
+    "country_PH": {
+        "message": "菲律賓"
+    },
+    "country_PN": {
+        "message": "皮特肯群島"
+    },
+    "country_PL": {
+        "message": "波蘭"
+    },
+    "country_PT": {
+        "message": "葡萄牙"
+    },
+    "country_PR": {
+        "message": "波多黎各"
+    },
+    "country_QA": {
+        "message": "卡達"
+    },
+    "country_RE": {
+        "message": "留尼旺"
+    },
+    "country_RO": {
+        "message": "羅馬尼亞"
+    },
+    "country_RU": {
+        "message": "俄羅斯"
+    },
+    "country_RW": {
+        "message": "盧安達"
+    },
+    "country_BL": {
+        "message": "聖巴瑟米"
+    },
+    "country_SH": {
+        "message": "聖赫勒拿"
+    },
+    "country_KN": {
+        "message": "聖克里斯多福及尼維斯"
+    },
+    "country_LC": {
+        "message": "聖露西亞"
+    },
+    "country_MF": {
+        "message": "聖馬丁"
+    },
+    "country_PM": {
+        "message": "聖皮耶與密克隆"
+    },
+    "country_VC": {
+        "message": "聖文森及格瑞那丁"
+    },
+    "country_WS": {
+        "message": "薩摩亞"
+    },
+    "country_SM": {
+        "message": "聖馬利諾"
+    },
+    "country_ST": {
+        "message": "聖多美普林西比"
+    },
+    "country_SA": {
+        "message": "沙烏地阿拉伯"
+    },
+    "country_SN": {
+        "message": "塞內加爾"
+    },
+    "country_RS": {
+        "message": "塞爾維亞"
+    },
+    "country_SC": {
+        "message": "塞席爾"
+    },
+    "country_SL": {
+        "message": "獅子山"
+    },
+    "country_SG": {
+        "message": "新加坡"
+    },
+    "country_SK": {
+        "message": "斯洛伐克"
+    },
+    "country_SI": {
+        "message": "斯洛維尼亞"
+    },
+    "country_SB": {
+        "message": "索羅門群島"
+    },
+    "country_SO": {
+        "message": "索馬利亞"
+    },
+    "country_ZA": {
+        "message": "南非"
+    },
+    "country_GS": {
+        "message": "南喬治亞與南桑威奇群島"
+    },
+    "country_ES": {
+        "message": "西班牙"
+    },
+    "country_LK": {
+        "message": "斯里蘭卡"
+    },
+    "country_SD": {
+        "message": "蘇丹"
+    },
+    "country_SR": {
+        "message": "蘇利南"
+    },
+    "country_SJ": {
+        "message": "斯瓦巴和揚馬延"
+    },
+    "country_SZ": {
+        "message": "史瓦帝尼"
+    },
+    "country_SE": {
+        "message": "瑞典"
+    },
+    "country_CH": {
+        "message": "瑞士"
+    },
+    "country_SY": {
+        "message": "敘利亞"
+    },
+    "country_TW": {
+        "message": "臺灣"
+    },
+    "country_TJ": {
+        "message": "塔吉克"
+    },
+    "country_TZ": {
+        "message": "坦尚尼亞"
+    },
+    "country_TH": {
+        "message": "泰國"
+    },
+    "country_TL": {
+        "message": "東帝汶"
+    },
+    "country_TG": {
+        "message": "多哥"
+    },
+    "country_TK": {
+        "message": "托克勞"
+    },
+    "country_TO": {
+        "message": "東加"
+    },
+    "country_TT": {
+        "message": "千里達及托巴哥"
+    },
+    "country_TN": {
+        "message": "突尼西亞"
+    },
+    "country_TR": {
+        "message": "土耳其"
+    },
+    "country_TM": {
+        "message": "土庫曼"
+    },
+    "country_TC": {
+        "message": "土克凱可群島"
+    },
+    "country_TV": {
+        "message": "吐瓦魯"
+    },
+    "country_UG": {
+        "message": "烏干達"
+    },
+    "country_UA": {
+        "message": "烏克蘭"
+    },
+    "country_AE": {
+        "message": "阿拉伯聯合大公國"
+    },
+    "country_GB": {
+        "message": "英國"
+    },
+    "country_US": {
+        "message": "美國"
+    },
+    "country_UM": {
+        "message": "美國本土外小島嶼"
+    },
+    "country_UY": {
+        "message": "烏拉圭"
+    },
+    "country_UZ": {
+        "message": "烏茲別克"
+    },
+    "country_VU": {
+        "message": "萬那杜"
+    },
+    "country_VE": {
+        "message": "委內瑞拉"
+    },
+    "country_VN": {
+        "message": "越南"
+    },
+    "country_VG": {
+        "message": "英屬維京群島"
+    },
+    "country_VI": {
+        "message": "美屬維京群島"
+    },
+    "country_WF": {
+        "message": "瓦利斯和富圖那"
+    },
+    "country_EH": {
+        "message": "西撒哈拉"
+    },
+    "country_YE": {
+        "message": "葉門"
+    },
+    "country_ZM": {
+        "message": "尚比亞"
+    },
+    "country_ZW": {
+        "message": "辛巴威"
+    },
+    "country_private": {
+        "message": "私有 IP 地址"
+    }
+}
