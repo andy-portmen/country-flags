@@ -30,7 +30,8 @@ document.addEventListener('click', e => {
     const url = args.get('url');
     chrome.storage.local.get({
       'info': 'https://webbrowsertools.com/whois-lookup/?query=[url]'
-    }, prefs => chrome.tabs.create({
+    }, prefs => chrome.runtime.sendMessage({
+      cmd: 'open',
       url: prefs.info
         .replace(/\[ip\]/g, ip)
         .replace(/\[url\]/g, encodeURIComponent(url))

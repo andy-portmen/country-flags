@@ -136,6 +136,12 @@ chrome.runtime.onMessage.addListener((request, sender) => {
       }, data => resolve(data, sender.tab.url, sender.tab.id))).catch(e => console.warn('xDNS failed to get IP address', e));
     }
   }
+  else if (request.cmd === 'open') {
+    chrome.tabs.create({
+      url: request.url,
+      index: sender.tab.index + 1
+    });
+  }
 });
 
 /* FAQs & Feedback */
