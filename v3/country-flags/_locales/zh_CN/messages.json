@@ -6,7 +6,7 @@
       "message": "Alexa：网站流量、统计和分析"
    },
    "bgArchive": {
-      "message": "Internet Archive: Free universal access to archived web pages"
+      "message": "互联网档案馆：自由的万能的访问存档网页"
    },
    "bgCSSValidator": {
       "message": "W3C CSS 验证器：CSS 验证器"
@@ -15,7 +15,7 @@
       "message": "Copy IP：将IP地址复制到剪贴板"
    },
    "bgCountry": {
-      "message": "国家"
+      "message": "IP所属"
    },
    "bgCustom1": {
       "message": "自定义命令 1"
@@ -33,13 +33,13 @@
       "message": "自定义命令 5"
    },
    "bgDNS": {
-      "message": "DNS Lookup: Perform an authoritative DNS lookup"
+      "message": "DNS 查找：执行权威 DNS 查找"
    },
    "bgErr": {
       "message": "错误： "
    },
    "bgErr1": {
-      "message": "obj.country is null"
+      "message": "obj.country 为空"
    },
    "bgErr2": {
       "message": "不能解析IP地址"
@@ -48,25 +48,25 @@
       "message": "不能复制到粘贴板"
    },
    "bgErr4": {
-      "message": "Cannot find IP address for this tab. Refresh may help!"
+      "message": "找不到此选项卡的 IP 地址。 [刷新](F5)可能有帮助！"
    },
    "bgFrames": {
-      "message": "Connected Sites"
+      "message": "连接的站点"
    },
    "bgFromCache": {
-      "message": ">>> Probably Loaded From Cache \u003C\u003C\u003C"
+      "message": ">>> 可能从缓存中加载 \u003C\u003C\u003C"
    },
    "bgGoogle": {
-      "message": "Google: Search by domain"
+      "message": "使用 Google 搜索此域名"
    },
    "bgGooglecache": {
-      "message": "Google Cache: Google cached pages for any web site"
+      "message": "Google 网页快照: 使用 Google 网页快照查看网站的快照"
    },
    "bgGoogletranslate": {
-      "message": "Google Translate: Free service instantly translates words, phrases, and web pages"
+      "message": "Google 翻译: 免费的翻译服务"
    },
    "bgHeaders": {
-      "message": "HTTP Headers: List all the response HTTP headers"
+      "message": "HTTP 响应头：列出所有的响应HTTP头"
    },
    "bgHost": {
       "message": "主机名称"
@@ -75,31 +75,31 @@
       "message": "服务器IP"
    },
    "bgIntodns": {
-      "message": "intoDNS: Checks the health and configuration of DNS and mail servers"
+      "message": "intoDNS：检查 DNS 和邮件服务器的健康状况和配置"
    },
    "bgIsitdownrightnow": {
-      "message": "Check Server Status: Helps finding whether a website is down or not"
+      "message": "检查服务器状态：帮助查找网站是否已关闭"
    },
    "bgMSG1": {
-      "message": "The server is on your private network. Use native integration to bypass SOCK5 server"
+      "message": "服务器是一个私有IP地址。 请尝试启用【选项】中【使用操作系统的本地 DNS 解析器】绕过SOCK代理服务器"
    },
    "bgMSG2": {
-      "message": "IP address is stored to the clipboard"
+      "message": "IP地址已存放在粘贴板中"
    },
    "bgMSG3": {
-      "message": "Whois details are stored to the clipboard"
+      "message": "Whois信息已存放在粘贴板中"
    },
    "bgNetcraft": {
-      "message": "Netcraft: Provides internet security services including anti-fraud and anti-phishing services"
+      "message": "Netcraft：提供互联网安全服务，包括反欺诈和反网络钓鱼服务"
    },
    "bgNuValidator": {
-      "message": "Validate.nu: HTML5 Validator"
+      "message": "Validate.nu：HTML5 验证器"
    },
    "bgOtherServices": {
       "message": "其他服务"
    },
    "bgPing": {
-      "message": "Ping: Test the reachability of this IP address"
+      "message": "Ping：测试此IP地址的可达性"
    },
    "bgResolveMethod": {
       "message": "解析方式"
@@ -108,25 +108,25 @@
       "message": "SSL 检测：检测当前网址的 SSL 证书。"
    },
    "bgTinyURL": {
-      "message": "TinyURL: Shorten the URL using TinyURL.com"
+      "message": "TinyURL：使用 TinyURL.com 缩短 URL"
    },
    "bgTrace": {
       "message": "路由跟踪：显示封包所途径的路由及其延迟。"
    },
    "bgVirustotal": {
-      "message": "Virustotal: A free virus, malware and URL scanning service"
+      "message": "Virustotal：免费的病毒、恶意软件和 URL 扫描服务"
    },
    "bgW3CValidator": {
-      "message": "W3C Validator: HTML5 Validator"
+      "message": "W3C 验证器：HTML5 验证器"
    },
    "bgWHOIS": {
-      "message": "Whois Lookup: Find the registration and delegation of a domain name"
+      "message": "Whois查询：查找域名的注册和授权"
    },
    "bgWOT": {
-      "message": "WOT Scorecard: Website reputation ratings"
+      "message": "WOT 记分卡：网站声誉评级"
    },
    "bgWebaim": {
-      "message": "Wave Report: Provides web accessibility solutions"
+      "message": "Wave 报告：提供网络无障碍解决方案"
    },
    "bgWhatIsMyIP": {
       "message": "我的IP是什么: 查看我当前网络的IP地址"
@@ -135,16 +135,16 @@
       "message": "我的UA字符串是什么: 查看当前浏览器的User-Agent"
    },
    "bgWikipediadomain": {
-      "message": "Wikipedia: Domain search"
+      "message": "使用 Wikipedia 搜索此域名"
    },
    "bgWolframalpha": {
-      "message": "Wolfram|Alpha : Access to the world's facts and data"
+      "message": "Wolfram|Alpha : 访问世界的事实和数据"
    },
    "country_AD": {
-      "message": "安多拉"
+      "message": "安道尔"
    },
    "country_AE": {
-      "message": "阿拉伯联合酋长国"
+      "message": "阿联酋"
    },
    "country_AF": {
       "message": "阿富汗"
@@ -153,7 +153,7 @@
       "message": "安提瓜和巴布达"
    },
    "country_AI": {
-      "message": "安圭拉"
+      "message": "安圭拉（英国）"
    },
    "country_AL": {
       "message": "阿尔巴尼亚"
@@ -162,7 +162,7 @@
       "message": "亚美尼亚"
    },
    "country_AN": {
-      "message": "荷属安的列斯"
+      "message": "安地列斯（已废除）"
    },
    "country_AO": {
       "message": "安哥拉"
@@ -183,703 +183,703 @@
       "message": "澳大利亚"
    },
    "country_AW": {
-      "message": "阿鲁巴"
+      "message": "阿鲁巴（荷兰王国）"
    },
    "country_AX": {
-      "message": "奥兰区"
+      "message": "奥兰区（芬兰）"
    },
    "country_AZ": {
-      "message": "阿塞拜疆共和国"
+      "message": "阿塞拜疆"
    },
    "country_BA": {
-      "message": "波斯尼亚和黑塞哥维那"
+      "message": "波黑"
    },
    "country_BB": {
       "message": "巴巴多斯"
    },
    "country_BD": {
-      "message": "孟加拉人民共和国"
+      "message": "孟加拉国"
    },
    "country_BE": {
-      "message": "比利时王国"
+      "message": "比利时"
    },
    "country_BF": {
       "message": "布基纳法索"
    },
    "country_BG": {
-      "message": "保加利亚共和国"
+      "message": "保加利亚"
    },
    "country_BH": {
-      "message": "巴林王国"
+      "message": "巴林"
    },
    "country_BI": {
-      "message": "布隆迪共和国"
+      "message": "布隆迪"
    },
    "country_BJ": {
-      "message": "Benin"
+      "message": "贝宁"
    },
    "country_BL": {
-      "message": "Saint Barthelemy"
+      "message": "圣巴泰勒米（法国）"
    },
    "country_BM": {
-      "message": "Bermuda"
+      "message": "[百慕大（英国）"
    },
    "country_BN": {
-      "message": "Brunei Darussalam"
+      "message": "文莱"
    },
    "country_BO": {
-      "message": "Bolivia"
+      "message": "玻利维亚"
    },
    "country_BR": {
-      "message": "Brazil"
+      "message": "巴西"
    },
    "country_BS": {
-      "message": "Bahamas"
+      "message": "巴哈马"
    },
    "country_BT": {
-      "message": "Bhutan"
+      "message": "不丹"
    },
    "country_BV": {
-      "message": "Bouvet Island"
+      "message": "布韦岛"
    },
    "country_BW": {
-      "message": "Botswana"
+      "message": "博茨瓦纳"
    },
    "country_BY": {
-      "message": "Belarus"
+      "message": "白俄罗斯"
    },
    "country_BZ": {
-      "message": "Belize"
+      "message": "伯利兹"
    },
    "country_CA": {
       "message": "加拿大"
    },
    "country_CC": {
-      "message": "Cocos (Keeling) Islands"
+      "message": "科科斯（基林）群岛（澳大利亚）"
    },
    "country_CD": {
-      "message": "Congo, Democratic Republic"
+      "message": "刚果民主共和国（金）"
    },
    "country_CF": {
-      "message": "Central African Republic"
+      "message": "中非"
    },
    "country_CG": {
-      "message": "Congo"
+      "message": "刚果共和国（布）"
    },
    "country_CH": {
-      "message": "Switzerland"
+      "message": "瑞士"
    },
    "country_CI": {
-      "message": "Côte d’Ivoire"
+      "message": "科特迪瓦"
    },
    "country_CK": {
-      "message": "Cook Islands"
+      "message": "库克群岛"
    },
    "country_CL": {
-      "message": "Chile"
+      "message": "智利"
    },
    "country_CM": {
-      "message": "Cameroon"
+      "message": "喀麦隆"
    },
    "country_CN": {
       "message": "中国"
    },
    "country_CO": {
-      "message": "Colombia"
+      "message": "哥伦比亚"
    },
    "country_CR": {
-      "message": "Costa Rica"
+      "message": "哥斯达黎加"
    },
    "country_CU": {
-      "message": "Cuba"
+      "message": "古巴"
    },
    "country_CV": {
-      "message": "Cape Verde"
+      "message": "佛得角"
    },
    "country_CX": {
-      "message": "Christmas Island"
+      "message": "圣诞岛（澳大利亚）"
    },
    "country_CY": {
-      "message": "Cyprus"
+      "message": "塞浦路斯"
    },
    "country_CZ": {
-      "message": "Czech Republic"
+      "message": "捷克"
    },
    "country_DE": {
-      "message": "Germany"
+      "message": "德国"
    },
    "country_DJ": {
-      "message": "Djibouti"
+      "message": "吉布提"
    },
    "country_DK": {
-      "message": "Denmark"
+      "message": "丹麦"
    },
    "country_DM": {
-      "message": "Dominica"
+      "message": "多米尼克"
    },
    "country_DO": {
-      "message": "Dominican Republic"
+      "message": "多米尼加"
    },
    "country_DZ": {
-      "message": "Algeria"
+      "message": "阿尔及利亚"
    },
    "country_EC": {
-      "message": "Ecuador"
+      "message": "厄瓜多尔"
    },
    "country_EE": {
-      "message": "Estonia"
+      "message": "爱沙尼亚"
    },
    "country_EG": {
-      "message": "Egypt"
+      "message": "埃及"
    },
    "country_EH": {
-      "message": "Western Sahara"
+      "message": "西撒哈拉"
    },
    "country_ER": {
-      "message": "Eritrea"
+      "message": "厄立特里亚"
    },
    "country_ES": {
-      "message": "Spain"
+      "message": "西班牙"
    },
    "country_ET": {
-      "message": "Ethiopia"
+      "message": "埃塞俄比亚"
    },
    "country_EU": {
-      "message": "European Union"
+      "message": "欧盟"
    },
    "country_FI": {
-      "message": "Finland"
+      "message": "芬兰"
    },
    "country_FJ": {
-      "message": "Fiji"
+      "message": "斐济"
    },
    "country_FK": {
-      "message": "Falkland Islands (Malvinas)"
+      "message": "福克兰群岛（英国）"
    },
    "country_FM": {
-      "message": "Micronesia, Federated States Of"
+      "message": "密克罗尼西亚联邦"
    },
    "country_FO": {
-      "message": "Faroe Islands"
+      "message": "法罗群岛（丹麦王国）"
    },
    "country_FR": {
-      "message": "France"
+      "message": "法国"
    },
    "country_GA": {
-      "message": "Gabon"
+      "message": "加蓬"
    },
    "country_GB": {
-      "message": "英国（大不列颠及北爱尔兰联合王国）"
+      "message": "英国"
    },
    "country_GD": {
-      "message": "Grenada"
+      "message": "格林纳达"
    },
    "country_GE": {
-      "message": "Georgia"
+      "message": "格鲁吉亚"
    },
    "country_GF": {
-      "message": "French Guiana"
+      "message": "法属圭亚那（法国）"
    },
    "country_GG": {
-      "message": "Guernsey"
+      "message": "根西（英国）"
    },
    "country_GH": {
-      "message": "Ghana"
+      "message": "加纳"
    },
    "country_GI": {
-      "message": "Gibraltar"
+      "message": "直布罗陀（英国）"
    },
    "country_GL": {
-      "message": "Greenland"
+      "message": "格陵兰（丹麦王国）"
    },
    "country_GM": {
-      "message": "Gambia"
+      "message": "冈比亚"
    },
    "country_GN": {
-      "message": "Guinea"
+      "message": "几内亚"
    },
    "country_GP": {
-      "message": "Guadeloupe"
+      "message": "瓜德罗普（法国）"
    },
    "country_GQ": {
-      "message": "Equatorial Guinea"
+      "message": "赤道几内亚"
    },
    "country_GR": {
-      "message": "Greece"
+      "message": "希腊"
    },
    "country_GS": {
-      "message": "South Georgia And Sandwich Isl."
+      "message": "南乔治亚和南桑威奇群岛（英国）"
    },
    "country_GT": {
-      "message": "Guatemala"
+      "message": "危地马拉"
    },
    "country_GU": {
-      "message": "Guam"
+      "message": "关岛（美国）"
    },
    "country_GW": {
-      "message": "Guinea-Bissau"
+      "message": "几内亚比绍"
    },
    "country_GY": {
-      "message": "Guyana"
+      "message": "圭亚那"
    },
    "country_HK": {
       "message": "中国香港特别行政区"
    },
    "country_HM": {
-      "message": "Heard Island & Mcdonald Islands"
+      "message": "赫德岛和麦克唐纳群岛"
    },
    "country_HN": {
-      "message": "Honduras"
+      "message": "洪都拉斯"
    },
    "country_HR": {
-      "message": "Croatia"
+      "message": "克罗地亚"
    },
    "country_HT": {
-      "message": "Haiti"
+      "message": "海地"
    },
    "country_HU": {
-      "message": "Hungary"
+      "message": "匈牙利"
    },
    "country_ID": {
-      "message": "Indonesia"
+      "message": "印度尼西亚"
    },
    "country_IE": {
-      "message": "Ireland"
+      "message": "爱尔兰"
    },
    "country_IL": {
-      "message": "Israel"
+      "message": "以色列"
    },
    "country_IM": {
-      "message": "Isle Of Man"
+      "message": "马恩岛（英国）"
    },
    "country_IN": {
-      "message": "India"
+      "message": "印度"
    },
    "country_IO": {
-      "message": "British Indian Ocean Territory"
+      "message": "英属印度洋领地（英国）"
    },
    "country_IQ": {
-      "message": "Iraq"
+      "message": "伊拉克"
    },
    "country_IR": {
-      "message": "Iran, Islamic Republic Of"
+      "message": "伊朗伊斯兰共和国"
    },
    "country_IS": {
-      "message": "Iceland"
+      "message": "冰岛"
    },
    "country_IT": {
-      "message": "Italy"
+      "message": "意大利"
    },
    "country_JE": {
-      "message": "Jersey"
+      "message": "泽西（英国）"
    },
    "country_JM": {
-      "message": "Jamaica"
+      "message": "牙买加"
    },
    "country_JO": {
-      "message": "Jordan"
+      "message": "约旦"
    },
    "country_JP": {
       "message": "日本"
    },
    "country_KE": {
-      "message": "Kenya"
+      "message": "肯尼亚"
    },
    "country_KG": {
-      "message": "Kyrgyzstan"
+      "message": "吉尔吉斯斯坦"
    },
    "country_KH": {
-      "message": "Cambodia"
+      "message": "柬埔寨"
    },
    "country_KI": {
-      "message": "Kiribati"
+      "message": "基里巴斯"
    },
    "country_KM": {
-      "message": "Comoros"
+      "message": "科摩罗"
    },
    "country_KN": {
-      "message": "Saint Kitts And Nevis"
+      "message": "圣基茨和尼维斯"
    },
    "country_KP": {
-      "message": "朝鲜（北韩）"
+      "message": "朝鲜民主主义人民共和国"
    },
    "country_KR": {
-      "message": "韩国（南韩）"
+      "message": "大韩民国"
    },
    "country_KW": {
-      "message": "Kuwait"
+      "message": "科威特"
    },
    "country_KY": {
-      "message": "Cayman Islands"
+      "message": "开曼群岛（英国）"
    },
    "country_KZ": {
-      "message": "Kazakhstan"
+      "message": "哈萨克斯坦"
    },
    "country_LA": {
-      "message": "Lao People's Democratic Republic"
+      "message": "老挝"
    },
    "country_LB": {
-      "message": "Lebanon"
+      "message": "黎巴嫩"
    },
    "country_LC": {
-      "message": "Saint Lucia"
+      "message": "圣卢西亚"
    },
    "country_LI": {
-      "message": "Liechtenstein"
+      "message": "列支敦士登"
    },
    "country_LK": {
-      "message": "Sri Lanka"
+      "message": "斯里兰卡"
    },
    "country_LR": {
-      "message": "Liberia"
+      "message": "利比里亚"
    },
    "country_LS": {
-      "message": "Lesotho"
+      "message": "莱索托"
    },
    "country_LT": {
-      "message": "Lithuania"
+      "message": "立陶宛"
    },
    "country_LU": {
-      "message": "Luxembourg"
+      "message": "卢森堡"
    },
    "country_LV": {
-      "message": "Latvia"
+      "message": "拉脱维亚"
    },
    "country_LY": {
-      "message": "Libyan Arab Jamahiriya"
+      "message": "利比亚"
    },
    "country_MA": {
-      "message": "Morocco"
+      "message": "摩洛哥"
    },
    "country_MC": {
-      "message": "Monaco"
+      "message": "摩纳哥"
    },
    "country_MD": {
-      "message": "Moldova"
+      "message": "摩尔多瓦"
    },
    "country_ME": {
-      "message": "Montenegro"
+      "message": "黑山"
    },
    "country_MF": {
-      "message": "Saint Martin"
+      "message": "圣马丁"
    },
    "country_MG": {
-      "message": "Madagascar"
+      "message": "马达加斯加"
    },
    "country_MH": {
-      "message": "Marshall Islands"
+      "message": "马绍尔群岛"
    },
    "country_MK": {
-      "message": "Macedonia"
+      "message": "北马其顿"
    },
    "country_ML": {
-      "message": "Mali"
+      "message": "马里"
    },
    "country_MM": {
-      "message": "Myanmar"
+      "message": "缅甸"
    },
    "country_MN": {
-      "message": "Mongolia"
+      "message": "蒙古"
    },
    "country_MO": {
       "message": "中国澳门特别行政区"
    },
    "country_MP": {
-      "message": "Northern Mariana Islands"
+      "message": "北马里亚纳群岛（美国）"
    },
    "country_MQ": {
-      "message": "Martinique"
+      "message": "马提尼克（法国）"
    },
    "country_MR": {
-      "message": "Mauritania"
+      "message": "毛里塔尼亚"
    },
    "country_MS": {
-      "message": "Montserrat"
+      "message": "蒙特塞拉特（英国）"
    },
    "country_MT": {
-      "message": "Malta"
+      "message": "马耳他"
    },
    "country_MU": {
-      "message": "Mauritius"
+      "message": "毛里求斯"
    },
    "country_MV": {
-      "message": "Maldives"
+      "message": "马尔代夫"
    },
    "country_MW": {
-      "message": "Malawi"
+      "message": "马拉维"
    },
    "country_MX": {
-      "message": "Mexico"
+      "message": "墨西哥"
    },
    "country_MY": {
-      "message": "Malaysia"
+      "message": "马来西亚"
    },
    "country_MZ": {
-      "message": "Mozambique"
+      "message": "莫桑比克"
    },
    "country_NA": {
-      "message": "Namibia"
+      "message": "纳米比亚"
    },
    "country_NC": {
-      "message": "New Caledonia"
+      "message": "新喀里多尼亚（法国）"
    },
    "country_NE": {
-      "message": "Niger"
+      "message": "尼日尔"
    },
    "country_NF": {
-      "message": "Norfolk Island"
+      "message": "诺福克岛"
    },
    "country_NG": {
-      "message": "Nigeria"
+      "message": "尼日利亚"
    },
    "country_NI": {
-      "message": "Nicaragua"
+      "message": "尼加拉瓜"
    },
    "country_NL": {
-      "message": "Netherlands"
+      "message": "荷兰"
    },
    "country_NO": {
-      "message": "Norway"
+      "message": "挪威"
    },
    "country_NP": {
-      "message": "Nepal"
+      "message": "尼泊尔"
    },
    "country_NR": {
-      "message": "Nauru"
+      "message": "瑙鲁"
    },
    "country_NU": {
-      "message": "Niue"
+      "message": "纽埃"
    },
    "country_NZ": {
-      "message": "New Zealand"
+      "message": "新西兰"
    },
    "country_OM": {
-      "message": "Oman"
+      "message": "阿曼"
    },
    "country_PA": {
-      "message": "Panama"
+      "message": "巴拿马"
    },
    "country_PE": {
-      "message": "Peru"
+      "message": "秘鲁"
    },
    "country_PF": {
-      "message": "French Polynesia"
+      "message": "法属波利尼西亚（法国）"
    },
    "country_PG": {
-      "message": "Papua New Guinea"
+      "message": "巴布亚新几内亚"
    },
    "country_PH": {
-      "message": "Philippines"
+      "message": "菲律宾"
    },
    "country_PK": {
-      "message": "Pakistan"
+      "message": "巴基斯坦"
    },
    "country_PL": {
-      "message": "Poland"
+      "message": "波兰"
    },
    "country_PM": {
-      "message": "Saint Pierre And Miquelon"
+      "message": "圣皮埃尔和密克隆（法国）"
    },
    "country_PN": {
-      "message": "Pitcairn"
+      "message": "皮特凯恩群岛（英国）"
    },
    "country_PR": {
-      "message": "Puerto Rico"
+      "message": "波多黎各（美国）"
    },
    "country_PS": {
-      "message": "Palestinian Territory, Occupied"
+      "message": "巴勒斯坦"
    },
    "country_PT": {
-      "message": "Portugal"
+      "message": "葡萄牙"
    },
    "country_PW": {
-      "message": "Palau"
+      "message": "帕劳"
    },
    "country_PY": {
-      "message": "Paraguay"
+      "message": "巴拉圭"
    },
    "country_QA": {
-      "message": "Qatar"
+      "message": "卡塔尔"
    },
    "country_RE": {
-      "message": "Reunion"
+      "message": "留尼汪（法国）"
    },
    "country_RO": {
-      "message": "Romania"
+      "message": "罗马尼亚"
    },
    "country_RS": {
-      "message": "Serbia"
+      "message": "塞尔维亚"
    },
    "country_RU": {
-      "message": "俄罗斯联邦"
+      "message": "俄罗斯"
    },
    "country_RW": {
-      "message": "Rwanda"
+      "message": "卢旺达"
    },
    "country_SA": {
-      "message": "Saudi Arabia"
+      "message": "沙特阿拉伯"
    },
    "country_SB": {
-      "message": "Solomon Islands"
+      "message": "所罗门群岛"
    },
    "country_SC": {
-      "message": "Seychelles"
+      "message": "塞舌尔"
    },
    "country_SD": {
-      "message": "Sudan"
+      "message": "苏丹"
    },
    "country_SE": {
-      "message": "Sweden"
+      "message": "瑞典"
    },
    "country_SG": {
       "message": "新加坡"
    },
    "country_SH": {
-      "message": "Saint Helena"
+      "message": "圣赫勒拿（英国）"
    },
    "country_SI": {
-      "message": "Slovenia"
+      "message": "斯洛文尼亚"
    },
    "country_SJ": {
-      "message": "Svalbard And Jan Mayen"
+      "message": "斯瓦巴和扬马延"
    },
    "country_SK": {
-      "message": "Slovakia"
+      "message": "斯洛伐克"
    },
    "country_SL": {
-      "message": "Sierra Leone"
+      "message": "塞拉利昂"
    },
    "country_SM": {
-      "message": "San Marino"
+      "message": "圣马力诺"
    },
    "country_SN": {
-      "message": "Senegal"
+      "message": "塞内加尔"
    },
    "country_SO": {
-      "message": "Somalia"
+      "message": "索马里"
    },
    "country_SR": {
-      "message": "Suriname"
+      "message": "苏里南"
    },
    "country_ST": {
-      "message": "Sao Tome And Principe"
+      "message": "圣多美和普林西比"
    },
    "country_SV": {
-      "message": "El Salvador"
+      "message": "萨尔瓦多"
    },
    "country_SY": {
-      "message": "Syrian Arab Republic"
+      "message": "叙利亚"
    },
    "country_SZ": {
-      "message": "Swaziland"
+      "message": "斯威士兰"
    },
    "country_TC": {
-      "message": "Turks And Caicos Islands"
+      "message": "特克斯和凯科斯群岛（英国）"
    },
    "country_TD": {
-      "message": "Chad"
+      "message": "乍得"
    },
    "country_TF": {
-      "message": "French Southern Territories"
+      "message": "法属南部和南极领地"
    },
    "country_TG": {
-      "message": "Togo"
+      "message": "多哥"
    },
    "country_TH": {
-      "message": "Thailand"
+      "message": "泰国"
    },
    "country_TJ": {
-      "message": "Tajikistan"
+      "message": "塔吉克斯坦"
    },
    "country_TK": {
-      "message": "Tokelau"
+      "message": "托克劳"
    },
    "country_TL": {
-      "message": "Timor-Leste"
+      "message": "东帝汶"
    },
    "country_TM": {
-      "message": "Turkmenistan"
+      "message": "土库曼斯坦"
    },
    "country_TN": {
-      "message": "Tunisia"
+      "message": "突尼斯"
    },
    "country_TO": {
-      "message": "Tonga"
+      "message": "汤加"
    },
    "country_TR": {
-      "message": "Turkey"
+      "message": "土耳其"
    },
    "country_TT": {
-      "message": "Trinidad And Tobago"
+      "message": "特立尼达和多巴哥"
    },
    "country_TV": {
-      "message": "Tuvalu"
+      "message": "图瓦卢"
    },
    "country_TW": {
-      "message": "中国台湾"
+      "message": "台湾"
    },
    "country_TZ": {
-      "message": "Tanzania"
+      "message": "坦桑尼亚"
    },
    "country_UA": {
-      "message": "Ukraine"
+      "message": "乌克兰"
    },
    "country_UG": {
-      "message": "Uganda"
+      "message": "乌干达"
    },
    "country_UM": {
-      "message": "United States Outlying Islands"
+      "message": "美国本土外小岛屿"
    },
    "country_US": {
-      "message": "美国（美利坚合众国）"
+      "message": "美国"
    },
    "country_UY": {
-      "message": "Uruguay"
+      "message": "乌拉圭"
    },
    "country_UZ": {
-      "message": "Uzbekistan"
+      "message": "乌兹别克斯坦"
    },
    "country_VA": {
-      "message": "Holy See (Vatican City State)"
+      "message": "梵蒂冈"
    },
    "country_VC": {
-      "message": "Saint Vincent And Grenadines"
+      "message": "圣文森特和格林纳丁斯"
    },
    "country_VE": {
-      "message": "Venezuela"
+      "message": "委内瑞拉"
    },
    "country_VG": {
-      "message": "Virgin Islands, British"
+      "message": "英属维尔京群岛（英国）"
    },
    "country_VI": {
-      "message": "Virgin Islands, U.S."
+      "message": "美属维尔京群岛（美国）"
    },
    "country_VN": {
-      "message": "Viet Nam"
+      "message": "越南"
    },
    "country_VU": {
-      "message": "Vanuatu"
+      "message": "瓦努阿图"
    },
    "country_WF": {
-      "message": "Wallis And Futuna"
+      "message": "瓦利斯和富图纳"
    },
    "country_WS": {
-      "message": "Samoa"
+      "message": "萨摩亚"
    },
    "country_YE": {
-      "message": "Yemen"
+      "message": "也门"
    },
    "country_YT": {
-      "message": "Mayotte"
+      "message": "马约特"
    },
    "country_ZA": {
-      "message": "South Africa"
+      "message": "南非"
    },
    "country_ZM": {
-      "message": "Zambia"
+      "message": "赞比亚"
    },
    "country_ZW": {
-      "message": "Zimbabwe"
+      "message": "津巴布韦"
    },
    "country_private": {
       "message": "私有IP地址"
@@ -888,16 +888,16 @@
       "message": "Alexa"
    },
    "optionsArchive": {
-      "message": "Internet Archive"
+      "message": "互联网档案馆"
    },
    "optionsCSSValidator": {
-      "message": "W3C CSS Validator"
+      "message": "W3C CSS 验证器"
    },
    "optionsCopy": {
       "message": "复制IP地址"
    },
    "optionsDNS": {
-      "message": "DNS Lookup"
+      "message": "DNS 查找"
    },
    "optionsDisplyDelay": {
       "message": "延迟显示图标 (单位：秒)"
@@ -912,13 +912,13 @@
       "message": "Google"
    },
    "optionsGooglecache": {
-      "message": "Google Cache"
+      "message": "Google 快照"
    },
    "optionsGoogletranslate": {
       "message": "Google 翻译"
    },
    "optionsHeaders": {
-      "message": "HTTP Headers"
+      "message": "HTTP 响应头"
    },
    "optionsHost": {
       "message": "Host实用工具"
@@ -1023,7 +1023,7 @@
       "message": "TinyUrl"
    },
    "optionsTitle": {
-      "message": "Options page :: Country Flags & IP Whois"
+      "message": "选项页 :: 国家旗帜和IP所属（Country Flags & IP Whois）"
    },
    "optionsTrace": {
       "message": "路由跟踪"
@@ -1035,19 +1035,19 @@
       "message": "当设备的像素比大于一时使用 SVG 标志图标（仅限 Firefox）"
    },
    "optionsVirustotal": {
-      "message": "Virustotal Scan"
+      "message": "Virustotal 扫描"
    },
    "optionsW3CValidator": {
-      "message": "W3C Validator"
+      "message": "W3C 验证器"
    },
    "optionsWHOIS": {
-      "message": "Whois Lookup"
+      "message": "Whois查询"
    },
    "optionsWOT": {
-      "message": "WOT Scorecard"
+      "message": "WOT 记分卡"
    },
    "optionsWebaim": {
-      "message": "Wave Report"
+      "message": "Wave 报告"
    },
    "optionsWhatIsMyIP": {
       "message": "我的IP是什么"
@@ -1056,7 +1056,7 @@
       "message": "我的UA字符串是什么"
    },
    "optionsWikipediadomain": {
-      "message": "Wikipedia: Domain"
+      "message": "使用 Wikipedia 搜索此域名"
    },
    "optionsWolframalpha": {
       "message": "Wolfram|Alpha"
