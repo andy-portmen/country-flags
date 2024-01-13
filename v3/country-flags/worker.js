@@ -294,6 +294,7 @@ const xDNS = href => new Promise((resolve, reject) => {
     cache: 'no-cache',
     // https://github.com/andy-portmen/country-flags/issues/79#issuecomment-1186255111
     credentials: 'omit',
+    redirect: 'manual',
     signal
   }).then(r => r.text()).catch(e => done(null, e));
 });
