@@ -21,7 +21,7 @@ const contexts = () => chrome.storage.local.get({
   'other-services': true,
   'sorting': []
 }, async prefs => {
-  const dictionary = async id => {
+  const dictionary = id => {
     if (id.startsWith('custom-cmd-')) {
       const n = id.slice(-1);
       return prefs[`custom-cmd-${n}-title`] || utils.translate('bgCustom' + n);

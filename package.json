@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "geolite2-redist": "^3.0.4",
-    "maxmind": "^4.3.11"
-  }
-}
