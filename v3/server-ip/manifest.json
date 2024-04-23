@@ -1,12 +1,13 @@
 {
   "name": "Server IP",
   "description": "Displays server IP address on every website",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "manifest_version": 3,
   "permissions": [
     "storage",
     "webRequest",
-    "scripting"
+    "scripting",
+    "alarms"
   ],
   "host_permissions": [
     "*://*/*"

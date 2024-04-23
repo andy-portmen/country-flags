@@ -47,7 +47,7 @@ const contexts = () => chrome.storage.local.get({
       contexts: ['action'],
       id,
       title: await dictionary(id)
-    });
+    }, () => chrome.runtime.lastError);
   }
 
   // other services
@@ -56,7 +56,7 @@ const contexts = () => chrome.storage.local.get({
       id: 'other-services',
       contexts: ['action'],
       title: utils.translate('bgOtherServices')
-    });
+    }, () => chrome.runtime.lastError);
     // change order (everything checked above 5 is located on top of the others menu)
     for (const id of [
       ...names.filter(id => items.indexOf(id) === -1).filter(key => prefs[key + '-menuitem'] === true),
@@ -67,7 +67,7 @@ const contexts = () => chrome.storage.local.get({
         id,
         title: await dictionary(id),
         parentId: 'other-services'
-      });
+      }, () => chrome.runtime.lastError);
     }
   }
 });

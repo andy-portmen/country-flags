@@ -1,6 +1,7 @@
 'use strict';
 
 self.importScripts('worker/require.js', 'worker/vendor/jgeoip.js', 'worker/worker.js');
+self.importScripts('cache.js');
 
 const style = 'background-color: #fff; position: fixed; bottom: [bottom]px; left: [left]px; z-index: 100000000000; border: none;' +
   'width: [width]px; min-width: [width]px; max-width: [width]px; height: 24px; min-height: 24px; max-height: 24px;';
