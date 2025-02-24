@@ -71,8 +71,17 @@ const contexts = () => chrome.storage.local.get({
     }
   }
 });
-chrome.runtime.onInstalled.addListener(contexts);
-chrome.runtime.onStartup.addListener(contexts);
+{
+  const once = () => {
+    if (once.done) {
+      return;
+    }
+    once.done = true;
+    contexts();
+  };
+  chrome.runtime.onInstalled.addListener(once);
+  chrome.runtime.onStartup.addListener(once);
+}
 
 chrome.runtime.onMessage.addListener(request => {
   if (request.method === 'contexts') {

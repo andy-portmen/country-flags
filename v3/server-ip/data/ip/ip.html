@@ -1,50 +1,16 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <style>
-      html, body {
-        height:  100%;
-      }
-      body {
-        font-size: 13px;
-        font-family: arial, sans-serif;
-        display: flex;
-        align-items: center;
-        margin: 0;
-        overflow: hidden;
-        user-select: none;
-        border: solid 1px #ececec;
-        box-sizing: border-box;
-      }
-      a {
-        padding-left: 5px;
-        flex: 1;
-        text-decoration: none;
-        text-align: center;
-      }
-      a,
-      a:visited {
-        color: #000;
-      }
-      img {
-        margin: 0 5px;
-        cursor: move;
-      }
-      img[data-cmd="close-me"] {
-        cursor: pointer;
-      }
-      img[data-cmd="close-me"]:hover {
-        background-color: #eee;
-      }
-      img[data-cmd="close-me"]:active {
-        background-color: #ddd;
-      }
-    </style>
-  </head>
-  <body>
-    <style type="text/css" id="css"></style>
-    <img src="loading.gif" width=16 title="Drag the flag and slowly move it to change position"><a target="_blank" href="#">127.0.0.1</a><img src="close.svg" width=16 data-cmd="close-me">
-    <script src="ip.js"></script>
-  </body>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" type="text/css" href="ip.css">
+</head>
+<body>
+  <style type="text/css" id="css"></style>
+  <input type="text" id="clipboard" readonly>
+  <img src="loading.gif" width=16>
+  <a target="_blank" href="#" title="Click to display more info">127.0.0.1</a>
+  <img src="copy.svg" width=16 data-cmd="copy" title="Copy IP address to the clipboard">
+  <img src="close.svg" width=16 data-cmd="close-me" title="Close this panel">
+  <script src="ip.js"></script>
+</body>
 </html>

@@ -16,8 +16,7 @@ import('geolite2-redist').then(geolite2 => {
     if (s.size > 2 * 1024 * 1024) {
       const stream = fs.createReadStream(path);
 
-      console.log('Updating GeoLite2-Country.db');
-      await stream.pipe(fs.createWriteStream('v2/country-flags/firefox/data/assets/GeoLite2-Country.db'));
+      console.info('Updating GeoLite2-Country.db');
       await stream.pipe(fs.createWriteStream('v3/country-flags/data/assets/GeoLite2-Country.db'));
       await stream.pipe(fs.createWriteStream('v3/server-ip/data/assets/GeoLite2-Country.db'));
 

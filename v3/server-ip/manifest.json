@@ -1,7 +1,7 @@
 {
   "name": "Server IP",
   "description": "Displays server IP address on every website",
-  "version": "0.2.4",
+  "version": "0.2.7",
   "manifest_version": 3,
   "permissions": [
     "storage",
@@ -13,7 +13,14 @@
     "*://*/*"
   ],
   "background": {
-    "service_worker": "worker.js"
+    "service_worker": "worker.js",
+    "scripts": [
+      "worker/require.js",
+      "worker/vendor/jgeoip.js",
+      "worker/worker.js",
+      "cache.js",
+      "worker.js"
+    ]
   },
   "homepage_url": "https://webextension.org/listing/country-flags.html?from=server-ip",
   "icons": {
@@ -28,9 +35,8 @@
   "content_scripts": [{
     "matches": ["*://*/*"],
     "run_at": "document_start",
-    "js": [
-      "data/verify.js"
-    ]
+    "css": ["data/ip.css"],
+    "js": ["data/verify.js"]
   }],
   "options_ui": {
     "page": "data/options/index.html"
@@ -38,5 +44,11 @@
   "web_accessible_resources": [{
     "resources": ["data/ip/*"],
     "matches": ["*://*/*"]
-  }]
+  }],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{15c2f6cc-3e9e-4ced-9d27-ee5d0e2b3ce2}",
+      "strict_min_version": "128.0"
+    }
+  }
 }

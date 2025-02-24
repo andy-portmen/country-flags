@@ -12,8 +12,14 @@ chrome.storage.local.get({
 
 const a = document.querySelector('a');
 a.textContent = ip;
-a.href = '/';
-a.dataset.cmd = 'open-external';
+chrome.storage.local.get({
+  'info': 'https://webbrowsertools.com/whois-lookup/?query=[url]'
+}, prefs => {
+  a.href = prefs.info
+    .replace(/\[ip\]/g, ip)
+    .replace(/\[url\]/g, encodeURIComponent(args.get('url')));
+});
+
 if (flag) {
   document.querySelector('img').src = './flags/' + flag + '.png';
 }
@@ -25,38 +31,17 @@ else {
 
 document.addEventListener('click', e => {
   const cmd = e.target.dataset.cmd;
-  if (cmd === 'open-external') {
-    e.preventDefault();
-    const url = args.get('url');
-    chrome.storage.local.get({
-      'info': 'https://webbrowsertools.com/whois-lookup/?query=[url]'
-    }, prefs => chrome.runtime.sendMessage({
-      cmd: 'open',
-      url: prefs.info
-        .replace(/\[ip\]/g, ip)
-        .replace(/\[url\]/g, encodeURIComponent(url))
-    }));
+  if (cmd === 'copy') {
+    navigator.clipboard.writeText(ip).catch(e => {
+      const input = document.getElementById('clipboard');
+      input.value = ip;
+      input.select();
+      if (document.execCommand('copy') === false) {
+        alert(e.message);
+      }
+    });
   }
   else if (cmd) {
     chrome.runtime.sendMessage({cmd});
   }
-});
-
-
-const move = e => top.postMessage({
-  method: 'move-flag',
-  dx: e.movementX,
-  dy: e.movementY
-}, '*');
-
-document.querySelector('img').addEventListener('mousedown', e => {
-  e.preventDefault();
-  document.removeEventListener('mousemove', move);
-  document.addEventListener('mousemove', move);
-});
-document.addEventListener('mouseleave', () => {
-  document.removeEventListener('mousemove', move);
-});
-document.addEventListener('mouseup', () => {
-  document.removeEventListener('mousemove', move);
 });

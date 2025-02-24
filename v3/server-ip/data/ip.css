@@ -1,0 +1,38 @@
+@layer {
+  iframe.server-ip {
+    all: initial;
+    z-index: calc(infinity) !important;
+    color-scheme: light !important;
+    position: fixed !important;
+    height: 24px !important;
+    min-height: 24px !important;
+    max-height: 24px !important;
+    background-color: #fff !important;
+    border-radius: 0 !important;
+    border: none !important;
+    anchor-name: --si-frame-anchor;
+  }
+  span.server-ip {
+    all: initial;
+    cursor: move !important;
+    user-select: none !important;
+    position: fixed !important;
+    position-anchor: --si-frame-anchor;
+    left: anchor(left);
+    top: anchor(top);
+    width: 26px !important;
+    height: 24px !important;
+    margin-left: 0 !important;
+    margin-bottom: 0 !important;
+    z-index: calc(infinity) !important;
+    background: transparent !important;
+    opacity: 0 !important;
+  }
+  span.server-ip.expanded {
+    width: 512px !important;
+    height: 512px !important;
+    margin-left: -256px !important;
+    margin-top: -256px !important;
+    margin-bottom: -256px !important; /* Firefox */
+  }
+}

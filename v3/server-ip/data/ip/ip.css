@@ -1,0 +1,37 @@
+html, body {
+  height:  100%;
+}
+body {
+  font-size: 13px;
+  font-family: arial, sans-serif;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  overflow: hidden;
+  border: solid 1px #ececec;
+  box-sizing: border-box;
+  padding-inline: 5px;
+  gap: 5px;
+}
+a {
+  flex: 1;
+  text-decoration: none;
+  text-align: center;
+}
+a,
+a:visited {
+  color: #000;
+}
+img {
+  cursor: pointer;
+}
+img:hover {
+  background-color: #eee;
+}
+img:active {
+  background-color: #ddd;
+}
+#clipboard {
+  position: absolute;
+  left: -9999px;
+}

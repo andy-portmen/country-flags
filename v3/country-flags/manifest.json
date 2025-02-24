@@ -3,7 +3,7 @@
   "name": "Country Flags & IP Whois",
   "description": "__MSG_appDesc__",
   "default_locale": "en",
-  "version": "0.6.3",
+  "version": "0.6.5",
   "permissions": [
     "storage",
     "webRequest",
@@ -30,11 +30,28 @@
     "512": "data/icons/512.png"
   },
   "background": {
-    "service_worker": "worker.js"
+    "service_worker": "worker.js",
+    "scripts": [
+        "worker/utils.js",
+        "worker/require.js",
+        "worker/vendor/jgeoip.js",
+        "worker/worker.js",
+        "existing.js",
+        "services.js",
+        "context.js",
+        "cache.js",
+        "worker.js"
+    ]
   },
   "action": {},
   "options_ui": {
     "page": "data/options/index.html",
     "open_in_tab": true
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{802a552e-13d1-4683-a40a-1e5325fba4bb}",
+      "strict_min_version": "128.0"
+    }
   }
 }

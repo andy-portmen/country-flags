@@ -1,10 +1,18 @@
 'use strict';
 
-self.importScripts('worker/require.js', 'worker/vendor/jgeoip.js', 'worker/worker.js');
-self.importScripts('cache.js');
+if (typeof importScripts !== 'undefined') {
+  self.importScripts('worker/require.js', 'worker/vendor/jgeoip.js', 'worker/worker.js');
+  self.importScripts('cache.js');
+}
 
-const style = 'background-color: #fff; position: fixed; bottom: [bottom]px; left: [left]px; z-index: 100000000000; border: none;' +
-  'width: [width]px; min-width: [width]px; max-width: [width]px; height: 24px; min-height: 24px; max-height: 24px;';
+{
+  const offscreenCanvas = new OffscreenCanvas(10, 10); // Width and height can be arbitrary
+  const context = offscreenCanvas.getContext('2d');
+  context.font = '13px arial, sans-serif'; // must be equal to the iframe used for displaying ip address
+  self.fsize = text => {
+    return context.measureText(text).width;
+  };
+}
 
 // use in case ip is not resolved by top_frame request
 const xDNS = href => new Promise((resolve, reject) => {
@@ -45,8 +53,7 @@ const resolve = (data, url, tabId) => {
   const dc = data.country || data.registered_country;
   const flag = (dc ? dc.iso_code : (data.continent ? data.continent.code : ''));
   chrome.storage.local.get({
-    'char': 7,
-    'padding': 48,
+    'padding': 73, // 5 + 16 + 5 + [ip] + 5 + 16 + 5 + 16 + 5
     'uppercase': true,
     'bottom': 20,
     'left': 30
@@ -54,48 +61,71 @@ const resolve = (data, url, tabId) => {
     if (prefs['uppercase']) {
       ip = ip.toUpperCase();
     }
-    const dest = chrome.runtime.getURL(
-      '/data/ip/ip.html?ip=' + ip + '&flag=' + flag + '&url=' + encodeURIComponent(url) + '&error=' + error
-    );
-
-    const css = style
-      .replace(/\[left\]/g, prefs.left)
-      .replace(/\[bottom\]/g, prefs.bottom)
-      .replace(/\[width\]/g, prefs.padding + ip.length * prefs.char);
+    const args = new URLSearchParams();
+    args.set('ip', ip);
+    args.set('flag', flag);
+    args.set('url', url);
+    args.set('error', error);
+    const dest = chrome.runtime.getURL('/data/ip/ip.html?' + args.toString());
 
     chrome.scripting.executeScript({
+      injectImmediately: true,
       target: {
         tabId
       },
-      func: (x, y, dest, css) => {
-        if (window.iframe === undefined) {
-          window.iframe = document.createElement('iframe');
-          window.iframe.setAttribute('src', dest);
-          window.iframe.setAttribute('style', css);
-          window.addEventListener('message', e => {
-            if (e.data && e.data.method === 'move-flag') {
-              x = Math.max(0, x + e.data.dx);
-              y = Math.max(0, y - e.data.dy);
-              window.iframe.style.left = x + 'px';
-              window.iframe.style.bottom = y + 'px';
+      func: (x, y, width, dest, isFF) => {
+        if (document.querySelector('.server-ip')) {
+          return;
+        }
+        const span = document.createElement('span');
+        span.classList.add('server-ip');
+        span.title = 'Drag the flag and move to change the position';
+        const iframe = document.createElement('iframe');
+        iframe.setAttribute('src', dest);
+        iframe.classList.add('server-ip');
+        iframe.style.bottom = y + 'px';
+        iframe.style.left = x + 'px';
+        iframe.style.width = width + 'px';
+        if (isFF) {
+          span.style.left = iframe.style.left;
+          span.style.bottom = iframe.style.bottom;
+        }
 
-              chrome.storage.local.set({
-                left: x,
-                bottom: y
-              });
-            }
+        const move = e => {
+          x = Math.max(0, x + e.movementX);
+          y = Math.max(0, y - e.movementY);
+          iframe.style.left = x + 'px';
+          iframe.style.bottom = y + 'px';
+          if (isFF) {
+            span.style.left = iframe.style.left;
+            span.style.bottom = iframe.style.bottom;
+          }
+          chrome.storage.local.set({
+            left: x,
+            bottom: y
           });
-          if (document.body) {
-            document.body.appendChild(window.iframe);
-          }
-          else {
-            document.addEventListener('DOMContentLoaded', () => {
-              document.body.appendChild(window.iframe);
-            });
-          }
+        };
+        const expire = () => {
+          document.removeEventListener('mousemove', move);
+          span.classList.remove('expanded');
+        };
+        span.addEventListener('mouseleave', expire);
+        document.addEventListener('mouseup', expire);
+        span.addEventListener('mousedown', () => {
+          span.classList.add('expanded');
+          document.removeEventListener('mousemove', move);
+          document.addEventListener('mousemove', move);
+        });
+        if (document.body) {
+          document.body.append(iframe, span);
+        }
+        else {
+          document.addEventListener('DOMContentLoaded', () => {
+            document.body.append(iframe, span);
+          });
         }
       },
-      args: [prefs.left, prefs.bottom, dest, css]
+      args: [prefs.left, prefs.bottom, prefs.padding + self.fsize(ip), dest, navigator.userAgent.includes('Firefox')]
     }, () => chrome.runtime.lastError);
   });
 };
@@ -123,7 +153,7 @@ chrome.runtime.onMessage.addListener((request, sender) => {
       },
       func: () => {
         try {
-          window.iframe.remove();
+          document.querySelectorAll('.server-ip').forEach(e => e.remove());
         }
         catch (e) {}
       }
@@ -149,8 +179,7 @@ chrome.runtime.onMessage.addListener((request, sender) => {
 {
   const {management, runtime: {onInstalled, setUninstallURL, getManifest}, storage, tabs} = chrome;
   if (navigator.webdriver !== true) {
-    const page = getManifest().homepage_url;
-    const {name, version} = getManifest();
+    const {homepage_url: page, name, version} = getManifest();
     onInstalled.addListener(({reason, previousVersion}) => {
       management.getSelf(({installType}) => installType === 'normal' && storage.local.get({
         'faqs': true,
@@ -159,7 +188,7 @@ chrome.runtime.onMessage.addListener((request, sender) => {
         if (reason === 'install' || (prefs.faqs && reason === 'update')) {
           const doUpdate = (Date.now() - prefs['last-update']) / 1000 / 60 / 60 / 24 > 45;
           if (doUpdate && previousVersion !== version) {
-            tabs.query({active: true, currentWindow: true}, tbs => tabs.create({
+            tabs.query({active: true, lastFocusedWindow: true}, tbs => tabs.create({
               url: page + '&version=' + version + (previousVersion ? '&p=' + previousVersion : '') + '&type=' + reason,
               active: reason === 'install',
               ...(tbs && tbs.length && {index: tbs[0].index + 1})

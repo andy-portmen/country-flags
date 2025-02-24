@@ -29,8 +29,6 @@
     jGeoIPs[1] = new GeoIP(1);
     require.files = [];
 
-    console.log(jGeoIPs);
-
     isLoaded = true;
     requests.forEach(([data, c]) => self.perform(data, c));
     requests = [];

@@ -19,11 +19,11 @@ utils.isPrivate.rs = [
   /^fe80:/
 ];
 
-utils.notify = e => chrome.notifications.create(null, {
+utils.notify = e => chrome.notifications.create({
   type: 'basic',
   iconUrl: '/data/icons/48.png',
   title: 'Country Flags & IP Whois',
   message: e.message || e
-});
+}, id => setTimeout(chrome.notifications.clear, 3000, id));
 
 utils.translate = id => chrome.i18n.getMessage(id) || id;
