@@ -11,8 +11,11 @@ chrome.alarms.onAlarm.addListener(async a => {
   }
 });
 
-chrome.runtime.onInstalled.addListener(() => chrome.storage.local.get({
-  periodInMinutes: 7 * 24 * 60
-}, prefs => chrome.alarms.create('clear-cache', {
-  periodInMinutes: prefs.periodInMinutes
-})));
+chrome.runtime.onInstalled.addListener(async () => {
+  const {periodInMinutes} = await chrome.storage.local.get({
+    periodInMinutes: 7 * 24 * 60
+  });
+  chrome.alarms.create('clear-cache', {
+    periodInMinutes
+  });
+});

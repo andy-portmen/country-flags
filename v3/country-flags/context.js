@@ -132,28 +132,28 @@ const copy = async str => {
   }
   catch (e) {
     const win = await chrome.windows.getCurrent();
-    chrome.storage.local.get({
+    const prefs = await chrome.storage.local.get({
       width: 400,
       height: 300,
       left: win.left + Math.round((win.width - 400) / 2),
       top: win.top + Math.round((win.height - 300) / 2)
-    }, prefs => {
-      chrome.windows.create({
-        url: '/data/copy/index.html?content=' + encodeURIComponent(str),
-        width: prefs.width,
-        height: prefs.height,
-        left: prefs.left,
-        top: prefs.top,
-        type: 'popup'
-      });
+    });
+    chrome.windows.create({
+      url: '/data/copy/index.html?content=' + encodeURIComponent(str),
+      width: prefs.width,
+      height: prefs.height,
+      left: prefs.left,
+      top: prefs.top,
+      type: 'popup'
     });
   }
 };
 
-const open = (url, tab) => chrome.storage.local.get({
-  'open-in-background': false,
-  'open-adjacent': true
-}, prefs => {
+const open = async (url, tab) => {
+  const prefs = await chrome.storage.local.get({
+    'open-in-background': false,
+    'open-adjacent': true
+  });
   const prop = {
     url,
     active: !prefs['open-in-background']
@@ -162,7 +162,7 @@ const open = (url, tab) => chrome.storage.local.get({
     prop.index = tab.index + 1;
   }
   chrome.tabs.create(prop);
-});
+};
 
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   const obj = await pp.get(tab.id);
@@ -177,30 +177,33 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
     }
     return;
   }
-
-  chrome.storage.local.get({
+  const prefs = await chrome.storage.local.get({
     [info.menuItemId]: services.urls[info.menuItemId]
-  }, prefs => {
-    try {
-      const url = replace(prefs[info.menuItemId], tab, obj);
-      open(url, tab);
-    }
-    catch (e) {
-      console.warn(e);
-      utils.translate('bgErr4').then(utils.notify);
-    }
   });
+  try {
+    const url = replace(prefs[info.menuItemId], tab, obj);
+    open(url, tab);
+  }
+  catch (e) {
+    console.warn(e);
+    utils.translate('bgErr4').then(utils.notify);
+  }
 });
 
 /* left click */
-chrome.action.onClicked.addListener(tab => chrome.storage.local.get({
-  'page-action-type': 'ip-host',
-  'ip': 'http://www.tcpiputils.com/browse/ip-address/[ip]',
-  'host': 'https://webbrowsertools.com/whois-lookup?query=[host]'
-}, async prefs => {
+chrome.action.onClicked.addListener(async tab => {
+  const prefs = await chrome.storage.local.get({
+    'page-action-type': 'ip-host',
+    'ip': 'http://www.tcpiputils.com/browse/ip-address/[ip]',
+    'host': 'https://webbrowsertools.com/whois-lookup?query=[host]'
+  });
   try {
     if (prefs['page-action-type'] === 'ip-host') {
       const obj = await pp.get(tab.id);
+      if (!obj) {
+        utils.notify(utils.translate('bgErr2'));
+        return;
+      }
 
       const ip = obj.ip;
       const hostname = (new URL(tab.url)).hostname;
@@ -238,26 +241,26 @@ chrome.action.onClicked.addListener(tab => chrome.storage.local.get({
         else {
           const win = await chrome.windows.getCurrent();
 
-          chrome.storage.local.get({
+          const prefs = await chrome.storage.local.get({
             'window.width': 300,
             'window.height': 400,
             'window.left': win.left + Math.round((win.width - 300) / 2),
             'window.top': win.top + Math.round((win.height - 400) / 2)
-          }, prefs => {
-            chrome.windows.create({
-              url: 'data/alert/index.html?msg=' + encodeURIComponent(s),
-              width: prefs['window.width'],
-              height: prefs['window.height'],
-              left: prefs['window.left'],
-              top: prefs['window.top'],
-              type: 'popup'
-            });
+          });
+          chrome.windows.create({
+            url: 'data/alert/index.html?msg=' + encodeURIComponent(s),
+            width: prefs['window.width'],
+            height: prefs['window.height'],
+            left: prefs['window.left'],
+            top: prefs['window.top'],
+            type: 'popup'
           });
         }
       });
     }
   }
   catch (e) {
+    console.error(e);
     utils.notify(e);
   }
-}));
+});

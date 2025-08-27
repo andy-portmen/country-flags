@@ -36,7 +36,7 @@
         "message": "Error: "
     },
     "bgErr1": {
-        "message": "obj.country is null"
+        "message": "'country' property of the tab's object is null"
     },
     "bgErr2": {
         "message": "Cannot resolve the IP"

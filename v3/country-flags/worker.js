@@ -38,19 +38,27 @@ const exec = (cmd, callback) => chrome.runtime.sendNativeMessage ? chrome.runtim
   stderr: '"Native Messaging" is not accessible. Make sure the permission is enabled from the options page and use it after a restart.'
 });
 
-const dns = (host, callback) => chrome.runtime.sendNativeMessage ? chrome.runtime.sendNativeMessage('com.add0n.node', {
-  permissions: ['dns'],
-  script: `
-    const dns = require('dns');
+const dns = async host => {
+  if (!chrome.runtime.sendNativeMessage) {
+    throw Error('NO_NATIVE_PERMISSION');
+  }
+  const r = await chrome.runtime.sendNativeMessage('com.add0n.node', {
+    permissions: ['dns'],
+    script: `
+      const dns = require('dns');
 
-    dns.lookup('${host}', (err, address, family) => {
-      push({err, address, family});
-      done();
-    });
-  `
-}, callback) : callback({
-  err: '"Native Messaging" is not accessible. Make sure the permission is enabled from the options page and use it after a restart.'
-});
+      dns.lookup('${host}', (err, address, family) => {
+        push({err, address, family});
+        done();
+      });
+    `
+  });
+  if ('address' in r) {
+    return r;
+  }
+  console.warn('dns', r);
+  throw Error('NO_ADDRESS_IN_RESPONSE');
+};
 
 const pp = {
   get: tabId => new Promise(resolve => chrome.storage.session.get('tab-' + tabId, p => {
@@ -152,6 +160,9 @@ const update = (tabId, reason, tab) => {
 };
 
 const resolve = (tabId, ip, tab, reason) => {
+  if (!tab) {
+    return;
+  }
   ip = ip || tab.ip;
 
   self.perform({tabId, ip}, async data => {
@@ -240,25 +251,20 @@ const onResponseStarted = async d => {
   }
 
   if (utils.isPrivate(ip)) {
+    set({country: 'private'}, true);
     chrome.storage.local.get({
       'dns': false
-    }, prefs => {
+    }).then(prefs => {
       if (prefs.dns) {
-        return dns(hostname, resp => {
-          if (resp && !resp.err && resp.address) {
-            if (utils.isPrivate(resp.address)) {
-              set({country: 'private'}, true);
-            }
-            else {
-              set({ip: resp.address}, false, true);
-            }
-          }
-          else {
+        dns(hostname).then(resp => {
+          if (utils.isPrivate(resp.address)) {
             set({country: 'private'}, true);
           }
-        });
+          else {
+            set({ip: resp.address}, false, true);
+          }
+        }).catch(e => set({country: 'private'}, true));
       }
-      set({country: 'private'}, true);
     });
   }
   else {
@@ -331,15 +337,44 @@ chrome.webNavigation.onCommitted.addListener(async d => {
     }
   }
 
-  // console.log('missed');
-  xDNS(url).then(d => onResponseStarted({
-    reason: 'xDNS:navigation:resolved',
-    ip: d.ip,
-    tabId,
-    url: d.url,
-    type: 'main_frame',
-    timeStamp: Date.now()
-  })).catch(async e => {
+  // First try the native method
+  try {
+    const prefs = await chrome.storage.local.get({
+      'dns': false
+    });
+    if (prefs.dns === false) {
+      throw Error('NATIVE_DISABLED');
+    }
+    const {hostname} = new URL(url);
+    const r = await dns(hostname);
+    if ('address' in r) {
+      return onResponseStarted({
+        reason: 'dns:navigation:resolved',
+        ip: r.address,
+        tabId,
+        url,
+        type: 'main_frame',
+        timeStamp: Date.now()
+      });
+    }
+  }
+  catch (e) {
+    console.warn('Cannot resolve using dns', url, e);
+  }
+
+  // Try xDNS method
+  try {
+    const d = await xDNS(url);
+    return onResponseStarted({
+      reason: 'xDNS:navigation:resolved',
+      ip: d.ip,
+      tabId,
+      url: d.url,
+      type: 'main_frame',
+      timeStamp: Date.now()
+    });
+  }
+  catch (e) {
     const tab = {
       error: e.message
     };
@@ -347,7 +382,7 @@ chrome.webNavigation.onCommitted.addListener(async d => {
     await pp.set(tabId, tab);
     update(tabId, 'xDNS:navigation:rejected', tab);
     console.warn('Cannot resolve using xDNS', url, e);
-  });
+  }
 });
 
 /* FAQs & Feedback */
