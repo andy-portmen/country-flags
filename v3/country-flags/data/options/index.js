@@ -159,8 +159,6 @@ document.getElementById('reset').addEventListener('click', e => {
 document.getElementById('support').addEventListener('click', () => chrome.tabs.create({
   url: chrome.runtime.getManifest().homepage_url + '?rd=donate'
 }));
-
-
 // localization
 [...document.querySelectorAll('[data-i18n]')].forEach(e => {
   const value = e.dataset.value;
@@ -171,4 +169,42 @@ document.getElementById('support').addEventListener('click', () => chrome.tabs.c
   else {
     e.textContent = message;
   }
+});
+document.getElementById('export').addEventListener('click', async () => {
+  const prefs = await chrome.storage.local.get(null);
+  const text = JSON.stringify(prefs, null, '  ');
+  const blob = new Blob([text], {type: 'application/json'});
+  const objectURL = URL.createObjectURL(blob);
+  Object.assign(document.createElement('a'), {
+    href: objectURL,
+    type: 'application/json',
+    download: 'country-flags-preferences.json'
+  }).dispatchEvent(new MouseEvent('click'));
+  setTimeout(() => URL.revokeObjectURL(objectURL));
+});
+document.getElementById('import').addEventListener('click', () => {
+  const input = document.createElement('input');
+  input.style.display = 'none';
+  input.type = 'file';
+  input.accept = '.json';
+  input.acceptCharset = 'utf-8';
+  document.body.appendChild(input);
+  input.initialValue = input.value;
+  input.onchange = () => {
+    if (input.value !== input.initialValue) {
+      const file = input.files[0];
+      if (file.size > 100e6) {
+        return console.warn('The file is too large!');
+      }
+      const reader = new FileReader();
+      reader.onloadend = async event => {
+        input.remove();
+        const json = JSON.parse(event.target.result);
+        await chrome.storage.local.set(json);
+        chrome.runtime.reload();
+      };
+      reader.readAsText(file, 'utf-8');
+    }
+  };
+  input.click();
 });
