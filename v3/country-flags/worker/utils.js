@@ -1,5 +1,6 @@
 const utils = {};
 utils.isPrivate = ip => ip === '::1' ||
+    ip === 'localhost' ||
     ip === 'd0::11' ||
     ip === '0.0.0.0' ||
     ip.match(utils.isPrivate.rs[0]) !== null ||

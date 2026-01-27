@@ -287,7 +287,14 @@ chrome.storage.onChanged.addListener(ps => {
 
 // use in case ip is not resolved by top_frame request
 const xDNS = href => new Promise((resolve, reject) => {
-  const {origin} = new URL(href);
+  const {origin, hostname} = new URL(href);
+
+  if (utils.isPrivate(hostname)) {
+    return resolve({
+      ip: hostname,
+      url: href
+    });
+  }
 
   const controller = new AbortController();
   const signal = controller.signal;
