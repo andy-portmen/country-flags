@@ -112,6 +112,7 @@ const update = (tabId, reason, tab) => {
       title += '\n' + utils.translate('bgHost') + ': ' + tab.hostname;
     }
     title += '\n' + utils.translate('bgIP') + ': ' + tab.ip;
+    title += '\n' + utils.translate('bgStatusLine') + ': ' + tab.statusLine;
 
     title += '\n\n' + utils.translate('bgResolveMethod') + ': ' + reason;
 
@@ -196,7 +197,8 @@ const resolve = (tabId, ip, tab, reason) => {
 };
 
 const onResponseStarted = async d => {
-  const {ip, tabId, url, type, timeStamp} = d;
+  const {ip, tabId, url, type, timeStamp, statusLine} = d;
+
   if (!ip) {
     return;
   }
@@ -232,6 +234,7 @@ const onResponseStarted = async d => {
     if (url && url.includes(tab.hostname) && tab.country && ip === tab.ip) {
       tab.frames = {};
       tab.timeStamp = timeStamp;
+      tab.statusLine = statusLine;
 
       return set(tab, true, false);
     }
@@ -245,7 +248,8 @@ const onResponseStarted = async d => {
       url,
       ip,
       frames: {},
-      timeStamp
+      timeStamp,
+      statusLine
     };
     await pp.set(tabId, tab);
   }
@@ -361,7 +365,8 @@ chrome.webNavigation.onCommitted.addListener(async d => {
         tabId,
         url,
         type: 'main_frame',
-        timeStamp: Date.now()
+        timeStamp: Date.now(),
+        statusLine: 'N/A'
       });
     }
   }
@@ -378,7 +383,8 @@ chrome.webNavigation.onCommitted.addListener(async d => {
       tabId,
       url: d.url,
       type: 'main_frame',
-      timeStamp: Date.now()
+      timeStamp: Date.now(),
+      statusLine: d.statusLine
     });
   }
   catch (e) {

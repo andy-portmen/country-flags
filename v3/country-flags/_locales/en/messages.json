@@ -137,6 +137,9 @@
     "bgResolveMethod": {
         "message": "Resolve Method"
     },
+    "bgStatusLine": {
+        "message": "Status Line"
+    },
     "bgFromCache": {
         "message": ">>> Probably Loaded From Cache <<<"
     },

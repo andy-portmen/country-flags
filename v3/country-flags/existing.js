@@ -21,7 +21,8 @@
             tabId: tab.id,
             url: d.url,
             type: 'main_frame',
-            timeStamp: Date.now()
+            timeStamp: Date.now(),
+            statusLine: d.statusLine
           })).catch(async e => {
             await pp.set(tab.id, {
               error: e.message
